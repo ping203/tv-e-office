@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Xml.Linq;
+using DataAccess.Common;
 
 namespace EOFFICE
 {
@@ -15,7 +16,7 @@ namespace EOFFICE
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            CDBase.strConnectionString = ConfigurationManager.ConnectionStrings["sqlconnection"].ConnectionString;
         }
 
         protected void Session_Start(object sender, EventArgs e)

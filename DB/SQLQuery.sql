@@ -1,6 +1,6 @@
-IF OBJECT_ID('DBEOFFICE','U') IS NOT NULL
+
 	DROP DATABASE DBEOFFICE
-GO
+
 CREATE DATABASE DBEOFFICE
 GO
 USE DBEOFFICE
@@ -22,7 +22,7 @@ GO
 IF OBJECT_ID('sp_tblDepartment_add','P') IS NOT NULL
 	DROP PROC sp_tblDeparment_add
 GO
-CREATE PROC sp_tblDepartment 
+CREATE PROC sp_tblDepartment_add 
 	@Name NVARCHAR,
 	@DepartmentParent INT,
 	@Description NVARCHAR(MAX)
@@ -149,7 +149,7 @@ GO
 IF OBJECT_ID('sp_tblGroup_get','P') IS NOT NULL
 	DROP PROC sp_tblGroup_get
 GO
-CREATE PROC sp_tbleGroup_get
+CREATE PROC sp_tblGroup_get
 	@GroupID INT=NULL,
 	@Name NVARCHAR(300)=NULL,
 	@Order VARCHAR(20)='DESC',
@@ -209,6 +209,452 @@ END
 IF OBJECT_ID('sp_tblPermission_update','P') IS NOT NULL
 	DROP PROC sp_tblPermission_update
 GO
-CREATE PROC sp_tblPermission_update
-	@PermissionID INT,
-	@IDModule
+CREATE PROC sp_tblPermission_update	
+	@IDModule VARCHAR(200),
+	@IDGroup INT,
+	@Roles VARCHAR(300)
+AS
+BEGIN
+	UPDATE tblPermission SET Roles=@Roles WHERE IDModule=@IDModule AND IDGroup=@IDGroup
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblPermission_delete','P') IS NOT NULL
+	DROP PROC sp_tblPermission_delete
+GO
+CREATE PROC sp_tblPermission_delete
+	@IDModule VARCHAR(200)=NULL,
+	@IDGroup INT=NULL
+AS
+BEGIN
+	IF (@IDModule IS NOT NULL AND @IDModule<>'') OR (@IDGroup IS NOT NULL AND @IDGroup<>'')
+	BEGIN
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @DieuKien=' WHERE (1=1)'
+		IF @IDModule IS NOT NULL AND @IDModule<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDMoudule='+cast(@IDModule AS NVARCHAR)
+		END
+		IF @IDGroup IS NOT NULL AND @IDGroup<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
+		END
+	END
+END
+/* get */
+GO
+IF OBJECT_ID('sp_tblPermission_get','P') IS NOT NULL
+	DROP PROC sp_tblPermission_get
+GO
+CREATE PROC sp_tblPermission_get	
+	@IDGroup INT
+AS
+BEGIN
+	IF @IDGroup IS NOT NULL AND @IDGroup<>0
+	BEGIN
+		SELECT * FROM tblPermission WHERE IDGroup=@IDGroup
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblPermission
+	END
+END
+GO
+/* table User */	
+IF OBJECT_ID('tblUser','U') IS NOT NULL
+	DROP TABLE tblUser
+GO
+CREATE TABLE tblUser
+(
+	UserID INT IDENTITY(1,1) PRIMARY KEY,
+	UserName VARCHAR(200) UNIQUE,
+	[Password] VARCHAR(300),
+	FullName NVARCHAR(300),
+	Email VARCHAR(200),
+	PhoneNumber VARCHAR(100),
+	Tel VARCHAR(100),
+	Gender VARCHAR(20),
+	BirthDay DATETIME,
+	[Address] NVARCHAR(200),
+	Position NVARCHAR(200),
+	[Status] VARCHAR(50),
+	IDDepartment INT FOREIGN KEY REFERENCES tblDepartment(DepartmentID),
+	IDGroup INT FOREIGN KEY REFERENCES tblGroup(GroupID)
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblUser_add','P') IS NOT NULL
+	DROP PROC sp_tblUser_add
+GO
+CREATE PROC sp_tblUser_add	
+	@UserName VARCHAR(200),
+	@Password VARCHAR(300),
+	@FullName NVARCHAR(300),
+	@Email VARCHAR(200),
+	@PhoneNumber VARCHAR(100),
+	@Tel VARCHAR(100),
+	@Gender VARCHAR(20),
+	@BirthDay DATETIME,
+	@Address NVARCHAR(200),
+	@Position NVARCHAR(200),
+	@Status VARCHAR(50),
+	@IDDepartment INT,
+	@IDGroup INT
+AS
+BEGIN
+	INSERT INTO tblUser(UserName,[Password],FullName,Email,PhoneNumber,Tel,Gender,BirthDay,[Address],Position,[Status],IDDepartment,IDGroup)
+	 VALUES(@UserName,@Password,@FullName,@Email,@PhoneNumber,@Tel,@Gender,@BirthDay,@Address,@Position,@Status,@IDDepartment,@IDGroup)
+END
+/* update */
+IF OBJECT_ID('sp_tblUser_update','P') IS NOT NULL
+	DROP PROC sp_tblUser_update
+GO
+CREATE PROC sp_tblUser_update	
+	@UserName VARCHAR(200),
+	@Password VARCHAR(300)=NULL,
+	@FullName NVARCHAR(300)=NULL,
+	@Email VARCHAR(200)=NULL,
+	@PhoneNumber VARCHAR(100)=NULL,
+	@Tel VARCHAR(100)=NULL,
+	@Gender VARCHAR(20)=NULL,
+	@BirthDay DATETIME=NULL,
+	@Address NVARCHAR(200)=NULL,
+	@Position NVARCHAR(200)=NULL,
+	@Status VARCHAR(50)=NULL,
+	@IDDepartment INT=NULL,
+	@IDGroup INT=NULL
+AS
+BEGIN
+	DECLARE @Update NVARCHAR(500)
+	SET @Update=' UserName=@UserName'	
+	IF @Password IS NOT NULL AND @Password<>''
+	BEGIN
+		SET @Update=',Password=@Password';
+	END
+	IF @FullName IS NOT NULL AND @FullName<>''
+	BEGIN
+		SET @Update=',FullName=@FullName';
+	END
+	IF @Email IS NOT NULL AND @Email<>''
+	BEGIN
+		SET @Update=',Email=@Email';
+	END
+	IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
+	BEGIN
+		SET @Update=',PhoneNumber=@PhoneNumber';
+	END
+	IF @Tel IS NOT NULL AND @Tel<>''
+	BEGIN
+		SET @Update=',Tel=@Tel';
+	END
+	IF @Gender IS NOT NULL AND @Gender<>''
+	BEGIN
+		SET @Update=',Gender=@Gender';
+	END
+	IF @BirthDay IS NOT NULL AND @BirthDay<>''
+	BEGIN
+		SET @Update=',BirthDay=@BirthDay';
+	END
+	IF @Address IS NOT NULL AND @Address<>''
+	BEGIN
+		SET @Update=',Address=@Address';
+	END
+	IF @Position IS NOT NULL AND @Position<>''
+	BEGIN
+		SET @Update=',Position=@Position';
+	END
+	IF @Status IS NOT NULL AND @Status<>''
+	BEGIN
+		SET @Update=',Status=@Status';
+	END
+	IF @IDDepartment IS NOT NULL AND @IDDepartment<>''
+	BEGIN
+		SET @Update=',IDDepartment=@IDDepartment';
+	END
+	IF @IDGroup IS NOT NULL AND @IDGroup<>''
+	BEGIN
+		SET @Update=',IDGroup=@IDGroup';
+	END
+	EXEC('UPDATE tblUser SET'+@Update+' WHERE UserName=@UserName')
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblUser_delete','P') IS NOT NULL
+	DROP PROC sp_tblUser_delete
+GO
+CREATE PROC sp_tblUser_delete
+	@UserName VARCHAR(200)
+AS
+BEGIN
+	DELETE tblUser WHERE UserName=@UserName
+END	
+GO
+/* get */
+IF OBJECT_ID('sp_tblUser_get','P') IS NOT NULL
+	DROP PROC sp_tblUser_get
+GO
+CREATE PROC sp_tblUser_get
+	@UserName VARCHAR(200)=NULL,	
+	@FullName NVARCHAR(300)=NULL,
+	@Email VARCHAR(200)=NULL,
+	@PhoneNumber VARCHAR(100)=NULL,
+	@Tel VARCHAR(100)=NULL,
+	@Gender VARCHAR(20)=NULL,
+	@BirthDay DATETIME=NULL,
+	@Address NVARCHAR(200)=NULL,
+	@Position NVARCHAR(200)=NULL,
+	@Status VARCHAR(50)=NULL,
+	@IDDepartment INT=NULL,
+	@IDGroup INT=NULL,
+	@Order VARCHAR(20)='DESC',
+	@OrderBy VARCHAR(100)='FullName',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @UserName IS NOT NULL AND @UserName<>''
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'
+		IF @FullName IS NOT NULL AND @FullName<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND FullName LIKE(N''%'+@FullName+'%'')'
+		END
+		IF @Email IS NOT NULL AND @Email<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Email LIKE(N''%'+@Email+'%'')'
+		END
+		IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND PhoneNumber LIKE(N''%'+@PhoneNumber+'%'')'
+		END
+		IF @Tel IS NOT NULL AND @Tel<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Tel LIKE(N''%'+@Tel+'%'')'
+		END
+		IF @Gender IS NOT NULL AND @Gender<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Gender ='+cast(@Gender AS VARCHAR)
+		END
+		IF @BirthDay IS NOT NULL AND @BirthDay<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND BirthDay='+cast(@BirthDay AS NVARCHAR)
+		END
+		IF @Address IS NOT NULL AND @Address<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Address LIKE(N''%'+@Address+'%'')'
+		END
+		IF @Position IS NOT NULL AND @Position<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Position LIKE(N''%'+@Position+'%'')'
+		END
+		IF @Status IS NOT NULL AND @Status<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+		END
+		IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDDepartment='+cast(@IDDepartment AS NVARCHAR)
+		END
+		IF @IDGroup IS NOT NULL AND @IDGroup<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
+		END
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+			FROM tblUser),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblUser WHERE UserName=@UserName
+	END
+END
+GO
+/* table DocumentKind */
+IF OBJECT_ID('tblDocumentKind','U') IS NOT NULL
+	DROP TABLE tblDocumentKind
+GO
+CREATE TABLE tblDocumentKind
+(
+	DocumentKindID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(200),
+	[Description] NVARCHAR(300),
+	DocumentKindParent INT DEFAULT(0)
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblDocumentKind_add','P') IS NOT NULL
+	DROP PROC sp_tblDocumentKind_add
+GO
+CREATE PROC sp_tblDocumentKind_add
+	@Name NVARCHAR(200),
+	@Description NVARCHAR(300),
+	@DocumentKindParent INT=0
+AS
+BEGIN
+	INSERT INTO tblDocumentKind([Name],[Description],DocumentKindParent) VALUES(@Name,@Description,@DocumentKindParent)
+END
+/* update */
+IF OBJECT_ID('sp_tblDocumentKind_update','P') IS NOT NULL
+	DROP PROC sp_tblDocumentKind_update
+GO
+CREATE PROC sp_tblDocumentKind_update
+	@DocumentKindID INT,
+	@Name NVARCHAR(200),
+	@Description NVARCHAR(300),
+	@DocumentKindParent INT=0
+AS
+BEGIN
+	UPDATE DocumentKind SET [Name]=@Name,[Description]=@Description,DocumentKindParent=@DocumentKindParent 
+		WHERE DocumentKindID=@DocumentKindID
+END
+/* delte */
+IF OBJECT_ID('sp_tblDocumentKind_delete','P') IS NOT NULL
+	DROP PROC sp_tblDocumentKind_delete
+GO
+CREATE PROC sp_tblDocumentKind_delete
+	@DocumentKindID INT
+AS
+BEGIN
+	DELETE DocumentKind WHERE DocumentKindID=@DocumentKindID
+END
+/* get */
+IF OBJECT_ID('sp_tblDocumentKind_get','P') IS NOT NULL
+	DROP PROC sp_tblDocumentKind_get
+GO
+CREATE PROC sp_tblDocumentKind_get
+	@DocumentKindID INT=NULL
+AS
+BEGIN
+	IF @DocumentKindID IS NOT NULL AND @DocumentKindID<>0
+	BEGIN
+		SELECT * FROM tblDocumentKind
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblDocumentKind WHERE DocumentKindID=@DocumentKindID
+	END
+END
+/* table Offical */
+GO
+IF OBJECT_ID('tblOffical','U') IS NOT NULL
+	DROP TABLE tblOffical
+GO
+CREATE TABLE tblOffical
+(
+	OfficalID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(300),
+	[Description] NVARCHAR(300),
+	[Address] NVARCHAR(300),
+	Tel VARCHAR(100),
+	Fax VARCHAR(100),
+	Email VARCHAR(100),
+	OfficalParent INT DEFAULT(0)
+)
+/* add */
+IF OBJECT_ID('sp_tblOffical_add','P') IS NOT NULL
+	DROP PROC sp_tblOffical_add
+GO
+CREATE PROC sp_tblOffical_add
+	@Name NVARCHAR(300),	
+	@Description NVARCHAR(300),
+	@Address NVARCHAR(300),
+	@Tel VARCHAR(100),
+	@Fax VARCHAR(100),
+	@Email VARCHAR(100),
+	@OfficalParent INT=0
+AS
+BEGIN
+	INSERT INTO tblOffical([Name],[Description],[Address],Tel,Fax,Email,OfficalParent) 
+		VALUES(@Name,@Description,@Address,@Tel,@Fax,@Email,@OfficalParent)
+END
+/* update */
+IF OBJECT_ID('sp_tblOffical_update','P') IS NOT NULL
+	DROP PROC sp_tblOffical_update
+GO
+CREATE PROC sp_tblOffical_update	
+	@OfficalID INT,
+	@Name NVARCHAR(300),
+	@Description NVARCHAR(300),
+	@Address NVARCHAR(300),
+	@Tel VARCHAR(100),
+	@Fax VARCHAR(100),
+	@Email VARCHAR(100),
+	@OfficalParent INT=0
+AS
+BEGIN
+	UPDATE tblOffical SET [Name]=@Name,[Description]=@Description,[Address]=@Address,Tel=@Tel,Fax=@Fax,Email=@Email,OfficalParent=@OfficalParent
+END
+/* delte */
+IF OBJECT_ID('sp_tblOffical_delete','P') IS NOT NULL
+	DROP PROC sp_tblOffical_delete
+GO
+CREATE PROC sp_tblOffical_delete
+	@OfficalID INT
+AS
+BEGIN
+	DELETE tblOffical WHERE OfficalID=@OfficalID
+END
+/* get */
+IF OBJECT_ID('sp_tblOffical_get','P') IS NOT NULL
+	DROP PROC sp_tblOffical_get
+GO
+CREATE PROC sp_tblOffical_get
+	@OfficalID INT=NULL,
+	@Name NVARCHAR(300)=NULL,
+	@Address NVARCHAR(300)=NULL,
+	@Tel VARCHAR(100)=NULL,
+	@Fax VARCHAR(100)=NULL,
+	@Email VARCHAR(100)=NULL,
+	@OfficalParent INT=NULL,
+	@Order VARCHAR(20)='DESC',
+	@OrderBy VARCHAR(100)='Name',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @OfficalID IS NOT NULL AND @OfficalID<>0
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'
+		IF @Name IS NOT NULL AND @Name<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Name LIKE(N''%'+@Name+'%'')'
+		END
+		IF @Address IS NOT NULL AND @Address<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Address LIKE(N''%'+@Address+'%'')'
+		END
+		IF @Tel IS NOT NULL AND @Tel<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Tel LIKE(N''%'+@Tel+'%'')'
+		END
+		IF @Fax IS NOT NULL AND @Fax<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Name Fax(N''%'+@Fax+'%'')'
+		END
+		IF @Email IS NOT NULL AND @Email<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Email LIKE(N''%'+@Email+'%'')'
+		END
+		IF @OfficalParent IS NOT NULL
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND OfficalParent='+cast(@OfficalParent AS NVARCHAR)
+		END
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+			FROM tblOffical),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblOffical WHERE OfficalID=@OfficalID
+	END
+END

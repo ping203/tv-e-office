@@ -414,6 +414,10 @@ AS
 BEGIN
 	IF @UserName IS NOT NULL AND @UserName<>''
 	BEGIN
+		SELECT * FROM tblUser WHERE UserName=@UserName
+	END
+	ELSE
+	BEGIN		
 		DECLARE @Start INT
 		DECLARE @End INT
 		DECLARE @DieuKien NVARCHAR(500)
@@ -467,10 +471,6 @@ BEGIN
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblUser),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
-	END
-	ELSE
-	BEGIN
-		SELECT * FROM tblUser WHERE UserName=@UserName
 	END
 END
 GO
@@ -729,21 +729,142 @@ IF OBJECT_ID('tblDocument','U') IS NOT NULL
 GO
 CREATE TABLE tblDocument
 (
-	DocumentID INT IDENTITY(1,1) PRIMARY KEY,
+	DocumentID VARCHAR(MAX) PRIMARY KEY,
+	DocumentNumber NVARCHAR(200),
 	[Name] NVARCHAR(300),
 	[Excerpt] NVARCHAR(MAX),
 	[Content] NVARCHAR(MAX),	
+	PublishDate DATETIME,
+	PublishOffical INT FOREIGN KEY tblOffical(OfficalID),
 	Attachs VARCHAR(50),
 	IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID),
-	UserCreat INT FOREIGN KEY tblUser(UserID),
+	CreateDate DATETIME DEFAULT(GetDate()),
+	IDUserCreat INT FOREIGN KEY tblUser(UserID),
 	UserProcess VARCHAR(100),
 	UserComments VARCHAR(100),
-	StartProcess DATETIME,
+	StartProcess DATETIME DEFAULT(GetDate()),
 	EndProcess DATETIME,
-	SendDate DATETIME,
-	ReceiveDate DATETIME,
+	SendDate DATETIME DEFAULT(GetDate()),
+	ReceiveDate DATETIME,	
 	SendOfficals VARCHAR(100),
-	ReceiveOfficals VARCHAR(100),
 	Priority VARCHAR(20),
 	[Status] VARCHAR(50)
 )
+GO
+/* add */
+IF OBJECT_ID('sp_tblDocument_add','P') IS NOT NULL
+	DROP PROC sp_tblDocument_add
+GO
+CREATE PROC sp_tblDocument_add
+	@DocumentID VARCHAR(MAX),
+	@DocumentNumber NVARCHAR(200)=NULL,
+	@Name NVARCHAR(300),
+	@Excerpt NVARCHAR(MAX)=NULL,
+	@Content NVARCHAR(MAX)=NULL,	
+	@PublishDate DATETIME=NULL,
+	@PublishOffical INT FOREIGN KEY tblOffical(OfficalID)=NULL,
+	@Attachs VARCHAR(50)=NULL,
+	@IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID),
+	@CreateDate DATETIME=GetDate(),
+	@IDUserCreat INT FOREIGN KEY tblUser(UserID),
+	@UserProcess VARCHAR(100),
+	@UserComments VARCHAR(100)=NULL,
+	@StartProcess DATETIME=GetDate(),
+	@EndProcess DATETIME=NULL,
+	@SendDate DATETIME=GetDate(),
+	@ReceiveDate DATETIME=NULL,	
+	@SendOfficals VARCHAR(100)=NULL,
+	@Priority VARCHAR(20),
+	@Status VARCHAR(50)
+AS
+BEGIN
+	INSERT INTO tblDocument(DocumentID,DocumentNumber,[Name],Excerpt,[Content],PublishDate,PublishOffical,
+				Attachs,IDDocumentKind,CreateDate,IDUserCreate,UserProcess,UserComments,StartProcess,EndProcess,
+				SendDate,ReceiveDate,SendOfficals,Priority,[Status]) 
+				VALUES(@DocumentID,@DocumentNumber,@Name,@Excerpt,@Content,@PublishDate,@PublishOffical,
+				@Attachs,@IDDocumentKind,@CreateDate,@IDUserCreate,@UserProcess,@UserComments,@StartProcess,@EndProcess,
+				@SendDate,@ReceiveDate,@SendOfficals,@Priority,@Status)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblDocument_update','P') IS NOT NULL
+	DROP PROC sp_tblDocument_update
+GO
+CREATE PROC sp_tblDocument_update
+	@DocumentID VARCHAR(MAX),
+	@DocumentNumber NVARCHAR(200),
+	@Name NVARCHAR(300)=NULL,
+	@Excerpt NVARCHAR(MAX)=NULL,
+	@Content NVARCHAR(MAX)=NULL,	
+	@PublishDate DATETIME=NULL,
+	@PublishOffical INT FOREIGN KEY tblOffical(OfficalID)=NULL,
+	@Attachs VARCHAR(50)=NULL,
+	@IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID)=NULL,
+	@CreateDate DATETIME=NULL,	
+	@UserProcess VARCHAR(100)=NULL,
+	@UserComments VARCHAR(100)=NULL,
+	@StartProcess DATETIME=NULL,
+	@EndProcess DATETIME=NULL,
+	@SendDate DATETIME=NULL,
+	@ReceiveDate DATETIME=NULL,	
+	@SendOfficals VARCHAR(100)=NULL,
+	@Priority VARCHAR(20)=NULL,
+	@Status VARCHAR(50)=NULL
+AS
+BEGIN
+	DECLARE @Update NVARCHAR(500)
+	SET @Update=' DocumentNumber=@DocumentNumber'
+	IF @Name IS NOT NULL AND @Name<>''
+	BEGIN
+		SET @Update=',Name=@Name'
+	END
+	IF @Excerpt IS NOT NULL AND @Excerpt<>''
+	BEGIN
+		SET @Update=',Excerpt=@Excerpt'
+	END
+	IF @Content IS NOT NULL
+	BEGIN
+		SET @Update=',Content=@Content'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	BEGIN
+		SET @Update='DocumentNumber=@DocumentNumber'
+	END
+END
+

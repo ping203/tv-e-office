@@ -573,6 +573,7 @@ BEGIN
 		VALUES(@Name,@Description,@Address,@Tel,@Fax,@Email,@OfficalParent)
 END
 /* update */
+GO
 IF OBJECT_ID('sp_tblOffical_update','P') IS NOT NULL
 	DROP PROC sp_tblOffical_update
 GO
@@ -590,6 +591,7 @@ BEGIN
 	UPDATE tblOffical SET [Name]=@Name,[Description]=@Description,[Address]=@Address,Tel=@Tel,Fax=@Fax,Email=@Email,OfficalParent=@OfficalParent
 END
 /* delte */
+GO
 IF OBJECT_ID('sp_tblOffical_delete','P') IS NOT NULL
 	DROP PROC sp_tblOffical_delete
 GO
@@ -599,6 +601,7 @@ AS
 BEGIN
 	DELETE tblOffical WHERE OfficalID=@OfficalID
 END
+GO
 /* get */
 IF OBJECT_ID('sp_tblOffical_get','P') IS NOT NULL
 	DROP PROC sp_tblOffical_get
@@ -658,3 +661,89 @@ BEGIN
 		SELECT * FROM tblOffical WHERE OfficalID=@OfficalID
 	END
 END
+GO
+/* table attach */
+IF OBJECT_ID('tblAttach','U') IS NOT NULL
+	DROP TABLE tblAttach
+GO
+CREATE TABLE tblAttach
+(
+	AttachID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(300),
+	[Description] NVARCHAR(300),
+	[Path] NVARCHAR(300)	
+)
+/* add */
+GO
+IF OBJECT_ID('sp_tblAttach_add','P') IS NOT NULL
+	DROP PROC sp_tblAttach_add
+GO
+CREATE PROC sp_tblAttach_add
+	@Name NVARCHAR(300),
+	@Description NVARCHAR(300),
+	@Path NVARCHAR(300)
+AS
+BEGIN
+	INSERT INTO tblAttacht([Name],[Description],[Path]) VALUES(@Name,@Description,@Path)
+END
+/* update */
+GO
+IF OBJECT_ID('sp_tblAttach_update','P') IS NOT NULL
+	DROP PROC sp_tblAttach_update
+GO
+CREATE PROC sp_tblAttach_update
+	@AttachID INT,
+	@Name NVARCHAR(300),
+	@Description NVARCHAR(300),
+	@Path NVARCHAR(300)
+AS
+BEGIN
+	UPDATE tblAttach SET [Name]=@Name,[Description]=@Description,[Path]=@Path WHERE AttachID=@AttachID
+END
+/* delete */
+GO
+IF OBJECT_ID('sp_tblAttach_delete','P') IS NOT NULL
+	DROP PROC sp_tblAttach_delete
+GO
+CREATE PROC sp_tblAttach_delete
+	@AttachID INT
+AS
+BEGIN
+	DELETE tblAttach WHERE AttachID=@AttachID
+END
+/* get */
+GO
+IF OBJECT_ID('sp_tblAttach_get','P') IS NOT NULL
+	DROP PROC sp_tblAttach_get
+GO
+CREATE PROC sp_tblAttach_get
+	@AttachID INT
+AS
+BEGIN
+	SELECT * FROM tblAttach WHERE AttachID=@AttachID
+END
+/* table Document */
+GO
+IF OBJECT_ID('tblDocument','U') IS NOT NULL
+	DROP TABLE tblDocument
+GO
+CREATE TABLE tblDocument
+(
+	DocumentID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(300),
+	[Excerpt] NVARCHAR(MAX),
+	[Content] NVARCHAR(MAX),	
+	Attachs VARCHAR(50),
+	IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID),
+	UserCreat INT FOREIGN KEY tblUser(UserID),
+	UserProcess VARCHAR(100),
+	UserComments VARCHAR(100),
+	StartProcess DATETIME,
+	EndProcess DATETIME,
+	SendDate DATETIME,
+	ReceiveDate DATETIME,
+	SendOfficals VARCHAR(100),
+	ReceiveOfficals VARCHAR(100),
+	Priority VARCHAR(20),
+	[Status] VARCHAR(50)
+)

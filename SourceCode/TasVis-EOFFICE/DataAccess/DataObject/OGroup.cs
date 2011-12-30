@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess.ObjectData
+namespace DataAccess.DataObject
 {
-    class OGroup
+     public class OGroup
     {
         private int _GroupID;
 

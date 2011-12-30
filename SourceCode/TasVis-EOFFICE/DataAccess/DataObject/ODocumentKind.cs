@@ -5,29 +5,21 @@ using System.Text;
 
 namespace DataAccess.DataObject
 {
-    public class ODepartment
+    public class ODocumentKind
     {
-        private int _DeparmentID;
+        private int _DocumentKindID;
 
-        public int DeparmentID
+        public int DocumentKindID
         {
-            get { return _DeparmentID; }
-            set { _DeparmentID = value; }
+            get { return _DocumentKindID; }
+            set { _DocumentKindID = value; }
         }
-
         private string _Name;
 
         public string Name
         {
             get { return _Name; }
             set { _Name = value; }
-        }
-        private int _DepartmentParent;
-
-        public int DepartmentParent
-        {
-            get { return _DepartmentParent; }
-            set { _DepartmentParent = value; }
         }
         private string _Description;
 
@@ -36,7 +28,12 @@ namespace DataAccess.DataObject
             get { return _Description; }
             set { _Description = value; }
         }
+        private int _DocumentKindParent;
 
-        
+        public int DocumentKindParent
+        {
+            get { return _DocumentKindParent; }
+            set { _DocumentKindParent = value; }
+        }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess.ObjectData
+namespace DataAccess.DataObject
 {
-    class OPermission
+    public class OPermission
     {
         private int _PermissionID;
 

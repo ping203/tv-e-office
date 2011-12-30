@@ -412,12 +412,8 @@ CREATE PROC sp_tblUser_get
 	@PageSize INT=50
 AS
 BEGIN
-	IF @UserName IS NOT NULL AND @UserName<>''
+	IF @UserName IS NULL OR @UserName=''
 	BEGIN
-		SELECT * FROM tblUser WHERE UserName=@UserName
-	END
-	ELSE
-	BEGIN		
 		DECLARE @Start INT
 		DECLARE @End INT
 		DECLARE @DieuKien NVARCHAR(500)
@@ -471,6 +467,10 @@ BEGIN
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblUser),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblUser WHERE UserName=@UserName
 	END
 END
 GO
@@ -620,7 +620,7 @@ CREATE PROC sp_tblOffical_get
 	@PageSize INT=50
 AS
 BEGIN
-	IF @OfficalID IS NOT NULL AND @OfficalID<>0
+	IF @OfficalID IS NULL OR @OfficalID=0
 	BEGIN
 		DECLARE @Start INT
 		DECLARE @End INT

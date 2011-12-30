@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using DataAccess.ObjectData;
+using DataAccess.DataObject;
 namespace DataAccess.BusinessObject
 {
     class BDepartment:Common.CDBase 

@@ -1,6 +1,7 @@
-
+USE Master
+IF DB_ID('DBOFFICE') IS NOT NULL
 	DROP DATABASE DBEOFFICE
-
+GO
 CREATE DATABASE DBEOFFICE
 GO
 USE DBEOFFICE
@@ -729,7 +730,7 @@ IF OBJECT_ID('tblDocument','U') IS NOT NULL
 GO
 CREATE TABLE tblDocument
 (
-	DocumentID VARCHAR(MAX) PRIMARY KEY,
+	DocumentID VARCHAR(500) PRIMARY KEY,
 	DocumentNumber NVARCHAR(200),
 	[Name] NVARCHAR(300),
 	[Excerpt] NVARCHAR(MAX),
@@ -739,7 +740,7 @@ CREATE TABLE tblDocument
 	Attachs VARCHAR(50),
 	IDDocumentKind INT FOREIGN KEY REFERENCES tblDocumentKind(DocumentKindID),
 	CreateDate DATETIME DEFAULT(GetDate()),
-	IDUserCreat INT FOREIGN KEY REFERENCES tblUser(UserID),
+	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
 	UserProcess VARCHAR(100),
 	UserComments VARCHAR(100),
 	StartProcess DATETIME DEFAULT(GetDate()),
@@ -756,7 +757,7 @@ IF OBJECT_ID('sp_tblDocument_add','P') IS NOT NULL
 	DROP PROC sp_tblDocument_add
 GO
 CREATE PROC sp_tblDocument_add
-	@DocumentID VARCHAR(MAX),
+	@DocumentID VARCHAR(500),
 	@DocumentNumber NVARCHAR(200)=NULL,
 	@Name NVARCHAR(300),
 	@Excerpt NVARCHAR(MAX)=NULL,
@@ -791,7 +792,7 @@ IF OBJECT_ID('sp_tblDocument_update','P') IS NOT NULL
 	DROP PROC sp_tblDocument_update
 GO
 CREATE PROC sp_tblDocument_update
-	@DocumentID VARCHAR(MAX),
+	@DocumentID VARCHAR(500),
 	@DocumentNumber NVARCHAR(200),
 	@Name NVARCHAR(300)=NULL,
 	@Excerpt NVARCHAR(MAX)=NULL,
@@ -900,7 +901,7 @@ IF OBJECT_ID('sp_tblDocument_get','P') IS NOT NULL
 	DROP PROC sp_tblDocument_get
 GO
 CREATE PROC sp_tblDocument_get
-	@DocumentID VARCHAR(MAX),
+	@DocumentID VARCHAR(500),
 	@DocumentNumber NVARCHAR(200)=NULL,
 	@Name NVARCHAR(300)=NULL,
 	@Content NVARCHAR(MAX)=NULL,	
@@ -987,3 +988,91 @@ BEGIN
 		SELECT * FROM tblDocument WHERE DocumentID=@DocumentID
 	END
 END
+GO
+/* table work group */
+IF OBJECT_ID('tblWorkGroup','U') IS NOT NULL
+	DROP TABLE tblWorkGroup
+GO
+CREATE TABLE tblWorkGroup
+(
+	WorkGroupID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(300),
+	[Description] NVARCHAR(MAX),
+	WorkGroupParent INT DEFAULT(0)	
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblWorkGroup_add','P') IS NOT NULL
+	DROP PROC sp_tblWorkGroup_add
+GO
+CREATE PROC sp_tblWorkGroup_add
+	@Name NVARCHAR(300),
+	@Description NVARCHAR(MAX),
+	@WorkGroupParent INT=0
+AS
+BEGIN
+	INSERT INTO tblWorkGroup([Name],[Description],WorkGroupParent) VALUES(@Name,@Description,@WorkGroupParent)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblWorkGroup_update','P') IS NOT NULL
+	DROP PROC sp_tblWorkGroup_update
+GO
+CREATE PROC sp_tblWorkGroup_update
+	@WorkGroupID INT,
+	@Name NVARCHAR(300),
+	@Description NVARCHAR(MAX),
+	@WorkGroupParent INT
+AS
+BEGIN
+	UPDATE tblWorkGroup SET [Name]=@Name,[Description]=@Description,WorkGroupParent=@WorkGroupParent WHERE WorkGroupID=@WorkGroupID
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblWorkGroup_delete','P') IS NOT NULL
+	DROP PROC sp_tblWorkGroup_delete
+GO
+CREATE PROC sp_tblWorkGroup_delete
+	@WorkGroupID INT
+AS
+BEGIN
+	DELETE tblWorkGroup WHERE WorkGroupID=@WorkGroupID
+END
+GO
+/* get */
+IF OBJECT_ID('sp_tblWorkGroup_get','P') IS NOT NULL
+	DROP PROC sp_tblWorkGroup_get
+GO
+CREATE PROC sp_tblWorkGroup_get
+	@WorkGroupID INT=NULL
+AS
+BEGIN
+	IF @WorkGroupID IS NULL OR @WorkGroupID=0
+	BEGIN
+		SELECT * FROM tblWorkGroup
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblWorkGroup WHERE WorkGroupID=@WorkGroupID
+	END
+END
+GO
+/* table work */
+IF OBJECT_ID('tblWork','U') IS NOT NULL
+	DROP TABLE tblWork
+GO
+CREATE TABLE tblWork
+(
+	WorkID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(300),
+	[Decription] NVARCHAR(MAX),
+	[Content] NVARCHAR(MAX),
+	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
+	IDUserProcess VARCHAR(50),
+	CreateDate DATETIME DEFAULT(GetDate()),
+	StartProcess DATETIME DEFAULT(GetDate()),
+	EndProcess DATETIME,
+	[Status] VARCHAR(50),
+	Priority VARCHAR(500,
+	
+)

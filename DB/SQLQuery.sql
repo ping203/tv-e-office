@@ -465,7 +465,7 @@ BEGIN
 			SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
 		END
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
-			FROM tblUser),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			FROM tblUser'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
 	ELSE
@@ -653,7 +653,7 @@ BEGIN
 			SET @DieuKien=@DieuKien+' AND OfficalParent='+cast(@OfficalParent AS NVARCHAR)
 		END
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
-			FROM tblOffical),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			FROM tblOffical'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
 	ELSE
@@ -735,11 +735,11 @@ CREATE TABLE tblDocument
 	[Excerpt] NVARCHAR(MAX),
 	[Content] NVARCHAR(MAX),	
 	PublishDate DATETIME,
-	PublishOffical INT FOREIGN KEY tblOffical(OfficalID),
+	PublishOffical INT FOREIGN KEY REFERENCES tblOffical(OfficalID),
 	Attachs VARCHAR(50),
-	IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID),
+	IDDocumentKind INT FOREIGN KEY REFERENCES tblDocumentKind(DocumentKindID),
 	CreateDate DATETIME DEFAULT(GetDate()),
-	IDUserCreat INT FOREIGN KEY tblUser(UserID),
+	IDUserCreat INT FOREIGN KEY REFERENCES tblUser(UserID),
 	UserProcess VARCHAR(100),
 	UserComments VARCHAR(100),
 	StartProcess DATETIME DEFAULT(GetDate()),
@@ -762,16 +762,16 @@ CREATE PROC sp_tblDocument_add
 	@Excerpt NVARCHAR(MAX)=NULL,
 	@Content NVARCHAR(MAX)=NULL,	
 	@PublishDate DATETIME=NULL,
-	@PublishOffical INT FOREIGN KEY tblOffical(OfficalID)=NULL,
+	@PublishOffical INT,
 	@Attachs VARCHAR(50)=NULL,
-	@IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID),
-	@CreateDate DATETIME=GetDate(),
-	@IDUserCreat INT FOREIGN KEY tblUser(UserID),
+	@IDDocumentKind INT,
+	@CreateDate DATETIME,
+	@IDUserCreate INT,
 	@UserProcess VARCHAR(100),
 	@UserComments VARCHAR(100)=NULL,
-	@StartProcess DATETIME=GetDate(),
+	@StartProcess DATETIME,
 	@EndProcess DATETIME=NULL,
-	@SendDate DATETIME=GetDate(),
+	@SendDate DATETIME,
 	@ReceiveDate DATETIME=NULL,	
 	@SendOfficals VARCHAR(100)=NULL,
 	@Priority VARCHAR(20),
@@ -797,9 +797,9 @@ CREATE PROC sp_tblDocument_update
 	@Excerpt NVARCHAR(MAX)=NULL,
 	@Content NVARCHAR(MAX)=NULL,	
 	@PublishDate DATETIME=NULL,
-	@PublishOffical INT FOREIGN KEY tblOffical(OfficalID)=NULL,
+	@PublishOffical INT =NULL,
 	@Attachs VARCHAR(50)=NULL,
-	@IDDocumentKind INT FOREIGN KEY tblDocumentKind(DocumentKindID)=NULL,
+	@IDDocumentKind INT =NULL,
 	@CreateDate DATETIME=NULL,	
 	@UserProcess VARCHAR(100)=NULL,
 	@UserComments VARCHAR(100)=NULL,
@@ -818,7 +818,7 @@ BEGIN
 	BEGIN
 		SET @Update=',Name=@Name'
 	END
-	IF @Excerpt IS NOT NULL AND @Excerpt<>''
+	IF @Excerpt IS NOT NULL
 	BEGIN
 		SET @Update=',Excerpt=@Excerpt'
 	END
@@ -826,45 +826,164 @@ BEGIN
 	BEGIN
 		SET @Update=',Content=@Content'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @PublishDate IS NOT NULL AND @PublishDate<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',PublishDate=@PublishDate'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',PublishOffical=@PublishOffical'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',Attachs=@Attachs'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',IDDocumentKind=@IDDocumentKind'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',CreateDate=@CreateDate'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @UserProcess IS NOT NULL AND @UserProcess<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',UserProcess=@UserProcess'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @UserComments IS NOT NULL
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',UserComments=@UserComments'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',StartProcess=@StartProcess'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',EndProcess=@EndProcess'
 	END
-	IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+	IF @SendDate IS NOT NULL AND @SendDate<>''
 	BEGIN
-		SET @Update='DocumentNumber=@DocumentNumber'
+		SET @Update=',SendDate=@SendDate'
+	END
+	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
+	BEGIN
+		SET @Update=',ReceiveDate=@ReceiveDate'
+	END
+	IF @SendOfficals IS NOT NULL
+	BEGIN
+		SET @Update=',SendOfficals=@SendOfficals'
+	END
+	IF @Priority IS NOT NULL AND @Priority<>''
+	BEGIN
+		SET @Update=',Priority=@Priority'
+	END
+	IF @Status IS NOT NULL AND @Status<>''
+	BEGIN
+		SET @Update=',Status=@Status'
+	END
+	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblDocument_delete','P') IS NOT NULL
+	DROP PROC sp_tblDocument_delete
+GO
+CREATE PROC sp_tblDocument_delete
+	@DocumentID INT
+AS
+BEGIN
+	DELETE tblDocument WHERE DocumentID=@DocumentID
+END
+/* get */
+IF OBJECT_ID('sp_tblDocument_get','P') IS NOT NULL
+	DROP PROC sp_tblDocument_get
+GO
+CREATE PROC sp_tblDocument_get
+	@DocumentID VARCHAR(MAX),
+	@DocumentNumber NVARCHAR(200)=NULL,
+	@Name NVARCHAR(300)=NULL,
+	@Content NVARCHAR(MAX)=NULL,	
+	@FromPublishDate DATETIME=NULL,
+	@ToPublishDate DATETIME=NULL,
+	@PublishOffical INT =NULL,
+	@IDDocumentKind INT =NULL,
+	@FromCreateDate DATETIME=NULL,	
+	@ToCreateDate DATETIME=NULL,	
+	@UserProcess VARCHAR(100)=NULL,
+	@UserComments VARCHAR(100)=NULL,		
+	@FromReceiveDate DATETIME=NULL,		
+	@ToReceiveDate DATETIME=NULL,
+	@Priority VARCHAR(20)=NULL,
+	@Status VARCHAR(50)=NULL,
+	@Order VARCHAR(30)='DESC',
+	@OrderBy VARCHAR(100)='Name',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @DocumentID IS NULL OR @DocumentID=''
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'
+		IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND DocumentNumber ='+cast(@DocumentNumber AS NVARCHAR)
+		END
+		IF @Name IS NOT NULL AND @Name<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Name LIKE(N''%'+@Name+'%'')'
+		END
+		IF @Content IS NOT NULL AND @Content<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Content LIKE(N''%'+@Content+'%'')'
+		END
+		IF @FromPublishDate IS NOT NULL AND @FromPublishDate<>'' AND @ToPublishDate IS NOT NULL AND @ToPublishDate<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND PublishDate BETWEEN '+cast(@FromPublishDate AS NVARCHAR)+' AND '+cast(@ToPublishDate AS NVARCHAR)
+		END
+		IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND PublishOffical ='+cast(@PublishOffical AS NVARCHAR)
+		END
+		IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDDocumentKind='+cast(@IDDocumentKind AS NVARCHAR)
+		END
+		IF @FromCreateDate IS NOT NULL AND @FromCreateDate<>'' AND @ToCreateDate IS NOT NULL AND @ToCreateDate<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '+cast(@FromCreateDate AS NVARCHAR)+' AND '+cast(@ToCreateDate AS NVARCHAR)
+		END
+		IF @UserProcess IS NOT NULL AND @UserProcess<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND UserProcess='+cast(@UserProcess AS NVARCHAR)
+		END
+		IF @UserComments IS NOT NULL AND @UserComments<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND UserComments='+cast(@UserComments AS NVARCHAR)
+		END
+		IF @FromReceiveDate IS NOT NULL AND @FromReceiveDate<>'' AND @ToReceiveDate IS NOT NULL AND @ToReceiveDate<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND ReceiveDate BETWEEN '+cast(@FromReceiveDate AS NVARCHAR)+' AND '+cast(@ToReceiveDate AS NVARCHAR)
+		END
+		IF @Priority IS NOT NULL AND @Priority<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Priority='+cast(@Priority AS NVARCHAR)
+		END
+		IF @Status IS NOT NULL AND @Status<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+		END		
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+			FROM tblDocument'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblDocument WHERE DocumentID=@DocumentID
 	END
 END
-

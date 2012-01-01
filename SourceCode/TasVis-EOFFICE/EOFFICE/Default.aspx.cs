@@ -11,9 +11,13 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.Common;
-using System.Data;
+using DataAccess.BusinessObject;
+using System.Collections.Generic;
+using System.Text;
+using DataAccess.DataObject;
+using System.Reflection;
+using System.ComponentModel;
 using System.Data.SqlClient;
-
 namespace EOFFICE
 {
     public partial class _Default : System.Web.UI.Page
@@ -24,18 +28,24 @@ namespace EOFFICE
         CDBase cdBase = new CDBase();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            //sqlParameter[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            //sqlParameter[0].Value = "hung";
+            //sqlParameter[1] = new SqlParameter("@DepartmentParent", SqlDbType.Int);
+            //sqlParameter[1].Value = 2;
+            //sqlParameter[2] = new SqlParameter("@Description", SqlDbType.NVarChar);
+            //sqlParameter[2].Value = "asdasghfg";
+            //cdBase.RunProcudure("sp_tblDepartment_add", sqlParameter);
+            
             sqlPara[0] = new SqlParameter("@DepartmentID", SqlDbType.Int);
             sqlPara[0].Value = 0;
-            grvTest.DataSource = cdBase.RunProcedureGet("sp_tblDepartment_get", sqlPara);          
+            DataTable tb= new DataTable();
+            
+            tb = cdBase.RunProcedureGet("sp_tblDepartment_get", sqlPara);
+            BDepartment bd = new BDepartment();
+            grvTest.DataSource = bd.Get(0);
             grvTest.DataBind();
-
-            sqlParameter[0] = new SqlParameter("@Name",SqlDbType.NVarChar);
-            sqlParameter[0].Value = "hung";
-            sqlParameter[1] = new SqlParameter("@DepartmentParent", SqlDbType.Int);
-            sqlParameter[1].Value = 1;
-            sqlParameter[2] = new SqlParameter("@Description", SqlDbType.NVarChar);
-            sqlParameter[2].Value = "asdasghfg";
-            cdBase.RunProcudure("sp_tblDepartment",sqlParameter);
         }
     }
 }

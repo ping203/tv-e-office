@@ -7,12 +7,12 @@ namespace DataAccess.DataObject
 {
     public class ODepartment
     {
-        private int _DeparmentID;
+        private int _DepartmentID;
 
-        public int DeparmentID
+        public int DepartmentID
         {
-            get { return _DeparmentID; }
-            set { _DeparmentID = value; }
+            get { return _DepartmentID; }
+            set { _DepartmentID = value; }
         }
 
         private string _Name;
@@ -35,6 +35,13 @@ namespace DataAccess.DataObject
         {
             get { return _Description; }
             set { _Description = value; }
+        }
+        private int _TotalResult;
+
+        public int TotalResult
+        {
+            get { return _TotalResult; }
+            set { _TotalResult = value; }
         }
 
         

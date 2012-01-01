@@ -1107,16 +1107,16 @@ GO
 CREATE PROC sp_tblWork_update
 	@WorkID INT,	
 	@Name NVARCHAR(300)=NULL,
-	@Decription NVARCHAR(MAX),
-	@Content NVARCHAR(MAX),
-	@Attachs VARCHAR(50),	
+	@Decription NVARCHAR(MAX)=NULL,
+	@Content NVARCHAR(MAX)=NULL,
+	@Attachs VARCHAR(50)=NULL,	
 	@IDUserCreate INT,	
-	@IDUserProcess VARCHAR(50),
+	@IDUserProcess VARCHAR(50)=NULL,
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
-	@EndProcess DATETIME,
-	@Status VARCHAR(50),
-	@Priority VARCHAR(500)
+	@EndProcess DATETIME=NULL,
+	@Status VARCHAR(50)=NULL,
+	@Priority VARCHAR(500)=NULL
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
@@ -1125,37 +1125,25 @@ BEGIN
 	BEGIN
 		SET @Update=@Update+',Name=@Name'
 	END
+	IF @Decription IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Decription=@Decription'
+	END
 	IF @Content IS NOT NULL
 	BEGIN
 		SET @Update=@Update+',Content=@Content'
-	END
-	IF @PublishDate IS NOT NULL AND @PublishDate<>''
-	BEGIN
-		SET @Update=@Update+',PublishDate=@PublishDate'
-	END
-	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
-	BEGIN
-		SET @Update=@Update+',PublishOffical=@PublishOffical'
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
 		SET @Update=@Update+',Attachs=@Attachs'
 	END
-	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
+	IF @IDUserProcess IS NOT NULL @IDUserProcess<>''
 	BEGIN
-		SET @Update=@Update+',IDDocumentKind=@IDDocumentKind'
-	END
+		SET @Update=@Update+',IDUserProcess=@IDUserProcess'
+	END	
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
 		SET @Update=@Update+',CreateDate=@CreateDate'
-	END
-	IF @UserProcess IS NOT NULL AND @UserProcess<>''
-	BEGIN
-		SET @Update=@Update+',UserProcess=@UserProcess'
-	END
-	IF @UserComments IS NOT NULL
-	BEGIN
-		SET @Update=@Update+',UserComments=@UserComments'
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
@@ -1165,25 +1153,13 @@ BEGIN
 	BEGIN
 		SET @Update=@Update+',EndProcess=@EndProcess'
 	END
-	IF @SendDate IS NOT NULL AND @SendDate<>''
-	BEGIN
-		SET @Update=@Update+',SendDate=@SendDate'
-	END
-	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
-	BEGIN
-		SET @Update=@Update+',ReceiveDate=@ReceiveDate'
-	END
-	IF @SendOfficals IS NOT NULL
-	BEGIN
-		SET @Update=@Update+',SendOfficals=@SendOfficals'
-	END
-	IF @Priority IS NOT NULL AND @Priority<>''
-	BEGIN
-		SET @Update=@Update+',Priority=@Priority'
-	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
 		SET @Update=@Update+',Status=@Status'
 	END
-	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
+	IF @Priority IS NOT NULL AND @Priority<>''
+	BEGIN
+		SET @Update=@Update+',Priority=@Priority'
+	END	
+	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END

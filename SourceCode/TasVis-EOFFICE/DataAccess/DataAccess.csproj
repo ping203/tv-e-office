@@ -50,12 +50,16 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CDBase.cs" />
     <Compile Include="Common\Common.cs" />
+    <Compile Include="DataObject\OAttach.cs" />
     <Compile Include="DataObject\ODepartment.cs" />
+    <Compile Include="DataObject\ODocument.cs" />
     <Compile Include="DataObject\ODocumentKind.cs" />
     <Compile Include="DataObject\OGroup.cs" />
     <Compile Include="DataObject\OOffical.cs" />
     <Compile Include="DataObject\OPermission.cs" />
     <Compile Include="DataObject\OUser.cs" />
+    <Compile Include="DataObject\OWork.cs" />
+    <Compile Include="DataObject\OWorkGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

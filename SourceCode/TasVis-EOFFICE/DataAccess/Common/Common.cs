@@ -19,7 +19,6 @@ namespace DataAccess.Common
             foreach(DataRow dtr in dtb.Rows)
             {
                 
-                
             }
             return lstResult;
         }

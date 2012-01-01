@@ -330,51 +330,51 @@ BEGIN
 	SET @Update=' UserName=@UserName'	
 	IF @Password IS NOT NULL AND @Password<>''
 	BEGIN
-		SET @Update=',Password=@Password';
+		SET @Update=@Update+',Password=@Password';
 	END
 	IF @FullName IS NOT NULL AND @FullName<>''
 	BEGIN
-		SET @Update=',FullName=@FullName';
+		SET @Update=@Update+',FullName=@FullName';
 	END
 	IF @Email IS NOT NULL AND @Email<>''
 	BEGIN
-		SET @Update=',Email=@Email';
+		SET @Update=@Update+',Email=@Email';
 	END
 	IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
 	BEGIN
-		SET @Update=',PhoneNumber=@PhoneNumber';
+		SET @Update=@Update+',PhoneNumber=@PhoneNumber';
 	END
 	IF @Tel IS NOT NULL AND @Tel<>''
 	BEGIN
-		SET @Update=',Tel=@Tel';
+		SET @Update=@Update+',Tel=@Tel';
 	END
 	IF @Gender IS NOT NULL AND @Gender<>''
 	BEGIN
-		SET @Update=',Gender=@Gender';
+		SET @Update=@Update+',Gender=@Gender';
 	END
 	IF @BirthDay IS NOT NULL AND @BirthDay<>''
 	BEGIN
-		SET @Update=',BirthDay=@BirthDay';
+		SET @Update=@Update+',BirthDay=@BirthDay';
 	END
 	IF @Address IS NOT NULL AND @Address<>''
 	BEGIN
-		SET @Update=',Address=@Address';
+		SET @Update=@Update+',Address=@Address';
 	END
 	IF @Position IS NOT NULL AND @Position<>''
 	BEGIN
-		SET @Update=',Position=@Position';
+		SET @Update=@Update+',Position=@Position';
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=',Status=@Status';
+		SET @Update=@Update+',Status=@Status';
 	END
 	IF @IDDepartment IS NOT NULL AND @IDDepartment<>''
 	BEGIN
-		SET @Update=',IDDepartment=@IDDepartment';
+		SET @Update=@Update+',IDDepartment=@IDDepartment';
 	END
 	IF @IDGroup IS NOT NULL AND @IDGroup<>''
 	BEGIN
-		SET @Update=',IDGroup=@IDGroup';
+		SET @Update=@Update+',IDGroup=@IDGroup';
 	END
 	EXEC('UPDATE tblUser SET'+@Update+' WHERE UserName=@UserName')
 END
@@ -817,71 +817,71 @@ BEGIN
 	SET @Update=' DocumentNumber=@DocumentNumber'
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=',Name=@Name'
+		SET @Update=@Update+',Name=@Name'
 	END
 	IF @Excerpt IS NOT NULL
 	BEGIN
-		SET @Update=',Excerpt=@Excerpt'
+		SET @Update=@Update+',Excerpt=@Excerpt'
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=',Content=@Content'
+		SET @Update=@Update+',Content=@Content'
 	END
 	IF @PublishDate IS NOT NULL AND @PublishDate<>''
 	BEGIN
-		SET @Update=',PublishDate=@PublishDate'
+		SET @Update=@Update+',PublishDate=@PublishDate'
 	END
 	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
 	BEGIN
-		SET @Update=',PublishOffical=@PublishOffical'
+		SET @Update=@Update+',PublishOffical=@PublishOffical'
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=',Attachs=@Attachs'
+		SET @Update=@Update+',Attachs=@Attachs'
 	END
 	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
 	BEGIN
-		SET @Update=',IDDocumentKind=@IDDocumentKind'
+		SET @Update=@Update+',IDDocumentKind=@IDDocumentKind'
 	END
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=',CreateDate=@CreateDate'
+		SET @Update=@Update+',CreateDate=@CreateDate'
 	END
 	IF @UserProcess IS NOT NULL AND @UserProcess<>''
 	BEGIN
-		SET @Update=',UserProcess=@UserProcess'
+		SET @Update=@Update+',UserProcess=@UserProcess'
 	END
 	IF @UserComments IS NOT NULL
 	BEGIN
-		SET @Update=',UserComments=@UserComments'
+		SET @Update=@Update+',UserComments=@UserComments'
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=',StartProcess=@StartProcess'
+		SET @Update=@Update+',StartProcess=@StartProcess'
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=',EndProcess=@EndProcess'
+		SET @Update=@Update+',EndProcess=@EndProcess'
 	END
 	IF @SendDate IS NOT NULL AND @SendDate<>''
 	BEGIN
-		SET @Update=',SendDate=@SendDate'
+		SET @Update=@Update+',SendDate=@SendDate'
 	END
 	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
 	BEGIN
-		SET @Update=',ReceiveDate=@ReceiveDate'
+		SET @Update=@Update+',ReceiveDate=@ReceiveDate'
 	END
 	IF @SendOfficals IS NOT NULL
 	BEGIN
-		SET @Update=',SendOfficals=@SendOfficals'
+		SET @Update=@Update+',SendOfficals=@SendOfficals'
 	END
 	IF @Priority IS NOT NULL AND @Priority<>''
 	BEGIN
-		SET @Update=',Priority=@Priority'
+		SET @Update=@Update+',Priority=@Priority'
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=',Status=@Status'
+		SET @Update=@Update+',Status=@Status'
 	END
 	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
 END
@@ -1067,12 +1067,123 @@ CREATE TABLE tblWork
 	[Name] NVARCHAR(300),
 	[Decription] NVARCHAR(MAX),
 	[Content] NVARCHAR(MAX),
+	Attachs VARCHAR(50),	
 	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
 	IDUserProcess VARCHAR(50),
 	CreateDate DATETIME DEFAULT(GetDate()),
 	StartProcess DATETIME DEFAULT(GetDate()),
 	EndProcess DATETIME,
 	[Status] VARCHAR(50),
-	Priority VARCHAR(500,
-	
+	Priority VARCHAR(500)	
 )
+GO
+/* add */
+IF OBJECT_ID('sp_tblWork_add','P') IS NOT NULL
+	DROP PROC sp_tblWork_add
+GO
+CREATE PROC sp_tblWork_add	
+	@Name NVARCHAR(300),
+	@Decription NVARCHAR(MAX),
+	@Content NVARCHAR(MAX),
+	@Attachs VARCHAR(50),	
+	@IDUserCreate INT,
+	@IDUserProcess VARCHAR(50),
+	@CreateDate DATETIME=NULL,
+	@StartProcess DATETIME=NULL,
+	@EndProcess DATETIME,
+	@Status VARCHAR(50),
+	@Priority VARCHAR(500)
+AS
+BEGIN
+	INSERT INTO tblWork([Name],[Description],[Content],Attachs,IDUserCreate,IDUserProcess,CreateDate,
+		StartProcess,EndProcess,[Status],Priority)
+		VALUES(@Name,@Description,@Content,@Attachs,@IDUserCreate,@IDUserProcess,@CreateDate,
+		@StartProcess,@EndProcess,@Status,@Priority)
+END
+/* update */
+IF OBJECT_ID('sp_tblWork_update','P') IS NOT NULL
+	DROP PROC sp_tblWork_update
+GO
+CREATE PROC sp_tblWork_update
+	@WorkID INT,	
+	@Name NVARCHAR(300)=NULL,
+	@Decription NVARCHAR(MAX),
+	@Content NVARCHAR(MAX),
+	@Attachs VARCHAR(50),	
+	@IDUserCreate INT,	
+	@IDUserProcess VARCHAR(50),
+	@CreateDate DATETIME=NULL,
+	@StartProcess DATETIME=NULL,
+	@EndProcess DATETIME,
+	@Status VARCHAR(50),
+	@Priority VARCHAR(500)
+AS
+BEGIN
+	DECLARE @Update NVARCHAR(500)
+	SET @Update=' IDUserCreate=@IDUserCreate'
+	IF @Name IS NOT NULL AND @Name<>''
+	BEGIN
+		SET @Update=@Update+',Name=@Name'
+	END
+	IF @Content IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Content=@Content'
+	END
+	IF @PublishDate IS NOT NULL AND @PublishDate<>''
+	BEGIN
+		SET @Update=@Update+',PublishDate=@PublishDate'
+	END
+	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
+	BEGIN
+		SET @Update=@Update+',PublishOffical=@PublishOffical'
+	END
+	IF @Attachs IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Attachs=@Attachs'
+	END
+	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
+	BEGIN
+		SET @Update=@Update+',IDDocumentKind=@IDDocumentKind'
+	END
+	IF @CreateDate IS NOT NULL AND @CreateDate<>''
+	BEGIN
+		SET @Update=@Update+',CreateDate=@CreateDate'
+	END
+	IF @UserProcess IS NOT NULL AND @UserProcess<>''
+	BEGIN
+		SET @Update=@Update+',UserProcess=@UserProcess'
+	END
+	IF @UserComments IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',UserComments=@UserComments'
+	END
+	IF @StartProcess IS NOT NULL AND @StartProcess<>''
+	BEGIN
+		SET @Update=@Update+',StartProcess=@StartProcess'
+	END
+	IF @EndProcess IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',EndProcess=@EndProcess'
+	END
+	IF @SendDate IS NOT NULL AND @SendDate<>''
+	BEGIN
+		SET @Update=@Update+',SendDate=@SendDate'
+	END
+	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
+	BEGIN
+		SET @Update=@Update+',ReceiveDate=@ReceiveDate'
+	END
+	IF @SendOfficals IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',SendOfficals=@SendOfficals'
+	END
+	IF @Priority IS NOT NULL AND @Priority<>''
+	BEGIN
+		SET @Update=@Update+',Priority=@Priority'
+	END
+	IF @Status IS NOT NULL AND @Status<>''
+	BEGIN
+		SET @Update=@Update+',Status=@Status'
+	END
+	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
+END

@@ -1,5 +1,5 @@
 USE Master
-IF DB_ID('DBOFFICE') IS NOT NULL
+IF DB_ID('DBEOFFICE') IS NOT NULL
 	DROP DATABASE DBEOFFICE
 GO
 CREATE DATABASE DBEOFFICE
@@ -327,54 +327,54 @@ CREATE PROC sp_tblUser_update
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
-	SET @Update=' UserName=@UserName'	
+	SET @Update=' UserName='+cast(@UserName AS NVARCHAR)
 	IF @Password IS NOT NULL AND @Password<>''
 	BEGIN
-		SET @Update=@Update+',Password=@Password';
+		SET @Update=@Update+',Password='+cast(@Password AS NVARCHAR)
 	END
 	IF @FullName IS NOT NULL AND @FullName<>''
 	BEGIN
-		SET @Update=@Update+',FullName=@FullName';
+		SET @Update=@Update+',FullName='+cast(@FullName AS NVARCHAR)
 	END
 	IF @Email IS NOT NULL AND @Email<>''
 	BEGIN
-		SET @Update=@Update+',Email=@Email';
+		SET @Update=@Update+',Email='+cast(@Email AS NVARCHAR)
 	END
 	IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
 	BEGIN
-		SET @Update=@Update+',PhoneNumber=@PhoneNumber';
+		SET @Update=@Update+',PhoneNumber='+cast(@PhoneNumber AS NVARCHAR)
 	END
 	IF @Tel IS NOT NULL AND @Tel<>''
 	BEGIN
-		SET @Update=@Update+',Tel=@Tel';
+		SET @Update=@Update+',Tel='+cast(@Tel AS NVARCHAR)
 	END
 	IF @Gender IS NOT NULL AND @Gender<>''
 	BEGIN
-		SET @Update=@Update+',Gender=@Gender';
+		SET @Update=@Update+',Gender='+cast(@Gender AS NVARCHAR)
 	END
 	IF @BirthDay IS NOT NULL AND @BirthDay<>''
 	BEGIN
-		SET @Update=@Update+',BirthDay=@BirthDay';
+		SET @Update=@Update+',BirthDay='+cast(@BirthDay AS NVARCHAR)
 	END
 	IF @Address IS NOT NULL AND @Address<>''
 	BEGIN
-		SET @Update=@Update+',Address=@Address';
+		SET @Update=@Update+',Address='+cast(@Address AS NVARCHAR)
 	END
 	IF @Position IS NOT NULL AND @Position<>''
 	BEGIN
-		SET @Update=@Update+',Position=@Position';
+		SET @Update=@Update+',Position='+cast(@Position AS NVARCHAR)
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status=@Status';
+		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
 	END
 	IF @IDDepartment IS NOT NULL AND @IDDepartment<>''
 	BEGIN
-		SET @Update=@Update+',IDDepartment=@IDDepartment';
+		SET @Update=@Update+',IDDepartment='+cast(@IDDepartment AS NVARCHAR)
 	END
 	IF @IDGroup IS NOT NULL AND @IDGroup<>''
 	BEGIN
-		SET @Update=@Update+',IDGroup=@IDGroup';
+		SET @Update=@Update+',IDGroup='+cast(@IDGroup AS NVARCHAR)
 	END
 	EXEC('UPDATE tblUser SET'+@Update+' WHERE UserName=@UserName')
 END
@@ -814,74 +814,74 @@ CREATE PROC sp_tblDocument_update
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
-	SET @Update=' DocumentNumber=@DocumentNumber'
+	SET @Update=' DocumentNumber='+cast(@DocumentNumber AS NVARCHAR)
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=@Update+',Name=@Name'
+		SET @Update=@Update+',Name='+cast(@Name AS NVARCHAR)
 	END
 	IF @Excerpt IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Excerpt=@Excerpt'
+		SET @Update=@Update+',Excerpt='+cast(@Excerpt AS NVARCHAR)
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Content=@Content'
+		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
 	END
 	IF @PublishDate IS NOT NULL AND @PublishDate<>''
 	BEGIN
-		SET @Update=@Update+',PublishDate=@PublishDate'
+		SET @Update=@Update+',PublishDate='+cast(@PublishDate AS NVARCHAR)
 	END
 	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
 	BEGIN
-		SET @Update=@Update+',PublishOffical=@PublishOffical'
+		SET @Update=@Update+',PublishOffical='+cast(@PublishOffical AS NVARCHAR)
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Attachs=@Attachs'
+		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
 	END
 	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
 	BEGIN
-		SET @Update=@Update+',IDDocumentKind=@IDDocumentKind'
+		SET @Update=@Update+',IDDocumentKind='+cast(@IDDocumentKind AS NVARCHAR)
 	END
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=@Update+',CreateDate=@CreateDate'
+		SET @Update=@Update+',CreateDate='+cast(@CreateDate AS NVARCHAR)
 	END
 	IF @UserProcess IS NOT NULL AND @UserProcess<>''
 	BEGIN
-		SET @Update=@Update+',UserProcess=@UserProcess'
+		SET @Update=@Update+',UserProcess='+cast(@UserProcess AS NVARCHAR)
 	END
 	IF @UserComments IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',UserComments=@UserComments'
+		SET @Update=@Update+',UserComments='+cast(@UserComments AS NVARCHAR)
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=@Update+',StartProcess=@StartProcess'
+		SET @Update=@Update+',StartProcess='+cast(@StartProcess AS NVARCHAR)
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',EndProcess=@EndProcess'
+		SET @Update=@Update+',EndProcess='+cast(@EndProcess AS NVARCHAR)
 	END
 	IF @SendDate IS NOT NULL AND @SendDate<>''
 	BEGIN
-		SET @Update=@Update+',SendDate=@SendDate'
+		SET @Update=@Update+',SendDate='+cast(@SendDate AS NVARCHAR)
 	END
 	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
 	BEGIN
-		SET @Update=@Update+',ReceiveDate=@ReceiveDate'
+		SET @Update=@Update+',ReceiveDate='+cast(@ReceiveDate AS NVARCHAR)
 	END
 	IF @SendOfficals IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',SendOfficals=@SendOfficals'
+		SET @Update=@Update+',SendOfficals='+cast(@SendOfficals AS NVARCHAR)
 	END
 	IF @Priority IS NOT NULL AND @Priority<>''
 	BEGIN
-		SET @Update=@Update+',Priority=@Priority'
+		SET @Update=@Update+',Priority='+cast(@Priority AS NVARCHAR)
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status=@Status'
+		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
 	END
 	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
 END
@@ -905,6 +905,7 @@ CREATE PROC sp_tblDocument_get
 	@DocumentNumber NVARCHAR(200)=NULL,
 	@Name NVARCHAR(300)=NULL,
 	@Content NVARCHAR(MAX)=NULL,	
+	@IDUserCreate INT=NULL,
 	@FromPublishDate DATETIME=NULL,
 	@ToPublishDate DATETIME=NULL,
 	@PublishOffical INT =NULL,
@@ -942,6 +943,10 @@ BEGIN
 		IF @Content IS NOT NULL AND @Content<>''
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND Content LIKE(N''%'+@Content+'%'')'
+		END
+		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDUserCreate ='+cast(@IDUserCreate AS NVARCHAR)
 		END
 		IF @FromPublishDate IS NOT NULL AND @FromPublishDate<>'' AND @ToPublishDate IS NOT NULL AND @ToPublishDate<>''
 		BEGIN
@@ -1065,7 +1070,7 @@ CREATE TABLE tblWork
 (
 	WorkID INT IDENTITY(1,1) PRIMARY KEY,
 	[Name] NVARCHAR(300),
-	[Decription] NVARCHAR(MAX),
+	[Description] NVARCHAR(MAX),
 	[Content] NVARCHAR(MAX),
 	Attachs VARCHAR(50),	
 	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
@@ -1083,7 +1088,7 @@ IF OBJECT_ID('sp_tblWork_add','P') IS NOT NULL
 GO
 CREATE PROC sp_tblWork_add	
 	@Name NVARCHAR(300),
-	@Decription NVARCHAR(MAX),
+	@Description NVARCHAR(MAX),
 	@Content NVARCHAR(MAX),
 	@Attachs VARCHAR(50),	
 	@IDUserCreate INT,
@@ -1105,13 +1110,13 @@ IF OBJECT_ID('sp_tblWork_update','P') IS NOT NULL
 	DROP PROC sp_tblWork_update
 GO
 CREATE PROC sp_tblWork_update
-	@WorkID INT,	
+	@WorkID INT,
 	@Name NVARCHAR(300)=NULL,
 	@Decription NVARCHAR(MAX)=NULL,
 	@Content NVARCHAR(MAX)=NULL,
 	@Attachs VARCHAR(50)=NULL,	
-	@IDUserCreate INT,	
-	@IDUserProcess VARCHAR(50)=NULL,
+	@IDUserCreate INT,
+	@IDUserProcess VARCHAR(50),
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
 	@EndProcess DATETIME=NULL,
@@ -1120,46 +1125,325 @@ CREATE PROC sp_tblWork_update
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
-	SET @Update=' IDUserCreate=@IDUserCreate'
+	SET @Update=' IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=@Update+',Name=@Name'
+		SET @Update=@Update+',Name='+cast(@Name AS NVARCHAR)
 	END
 	IF @Decription IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Decription=@Decription'
+		SET @Update=@Update+',Decription='+cast(@Decription AS NVARCHAR)
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Content=@Content'
+		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Attachs=@Attachs'
+		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
 	END
-	IF @IDUserProcess IS NOT NULL @IDUserProcess<>''
+	IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 	BEGIN
-		SET @Update=@Update+',IDUserProcess=@IDUserProcess'
+		SET @Update=@Update+',IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
 	END	
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=@Update+',CreateDate=@CreateDate'
+		SET @Update=@Update+',CreateDate='+cast(@CreateDate AS NVARCHAR)
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=@Update+',StartProcess=@StartProcess'
+		SET @Update=@Update+',StartProcess='+cast(@StartProcess AS NVARCHAR)
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',EndProcess=@EndProcess'
+		SET @Update=@Update+',EndProcess='+cast(@EndProcess AS NVARCHAR)
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status=@Status'
+		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
 	END
 	IF @Priority IS NOT NULL AND @Priority<>''
 	BEGIN
-		SET @Update=@Update+',Priority=@Priority'
+		SET @Update=@Update+',Priority='+cast(@Priority AS NVARCHAR)
 	END	
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
+GO
+/* get */
+IF OBJECT_ID('sp_tblWork_get','P') IS NOT NULL
+	DROP PROC sp_tblWork_get
+GO
+CREATE PROC sp_tblWork_get
+	@WorkID INT=NULL,	
+	@Name NVARCHAR(300)=NULL,
+	@Content NVARCHAR(MAX)=NULL,
+	@IDUserCreate INT=NULL,
+	@IDUserProcess VARCHAR(50)=NULL,
+	@FromCreateDate DATETIME=NULL,
+	@ToCreateDate DATETIME=NULL,
+	@StartProcess DATETIME=NULL,
+	@EndProcess DATETIME=NULL,
+	@Status VARCHAR(50)=NULL,
+	@Priority VARCHAR(500)=NULL,
+	@Order VARCHAR(30)='DESC',
+	@OrderBy VARCHAR(100)='Name',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @WorkID IS NULL OR @WorkID=0
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'		
+		IF @Name IS NOT NULL AND @Name<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Name LIKE(N''%'+@Name+'%'')'
+		END
+		IF @Content IS NOT NULL AND @Content<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Content LIKE(N''%'+@Content+'%'')'
+		END
+		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDUserCreate ='+cast(@IDUserCreate AS NVARCHAR)
+		END
+		IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
+		END
+		IF @FromCreateDate IS NOT NULL AND @FromCreateDate<>'' AND @ToCreateDate IS NOT NULL AND @ToCreateDate<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '+cast(@FromCreateDate AS NVARCHAR)+' AND '+cast(@ToCreateDate AS NVARCHAR)
+		END			
+		IF @StartProcess IS NOT NULL AND @StartProcess<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND (StartProcess=@StartProcess OR StartProcess<@StartProcess)'
+		END						
+		IF @Priority IS NOT NULL AND @Priority<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Priority='+cast(@Priority AS NVARCHAR)
+		END		
+		IF @Status IS NOT NULL AND @Status<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+		END						
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+			FROM tblWork'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblWork WHERE WorkID=@WorkID
+	END
+END
+GO
+/* table comment */
+IF OBJECT_ID('tblComment','U') IS NOT NULL
+	DROP TABLE tblComment
+GO
+CREATE TABLE tblComment
+(
+	CommentID VARCHAR(500) PRIMARY KEY,
+	Title NVARCHAR(MAX),
+	[Content] NVARCHAR(MAX),
+	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
+	IDDocument VARCHAR(500),
+	IDWork INT,
+	Attachs VARCHAR(50),
+	CreateDate DATETIME DEFAULT(GetDate()),		
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblComment_add','P') IS NOT NULL
+	DROP PROC sp_tblComment_add
+GO
+CREATE PROC sp_tblComment_add
+	@CommentID VARCHAR(500),
+	@Title NVARCHAR(MAX),
+	@Content NVARCHAR(MAX),
+	@IDUserCreate INT,
+	@IDDocument VARCHAR(500)=NULL,
+	@IDWork INT=NULL,
+	@Attachs VARCHAR(50)=NULL,
+	@CreateDate DATETIME=NULL
+AS
+BEGIN
+	INSERT INTO tblComment(CommentID,Title,[Content],IDUserCreate,IDDocument,IDWork,Attachs,CreateDate)
+			VALUES(@CommentID,@Title,@Content,@IDUserCreate,@IDDocument,@IDWork,@Attachs,@CreateDate)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblComment_update','P') IS NOT NULL
+	DROP PROC sp_tblComment_update
+GO
+CREATE PROC sp_tblComment_update
+	@CommentID VARCHAR(500),
+	@Title NVARCHAR(MAX)=NULL,
+	@Content NVARCHAR(MAX)=NULL,
+	@IDUserCreate INT,
+	@IDDocument VARCHAR(500)=NULL,
+	@IDWork INT=NULL,
+	@Attachs VARCHAR(50)=NULL,
+	@CreateDate DATETIME=NULL
+AS
+BEGIN
+	DECLARE @Update NVARCHAR(500)
+	SET @Update=' IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
+	IF @Title IS NOT NULL AND @Title<>''
+	BEGIN
+		SET @Update=@Update+',Title='+cast(@Title AS NVARCHAR)
+	END
+	IF @Content IS NOT NULL AND @Content<>''
+	BEGIN
+		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
+	END		
+	IF @IDDocument IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',IDDocument='+cast(@IDDocument AS NVARCHAR)
+	END	
+	IF @IDWork IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',IDWork='+cast(@IDWork AS NVARCHAR)
+	END	
+	IF @Attachs IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
+	END
+	EXEC('UPDATE tblComment SET'+@Update+' WHERE Comment='+@CommentID)	
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblComment_delete','P') IS NOT NULL
+	DROP PROC sp_tblComment_delete
+GO
+CREATE PROC sp_tblComment_delete
+	@CommentID VARCHAR(500)
+AS
+BEGIN
+	DELETE tblComment WHERE CommentID=@CommentID
+END
+/* get */
+IF OBJECT_ID('sp_tblComment_get','P') IS NOT NULL
+	DROP PROC sp_tblComment_get
+GO
+CREATE PROC sp_tblComment_get
+	@CommentID VARCHAR(500)=NULL,
+	@Title NVARCHAR(MAX)=NULL,
+	@IDUserCreate INT=NULL,
+	@IDDocument VARCHAR(500)=NULL,
+	@IDWork INT=NULL
+AS
+BEGIN
+	IF @CommentID IS NULL OR @CommentID=''
+	BEGIN	
+		DECLARE @DieuKien NVARCHAR(500)	
+		SET @DieuKien=' WHERE (1=1)'
+		IF @Title IS NOT NULL AND @Title<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+'Title LIKE(N''%'+@Title+'%'')'
+		END
+		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+'IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
+		END
+		IF @IDDocument IS NOT NULL AND @IDDocument<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+'IDDocument='+cast(@IDDocument AS NVARCHAR)
+		END
+		IF @IDWork IS NOT NULL AND @IDWork<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+'IDWork='+cast(@IDWork AS NVARCHAR)
+		END
+		EXEC('SELECT * FROM tblComment'+@DieuKien)
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblComment WHERE CommentID=@CommentID
+	END
+END
+GO
+/* table Calendar */
+IF OBJECT_ID('tblCalendar','U') IS NOT NULL
+	DROP TABLE tblCalendar
+GO
+CREATE TABLE tblCalendar
+(
+	CalendarID INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] NVARCHAR(500),
+	[Content] NVARCHAR(MAX),
+	StartDate DATETIME,
+	EndDate DATETIME,
+	UserJoin VARCHAR(200),
+	[Address] NVARCHAR(300),
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblCalendar_add','P') IS NOT NULL
+	DROP PROC sp_tblCalendar_add
+GO
+CREATE PROC sp_tblCalendar_add
+	@Name NVARCHAR(500),
+	@Content NVARCHAR(MAX),
+	@StartDate DATETIME,
+	@EndDate DATETIME,
+	@UserJoin VARCHAR(200),
+	@Address NVARCHAR(300)
+AS
+BEGIN
+	INSERT INTO tblCalendar([Name],[Content],StartDate,EndDate,UserJoin,[Address]) 
+				VALUES(@Name,@Content,@StartDate,@EndDate,@UserJoin,@Address)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblCalendar_update','P') IS NOT NULL
+	DROP PROC sp_tblCalendar_update
+GO
+CREATE PROC sp_tblCalendar_update
+	@CalendarID INT,
+	@Name NVARCHAR(500),
+	@Content NVARCHAR(MAX),
+	@StartDate DATETIME,
+	@EndDate DATETIME,
+	@UserJoin VARCHAR(200),
+	@Address NVARCHAR(300)
+AS
+BEGIN
+	UPDATE tblCalendar SET [Name]=@Name,[Content]=@Content,StartDate=@StartDate,
+			EndDate=@EndDate,UserJoin=@UserJoin,[Address]=@Address WHERE CalendarID=@CalendarID
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblCalendar_delete','P') IS NOT NULL
+	DROP PROC sp_tblCalendar_delete
+GO
+CREATE PROC sp_tblCalendar_delete
+	@CalendarID INT
+AS
+BEGIN
+	DELETE tblCalendar WHERE CalendarID=@CalendarID
+END
+GO
+/* get */
+IF OBJECT_ID('sp_tblCalendar_get','P') IS NOT NULL
+	DROP PROC sp_tblCalendar_get
+GO
+CREATE PROC sp_tblCalendar_get
+	@CalendarID INT=NULL,
+	@FromDate DATETIME=NULL,
+	@ToDate DATETIME=NULL
+AS
+BEGIN
+	IF @CalendarID IS NULL OR @CalendarID=0
+	BEGIN
+		IF @FromDate IS NOT NULL AND @FromDate<>'' AND @ToDate IS NOT NULL AND @ToDate<>''		
+			SELECT * FROM tblCalendar WHERE StartDate BETWEEN @FromDate AND @ToDate		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblCalendar WHERE CalendarID=@CalendarID
+	END
+END	

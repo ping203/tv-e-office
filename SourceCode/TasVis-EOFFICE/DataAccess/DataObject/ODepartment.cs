@@ -36,14 +36,6 @@ namespace DataAccess.DataObject
             get { return _Description; }
             set { _Description = value; }
         }
-        private int _TotalResult;
-
-        public int TotalResult
-        {
-            get { return _TotalResult; }
-            set { _TotalResult = value; }
-        }
-
         
     }
 }

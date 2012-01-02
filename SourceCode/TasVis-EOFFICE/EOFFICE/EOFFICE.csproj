@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E0B51DC7-725E-4A2B-902F-2223F9E24E39}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -68,6 +68,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MasterPages\Default.Master.cs">
+      <DependentUpon>Default.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPages\Default.Master.designer.cs">
+      <DependentUpon>Default.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +82,52 @@
       <Project>{5E8FF71C-33D9-41A5-BCE2-55150DE39F8D}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\style.css" />
+    <Content Include="Images\Accordion_Module_button_collapse_left_grey.png" />
+    <Content Include="Images\Accordion_Module_button_expand_left_grey.png" />
+    <Content Include="Images\calendar_icon.gif" />
+    <Content Include="Images\Create.png" />
+    <Content Include="Images\Erase.png" />
+    <Content Include="Images\Forward.png" />
+    <Content Include="Images\Go-back.png" />
+    <Content Include="Images\Help.png" />
+    <Content Include="Images\Home.png" />
+    <Content Include="Images\List-compass.png" />
+    <Content Include="Images\List-in.png" />
+    <Content Include="Images\List-out.png" />
+    <Content Include="Images\List-play.png" />
+    <Content Include="Images\List.png" />
+    <Content Include="Images\logo-ns.png" />
+    <Content Include="Images\Message.png" />
+    <Content Include="Images\New-document.png" />
+    <Content Include="Images\nganson_logo.png" />
+    <Content Include="Images\Notes.png" />
+    <Content Include="Images\OK.png" />
+    <Content Include="Images\order-asc.png" />
+    <Content Include="Images\order-desc1.png" />
+    <Content Include="Images\People.png" />
+    <Content Include="Images\Person.png" />
+    <Content Include="Images\Pinion.png" />
+    <Content Include="Images\Play.png" />
+    <Content Include="Images\Repair.png" />
+    <Content Include="Images\Report.png" />
+    <Content Include="Images\Save.png" />
+    <Content Include="Images\sprite.png" />
+    <Content Include="Images\Stage_BG_btm.png" />
+    <Content Include="Images\Text-in.png" />
+    <Content Include="Images\Text-out.png" />
+    <Content Include="Images\Text-preview.png" />
+    <Content Include="Images\Text-warning.png" />
+    <Content Include="Images\Text-Yes.png" />
+    <Content Include="Images\Turn-off.png" />
+    <Content Include="Images\Up.png" />
+    <Content Include="Images\View.png" />
+    <Content Include="Images\Wrench.png" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\script.js" />
+    <Content Include="MasterPages\Default.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -99,9 +152,6 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

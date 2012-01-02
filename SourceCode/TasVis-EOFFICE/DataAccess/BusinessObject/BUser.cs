@@ -37,35 +37,35 @@ namespace DataAccess.BusinessObject
              return list;
          }
 
-         public bool Add(string UserName, string Password, string FullName, string Email,string PhoneNumber,string Tel, string Gender,DateTime Birthday,string Address,string Position,string Status,int IDDepartment,int IDGroup)
+         public bool Add(OUser obj)
          {
              SqlParameter[] sqlPara = new SqlParameter[13];
              sqlPara[0] = new SqlParameter("@UserName",SqlDbType.VarChar);
-             sqlPara[0].Value = UserName;
+             sqlPara[0].Value = obj.UserName;
              sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);
-             sqlPara[1].Value = Password;
+             sqlPara[1].Value = obj.Password;
              sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
-             sqlPara[2].Value = FullName;
+             sqlPara[2].Value = obj.FullName;
              sqlPara[3] = new SqlParameter("@Email", SqlDbType.VarChar);
-             sqlPara[3].Value = Email;
+             sqlPara[3].Value = obj.Email;
              sqlPara[4] = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
-             sqlPara[4].Value = PhoneNumber;
+             sqlPara[4].Value = obj.PhoneNumber;
              sqlPara[5] = new SqlParameter("@Tel", SqlDbType.VarChar);
-             sqlPara[5].Value = Tel;
+             sqlPara[5].Value = obj.Tel;
              sqlPara[6] = new SqlParameter("@Gender", SqlDbType.VarChar);
-             sqlPara[6].Value = Gender;
+             sqlPara[6].Value = obj.Gender;
              sqlPara[7] = new SqlParameter("@BirthDay", SqlDbType.DateTime);
-             sqlPara[7].Value = Birthday;
+             sqlPara[7].Value = obj.Birthday;
              sqlPara[8] = new SqlParameter("@Address", SqlDbType.NVarChar);
-             sqlPara[8].Value = Address;
+             sqlPara[8].Value = obj.Address;
              sqlPara[9] = new SqlParameter("@Position", SqlDbType.NVarChar);
-             sqlPara[9].Value = Position;
+             sqlPara[9].Value = obj.Position;
              sqlPara[10] = new SqlParameter("@Status", SqlDbType.VarChar);
-             sqlPara[10].Value = Status;
+             sqlPara[10].Value = obj.Status;
              sqlPara[11] = new SqlParameter("@IDDepartment", SqlDbType.Int);
-             sqlPara[11].Value = IDDepartment;
+             sqlPara[11].Value = obj.IDDepartment;
              sqlPara[12] = new SqlParameter("@IDGroup", SqlDbType.Int);
-             sqlPara[12].Value = IDGroup;
+             sqlPara[12].Value = obj.IDGroup;
 
              return RunProcudure("sp_tblUser_add",sqlPara);
          }

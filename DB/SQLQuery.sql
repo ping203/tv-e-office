@@ -510,7 +510,7 @@ CREATE PROC sp_tblDocumentKind_update
 	@DocumentKindParent INT=0
 AS
 BEGIN
-	UPDATE DocumentKind SET [Name]=@Name,[Description]=@Description,DocumentKindParent=@DocumentKindParent 
+	UPDATE tblDocumentKind SET [Name]=@Name,[Description]=@Description,DocumentKindParent=@DocumentKindParent 
 		WHERE DocumentKindID=@DocumentKindID
 END
 /* delte */
@@ -521,7 +521,7 @@ CREATE PROC sp_tblDocumentKind_delete
 	@DocumentKindID INT
 AS
 BEGIN
-	DELETE DocumentKind WHERE DocumentKindID=@DocumentKindID
+	DELETE tblDocumentKind WHERE DocumentKindID=@DocumentKindID
 END
 /* get */
 IF OBJECT_ID('sp_tblDocumentKind_get','P') IS NOT NULL

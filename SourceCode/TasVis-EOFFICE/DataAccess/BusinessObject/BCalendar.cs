@@ -10,21 +10,21 @@ namespace DataAccess.BusinessObject
 {
     public class BCalendar:Common.CDBase
     {
-        public bool Add(string Name,string Content,DateTime StartDate,DateTime EndDate,string UserJoin,string Address)
+        public bool Add(OCalendar obj)
         {
             SqlParameter[] sqlPara = new SqlParameter[6];
             sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
-            sqlPara[0].Value = Name;
+            sqlPara[0].Value = obj.Name;
             sqlPara[1] = new SqlParameter("@Content", SqlDbType.NVarChar);
-            sqlPara[1].Value = Content;
+            sqlPara[1].Value = obj.Content;
             sqlPara[2] = new SqlParameter("@StartDate", SqlDbType.DateTime);
-            sqlPara[2].Value = StartDate;
+            sqlPara[2].Value = obj.StartDate;
             sqlPara[3] = new SqlParameter("@EndDate", SqlDbType.DateTime);
-            sqlPara[3].Value = EndDate;
+            sqlPara[3].Value = obj.EndDate;
             sqlPara[4] = new SqlParameter("@UserJoin", SqlDbType.VarChar);
-            sqlPara[4].Value = UserJoin;
+            sqlPara[4].Value = obj.UserJoin;
             sqlPara[5] = new SqlParameter("@Address", SqlDbType.NVarChar);
-            sqlPara[5].Value = Address;
+            sqlPara[5].Value = obj.Address;
 
             return RunProcudure("sp_tblCalendar_add", sqlPara);
         }

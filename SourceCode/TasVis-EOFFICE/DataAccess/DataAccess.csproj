@@ -51,6 +51,8 @@
     <Compile Include="Common\CDBase.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="DataObject\OAttach.cs" />
+    <Compile Include="DataObject\OCalendar.cs" />
+    <Compile Include="DataObject\OComment.cs" />
     <Compile Include="DataObject\ODepartment.cs" />
     <Compile Include="DataObject\ODocument.cs" />
     <Compile Include="DataObject\ODocumentKind.cs" />

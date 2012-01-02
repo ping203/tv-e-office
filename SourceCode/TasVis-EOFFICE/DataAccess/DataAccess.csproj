@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BusinessObject\BAttach.cs" />
     <Compile Include="BusinessObject\BCalendar.cs" />
+    <Compile Include="BusinessObject\BComment.cs" />
     <Compile Include="BusinessObject\BDepartment.cs" />
     <Compile Include="BusinessObject\BUser.cs" />
     <Compile Include="Class1.cs" />

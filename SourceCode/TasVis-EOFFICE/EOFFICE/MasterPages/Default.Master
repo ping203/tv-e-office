@@ -1,0 +1,148 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="EOFFICE.MasterPages.Default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<link rel="Stylesheet" href="../css/style.css" />
+<script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="../js/script.js"></script>
+<head runat="server">
+    <title>Untitled Page</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+<form id="form1" runat="server">
+<div id="wrapper">
+  <div id="header">
+   	  <div id="logo">
+			<a href="file:///E:/TASVIS/PROJECT/NganSon/HTML/Index.html"><img src="Images/logo-ns.png" no-repeat /></a>
+        </div><!-- end logo -->
+        <div id="menu-top">
+        	<ul>
+            	<li><a href="http://nganson.vn" target="_blank"><span class="icon"><img src="Images/Home.png" /></span>Trang chủ</a></li>
+                <li><a href="http://nganson.com.vn" target="_blank"><span class="icon"><img src="Images/People.png" /></span>Quản lý nhân sự</a></li>
+                <li><a href="/Help.aspx"><span class="icon"><img src="Images/Help.png" /></span>Trợ giúp</a></li>
+                <li><a href="/Person.aspx"><span class="icon"><img src="Images/Person.png" /></span>Xin chào <span class="user-name">Vinh</span></a></li>
+                <li><a href="/Logout.aspx"><span class="icon"><img src="Images/Turn-off.png" /></span>Thoát</a></li>
+            </ul>
+        </div><!-- end menu-top -->
+    </div><!-- end header -->
+    <div id="middle">
+  <div id="menu-left">
+        	<ul class="ul-menu-left">
+            	<li class="li-parent" id="du-thao-cong-van">
+                	<h3><a href="#" class="a-parent parent-active"><span class="icon"><img src="Images/Text-out.png" /></span>Dự thảo công văn</a></h3>
+                    <ul class="ul-child">
+                    	<li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/New-document.png" /></span>Dự thảo công văn</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/List-compass.png" /></span>Công văn chờ/đang xử lý</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/OK.png" /></span>Công văn đã hoàn thành</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="file:///E:/TASVIS/PROJECT/NganSon/HTML/CongVanCanXuLy.html" class="a-child"><span class="icon"><img src="Images/List-play.png" /></span>Công văn cần xử lý</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Up.png" /></span>Phát hành công văn</a>                            
+                        </li>                        
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Text-warning.png" /></span>Chờ phát hành</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Text-Yes.png" /></span>Đã phát hành</a>
+                        </li>                        
+                    </ul>
+                </li>
+            	<li class="li-parent">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/Text-out.png" /></span>Công văn đi</a></h3>
+                    <ul class="ul-child">
+                    	<li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/List-out.png" /></span>Danh sách công văn đi</a>
+                        </li>                                                
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Text-preview.png" /></span>Tra cứu văn bản đi</a>
+                        </li>                        
+                    </ul>
+                </li>
+                <li class="li-parent">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/Text-in.png" /></span>Công văn đến</a></h3>
+                    <ul class="ul-child">
+                    	<li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Text-warning.png" /></span>Công văn chưa xử lý</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/List-compass.png" /></span>Công văn đang xử lý</a>
+                        </li>                       
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Text-preview.png" /></span>Tra cứu công văn đến</a>
+                        </li>                         
+                    </ul>
+                </li>
+            	<li class="li-parent" id="lich-cong-tac">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/calendar_icon.gif" /></span>Lịch công tác</a></h3>
+                    <ul class="ul-child">                    	
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Create.png" /></span>Tạo mới lịch họp</a>
+
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/View.png" /></span>Xem lịch họp</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Repair.png" /></span>Ngày được đăng ký</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Repair.png" /></span>Người được đăng ký</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="li-parent">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/Notes.png" /></span>Quản lý công việc</a></h3>
+                    <ul class="ul-child">
+                    	<li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Create.png" /></span>Tạo mới công việc</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Play.png" /></span>Công việc cần hoàn thành</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/OK.png" /></span>Công việc đã kết thúc</a>
+                        </li>
+                    </ul>
+                </li>                                
+                <li class="li-parent">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/Person.png" /></span>Thông tin cá nhân</a></h3>
+                    <ul class="ul-child">
+                    	<li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Message.png" /></span>Danh bạ cá nhân</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Person.png" /></span>Thông tin cá nhân</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="#" class="a-child"><span class="icon"><img src="Images/Repair.png" /></span>Đổi mật khẩu</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="li-parent">
+                	<h3><a href="#" class="a-parent"><span class="icon"><img src="Images/Pinion.png" /></span>Quản trị hệ thống</a></h3>
+                </li>
+            </ul>
+        </div><!-- end menu-left -->
+        <div id="content">
+        	<asp:ContentPlaceHolder ID="cphContent" runat="server">
+        	
+        	</asp:ContentPlaceHolder>
+        </div><!-- end content -->
+    </div><!-- end middle -->
+    <div id="bottom">
+    
+    </div><!-- end bottom -->
+</div><!-- end wrapprer -->
+</form>
+</body>
+</html>

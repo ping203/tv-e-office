@@ -77,11 +77,13 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OComment> Get(string Title)
+        public IList<OComment> Get(string CommentID,string Title)
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@Title", SqlDbType.NVarChar);
-            sqlPara[0].Value = Title;
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@CommentID", SqlDbType.VarChar);
+            sqlPara[0].Value = CommentID;
+            sqlPara[1] = new SqlParameter("@Title", SqlDbType.NVarChar);
+            sqlPara[1].Value = Title;
             DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
             IList<OComment> list = new List<OComment>();
             list = Common.Common.ConvertTo<OComment>(tbl);
@@ -99,27 +101,20 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OComment> Get(string IDDocument)
+        public IList<OComment> Get(string Title,string IDDocument, string IDWork)
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@IDDocument", SqlDbType.VarChar);
-            sqlPara[0].Value = IDDocument;
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@Title", SqlDbType.NVarChar);
+            sqlPara[0].Value = Title;
+            sqlPara[1] = new SqlParameter("@IDDocument", SqlDbType.VarChar);
+            sqlPara[1].Value = IDDocument;
+            sqlPara[2] = new SqlParameter("@IDWork", SqlDbType.Int);
+            sqlPara[2].Value = IDWork;
             DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
             IList<OComment> list = new List<OComment>();
             list = Common.Common.ConvertTo<OComment>(tbl);
             return list;
-        }
-
-        public IList<OComment> Get(string IDWork)
-        {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@IDWork", SqlDbType.Int);
-            sqlPara[0].Value = IDWork;
-            DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
-            IList<OComment> list = new List<OComment>();
-            list = Common.Common.ConvertTo<OComment>(tbl);
-            return list;
-        }
+        }        
 
         public IList<OComment> Get(string Title,int IDUserCreate)
         {

@@ -20,15 +20,15 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblAttach_delete", sqlPara);
         }
 
-        public bool Add(string Name,string Description,string Path)
+        public bool Add(OAttach obj)
         {
             SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
-            sqlPara[0].Value = Name;
+            sqlPara[0].Value = obj.Name;
             sqlPara[1] = new SqlParameter("@Description", SqlDbType.NVarChar);
-            sqlPara[1].Value = Description;
+            sqlPara[1].Value = obj.Description;
             sqlPara[2] = new SqlParameter("@Path", SqlDbType.NVarChar);
-            sqlPara[2].Value = Path;
+            sqlPara[2].Value = obj.Path;
 
             return RunProcudure("sp_tblAttach_add", sqlPara);
         }

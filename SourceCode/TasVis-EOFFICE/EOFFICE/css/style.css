@@ -26,7 +26,7 @@ img{border:none;}
 #menu-left{width:230px;background:#FFF;float:left;}
 .ul-menu-left{padding:10px;}
 .li-parent{padding-bottom:10px;display:block;}
-.li-parent h3{background:#EAEAEA;}
+.li-parent h3{background:#EAEAEA;margin-bottom:10px;}
 .a-parent{display:block;padding:5px;color:#646464;background:url('../Images/Accordion_Module_button_expand_left_grey.png') no-repeat right center;margin-right:5px;}
 .parent-active{background:url('../Images/Accordion_Module_button_collapse_left_grey.png') no-repeat right center;}
 .icon{display:block;width:16px;height:16px;float:left;margin-right:5px;}
@@ -55,6 +55,11 @@ search-doc{}
 .altenate tr,.altenate td{background:#6FC;}
 .tbl-list td{padding:5px;}
 .tbl-list a:hover{text-decoration:underline;}
+.link-function{float:left;margin:0 5px;text-indent:-999px;display:block;width:16px;height:16px;}
+.edit{background:url('../Images/Modify.png') no-repeat;}
+.update{background:url('../Images/Yes.png') no-repeat;}
+.cancel{background:url('../Images/No.png') no-repeat;}
+.delete{background:url('../Images/Erase.png') no-repeat;}
 .order-desc{background:url('../Images/order-desc.png') no-repeat center right;padding-right:15px;}
 .order-asc{background:url('../Images/order-asc.png') no-repeat center right;padding-right:15px;}
 .pagenav{overflow:hidden;border:1px solid #0072BC;padding:3px 0px;border-top:0px;background:#6F9;}

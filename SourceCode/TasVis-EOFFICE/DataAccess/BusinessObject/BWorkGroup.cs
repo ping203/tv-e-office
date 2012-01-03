@@ -19,7 +19,7 @@ namespace DataAccess.BusinessObject
             sqlPara[1] = new SqlParameter("@Description", SqlDbType.NVarChar);
             sqlPara[1].Value = obj.Description;
             sqlPara[2] = new SqlParameter("@WorkGroupParent", SqlDbType.Int);
-            sqlPara[2].Value = 0;
+            sqlPara[2].Value = obj.WorkGroupParent;
 
             return RunProcudure("sp_tblWorkGroup_add", sqlPara);
         }

@@ -26,7 +26,7 @@ namespace DataAccess.BusinessObject
 
         public bool Update(string IDModule, int IDGroup, string Roles)
         {
-            SqlParameter[] sqlPara = new SqlParameter[4];
+            SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@IDModule", SqlDbType.VarChar);
             sqlPara[0].Value = IDModule;
             sqlPara[1] = new SqlParameter("@IDGroup", SqlDbType.Int);

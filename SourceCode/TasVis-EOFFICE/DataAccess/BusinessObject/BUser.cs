@@ -80,7 +80,7 @@ namespace DataAccess.BusinessObject
 
          public bool Update(string UserName, string Password)
          {
-             SqlParameter[] sqlPara = new SqlParameter[1];
+             SqlParameter[] sqlPara = new SqlParameter[2];
              sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
              sqlPara[0].Value = UserName;
              sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);

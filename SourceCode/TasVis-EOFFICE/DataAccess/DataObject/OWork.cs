@@ -21,12 +21,12 @@ namespace DataAccess.DataObject
             get { return _Name; }
             set { _Name = value; }
         }
-        private string _Decription;
+        private string _Description;
 
-        public string Decription
+        public string Description
         {
-            get { return _Decription; }
-            set { _Decription = value; }
+            get { return _Description; }
+            set { _Description = value; }
         }
         private string _Content;
 
@@ -84,12 +84,12 @@ namespace DataAccess.DataObject
             get { return _Status; }
             set { _Status = value; }
         }
-        private string _Priotity;
+        private string _Priority;
 
-        public string Priotity
+        public string Priority
         {
-            get { return _Priotity; }
-            set { _Priotity = value; }
+            get { return _Priority; }
+            set { _Priority = value; }
         }
         
     }

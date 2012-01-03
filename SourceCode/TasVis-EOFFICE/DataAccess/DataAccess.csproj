@@ -50,7 +50,11 @@
     <Compile Include="BusinessObject\BComment.cs" />
     <Compile Include="BusinessObject\BDepartment.cs" />
     <Compile Include="BusinessObject\BDocumentKind.cs" />
+    <Compile Include="BusinessObject\BGroup.cs" />
+    <Compile Include="BusinessObject\BPermission.cs" />
     <Compile Include="BusinessObject\BUser.cs" />
+    <Compile Include="BusinessObject\BWork.cs" />
+    <Compile Include="BusinessObject\BWorkGroup.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CDBase.cs" />
     <Compile Include="Common\Common.cs" />

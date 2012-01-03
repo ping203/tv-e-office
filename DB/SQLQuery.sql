@@ -531,7 +531,7 @@ CREATE PROC sp_tblDocumentKind_get
 	@DocumentKindID INT=NULL
 AS
 BEGIN
-	IF @DocumentKindID IS NOT NULL AND @DocumentKindID<>0
+	IF @DocumentKindID IS NULL OR @DocumentKindID=0
 	BEGIN
 		SELECT * FROM tblDocumentKind
 	END

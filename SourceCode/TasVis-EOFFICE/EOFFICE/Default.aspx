@@ -27,7 +27,7 @@
                 <td align="center">23/12/2011</td>
                 <td align="center">24/12/2011</td>
                 <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function update">Update</a><a href="#" class="link-function cancel">Cancel</a><a href="#" class="link-function delete">Xóa</a></td>
+                <td><a href="#" class="link-function update" title="Cập nhật">Cập nhật</a><a href="#" class="link-function cancel" title="Hủy">Hủy</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
             </tr>
             <tr class="altenate">
             	<td align="center">2</td>
@@ -35,7 +35,7 @@
                 <td align="center">23/12/2011</td>
                 <td align="center">24/12/2011</td>
                 <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
+                <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
             </tr>
             <tr>
             	<td align="center">3</td>
@@ -51,7 +51,7 @@
                 <td align="center">23/12/2011</td>
                 <td align="center">24/12/2011</td>
                 <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
+                <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr>
             	<td align="center">5</td>
@@ -75,6 +75,7 @@
                 <td align="center">23/12/2011</td>
                 <td align="center">24/12/2011</td>
                 <td>Báo cáo tuần</td>
+                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr class="altenate">
             	<td align="center">8</td>

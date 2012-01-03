@@ -49,6 +49,7 @@
     <Compile Include="BusinessObject\BCalendar.cs" />
     <Compile Include="BusinessObject\BComment.cs" />
     <Compile Include="BusinessObject\BDepartment.cs" />
+    <Compile Include="BusinessObject\BDocumentKind.cs" />
     <Compile Include="BusinessObject\BUser.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CDBase.cs" />

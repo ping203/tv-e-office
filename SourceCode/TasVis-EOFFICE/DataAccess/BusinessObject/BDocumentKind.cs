@@ -19,12 +19,12 @@ namespace DataAccess.BusinessObject
             sqlPara[1] = new SqlParameter("@Description", SqlDbType.NVarChar);
             sqlPara[1].Value = obj.Description;
             sqlPara[2] = new SqlParameter("@DocumentKindParent", SqlDbType.Int);
-            sqlPara[2].Value = 0;
+            sqlPara[2].Value = obj.DocumentKindParent;
 
             return RunProcudure("sp_tblDocumentKind_add", sqlPara);
         }
 
-        public bool Update(int DocumentKindID,string Name,string Description)
+        public bool Update(int DocumentKindID, string Name, string Description, int DocumentKindParent)
         {
             SqlParameter[] sqlPara = new SqlParameter[4];
             sqlPara[0] = new SqlParameter("@DocumentKindID", SqlDbType.Int);
@@ -34,7 +34,7 @@ namespace DataAccess.BusinessObject
             sqlPara[2] = new SqlParameter("@Description", SqlDbType.NVarChar);
             sqlPara[2].Value = Description;
             sqlPara[3] = new SqlParameter("@DocumentKindParent", SqlDbType.Int);
-            sqlPara[3].Value = 0;
+            sqlPara[3].Value = DocumentKindParent;
 
             return RunProcudure("sp_tblDocumentKind_update", sqlPara);
         }

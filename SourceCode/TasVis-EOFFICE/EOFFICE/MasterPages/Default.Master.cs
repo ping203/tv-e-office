@@ -17,7 +17,8 @@ namespace EOFFICE.MasterPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblUser.Text = "Vinh";
+            lblUser.DataBind();
         }
     }
 }

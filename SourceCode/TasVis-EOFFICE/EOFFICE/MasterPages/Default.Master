@@ -7,7 +7,7 @@
 <script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="../js/script.js"></script>
 <head runat="server">
-    <title>Untitled Page</title>
+    <title>Phần mềm quản lý công văn - Công ty cổ phần Ngân Sơn</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -16,14 +16,14 @@
 <div id="wrapper">
   <div id="header">
    	  <div id="logo">
-			<a href="file:///E:/TASVIS/PROJECT/NganSon/HTML/Index.html"><img src="Images/logo-ns.png" no-repeat /></a>
+			<a href="/Default.aspx"><img src="Images/logo-ns.png" no-repeat /></a>
         </div><!-- end logo -->
         <div id="menu-top">
         	<ul>
             	<li><a href="http://nganson.vn" target="_blank"><span class="icon"><img src="Images/Home.png" /></span>Trang chủ</a></li>
                 <li><a href="http://nganson.com.vn" target="_blank"><span class="icon"><img src="Images/People.png" /></span>Quản lý nhân sự</a></li>
                 <li><a href="/Help.aspx"><span class="icon"><img src="Images/Help.png" /></span>Trợ giúp</a></li>
-                <li><a href="/Person.aspx"><span class="icon"><img src="Images/Person.png" /></span>Xin chào <span class="user-name">Vinh</span></a></li>
+                <li><a href="/Person.aspx"><span class="icon"><img src="Images/Person.png" /></span>Xin chào <asp:Label ID="lblUser" class="user-name" runat="server"></asp:Label></a></li>
                 <li><a href="/Logout.aspx"><span class="icon"><img src="Images/Turn-off.png" /></span>Thoát</a></li>
             </ul>
         </div><!-- end menu-top -->

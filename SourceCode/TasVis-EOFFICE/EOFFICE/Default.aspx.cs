@@ -39,14 +39,14 @@ namespace EOFFICE
             //sqlParameter[2].Value = "asdasghfg";
             //cdBase.RunProcudure("sp_tblDepartment_add", sqlParameter);
             
-            sqlPara[0] = new SqlParameter("@DepartmentID", SqlDbType.Int);
-            sqlPara[0].Value = 0;
-            DataTable tb= new DataTable();
+            //sqlPara[0] = new SqlParameter("@DepartmentID", SqlDbType.Int);
+            //sqlPara[0].Value = 0;
+            //DataTable tb= new DataTable();
             
-            tb = cdBase.RunProcedureGet("sp_tblDepartment_get", sqlPara);
-            BDepartment bd = new BDepartment();
-            grvTest.DataSource = bd.Get(0);
-            grvTest.DataBind();
+            //tb = cdBase.RunProcedureGet("sp_tblDepartment_get", sqlPara);
+            //BDepartment bd = new BDepartment();
+            //grvTest.DataSource = bd.Get(0);
+            //grvTest.DataBind();
         }
     }
 }

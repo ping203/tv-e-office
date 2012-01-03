@@ -117,7 +117,7 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[1];
             sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
             sqlPara[0].Value = WorkID;
-            DataTable tbl = RunProcedureGet("sp_tblWork_update", sqlPara);
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
             IList<OWork> list = new List<OWork>();
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
@@ -130,7 +130,7 @@ namespace DataAccess.BusinessObject
             sqlPara[0].Value = WorkID;
             sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
             sqlPara[1].Value = Name;
-            DataTable tbl = RunProcedureGet("sp_tblWork_update", sqlPara);
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
             IList<OWork> list = new List<OWork>();
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;

@@ -46,7 +46,7 @@ BEGIN
 	UPDATE tblDepartment SET [Name]=@Name,DepartmentParent=@DepartmentParent,[Description]=@Description WHERE DepartmentID=@DepartmentID
 END
 GO
-/* creapte pro delete */
+/* create pro delete */
 IF OBJECT_ID('sp_tblDepartment_delete','P') IS NOT NULL
 	DROP PROC sp_tblDepartment_delete
 GO
@@ -1112,7 +1112,7 @@ GO
 CREATE PROC sp_tblWork_update
 	@WorkID INT,
 	@Name NVARCHAR(300)=NULL,
-	@Decription NVARCHAR(MAX)=NULL,
+	@Description NVARCHAR(MAX)=NULL,
 	@Content NVARCHAR(MAX)=NULL,
 	@Attachs VARCHAR(50)=NULL,	
 	@IDUserCreate INT,
@@ -1130,9 +1130,9 @@ BEGIN
 	BEGIN
 		SET @Update=@Update+',Name='+cast(@Name AS NVARCHAR)
 	END
-	IF @Decription IS NOT NULL
+	IF @Description IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Decription='+cast(@Decription AS NVARCHAR)
+		SET @Update=@Update+',Decription='+cast(@Description AS NVARCHAR)
 	END
 	IF @Content IS NOT NULL
 	BEGIN

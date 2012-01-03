@@ -19,6 +19,7 @@ namespace EOFFICE.MasterPages
         {
             lblUser.Text = "Vinh";
             lblUser.DataBind();
+            
         }
     }
 }

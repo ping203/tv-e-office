@@ -95,6 +95,7 @@
     <Content Include="css\style.css" />
     <Content Include="Images\Accordion_Module_button_collapse_left_grey.png" />
     <Content Include="Images\Accordion_Module_button_expand_left_grey.png" />
+    <Content Include="Images\Boss.png" />
     <Content Include="Images\calendar_icon.gif" />
     <Content Include="Images\Create.png" />
     <Content Include="Images\Erase.png" />
@@ -102,6 +103,8 @@
     <Content Include="Images\Go-back.png" />
     <Content Include="Images\Help.png" />
     <Content Include="Images\Home.png" />
+    <Content Include="Images\icon_locked.png" />
+    <Content Include="Images\icon_username.png" />
     <Content Include="Images\List-compass.png" />
     <Content Include="Images\List-in.png" />
     <Content Include="Images\List-out.png" />
@@ -109,8 +112,10 @@
     <Content Include="Images\List.png" />
     <Content Include="Images\logo-ns.png" />
     <Content Include="Images\Message.png" />
+    <Content Include="Images\Modify.png" />
     <Content Include="Images\New-document.png" />
     <Content Include="Images\nganson_logo.png" />
+    <Content Include="Images\No.png" />
     <Content Include="Images\Notes.png" />
     <Content Include="Images\OK.png" />
     <Content Include="Images\order-asc.png" />
@@ -131,8 +136,10 @@
     <Content Include="Images\Text-Yes.png" />
     <Content Include="Images\Turn-off.png" />
     <Content Include="Images\Up.png" />
+    <Content Include="Images\User-group.png" />
     <Content Include="Images\View.png" />
     <Content Include="Images\Wrench.png" />
+    <Content Include="Images\Yes.png" />
     <Content Include="js\jquery.js" />
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />

@@ -1169,6 +1169,17 @@ BEGIN
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
 GO
+/* delete */
+IF OBJECT_ID('sp_tblWork_delete','P') IS NOT NULL
+	DROP PROC sp_tblWork_delete
+GO
+CREATE PROC sp_tblWork_delete
+	@WorkID INT
+AS
+BEGIN
+	DELETE tblWork WHERE WorkID=@WorkID
+END
+GO
 /* get */
 IF OBJECT_ID('sp_tblWork_get','P') IS NOT NULL
 	DROP PROC sp_tblWork_get

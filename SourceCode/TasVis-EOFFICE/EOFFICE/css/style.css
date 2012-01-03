@@ -9,7 +9,7 @@ ul{margin:0;padding:0;}
 li{list-style-type:none;}
 img{border:none;}
 /* wrapper */
-#wrapper{}
+#wrapper{min-height:695px;}
 
 /* header */
 #header{height:100px;}
@@ -83,4 +83,8 @@ search-doc{}
 .xyly{overflow:hidden;}
 /* bottom */
 #bottom{}
-
+/* login */
+#wpfrmlogin{width:500px;margin:0 auto;background:#CFO;padding-top:100px;}
+#frmlogin{background:#CD4900;color:#FFF;}
+#frmlogin .txt{color:#FFF;}
+#frmlogin h2{color:#FFF;margin-bottom:10px;font-size:25px;background:#0072BC;padding:5px 10px;}

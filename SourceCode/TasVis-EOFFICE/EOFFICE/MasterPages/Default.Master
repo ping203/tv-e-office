@@ -4,8 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <link rel="Stylesheet" href="../css/style.css" />
+
 <script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="../js/script.js"></script>
+
 <head runat="server">
     <title>Phần mềm quản lý công văn - Công ty cổ phần Ngân Sơn</title>
     <asp:ContentPlaceHolder ID="head" runat="server">

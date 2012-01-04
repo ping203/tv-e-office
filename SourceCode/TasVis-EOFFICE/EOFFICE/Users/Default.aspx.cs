@@ -10,11 +10,25 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using DataAccess.Common;
 
 namespace EOFFICE.Users
 {
     public partial class Default : System.Web.UI.Page
     {
-        
+        #region "Common Function"
+        #endregion
+
+        #region "Events"
+        /// <summary>
+        /// Thực hiện thao tác
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkAccept_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

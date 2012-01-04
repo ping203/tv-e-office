@@ -14,12 +14,21 @@ namespace EOFFICE.Users {
     public partial class Default {
         
         /// <summary>
-        /// gvListUser control.
+        /// drdAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvListUser;
+        protected global::System.Web.UI.WebControls.DropDownList drdAction;
+        
+        /// <summary>
+        /// lnkAccept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkAccept;
     }
 }

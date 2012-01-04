@@ -5,178 +5,100 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/Modify.png" runat="server" /></span>Cập nhật người dùng</h2>
+                <asp:Image ImageUrl="~/Images/Modify.png" runat="server" /></span>Cập nhật người
+            dùng</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
-                <td align="right">
-                    Username
-                </td>
-                <td>
-                    <asp:TextBox runat="server" ID="txtUsername"
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td align="center">
-                    2
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    3
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td align="center">
-                    4
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    5
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td align="center">
-                    6
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    7
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td align="center">
-                    8
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    9
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td align="center">
-                    10
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
+                <td align="left">
+                    <table>
+                        <tr>
+                            <td align="right">
+                                Tài khoản:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtUsername" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Mật khẩu:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass=" required password"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Xác nhận mật khẩu:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="required confirm_password"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Họ và tên:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtFullName" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Email:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtEmail" CssClass="email required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Số di động:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtPhoneNumber" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Số máy bàn:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtTel" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Giới tính:
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" id="drdGender">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Ngày sinh:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtBirthDay" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" 
+                                    OnClientClick="javascript:return $('form').valid();" 
+                                    onclick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
     </div>
+    <script language="javascript" type="text/javascript">
+        $('#<%=txtBirthDay.ClientID%>').datetimepicker();
+    </script>
 </asp:Content>

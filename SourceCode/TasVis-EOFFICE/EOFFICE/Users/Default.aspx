@@ -5,20 +5,23 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản trị người
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản lý người
             dùng</h2>
-        <asp:GridView CssClass="tbl-list" runat="server" ID="gvListUser" AutoGenerateColumns="false"
-            GridLines="None">
-            <Columns>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                    
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
+                <td colspan="7">
+                    <asp:DropDownList runat="server" ID="drdAction">
+                        <asp:ListItem Text="Duyệt" Value="Approve"></asp:ListItem>
+                        <asp:ListItem Text="Xóa" Value="Delete"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click">Thực hiện</asp:LinkButton>
+                    <a class="link-btn" href="Edit.aspx"><span class="create">Thêm mới</span></a>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" />
+                </th>
                 <th>
                     Stt
                 </th>
@@ -34,8 +37,14 @@
                 <th>
                     Ghi chú
                 </th>
+                <th>
+                    Thao tác
+                </th>
             </tr>
             <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     1
                 </td>
@@ -51,8 +60,16 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function update" title="Cập nhật">Cập nhật</a><a href="#"
+                        class="link-function cancel" title="Hủy">Hủy</a><a href="#" class="link-function delete"
+                            title="Xóa">Xóa</a>
+                </td>
             </tr>
             <tr class="altenate">
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     2
                 </td>
@@ -68,8 +85,15 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete"
+                        title="Xóa">Xóa</a>
+                </td>
             </tr>
             <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     3
                 </td>
@@ -85,8 +109,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr class="altenate">
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     4
                 </td>
@@ -102,8 +132,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     5
                 </td>
@@ -119,8 +155,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr class="altenate">
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     6
                 </td>
@@ -136,8 +178,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     7
                 </td>
@@ -153,8 +201,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr class="altenate">
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     8
                 </td>
@@ -170,8 +224,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr>
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     9
                 </td>
@@ -187,8 +247,14 @@
                 <td>
                     Báo cáo tuần
                 </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                </td>
             </tr>
             <tr class="altenate">
+                <td>
+                    <input type="checkbox" />
+                </td>
                 <td align="center">
                     10
                 </td>
@@ -203,6 +269,9 @@
                 </td>
                 <td>
                     Báo cáo tuần
+                </td>
+                <td>
+                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
                 </td>
             </tr>
         </table>

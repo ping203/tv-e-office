@@ -113,7 +113,7 @@
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Notes.png" runat="server" /></span>Quản lý công việc</a></h3>
                     <ul class="ul-child">
                     	<li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Create.png" runat="server" /></span>Tạo mới công việc</a>
+                        	<a href="../Works/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Create.png" runat="server" /></span>Tạo mới công việc</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc cần hoàn thành</a>

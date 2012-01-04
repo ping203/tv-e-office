@@ -4,11 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <link rel="Stylesheet" href="../css/style.css" />
+<link rel="Stylesheet" href="../css/datepicker-style.css" />
 
 <script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="../js/script.js"></script>
 <script language="javascript" type="text/javascript" src="../js/jquery.validate.js"></script>
-<script language="javascript" type="text/javascript" src="../js/jquery-ui-timepicker.js"></script>
+<script language="javascript" type="text/javascript" src="../js/ui.datetimepicker.js"></script>
 <script type="text/javascript">
         $(document).ready(function() {        
             $("#aspnetForm").validate();

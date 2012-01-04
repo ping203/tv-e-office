@@ -11,6 +11,24 @@ using System.Data.SqlClient;
 
 namespace DataAccess.Common
 {
+    /// <summary>
+    /// Giới tính
+    /// </summary>
+    public enum Gender
+    {
+        /// <summary>
+        /// Nam
+        /// </summary>
+        Male = 1,
+        /// <summary>
+        /// Nữ
+        /// </summary>
+        Female = 2,
+        /// <summary>
+        /// Khác
+        /// </summary>
+        Other = 3
+    };
     public class Common
     {
         public static DataTable ConvertTo<T>(IList<T> list)

@@ -11,6 +11,7 @@ namespace DataAccess.BusinessObject
 {
     public class BDocument:Common.CDBase
     {
+        
         public bool Add(ODocument obj)
         {
             SqlParameter[] sqlPara = new SqlParameter[20];
@@ -122,7 +123,7 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<ODocument>(tbl);
             return list;
         }
-
+        
         public IList<ODocument> Get(string DocumentID,string Name)
         {
             SqlParameter[] sqlPara = new SqlParameter[2];

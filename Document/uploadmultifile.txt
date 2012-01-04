@@ -1,0 +1,31 @@
+//html
+<table>
+<tr>
+	<td class="tdlabel">Anh mo ta:</td>
+	<td class="tdcontent anhmota">                
+		<asp:FileUpload ID="fuAnhMoTa1" EnableViewState="true" runat="server" />                
+	</td>
+	<td class="tdcontent"><span class="messenger" id="mesAnhMoTa"></span></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="tdcontent"><input type="button" id="btnAddFile" class="btn" Value="Thêm ?nh mô t?" /></td>
+</tr>
+<table>
+//script
+$("#btnAddFile").click(function(){
+        $(".anhmota").append('<p><input type="file" name="file" /></p>');
+        return false;
+    });
+//code cs
+protected void SaveFiles()
+{
+	hfc = Request.Files;
+	for (int j = 0; j < hfc.Count; j++)
+	{	
+		if (hfc[j].FileName != "")
+		{
+			hfc[j].SaveAs(Server.MapPath("/Portals/0/AnhSanPham/" + hfc[j].FileName));		
+		}
+	}
+}

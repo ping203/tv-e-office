@@ -1,21 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
-    <script type="text/javascript">
-        $(document).ready(function() {
-        
-            $("#commentForm").validate();
-        });
-  </script>
-    <div class="list wp-form" id="create-document">
+    
+    <div class="list wp-form" id="createWork">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công việc mới</h2>
-                <form id="commentForm">
+                
                 	<div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnSave" runat="server" Text="Lưu công việc" CssClass="btn"/></li>
-                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnCancel" runat="server" Text="Hủy bỏ" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnBack" runat="server" Text="Quay về" CssClass="btn" /></li>
+                        	<li><asp:Button ID="btnSave" runat="server" Text="Lưu công việc" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
+                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
+                            <li><asp:Button ID="btnCancel" runat="server" Text="Hủy bỏ" CssClass="btn" ></asp:Button></li>
+                            <li><asp:LinkButton ID="btnBack" runat="server" Text="Quay về" CssClass="btn" 
+                                    Height="20px" onclick="btnBack_Click" ></asp:LinkButton></li>
                         </ul>
                     </div>
                     <div class="form">
@@ -23,11 +19,10 @@
                     	<tr>
                         	<td>Nhóm công việc:<span class="rq">*</span></td>
                             <td colspan="3">                            	
-                                <asp:DropDownList runat="server" ID="ddlWorkGroup" AppendDataBoundItems="true">
+                                <asp:DropDownList runat="server" ID="ddlWorkGroup" AppendDataBoundItems="true" CssClass="required">
                                     
                                 </asp:DropDownList>
-                                <asp:Button CssClass="link-btn" Text="Thêm nhóm công việc" runat="server" 
-                                    ID="btnAddGroup"></asp:Button>                       
+                                <asp:LinkButton CssClass="link-btn" Text="Thêm nhóm công việc" runat="server" ID="btnAddGroup" PostBackUrl="~/Works/WorkGroupCreat.aspx"></asp:LinkButton>                       
                             </td>
                         </tr>
                         <tr>
@@ -36,8 +31,8 @@
                         </tr>
                         <tr>
                         	<td>Ngày bắt đầu: <span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="txt"></asp:TextBox>(dd/mm/yy)</td>
-                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="txt"></asp:TextBox>(dd/mm/yy)</td>                            
+                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required"></asp:TextBox>(dd/mm/yy)</td>
+                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required"></asp:TextBox>(dd/mm/yy)</td>                            
                         </tr>
                         <tr>
                         	<td>Nội dung tóm tắt: </td>
@@ -65,12 +60,14 @@
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu công việc" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnCancel2" runat="server" Text="Hủy bỏ" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnBack2" runat="server" Text="Quay về" CssClass="btn" /></li>
+                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu công việc" CssClass="btn" ></asp:Button></li>
+                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
+                            <li><asp:Button ID="btnCancel2" runat="server" Text="Hủy bỏ" CssClass="btn" ></asp:Button></li>
+                            <li><asp:LinkButton ID="btnBack2" runat="server" Text="Quay về" CssClass="btn" 
+                                    onclick="btnBack2_Click" ></asp:LinkButton></li>
                         </ul>
                     </div>
-                </form>
+                
             </div>
+    
 </asp:Content>

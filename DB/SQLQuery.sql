@@ -1075,6 +1075,7 @@ CREATE TABLE tblWork
 	Attachs VARCHAR(50),	
 	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
 	IDUserProcess VARCHAR(50),
+	IDWorkGroup INT,
 	CreateDate DATETIME DEFAULT(GetDate()),
 	StartProcess DATETIME DEFAULT(GetDate()),
 	EndProcess DATETIME,
@@ -1093,6 +1094,7 @@ CREATE PROC sp_tblWork_add
 	@Attachs VARCHAR(50),	
 	@IDUserCreate INT,
 	@IDUserProcess VARCHAR(50),
+	@IDWorkGroup INT,
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
 	@EndProcess DATETIME,
@@ -1100,9 +1102,9 @@ CREATE PROC sp_tblWork_add
 	@Priority VARCHAR(500)
 AS
 BEGIN
-	INSERT INTO tblWork([Name],[Description],[Content],Attachs,IDUserCreate,IDUserProcess,CreateDate,
+	INSERT INTO tblWork([Name],[Description],[Content],Attachs,IDUserCreate,IDUserProcess,IDWorkGroup,CreateDate,
 		StartProcess,EndProcess,[Status],Priority)
-		VALUES(@Name,@Description,@Content,@Attachs,@IDUserCreate,@IDUserProcess,@CreateDate,
+		VALUES(@Name,@Description,@Content,@Attachs,@IDUserCreate,@IDUserProcess,@IDWorkGroup,@CreateDate,
 		@StartProcess,@EndProcess,@Status,@Priority)
 END
 /* update */
@@ -1117,6 +1119,7 @@ CREATE PROC sp_tblWork_update
 	@Attachs VARCHAR(50)=NULL,	
 	@IDUserCreate INT,
 	@IDUserProcess VARCHAR(50),
+	@IDWorkGroup INT=NULL,
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
 	@EndProcess DATETIME=NULL,
@@ -1145,6 +1148,10 @@ BEGIN
 	IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 	BEGIN
 		SET @Update=@Update+',IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
+	END
+	IF @IDWorkGroup IS NOT NULL AND @IDWorkGroup<>0
+	BEGIN
+		SET @Update=@Update+',IDWorkGroup='+cast(@IDWorkGroup AS NVARCHAR)
 	END	
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
@@ -1190,9 +1197,10 @@ CREATE PROC sp_tblWork_get
 	@Content NVARCHAR(MAX)=NULL,
 	@IDUserCreate INT=NULL,
 	@IDUserProcess VARCHAR(50)=NULL,
+	@IDWorkGroup INT=NULL,
 	@FromCreateDate DATETIME=NULL,
 	@ToCreateDate DATETIME=NULL,
-	@StartProcess DATETIME=NULL,
+	@StartProcess DATETIME=NULL,	
 	@EndProcess DATETIME=NULL,
 	@Status VARCHAR(50)=NULL,
 	@Priority VARCHAR(500)=NULL,
@@ -1225,6 +1233,10 @@ BEGIN
 		IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
+		END
+		IF @IDWorkGroup IS NOT NULL AND @IDWorkGroup<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDWorkGroup='+cast(@IDWorkGroup AS NVARCHAR)
 		END
 		IF @FromCreateDate IS NOT NULL AND @FromCreateDate<>'' AND @ToCreateDate IS NOT NULL AND @ToCreateDate<>''
 		BEGIN

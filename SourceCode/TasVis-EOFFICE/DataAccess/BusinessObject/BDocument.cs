@@ -122,5 +122,16 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<ODocument>(tbl);
             return list;
         }
+
+        public IList<ODocument> Get(string Name)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[0].Value = Name;
+            DataTable tbl = RunProcedureGet("sp_tblDocument_get", sqlPara);
+            IList<ODocument> list = new List<ODocument>();
+            list = Common.Common.ConvertTo<ODocument>(tbl);
+            return list;
+        }
     }
 }

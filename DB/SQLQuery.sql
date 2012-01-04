@@ -891,7 +891,7 @@ IF OBJECT_ID('sp_tblDocument_delete','P') IS NOT NULL
 	DROP PROC sp_tblDocument_delete
 GO
 CREATE PROC sp_tblDocument_delete
-	@DocumentID INT
+	@DocumentID VARCHAR(500)
 AS
 BEGIN
 	DELETE tblDocument WHERE DocumentID=@DocumentID

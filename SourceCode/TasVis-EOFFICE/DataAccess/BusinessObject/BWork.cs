@@ -13,7 +13,7 @@ namespace DataAccess.BusinessObject
     {
         public bool Add(OWork obj)
         {
-            SqlParameter[] sqlPara = new SqlParameter[11];
+            SqlParameter[] sqlPara = new SqlParameter[12];
             sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
             sqlPara[0].Value = obj.Name;
             sqlPara[1] = new SqlParameter("@Description", SqlDbType.NVarChar);
@@ -36,14 +36,16 @@ namespace DataAccess.BusinessObject
             sqlPara[9].Value = obj.Status;
             sqlPara[10] = new SqlParameter("@Priority", SqlDbType.VarChar);
             sqlPara[10].Value = obj.Priority;
+            sqlPara[11] = new SqlParameter("@IDWorkGroup",SqlDbType.Int);
+            sqlPara[11].Value = obj.IDWorkGroup;
 
 
             return RunProcudure("sp_tblWork_add", sqlPara);
         }
 
-        public bool Update(int WorkID, string Name, string Description, string Content,string Attachs,int IDUserCreate,string IDUserProcess,DateTime CreateDate,DateTime StartProcess,DateTime EndProcess,string Status,string Priority)
+        public bool Update(int WorkID, string Name, string Description, string Content, string Attachs, int IDUserCreate, string IDUserProcess, DateTime CreateDate, DateTime StartProcess, DateTime EndProcess, string Status, string Priority, int IDWorkGroup)
         {
-            SqlParameter[] sqlPara = new SqlParameter[12];
+            SqlParameter[] sqlPara = new SqlParameter[13];
             sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
             sqlPara[0].Value = WorkID;
             sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
@@ -68,6 +70,8 @@ namespace DataAccess.BusinessObject
             sqlPara[10].Value =Status;
             sqlPara[11] = new SqlParameter("@Priority", SqlDbType.VarChar);
             sqlPara[11].Value = Priority;
+            sqlPara[12] = new SqlParameter("@IDWorkGroup", SqlDbType.Int);
+            sqlPara[12].Value = IDWorkGroup;
 
             return RunProcudure("sp_tblWork_update", sqlPara);
         }

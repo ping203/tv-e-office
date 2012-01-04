@@ -30,7 +30,7 @@
                 <th><a href="#">Ngày hoàn thành</a></th>
                 <th>Ghi chú</th>
                 <th>Thao tác</th>
-            </tr>
+            </tr>            
             <tr>
                 <td><input type="checkbox" /></td>
             	<td align="center">1</td>

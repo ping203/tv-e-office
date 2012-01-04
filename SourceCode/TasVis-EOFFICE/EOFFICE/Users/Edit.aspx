@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="EOFFICE.Users.Default"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="EOFFICE.Users.Edit"
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" runat="server" ID="ContentUser">
@@ -86,6 +86,24 @@
                         </tr>
                         <tr>
                             <td align="right">
+                                Phòng ban:
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" id="drdDepartment" DataValueField="DepartmentID" DataTextField="Name">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Nhóm người dùng:
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" id="drdGroup" DataValueField="GroupID" DataTextField="Name">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
                                 <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" 
                                     OnClientClick="javascript:return $('form').valid();" 
                                     onclick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
@@ -99,6 +117,8 @@
         </table>
     </div>
     <script language="javascript" type="text/javascript">
-        $('#<%=txtBirthDay.ClientID%>').datetimepicker();
+        	$(document).ready(function(){
+		$("#<%=txtBirthDay.ClientID%>").datepicker();
+	});
     </script>
 </asp:Content>

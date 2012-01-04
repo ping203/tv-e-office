@@ -11,7 +11,7 @@
 namespace EOFFICE.Users {
     
     
-    public partial class Default {
+    public partial class Edit {
         
         /// <summary>
         /// txtUsername control.
@@ -93,6 +93,24 @@ namespace EOFFICE.Users {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBirthDay;
+        
+        /// <summary>
+        /// drdDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drdDepartment;
+        
+        /// <summary>
+        /// drdGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drdGroup;
         
         /// <summary>
         /// lnkUpdate control.

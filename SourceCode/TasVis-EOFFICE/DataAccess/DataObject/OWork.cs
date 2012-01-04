@@ -91,6 +91,12 @@ namespace DataAccess.DataObject
             get { return _Priority; }
             set { _Priority = value; }
         }
-        
+        private int _IDWorkGroup;
+
+        public int IDWorkGroup
+        {
+            get { return _IDWorkGroup; }
+            set { _IDWorkGroup = value; }
+        }
     }
 }

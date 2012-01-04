@@ -13,7 +13,17 @@
     <div class="list" id="list-congvieccanlam">
     	<h2><span class="icon"><img src="Images/Play.png" /></span>Danh sách công việc cần hoàn thành</h2>
     	<table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
+    	    <tr>
+    	        <td colspan="7">    	            
+    	            <select class="select">
+    	                <option>Xóa</option>
+    	                <option>Duyệt</option>
+    	            </select>
+    	            <a href="#" class="link-btn">Thực hiện</a>
+    	        </td>
+    	    </tr>
         	<tr>
+        	    <th><input type="checkbox" /></th>
             	<th>Stt</th>
                 <th><a href="#" class="order-desc">Tên công việc</a></th>
                 <th><a href="#">Ngày bắt đầu</a></th>
@@ -22,6 +32,7 @@
                 <th>Thao tác</th>
             </tr>
             <tr>
+                <td><input type="checkbox" /></td>
             	<td align="center">1</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -30,6 +41,7 @@
                 <td><a href="#" class="link-function update" title="Cập nhật">Cập nhật</a><a href="#" class="link-function cancel" title="Hủy">Hủy</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
             </tr>
             <tr class="altenate">
+                <td><input type="checkbox" /></td>
             	<td align="center">2</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -38,6 +50,7 @@
                 <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
             </tr>
             <tr>
+                <td><input type="checkbox" /></td>
             	<td align="center">3</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -46,6 +59,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr class="altenate">
+                <td><input type="checkbox" /></td>
             	<td align="center">4</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -54,6 +68,7 @@
                 <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr>
+                <td><input type="checkbox" /></td>
             	<td align="center">5</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -62,6 +77,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr class="altenate">
+                <td><input type="checkbox" /></td>
             	<td align="center">6</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -70,6 +86,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr>
+                <td><input type="checkbox" /></td>
             	<td align="center">7</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -78,6 +95,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr class="altenate">
+                <td><input type="checkbox" /></td>
             	<td align="center">8</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -86,6 +104,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr>
+                <td><input type="checkbox" /></td>
             	<td align="center">9</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>
@@ -94,6 +113,7 @@
                 <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
             </tr>
             <tr class="altenate">
+                <td><input type="checkbox" /></td>
             	<td align="center">10</td>
                 <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
                 <td align="center">23/12/2011</td>

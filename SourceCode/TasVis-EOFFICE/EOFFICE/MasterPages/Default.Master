@@ -132,7 +132,7 @@
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Pinion.png" runat="server" /></span>Quản trị hệ thống</a></h3>
                 	<ul class="ul-child">
                 	    <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Người dùng</a>
+                        	<a href="/Users" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Người dùng</a>
                         </li>
                     	<li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/User-group.png" runat="server" /></span>Nhóm người dùng</a>

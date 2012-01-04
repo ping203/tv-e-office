@@ -8,7 +8,6 @@ namespace DataAccess.DataObject
     public class ODepartment
     {
         private int _DepartmentID;
-
         public int DepartmentID
         {
             get { return _DepartmentID; }

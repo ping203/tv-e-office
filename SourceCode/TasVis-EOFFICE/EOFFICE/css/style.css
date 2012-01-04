@@ -80,7 +80,7 @@ search-doc{}
 .link-btn:hover{background:#5E9AF0;}
 .txt{width:150px;background:none;border:1px solid #CCC;height:20px;}
 .textarea{width:600px;background:none;border:1px solid #CCC;}
-.select{height:22px;background:none;border:1px solid #CCC;}
+.select{height:22px;background:none;border:1px solid #CCC;min-width:100px;}
 .required{color:#F00;}
 .title-process{border-bottom:2px solid #0072BC;padding-bottom:3px;margin-bottom:10px;}
 .listcb{float:left;width:200px;margin-right:20px;}

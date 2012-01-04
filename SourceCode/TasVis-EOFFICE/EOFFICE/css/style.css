@@ -78,6 +78,7 @@ search-doc{}
 .btn:hover{background:#5E9AF0;}
 .link-btn{padding:3px 5px;background:#0066CC;color:#FFF;}
 .link-btn:hover{background:#5E9AF0;}
+.link-btn .create{padding-left:20px;background:url('../Images/create.png') no-repeat;}
 .txt{width:150px;background:none;border:1px solid #CCC;height:20px;}
 .textarea{width:600px;background:none;border:1px solid #CCC;}
 .select{height:22px;background:none;border:1px solid #CCC;min-width:100px;}

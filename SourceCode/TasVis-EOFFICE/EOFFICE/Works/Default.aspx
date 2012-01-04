@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
-<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">
+<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
     
     <div class="list wp-form" id="create-document">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công việc mới</h2>
@@ -18,8 +18,8 @@
                     	<tr>
                         	<td>Nhóm công việc:<span class="required">*</span></td>
                             <td colspan="3">                            	
-                                <asp:DropDownList runat="server" ID="ddlWorkGroup" AutoPostBack="true">
-                                    <asp:ListItem>-- Chọn nhóm công việc --</asp:ListItem>
+                                <asp:DropDownList runat="server" ID="ddlWorkGroup" AppendDataBoundItems="true">
+                                    
                                 </asp:DropDownList>
                                 <asp:Button CssClass="link-btn" Text="Thêm nhóm công việc" runat="server" 
                                     ID="btnAddGroup"></asp:Button>                       

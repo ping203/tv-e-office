@@ -7,8 +7,12 @@
 
 <script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="../js/script.js"></script>
-<script type="text/javascript" src="../js/jquery.validate.js"></script>
-
+<script language="javascript" type="text/javascript" src="../js/jquery.validate.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {        
+            $("#aspnetForm").validate();
+        });
+ </script>
 <head runat="server">
     <title>Phần mềm quản lý công văn - Công ty cổ phần Ngân Sơn</title>
     <asp:ContentPlaceHolder ID="head" runat="server">

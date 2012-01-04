@@ -123,11 +123,13 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<ODocument> Get(string Name)
+        public IList<ODocument> Get(string DocumentID,string Name)
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
-            sqlPara[0].Value = Name;
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
+            sqlPara[0].Value = DocumentID;
+            sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[1].Value = Name;
             DataTable tbl = RunProcedureGet("sp_tblDocument_get", sqlPara);
             IList<ODocument> list = new List<ODocument>();
             list = Common.Common.ConvertTo<ODocument>(tbl);

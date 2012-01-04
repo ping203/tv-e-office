@@ -28,14 +28,14 @@ namespace EOFFICE.Works
 
         protected void ddlWorkGroup_Load()
         {
-            ddlWorkGroup.Items.Clear();
-            ListItem lit = new ListItem("-- Chọn loại công việc --", "0");
-            ddlWorkGroup.Items.Add(lit);
-            BWorkGroup bwg= new BWorkGroup();
-            ddlWorkGroup.DataSource = bwg.Get(0);
-            ddlWorkGroup.DataTextField = "Name";
-            ddlWorkGroup.DataValueField = "WorkGroupID";
-            ddlWorkGroup.DataBind();
+            //ddlWorkGroup.Items.Clear();
+            //ListItem lit = new ListItem("-- Chọn loại công việc --", "0");
+            //ddlWorkGroup.Items.Add(lit);
+            //BWorkGroup bwg= new BWorkGroup();
+            //ddlWorkGroup.DataSource = bwg.Get(0);
+            //ddlWorkGroup.DataTextField = "Name";
+            //ddlWorkGroup.DataValueField = "WorkGroupID";
+            //ddlWorkGroup.DataBind();
         }
     }
 }

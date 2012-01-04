@@ -13,7 +13,7 @@
         $(document).ready(function() {        
             $("#aspnetForm").validate();
         });
- </script>
+ </script> 
 <head runat="server">
     <title>Phần mềm quản lý công văn - Công ty cổ phần Ngân Sơn</title>
     <asp:ContentPlaceHolder ID="head" runat="server">

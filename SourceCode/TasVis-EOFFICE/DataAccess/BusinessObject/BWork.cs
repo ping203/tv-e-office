@@ -116,16 +116,16 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblWork_delete", sqlPara);
         }
 
-        public IList<OWork> Get(int WorkID)
-        {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
-            sqlPara[0].Value = WorkID;
-            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
-            IList<OWork> list = new List<OWork>();
-            list = Common.Common.ConvertTo<OWork>(tbl);
-            return list;
-        }
+        //public IList<OWork> Get(int WorkID)
+        //{
+        //    SqlParameter[] sqlPara = new SqlParameter[1];
+        //    sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
+        //    sqlPara[0].Value = WorkID;
+        //    DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+        //    IList<OWork> list = new List<OWork>();
+        //    list = Common.Common.ConvertTo<OWork>(tbl);
+        //    return list;
+        //}
 
         public IList<OWork> Get(int WorkID,string Name)
         {
@@ -139,6 +139,15 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
-
+        public IList<OWork> Get(int IDUserCreate)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0].Value = IDUserCreate;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
     }
 }

@@ -1,7 +1,21 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkGroupCreat.aspx.cs" Inherits="EOFFICE.Works.WorkGroupCreat" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
-    
+    <script type="text/javascript">
+
+    function SelectAll(id) {
+
+        var frm = document.forms[0];
+
+        for (i=0;i<frm.elements.length;i++) {
+
+            if (frm.elements[i].type == "checkbox") {
+
+                frm.elements[i].checked = document.getElementById(id).checked;
+            }
+        }
+    } 
+    </script>
     <div class="list wp-form" id="createWorkGroup">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo nhóm công việc mới</h2>
                 
@@ -23,32 +37,51 @@
                         <tr>
                             <td></td>
                             <td>
-                                <asp:Button ID="btnSubmit" runat="server" Text="Cập nhật" />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Cập nhật" onclick="btnSubmit_Click" />
                             </td>
                         </tr>     
                     </table>
                     <div class="list" id="list-congvieccanlam">
-            	        <h2><span class="icon"><img src="Images/Play.png" /></span>THÊM NHÓM CÔNG VIỆC</h2>
-            	        <asp:DataGrid ID="grvWorkGroup" runat="server" AllowCustomPaging="True" 
-                                AllowSorting="True" AutoGenerateColumns="False" Width="100%">
-                                <Columns>
-                                    <asp:TemplateColumn >
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="myCheckBox" runat="server" />
-                                        </ItemTemplate>
-                                    </asp:TemplateColumn>
-                                    <asp:BoundColumn DataField="Name" HeaderText="Nhóm công việc"></asp:BoundColumn>
-                                    <asp:BoundColumn DataField="Description" HeaderText="Mô tả"></asp:BoundColumn>
-                                    
-                                    <asp:TemplateColumn HeaderText="Thao tác" >
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="LinkButton1" runat="server" Text="Sửa" CommandName="Edit"></asp:LinkButton>
-                                            <asp:LinkButton ID="LinkButton2" runat="server" Text="Xóa" CommandName="Delete"></asp:LinkButton>
-                                        </ItemTemplate>
-                                    </asp:TemplateColumn>
-                                </Columns>
-                                
-                            </asp:DataGrid>
+            	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM CÔNG VIỆC</h2>
+            	        <asp:LinkButton ID="btnDelete" runat="server" Text="Xóa nhóm công việc" onclick="btnDelete_Click" CssClass="link-btn"></asp:LinkButton>	
+                        <asp:GridView ID="grvWorkGroup" runat="server" AutoGenerateColumns="False" 
+                                    CssClass="tbl-list" Width="100%" onrowcreated="grvWorkGroup_RowCreated" 
+                                    onrowdatabound="grvWorkGroup_RowDataBound" 
+                            DataKeyNames="WorkGroupID" onrowcancelingedit="grvWorkGroup_RowCancelingEdit" 
+                            onrowediting="grvWorkGroup_RowEditing" 
+                            onrowupdating="grvWorkGroup_RowUpdating" >
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <asp:CheckBox ID="CheckAll" runat="server" />
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="MyCheckBox" runat="server" />
+                                    </ItemTemplate>
+                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="STT">
+                                   <ItemTemplate>
+                                          <%# Container.DataItemIndex + 1 %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="Name" HeaderText="Tên nhóm công việc" />
+                                <asp:BoundField DataField="Description" HeaderText="Mô tả" />
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Thao tác</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit"  runat="server" />
+                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server"></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update"   runat="server" />
+                                        <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel"  runat="server" />
+                                    </EditItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />                   
+                                </asp:TemplateField>
+                            </Columns>
+                            <HeaderStyle ForeColor="#0072BC" />
+                        </asp:GridView>
                         <div class="pagenav">
                 	        <ul>
                     	        <li><a href="#">Trang đầu</a></li>
@@ -60,13 +93,15 @@
                                 <li><a href="#">...</a></li>
                                 <li><a href="#">Trang cuối</a></li>
                             </ul>
-                        </div>	
+                        </div>
+                        <br />
+                        
+                        
                     </div>
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:LinkButton CausesValidation="false"  ID="btnBack2" runat="server" 
-                                    Text="Quay về" CssClass="btn" onclick="btnBack2_Click" ></asp:LinkButton></li>
+                        	<li><asp:LinkButton CausesValidation="false"  ID="btnBack2" runat="server" Text="Quay về" CssClass="btn" onclick="btnBack2_Click" ></asp:LinkButton></li>
                         </ul>
                     </div>
                 

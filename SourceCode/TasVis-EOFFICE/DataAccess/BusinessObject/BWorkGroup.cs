@@ -39,6 +39,8 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblWorkGroup_update", sqlPara);
         }
 
+        
+
         public bool Delete(int WorkGroupID)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];

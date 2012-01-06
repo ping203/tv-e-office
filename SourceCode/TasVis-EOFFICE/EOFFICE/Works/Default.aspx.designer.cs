@@ -41,15 +41,6 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
-        /// btnBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack;
-        
-        /// <summary>
         /// ddlWorkGroup control.
         /// </summary>
         /// <remarks>
@@ -183,14 +174,5 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel2;
-        
-        /// <summary>
-        /// btnBack2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack2;
     }
 }

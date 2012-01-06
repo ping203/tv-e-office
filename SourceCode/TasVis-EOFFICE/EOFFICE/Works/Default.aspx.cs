@@ -18,13 +18,13 @@ namespace EOFFICE.Works
 {
     public partial class Default : System.Web.UI.Page
     {
-        static string prevPage = String.Empty;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 ddlWorkGroup_Load();
-                prevPage = Request.UrlReferrer.ToString();
+                
             }
         }
 
@@ -49,14 +49,6 @@ namespace EOFFICE.Works
             //objWork.Attachs=
         }
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(prevPage);
-        }
-
-        protected void btnBack2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(prevPage);
-        }
+        
     }
 }

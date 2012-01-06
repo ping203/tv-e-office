@@ -10,8 +10,7 @@
                         	<li><asp:Button ID="btnSave" runat="server" Text="Lưu công việc" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
                             <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
                             <li><asp:Button ID="btnCancel" runat="server" Text="Hủy bỏ" CssClass="btn" ></asp:Button></li>
-                            <li><asp:LinkButton ID="btnBack" runat="server" Text="Quay về" CssClass="btn" 
-                                    Height="20px" onclick="btnBack_Click" ></asp:LinkButton></li>
+                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
                     <div class="form">
@@ -63,8 +62,7 @@
                         	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu công việc" CssClass="btn" ></asp:Button></li>
                             <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
                             <li><asp:Button ID="btnCancel2" runat="server" Text="Hủy bỏ" CssClass="btn" ></asp:Button></li>
-                            <li><asp:LinkButton ID="btnBack2" runat="server" Text="Quay về" CssClass="btn" 
-                                    onclick="btnBack2_Click" ></asp:LinkButton></li>
+                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
                 

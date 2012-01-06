@@ -17,13 +17,13 @@ namespace EOFFICE.Works
 {
     public partial class WorkGroupCreat : System.Web.UI.Page
     {
-        static string prevPage = String.Empty;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 grvWorkGroup_Load();
-                prevPage = Request.UrlReferrer.ToString();
+                
             }
         }
 
@@ -32,17 +32,10 @@ namespace EOFFICE.Works
             BWorkGroup objWorkGroup = new BWorkGroup();
             grvWorkGroup.DataSource= objWorkGroup.Get(0);
             grvWorkGroup.DataBind();
+            ddlGroupParent_Load();
         }
 
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(prevPage);
-        }
-
-        protected void btnBack2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(prevPage);
-        }
+        
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -77,6 +70,40 @@ namespace EOFFICE.Works
             }
         }
 
+        protected void ddlGroupParent_Load()
+        {
+            DropDownList drdList;
+            BWorkGroup obj= new BWorkGroup();
+            // foreach loop is used to loop through each row of GridView Control.
+            foreach (GridViewRow grdRow in grvWorkGroup.Rows)
+            {
+                // Nested DropDownList Control reference is passed to the DrdList object. This will allow you access the properties of dropdownlist placed inside the GridView Template column.
+                drdList = (DropDownList)(grvWorkGroup.Rows[grdRow.RowIndex].Cells[4].FindControl("ddlGroupParent"));
+
+                // DataBinding of nested DropDownList Control for each row of GridView Control.
+                ListItem lit = new ListItem("Không có nhóm công việc cha", "0");
+
+                
+                drdList.DataSource = obj.Get(0);
+                drdList.DataValueField = "WorkGroupID";
+                drdList.DataTextField = "Name";
+                
+                drdList.DataBind();
+                drdList.Items.Insert(0, lit);
+                int Id = Convert.ToInt32(grvWorkGroup.DataKeys[grdRow.RowIndex].Value);
+                int IdParent = obj.Get(Id).First().WorkGroupParent;
+                if (IdParent == 0)
+                {
+                    drdList.SelectedValue = "0";
+                }
+                else
+                {
+                    drdList.SelectedValue = IdParent.ToString();
+                }
+                //drdList.SelectedValue = grvWorkGroup.DataKeys[grdRow.RowIndex].Value.ToString();
+            }
+        }
+
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             BWorkGroup obj = new BWorkGroup();
@@ -87,7 +114,6 @@ namespace EOFFICE.Works
                 if (checkbox.Checked == true)
                 {
                     int Id =Convert.ToInt32(grvWorkGroup.DataKeys[row.RowIndex].Value);
-                    
                     obj.Delete(Id);
                 }
 
@@ -105,8 +131,8 @@ namespace EOFFICE.Works
                 //and passing the ClientID of the Select All checkbox
 
                 ((CheckBox)e.Row.FindControl("CheckAll")).Attributes.Add("onclick", "javascript:SelectAll('" + ((CheckBox)e.Row.FindControl("CheckAll")).ClientID + "')");
-
             }
+            
         }
 
         protected void grvWorkGroup_RowEditing(object sender, GridViewEditEventArgs e)
@@ -118,11 +144,13 @@ namespace EOFFICE.Works
         protected void grvWorkGroup_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             int Id =Convert.ToInt32(grvWorkGroup.DataKeys[e.RowIndex].Value);
-            TextBox Name = (TextBox)grvWorkGroup.Rows[e.RowIndex].FindControl("txtName");
-            TextBox Description = (TextBox)grvWorkGroup.Rows[e.RowIndex].FindControl("txtDescription");
-
+            string textName = ((TextBox)grvWorkGroup.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
+            string textDescription = ((TextBox)grvWorkGroup.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
+            DropDownList ddl = (DropDownList)grvWorkGroup.Rows[e.RowIndex].Cells[4].Controls[1];
+            //ddl.Enabled = true;
+            
             BWorkGroup obj = new BWorkGroup();
-            obj.Update(Id, "abcd", "abcd",0);
+            obj.Update(Id, textName, textDescription, int.Parse(ddl.SelectedValue));
             grvWorkGroup.EditIndex = -1;
             grvWorkGroup_Load();
         }

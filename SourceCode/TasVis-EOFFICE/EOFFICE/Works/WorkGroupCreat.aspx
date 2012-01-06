@@ -21,7 +21,7 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                            <li><asp:LinkButton ID="btnBack" runat="server" Text="Quay về" CssClass="btn" onclick="btnBack_Click"></asp:LinkButton></li>
+                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
                     <div class="form">
@@ -64,9 +64,22 @@
                                    <ItemTemplate>
                                           <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
+                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Tên nhóm công việc" />
-                                <asp:BoundField DataField="Description" HeaderText="Mô tả" />
+                                <asp:BoundField DataField="Name" HeaderText="Tên nhóm công việc">
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Description" HeaderText="Mô tả" >
+                                    <ItemStyle Width="45%"  />
+                                </asp:BoundField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Nhóm công việc cha</HeaderTemplate>                                    
+                                    <ItemTemplate>                                        
+                                        <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px"  Enabled="false"></asp:DropDownList>
+                                    </ItemTemplate>                                    
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px"></asp:DropDownList>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>                                                                   
                                 <asp:TemplateField>
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
@@ -77,7 +90,7 @@
                                         <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update"   runat="server" />
                                         <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel"  runat="server" />
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />                   
+                                    <ItemStyle HorizontalAlign="Center" Width="7%" />                   
                                 </asp:TemplateField>
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />
@@ -95,13 +108,14 @@
                             </ul>
                         </div>
                         <br />
-                        
+                       
                         
                     </div>
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:LinkButton CausesValidation="false"  ID="btnBack2" runat="server" Text="Quay về" CssClass="btn" onclick="btnBack2_Click" ></asp:LinkButton></li>
+                        	
+                        	<li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
                 

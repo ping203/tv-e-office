@@ -14,15 +14,6 @@ namespace EOFFICE.Works {
     public partial class WorkGroupCreat {
         
         /// <summary>
-        /// btnBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack;
-        
-        /// <summary>
         /// txtWorkGroupName control.
         /// </summary>
         /// <remarks>
@@ -66,14 +57,5 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvWorkGroup;
-        
-        /// <summary>
-        /// btnBack2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack2;
     }
 }

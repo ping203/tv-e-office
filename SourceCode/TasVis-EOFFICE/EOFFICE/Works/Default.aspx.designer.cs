@@ -32,15 +32,6 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Button btnForward;
         
         /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
-        
-        /// <summary>
         /// ddlWorkGroup control.
         /// </summary>
         /// <remarks>
@@ -104,13 +95,13 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.TextBox txtContent;
         
         /// <summary>
-        /// AttachsFile control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload AttachsFile;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
         /// rdoPrior1 control.
@@ -140,13 +131,13 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.RadioButton rdoPrior3;
         
         /// <summary>
-        /// txtUserProcess control.
+        /// rptUserProcess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserProcess;
+        protected global::System.Web.UI.WebControls.Repeater rptUserProcess;
         
         /// <summary>
         /// btnSave2 control.
@@ -165,14 +156,5 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnForward2;
-        
-        /// <summary>
-        /// btnCancel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel2;
     }
 }

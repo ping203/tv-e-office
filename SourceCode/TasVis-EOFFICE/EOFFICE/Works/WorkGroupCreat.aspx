@@ -21,7 +21,7 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
+                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"/></li>
                         </ul>
                     </div>
                     <div class="form">

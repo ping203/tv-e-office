@@ -28,9 +28,9 @@ namespace DataAccess.DataObject
             get { return _Description; }
             set { _Description = value; }
         }
-        private string _WorkGroupParent;
+        private int _WorkGroupParent;
 
-        public string WorkGroupParent
+        public int WorkGroupParent
         {
             get { return _WorkGroupParent; }
             set { _WorkGroupParent = value; }

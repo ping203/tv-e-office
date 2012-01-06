@@ -685,7 +685,7 @@ CREATE PROC sp_tblAttach_add
 	@Path NVARCHAR(300)
 AS
 BEGIN
-	INSERT INTO tblAttacht([Name],[Description],[Path]) VALUES(@Name,@Description,@Path)
+	INSERT INTO tblAttach([Name],[Description],[Path]) VALUES(@Name,@Description,@Path)
 END
 /* update */
 GO

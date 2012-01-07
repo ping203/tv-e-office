@@ -14,6 +14,7 @@
 <script type="text/javascript">
         $(document).ready(function() {        
             $("#aspnetForm").validate();
+            $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
         });
  </script> 
 <head runat="server">

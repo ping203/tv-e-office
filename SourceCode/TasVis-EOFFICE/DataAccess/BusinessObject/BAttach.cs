@@ -53,7 +53,17 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[1];
             sqlPara[0] = new SqlParameter("@AttachID", SqlDbType.Int);
             sqlPara[0].Value = AttachID;
-            DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+            DataTable tbl = RunProcedureGet("sp_tblAttach_get", sqlPara);
+            IList<OAttach> list = new List<OAttach>();
+            list = Common.Common.ConvertTo<OAttach>(tbl);
+            return list;
+        }
+
+        public IList<OAttach> GetLast()
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            DataTable tbl = RunProcedureGet("sp_tblAttach_getlast",sqlPara );
+
             IList<OAttach> list = new List<OAttach>();
             list = Common.Common.ConvertTo<OAttach>(tbl);
             return list;

@@ -7,12 +7,12 @@ namespace DataAccess.DataObject
 {
     public class OAttach
     {
-        private int _AttackID;
+        private int _AttachID;
 
-        public int AttackID
+        public int AttachID
         {
-            get { return _AttackID; }
-            set { _AttackID = value; }
+            get { return _AttachID; }
+            set { _AttachID = value; }
         }
         private string _Name;
 

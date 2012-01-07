@@ -46,7 +46,9 @@ namespace EOFFICE.Works
             BWorkGroup ọbjB = new BWorkGroup();
             ọbjB.Add(obj);
             grvWorkGroup_Load();
-            
+
+            txtWorkGroupName.Text = string.Empty;
+            txtContent.Text = string.Empty;
         }
 
         protected void grvWorkGroup_RowCreated(object sender, GridViewRowEventArgs e)
@@ -153,6 +155,9 @@ namespace EOFFICE.Works
             obj.Update(Id, textName, textDescription, int.Parse(ddl.SelectedValue));
             grvWorkGroup.EditIndex = -1;
             grvWorkGroup_Load();
+
+            txtWorkGroupName.Text = string.Empty;
+            txtContent.Text = string.Empty;
         }
 
         protected void grvWorkGroup_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)

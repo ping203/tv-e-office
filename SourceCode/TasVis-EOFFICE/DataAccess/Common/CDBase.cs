@@ -72,6 +72,31 @@ namespace DataAccess.Common
             return dt;
         }
 
+        public DataTable RunProcedureGet(string procedureName)
+        {
+            Connect();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = procedureName;
+
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+
+            try
+            {
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+            }
+            catch (Exception ex) { }
+            finally
+            {
+                cmd.Dispose();
+                closeConnection();
+            }
+            return dt;
+        }
+
         public bool RunProcudure(string procedureName, SqlParameter[] sqlParameter)
         {
             Connect();

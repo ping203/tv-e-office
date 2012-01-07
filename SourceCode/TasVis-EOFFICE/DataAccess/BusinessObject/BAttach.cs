@@ -61,8 +61,8 @@ namespace DataAccess.BusinessObject
 
         public IList<OAttach> GetLast()
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
-            DataTable tbl = RunProcedureGet("sp_tblAttach_getlast",sqlPara );
+            
+            DataTable tbl = RunProcedureGet("sp_tblAttach_getlast");
 
             IList<OAttach> list = new List<OAttach>();
             list = Common.Common.ConvertTo<OAttach>(tbl);

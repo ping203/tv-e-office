@@ -1,13 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
-<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
-
-    <script language="javascript" type="text/javascript">
-	$(document).ready(function(){
-	$(".required date").datepicker({ dateFormat: 'dd/mm/yy' });
-	$(".required date").datepicker({ dateFormat: 'dd/mm/yy' });
-	});
-</script>
+<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
 <script type="text/javascript">
     $(document).ready(function() {
         $("#listUserProcess").hide();
@@ -45,7 +38,7 @@
                         </tr>
                         <tr>
                         	<td>Ngày bắt đầu: <span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required date"></asp:TextBox>(dd/mm/yyyy)</td>
+                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required datepicker"></asp:TextBox>(dd/mm/yyyy)</td>
                             <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required date"></asp:TextBox>(dd/mm/yyyy)</td>                            
                         </tr>
                         <tr>

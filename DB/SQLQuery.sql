@@ -723,6 +723,16 @@ AS
 BEGIN
 	SELECT * FROM tblAttach WHERE AttachID=@AttachID
 END
+/* get last record */
+GO
+IF OBJECT_ID('sp_tblAttach_getlast','P') IS NOT NULL
+	DROP PROC sp_tblAttach_getlast
+GO
+CREATE PROC sp_tblAttach_getlast	
+AS
+BEGIN
+	SELECT * FROM tblAttach WHERE AttachID = IDENT_CURRENT('tblAttach')
+END
 /* table Document */
 GO
 IF OBJECT_ID('tblDocument','U') IS NOT NULL

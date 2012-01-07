@@ -102,7 +102,7 @@ namespace EOFFICE.Works
                 {
                     drdList.SelectedValue = IdParent.ToString();
                 }
-                //drdList.SelectedValue = grvWorkGroup.DataKeys[grdRow.RowIndex].Value.ToString();
+                
             }
         }
 

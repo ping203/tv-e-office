@@ -25,7 +25,7 @@ namespace EOFFICE.Works
             if (!Page.IsPostBack)
             {
                 ddlWorkGroup_Load();
-                rptUserProcess_Load();
+                CheckBoxBind_Load();
             }
         }
 
@@ -43,16 +43,6 @@ namespace EOFFICE.Works
         {
             CultureInfo culture = new CultureInfo("fr-FR", true);
             
-            OWork objWork = new OWork();
-            objWork.Name = txtWorkName.Text;
-            objWork.Description = txtDescription.Text;
-            objWork.Content = txtContent.Text;
-            //--Lấy IDUserCreate sau
-            objWork.IDUserCreate = 1;
-            objWork.IDWorkGroup =int.Parse(ddlWorkGroup.SelectedValue);
-            objWork.StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
-            objWork.EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
-
             //Upload File
             DateTime CurrentTime = DateTime.Now;
             string day = CurrentTime.Day.ToString();
@@ -62,11 +52,15 @@ namespace EOFFICE.Works
             string minute = CurrentTime.Minute.ToString();
             string millisecond = CurrentTime.Millisecond.ToString();
             string str = " " + day + "-" + month + "-" + year + "-" + "-" + hour + "-" + minute + "-" + millisecond;
+
+            //Lấy danh sách file Attach
             BAttach Bobj = new BAttach();
+            HttpFileCollection hfc = Request.Files;
+            int n = hfc.Count;
             try
             {
                 // Get the HttpFileCollection
-                HttpFileCollection hfc = Request.Files;
+                
                 for (int i = 0; i < hfc.Count; i++)
                 {
                     HttpPostedFile hpf = hfc[i];
@@ -78,6 +72,7 @@ namespace EOFFICE.Works
                         obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName) + str + System.IO.Path.GetExtension(hpf.FileName);
                         obj.Description = "";
                         Bobj.Add(obj);
+                        lblSatus.Text += Bobj.GetLast().FirstOrDefault().AttackID.ToString() + ",";
                     }
                 }
             }
@@ -85,26 +80,36 @@ namespace EOFFICE.Works
             {
 
             }
-
-            //Lấy danh sách Người thực hiện công việc
-            foreach (RepeaterItem oItem in rptUserProcess.Items)
+            lblSatus.Text += Bobj.GetLast().FirstOrDefault().AttackID.ToString() + ",";
+            //Lấy danh sách người thực hiện công việc
+            string ListUserProcess = string.Empty;
+            foreach (ListItem item in CheckBoxBind.Items)
             {
-                CheckBox chkBoxSelected = oItem.FindControl("cbxCheck") as CheckBox;
-                if (chkBoxSelected.Checked)
+                
+                if (item.Selected)
                 {
-                    //int Id = Convert.ToInt32(rptUserProcess.);
-                    
+                    ListUserProcess += item.Value.ToString()+",";
                 }
             }
 
+            //Lưu công việc mới
+            OWork objWork = new OWork();
+            objWork.Name = txtWorkName.Text;
+            objWork.Description = txtDescription.Text;
+            objWork.Content = txtContent.Text;
+            objWork.IDUserCreate = 1;    //--Lấy IDUserCreate sau
+            objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
+            objWork.StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+            objWork.EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+
         }
 
-        private void rptUserProcess_Load()
+        private void CheckBoxBind_Load()
         {
             BUser obj = new BUser();
             string username = string.Empty;
-            rptUserProcess.DataSource = obj.Get(username);
-            rptUserProcess.DataBind();
+            CheckBoxBind.DataSource = obj.Get(username);
+            CheckBoxBind.DataBind();
         }
 
         

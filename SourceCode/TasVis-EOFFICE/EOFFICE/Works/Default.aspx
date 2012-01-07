@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
+
     <script language="javascript" type="text/javascript">
 	$(document).ready(function(){
 	$(".required date").datepicker({ dateFormat: 'dd/mm/yy' });
@@ -58,6 +59,7 @@
                         <tr>
                         	<td>File đính kèm: </td>
                             <td colspan="3">
+                                <asp:Label runat="server" ID="lblSatus" Text="bnbn"></asp:Label>
                                 <asp:FileUpload ID="FileUpload1" runat="server" class="multi" />
                             </td>
                         </tr>
@@ -72,30 +74,7 @@
                             <td colspan="3">
                                 <input type="button" id="btnHide" value="Chọn người nhận việc" style="margin-bottom:10px" />
                                 <div id="listUserProcess" style="width:100%" >
-                                
-                                    <asp:Repeater runat="server" ID="rptUserProcess">
-                                        <HeaderTemplate>
-                                            <table width="100%">
-                                                
-                                        </HeaderTemplate>
-                                           <ItemTemplate>
-                                                <tr>
-                                                    <td>
-                                              <asp:CheckBox ID="cbxCheck" runat="server" Text=<%#DataBinder.Eval(Container.DataItem,"FullName") %>/>
-                                                   
-                                                   </td >
-                                           </ItemTemplate>                                          
-                                                
-                                           <AlternatingItemTemplate>
-                                                <td>
-                                               <asp:CheckBox ID="cbxCheck" runat="server" Text=<%#DataBinder.Eval(Container.DataItem,"FullName") %> />
-                                                    
-                                                 </td></tr>
-                                           </AlternatingItemTemplate>
-                                        <FooterTemplate>
-                                            </table>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
+                                    <asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserID"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
                                 </div>
                             </td>
                         </tr>

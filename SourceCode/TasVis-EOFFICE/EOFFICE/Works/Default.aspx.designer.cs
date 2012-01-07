@@ -95,6 +95,15 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.TextBox txtContent;
         
         /// <summary>
+        /// lblSatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSatus;
+        
+        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>
@@ -131,13 +140,13 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.RadioButton rdoPrior3;
         
         /// <summary>
-        /// rptUserProcess control.
+        /// CheckBoxBind control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptUserProcess;
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxBind;
         
         /// <summary>
         /// btnSave2 control.

@@ -96,6 +96,13 @@
     <Compile Include="Users\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Works\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,6 +179,7 @@
     <Content Include="obj\Release\EOFFICE.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Release\EOFFICE.dll" />
     <Content Include="obj\Release\EOFFICE.pdb" />
+    <Content Include="Users\Edit.aspx" />
     <Content Include="Works\Default.aspx" />
   </ItemGroup>
   <ItemGroup>

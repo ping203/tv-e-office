@@ -1264,7 +1264,7 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
 		END						
-		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblWork'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
 	END
@@ -1274,6 +1274,7 @@ BEGIN
 	END
 END
 GO
+exec sp_tblWork_get @WorkID=0
 /* table comment */
 IF OBJECT_ID('tblComment','U') IS NOT NULL
 	DROP TABLE tblComment

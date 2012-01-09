@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
-<script type="text/javascript">
+
+    <script type="text/javascript">
     $(document).ready(function() {
         $("#listUserProcess").hide();
         $("#btnHide").click(function() {
@@ -16,7 +17,8 @@
                 	<div class="nav-function">
                     	<ul>
                         	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
-                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
+                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:Button></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
@@ -38,7 +40,7 @@
                         </tr>
                         <tr>
                         	<td>Ngày bắt đầu: <span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required datepicker"></asp:TextBox>(dd/mm/yyyy)</td>
+                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required date datepicker"></asp:TextBox>(dd/mm/yyyy)</td>
                             <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required date"></asp:TextBox>(dd/mm/yyyy)</td>                            
                         </tr>
                         <tr>
@@ -52,7 +54,6 @@
                         <tr>
                         	<td>File đính kèm: </td>
                             <td colspan="3">
-                                <asp:Label runat="server" ID="lblSatus" Text="bnbn"></asp:Label>
                                 <asp:FileUpload ID="FileUpload1" runat="server" class="multi" />
                             </td>
                         </tr>
@@ -67,7 +68,7 @@
                             <td colspan="3">
                                 <input type="button" id="btnHide" value="Chọn người nhận việc" style="margin-bottom:10px" />
                                 <div id="listUserProcess" style="width:100%" >
-                                    <asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserID"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
+                                    <asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
                                 </div>
                             </td>
                         </tr>
@@ -75,8 +76,10 @@
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" CssClass="btn" ></asp:Button></li>
-                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" ></asp:Button></li>
+                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" CssClass="btn" 
+                                    onclick="btnSave_Click" ></asp:Button></li>
+                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:Button></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                             

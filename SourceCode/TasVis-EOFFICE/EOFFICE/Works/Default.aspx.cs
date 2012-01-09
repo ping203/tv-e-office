@@ -57,6 +57,7 @@ namespace EOFFICE.Works
             BAttach Bobj = new BAttach();
             HttpFileCollection hfc = Request.Files;
             int n = hfc.Count;
+            string listFile = string.Empty;
             try
             {
                 // Get the HttpFileCollection
@@ -72,7 +73,7 @@ namespace EOFFICE.Works
                         obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName) + str + System.IO.Path.GetExtension(hpf.FileName);
                         obj.Description = "";
                         Bobj.Add(obj);
-                        lblSatus.Text += Bobj.GetLast().FirstOrDefault().AttackID.ToString() + ",";
+                        listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
                     }
                 }
             }
@@ -80,7 +81,8 @@ namespace EOFFICE.Works
             {
 
             }
-            lblSatus.Text += Bobj.GetLast().FirstOrDefault().AttackID.ToString() + ",";
+            
+            
             //Lấy danh sách người thực hiện công việc
             string ListUserProcess = string.Empty;
             foreach (ListItem item in CheckBoxBind.Items)
@@ -91,14 +93,33 @@ namespace EOFFICE.Works
                     ListUserProcess += item.Value.ToString()+",";
                 }
             }
+            //Lấy mức độ ưu tiên
+            string Priority = string.Empty;
+            if (rdoPrior1.Checked == true)
+            {
+                Priority = "Rất quan trọng";
+            }
+            else if (rdoPrior2.Checked == true)
+            {
+                Priority = "Quan trọng";
+            }
+            else
+            {
+                Priority = "Bình thường";
+            }
 
             //Lưu công việc mới
             OWork objWork = new OWork();
             objWork.Name = txtWorkName.Text;
             objWork.Description = txtDescription.Text;
             objWork.Content = txtContent.Text;
+            objWork.Attachs = listFile;
             objWork.IDUserCreate = 1;    //--Lấy IDUserCreate sau
+            objWork.IDUserProcess = ListUserProcess;
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
+            objWork.CreateDate = CurrentTime;
+            objWork.Status = "Chưa giao";
+            objWork.Priority = Priority;
             objWork.StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
             objWork.EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
 
@@ -112,6 +133,13 @@ namespace EOFFICE.Works
             CheckBoxBind.DataBind();
         }
 
-        
+        protected void btnForward_Click(object sender, EventArgs e)
+        {
+            //Gửi thông báo tới người thực hiện công việc
+
+
+            //Chuyển sang trang giao việc
+            Response.Redirect("WorkAssignment.aspx");
+        }
     }
 }

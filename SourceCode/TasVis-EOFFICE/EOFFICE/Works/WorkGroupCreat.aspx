@@ -44,6 +44,7 @@
                     <div class="list" id="list-congvieccanlam">
             	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM CÔNG VIỆC</h2>
             	        <asp:LinkButton ID="btnDelete" runat="server" Text="Xóa nhóm công việc" onclick="btnDelete_Click" CssClass="link-btn"></asp:LinkButton>	
+            	        <br />
                         <asp:GridView ID="grvWorkGroup" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" onrowcreated="grvWorkGroup_RowCreated" 
                                     onrowdatabound="grvWorkGroup_RowDataBound" 

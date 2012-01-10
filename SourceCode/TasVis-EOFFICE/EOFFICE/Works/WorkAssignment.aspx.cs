@@ -14,6 +14,9 @@ using DataAccess.Common;
 using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.Data.SqlClient;
+using System.Collections.Specialized;
+using System.Web.Configuration;
+using System.Collections.Generic;
 
 namespace EOFFICE.Works
 {
@@ -25,6 +28,7 @@ namespace EOFFICE.Works
             {
                 ddlWorkGroup_Load();
                 grvWork_Load();
+                ddlWork_Load();
             }
         }
 
@@ -39,13 +43,17 @@ namespace EOFFICE.Works
             ddlWorkGroup.DataBind();
             ddlWorkGroup.Items.Insert(0, lit);
         }
-
+        /// <summary>
+        /// Lấy danh sách công việc giao của người dùng đang tạo công việc
+        /// </summary>
+        
         protected void grvWork_Load()
         {
             BWork objWork = new BWork();
-            grvWork.DataSource = objWork.GetWork(0);
+            grvWork.DataSource = objWork.Get(1, "CHUA_GIAO").Union(objWork.Get(1, "DANG_THUC_HIEN"));
             grvWork.DataBind();
         }
+
 
         protected void grvWork_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -60,6 +68,7 @@ namespace EOFFICE.Works
             }
 
         }
+
         /// <summary>
         /// Hàm lấy ra danh sách người xử lý công việc với chuỗi IDUserProcess truyền vào
         /// </summary>
@@ -78,6 +87,7 @@ namespace EOFFICE.Works
             list = list.Remove(list.Length - 2);
             return list;
         }
+
         /// <summary>
         /// Hàm ghép chuỗi thời gian bắt đầu và kết thúc
         /// </summary>
@@ -93,6 +103,23 @@ namespace EOFFICE.Works
             time += " - " + objWork.EndProcess.Day.ToString() + "/" + objWork.EndProcess.Month.ToString() + "/" + objWork.EndProcess.Year.ToString();
             return time;
         }
+
+        /// <summary>
+        /// Lấy ra trạng thái công việc giao tương ứng với công việc
+        /// </summary>
+        /// <param name="WorkID"></param>
+        /// <returns></returns>
+        protected string BindTrangThai(string WorkID)
+        {
+            string status = string.Empty;
+            BWork obj = new BWork();
+            OWork objWork = new OWork();
+            objWork = obj.GetWork(int.Parse(WorkID)).First();
+            NameValueCollection appSettings = WebConfigurationManager.AppSettings as NameValueCollection;
+            status = appSettings[objWork.Status];
+            return status;
+        }
+
 
         protected string BindNgayTao(string WorkID)
         {
@@ -110,6 +137,46 @@ namespace EOFFICE.Works
                 e.Row.CssClass = "normal";
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowState == DataControlRowState.Alternate)
                 e.Row.CssClass = "altenate";
+        }
+
+        protected void ddlWork_Load()
+        {
+            NameValueCollection appSettings =WebConfigurationManager.AppSettings as NameValueCollection;
+            string str = appSettings["CHUA_GIAO"];
+            string str1 = appSettings["DANG_THUC_HIEN"];
+            ListItem[] lit = new ListItem[3];
+            lit[0]= new ListItem("Tất cả","0");
+            lit[1] = new ListItem(str, "CHUA_GIAO");
+            lit[2] = new ListItem(str1,"DANG_THUC_HIEN");
+            ddlWork.Items.Add(lit[0]);
+            ddlWork.Items.Add(lit[1]);
+            ddlWork.Items.Add(lit[2]);
+        }
+
+        protected void btnTim_Click(object sender, EventArgs e)
+        {
+            BWork objWork = new BWork();
+
+            string name = txtWorkName.Text;
+            string UserProcess = txtUserProcess.Text;
+
+            if (ddlWorkGroup.SelectedValue == "0")
+            {
+                if (ddlWork.SelectedValue == "0")
+                {
+                    grvWork.DataSource = objWork.Get(1, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(1, name, "DANG_THUC_HIEN", UserProcess));                   
+                }
+                else
+                {
+                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(), UserProcess);
+                }
+            }
+            else
+            {
+                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(), int.Parse(ddlWorkGroup.SelectedValue), UserProcess);
+            }
+            
+            grvWork.DataBind();
         }
     }
 }

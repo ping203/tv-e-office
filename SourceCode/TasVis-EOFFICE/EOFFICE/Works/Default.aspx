@@ -41,7 +41,7 @@
                         <tr>
                         	<td>Ngày bắt đầu: <span class="rq">*</span></td>
                             <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required date datepicker"></asp:TextBox>(dd/mm/yyyy)</td>
-                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required date"></asp:TextBox>(dd/mm/yyyy)</td>                            
+                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required date datepicker"></asp:TextBox>(dd/mm/yyyy)</td>                            
                         </tr>
                         <tr>
                         	<td>Nội dung tóm tắt: </td>

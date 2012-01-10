@@ -86,6 +86,15 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Button btnTim;
         
         /// <summary>
+        /// lblThongBao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblThongBao;
+        
+        /// <summary>
         /// grvWork control.
         /// </summary>
         /// <remarks>
@@ -93,15 +102,6 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvWork;
-        
-        /// <summary>
-        /// txt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txt;
         
         /// <summary>
         /// Button1 control.

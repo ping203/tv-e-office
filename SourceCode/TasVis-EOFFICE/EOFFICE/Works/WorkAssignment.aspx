@@ -20,9 +20,7 @@
                     	    <td>Xem công việc:</td>
                     	    <td>
                     	        <asp:DropDownList runat="server" ID="ddlWork">
-                    	            <asp:ListItem Text="Tất cả" Value="Tất cả"></asp:ListItem>
-                    	            <asp:ListItem Text="Chưa giao" Value="Chưa giao"></asp:ListItem>
-                    	            <asp:ListItem Text="Đang thực hiện" Value="Đang thực hiện"></asp:ListItem>
+                    	            
                     	        </asp:DropDownList>
                     	    </td>
                     	    <td>Nhóm công việc:</td>
@@ -43,9 +41,12 @@
                     	<tr>
                     	    <td></td>
                     	    <td>
-                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" />
+                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" onclick="btnTim_Click" />
                     	</tr>
                     </table>
+                    <br />
+                    <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH CÔNG VIỆC GIAO</h2>
+                    <asp:Label runat="server" ID="lblThongBao" Text=""></asp:Label>
                     <br />
                         <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
                             CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated" 
@@ -83,18 +84,21 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Trạng thái</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%#BindTrangThai(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
+                                    </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Ngày tạo</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#BindNgayTao(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
+                                        <asp:Label ID="Label3" runat="server" Text='<%#BindNgayTao(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />
                         </asp:GridView>
-                        <asp:Label ID="txt" runat="server" Text="abc"></asp:Label>
+                        
                     </div>
                     <div class="nav-function">
                     	<ul>

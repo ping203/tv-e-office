@@ -127,18 +127,8 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OWork> Get(int WorkID,string Name)
-        {
-            SqlParameter[] sqlPara = new SqlParameter[2];
-            sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
-            sqlPara[0].Value = WorkID;
-            sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
-            sqlPara[1].Value = Name;
-            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
-            IList<OWork> list = new List<OWork>();
-            list = Common.Common.ConvertTo<OWork>(tbl);
-            return list;
-        }
+        
+
         public IList<OWork> Get(int IDUserCreate)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];
@@ -149,5 +139,26 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
+
+        /// <summary>
+        /// Hàm lấy ra danh sách công việc tương ứng với người tạo và trạng thái công việc giao
+        /// </summary>
+        /// <param name="IDUserCreate"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public IList<OWork> Get(int IDUserCreate,string Status)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0].Value = IDUserCreate;
+            sqlPara[0] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[0].Value = Status;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
+
+        
     }
 }

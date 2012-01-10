@@ -159,6 +159,60 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        
+        /// <summary>
+        /// Trả lại danh sách công việc tương ứng với người tạo, tên công việc
+        /// Trạng thái công việc giao, nhóm công việc và người thực hiện
+        /// </summary>
+        /// <param name="IDUserCreate"></param>
+        /// <param name="Name"></param>
+        /// <param name="Status"></param>
+        /// <param name="IDWorkGroup"></param>
+        /// <param name="IDUserProcess"></param>
+        /// <returns></returns>
+        public IList<OWork> Get(int IDUserCreate,string Name, string Status, int IDWorkGroup,string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[5];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0].Value = IDUserCreate;
+            sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[1].Value = Name;
+            sqlPara[2] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[2].Value = Status;
+            sqlPara[3] = new SqlParameter("@IDWorkGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDWorkGroup;
+            sqlPara[4] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[4].Value = IDUserProcess;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
+
+        /// <summary>
+        /// Trả lại danh sách công việc tương ứng với người tạo, tên công việc
+        /// Trạng thái công việc giao, và người thực hiện
+        /// </summary>
+        /// <param name="IDUserCreate"></param>
+        /// <param name="Name"></param>
+        /// <param name="Status"></param>
+        /// <param name="IDWorkGroup"></param>
+        /// <param name="IDUserProcess"></param>
+        /// <returns></returns>
+        public IList<OWork> Get(int IDUserCreate, string Name, string Status, string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0].Value = IDUserCreate;
+            sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[1].Value = Name;
+            sqlPara[2] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[2].Value = Status;
+            sqlPara[3] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[3].Value = IDUserProcess;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
     }
 }

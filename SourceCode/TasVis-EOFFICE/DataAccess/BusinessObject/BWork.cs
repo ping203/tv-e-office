@@ -151,8 +151,8 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[2];
             sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
             sqlPara[0].Value = IDUserCreate;
-            sqlPara[0] = new SqlParameter("@Status", SqlDbType.VarChar);
-            sqlPara[0].Value = Status;
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
             DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
             IList<OWork> list = new List<OWork>();
             list = Common.Common.ConvertTo<OWork>(tbl);

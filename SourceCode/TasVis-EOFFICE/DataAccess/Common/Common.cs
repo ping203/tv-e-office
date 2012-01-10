@@ -125,22 +125,6 @@ namespace DataAccess.Common
 
             return table;
         }
-
-        /// <summary>
-        /// Hàm nối 2 list
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="firstList"></param>
-        /// <param name="secondList"></param>
-        /// <returns></returns>
-        public static List<T> MergeListCollections<T>(List<T> firstList, List<T> secondList)
-        {
-            List<T> mergedList = new List<T>();
-            mergedList.InsertRange(0, firstList);
-            mergedList.InsertRange(mergedList.Count, secondList);
-            return mergedList;
-        }
-
         
     }
 }

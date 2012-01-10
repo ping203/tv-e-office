@@ -330,51 +330,51 @@ BEGIN
 	SET @Update=' UserName='+cast(@UserName AS NVARCHAR)
 	IF @Password IS NOT NULL AND @Password<>''
 	BEGIN
-		SET @Update=@Update+',Password='+cast(@Password AS NVARCHAR)
+		SET @Update=@Update+',Password='''+@Password+''''
 	END
 	IF @FullName IS NOT NULL AND @FullName<>''
 	BEGIN
-		SET @Update=@Update+',FullName='+cast(@FullName AS NVARCHAR)
+		SET @Update=@Update+',FullName ='''+@FullName+''''
 	END
 	IF @Email IS NOT NULL AND @Email<>''
 	BEGIN
-		SET @Update=@Update+',Email='+cast(@Email AS NVARCHAR)
+		SET @Update=@Update+',Email ='''+@Email+''''
 	END
 	IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
 	BEGIN
-		SET @Update=@Update+',PhoneNumber='+cast(@PhoneNumber AS NVARCHAR)
+		SET @Update=@Update+',PhoneNumber ='''+@PhoneNumber+''''
 	END
 	IF @Tel IS NOT NULL AND @Tel<>''
 	BEGIN
-		SET @Update=@Update+',Tel='+cast(@Tel AS NVARCHAR)
+		SET @Update=@Update+',Tel ='''+@Tel+''''
 	END
 	IF @Gender IS NOT NULL AND @Gender<>''
 	BEGIN
-		SET @Update=@Update+',Gender='+cast(@Gender AS NVARCHAR)
+		SET @Update=@Update+',Gender='''+@Gender+''''
 	END
 	IF @BirthDay IS NOT NULL AND @BirthDay<>''
 	BEGIN
-		SET @Update=@Update+',BirthDay='+cast(@BirthDay AS NVARCHAR)
+		SET @Update=@Update+',BirthDay='''+@BirthDay+''''
 	END
 	IF @Address IS NOT NULL AND @Address<>''
 	BEGIN
-		SET @Update=@Update+',Address='+cast(@Address AS NVARCHAR)
+		SET @Update=@Update+',Address ='''+@Address+''''
 	END
 	IF @Position IS NOT NULL AND @Position<>''
 	BEGIN
-		SET @Update=@Update+',Position='+cast(@Position AS NVARCHAR)
+		SET @Update=@Update+',Position ='''+@Position+''''
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
+		SET @Update=@Update+',Status='''+@Status+''''
 	END
-	IF @IDDepartment IS NOT NULL AND @IDDepartment<>''
+	IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
 	BEGIN
-		SET @Update=@Update+',IDDepartment='+cast(@IDDepartment AS NVARCHAR)
+		SET @Update=@Update+',IDDepartment='+cast(@IDDepartment AS VARCHAR)
 	END
-	IF @IDGroup IS NOT NULL AND @IDGroup<>''
+	IF @IDGroup IS NOT NULL AND @IDGroup<>0
 	BEGIN
-		SET @Update=@Update+',IDGroup='+cast(@IDGroup AS NVARCHAR)
+		SET @Update=@Update+',IDGroup='+cast(@IDGroup AS VARCHAR)
 	END
 	EXEC('UPDATE tblUser SET'+@Update+' WHERE UserName=@UserName')
 END
@@ -439,11 +439,11 @@ BEGIN
 		END
 		IF @Gender IS NOT NULL AND @Gender<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Gender ='+cast(@Gender AS VARCHAR)
+			SET @DieuKien=@DieuKien+' AND Gender ='''+@Gender+''''
 		END
 		IF @BirthDay IS NOT NULL AND @BirthDay<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND BirthDay='+cast(@BirthDay AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND BirthDay='''+@BirthDay+''''
 		END
 		IF @Address IS NOT NULL AND @Address<>''
 		BEGIN
@@ -455,17 +455,17 @@ BEGIN
 		END
 		IF @Status IS NOT NULL AND @Status<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND Status='''+@Status+''''
 		END
 		IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND IDDepartment='+cast(@IDDepartment AS NVARCHAR)
 		END
-		IF @IDGroup IS NOT NULL AND @IDGroup<>''
+		IF @IDGroup IS NOT NULL AND @IDGroup<>0
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
 		END
-		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblUser'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
@@ -643,7 +643,7 @@ BEGIN
 		END
 		IF @Fax IS NOT NULL AND @Fax<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Name Fax(N''%'+@Fax+'%'')'
+			SET @DieuKien=@DieuKien+' AND Fax LIKE(N''%'+@Fax+'%'')'
 		END
 		IF @Email IS NOT NULL AND @Email<>''
 		BEGIN
@@ -653,7 +653,7 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND OfficalParent='+cast(@OfficalParent AS NVARCHAR)
 		END
-		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblOffical'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
@@ -827,71 +827,71 @@ BEGIN
 	SET @Update=' DocumentNumber='+cast(@DocumentNumber AS NVARCHAR)
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=@Update+',Name='+cast(@Name AS NVARCHAR)
+		SET @Update=@Update+',Name='''+@Name+''''
 	END
 	IF @Excerpt IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Excerpt='+cast(@Excerpt AS NVARCHAR)
+		SET @Update=@Update+',Excerpt='''+@Excerpt+''''
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
+		SET @Update=@Update+',Content='''+@Content+''''
 	END
 	IF @PublishDate IS NOT NULL AND @PublishDate<>''
 	BEGIN
-		SET @Update=@Update+',PublishDate='+cast(@PublishDate AS NVARCHAR)
+		SET @Update=@Update+',PublishDate='''+@PublishDate+''''
 	END
-	IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
+	IF @PublishOffical IS NOT NULL AND @PublishOffical<>0
 	BEGIN
 		SET @Update=@Update+',PublishOffical='+cast(@PublishOffical AS NVARCHAR)
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
+		SET @Update=@Update+',Attachs='''+@Attachs+''''
 	END
-	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
+	IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>0
 	BEGIN
 		SET @Update=@Update+',IDDocumentKind='+cast(@IDDocumentKind AS NVARCHAR)
 	END
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=@Update+',CreateDate='+cast(@CreateDate AS NVARCHAR)
+		SET @Update=@Update+',CreateDate='''+@CreateDate+''''
 	END
 	IF @UserProcess IS NOT NULL AND @UserProcess<>''
 	BEGIN
-		SET @Update=@Update+',UserProcess='+cast(@UserProcess AS NVARCHAR)
+		SET @Update=@Update+',UserProcess='''+@UserProcess+''''
 	END
 	IF @UserComments IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',UserComments='+cast(@UserComments AS NVARCHAR)
+		SET @Update=@Update+',UserComments='''+@UserComments+''''
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=@Update+',StartProcess='+cast(@StartProcess AS NVARCHAR)
+		SET @Update=@Update+',StartProcess='''+@StartProcess+''''
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',EndProcess='+cast(@EndProcess AS NVARCHAR)
+		SET @Update=@Update+',EndProcess='''+@EndProcess+''''
 	END
 	IF @SendDate IS NOT NULL AND @SendDate<>''
 	BEGIN
-		SET @Update=@Update+',SendDate='+cast(@SendDate AS NVARCHAR)
+		SET @Update=@Update+',SendDate='''+@SendDate+''''
 	END
 	IF @ReceiveDate IS NOT NULL AND @ReceiveDate<>''
 	BEGIN
-		SET @Update=@Update+',ReceiveDate='+cast(@ReceiveDate AS NVARCHAR)
+		SET @Update=@Update+',ReceiveDate='''+@ReceiveDate+''''
 	END
 	IF @SendOfficals IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',SendOfficals='+cast(@SendOfficals AS NVARCHAR)
+		SET @Update=@Update+',SendOfficals='''+@SendOfficals+''''
 	END
 	IF @Priority IS NOT NULL AND @Priority<>''
 	BEGIN
-		SET @Update=@Update+',Priority='+cast(@Priority AS NVARCHAR)
+		SET @Update=@Update+',Priority='''+@Priority+''''
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
+		SET @Update=@Update+',Status='''+@Status+''''
 	END
 	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
 END
@@ -944,7 +944,7 @@ BEGIN
 		SET @DieuKien=' WHERE (1=1)'
 		IF @DocumentNumber IS NOT NULL AND @DocumentNumber<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND DocumentNumber ='+cast(@DocumentNumber AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND DocumentNumber ='''+@DocumentNumber+''''
 		END
 		IF @Name IS NOT NULL AND @Name<>''
 		BEGIN
@@ -960,41 +960,41 @@ BEGIN
 		END
 		IF @FromPublishDate IS NOT NULL AND @FromPublishDate<>'' AND @ToPublishDate IS NOT NULL AND @ToPublishDate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND PublishDate BETWEEN '+cast(@FromPublishDate AS NVARCHAR)+' AND '+cast(@ToPublishDate AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND PublishDate BETWEEN '''+@FromPublishDate+''' AND '''+@ToPublishDate+''''
 		END
-		IF @PublishOffical IS NOT NULL AND @PublishOffical<>''
+		IF @PublishOffical IS NOT NULL AND @PublishOffical<>0
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND PublishOffical ='+cast(@PublishOffical AS NVARCHAR)
 		END
-		IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>''
+		IF @IDDocumentKind IS NOT NULL AND @IDDocumentKind<>0
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND IDDocumentKind='+cast(@IDDocumentKind AS NVARCHAR)
 		END
 		IF @FromCreateDate IS NOT NULL AND @FromCreateDate<>'' AND @ToCreateDate IS NOT NULL AND @ToCreateDate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '+cast(@FromCreateDate AS NVARCHAR)+' AND '+cast(@ToCreateDate AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '''+@FromCreateDate+''' AND '''+@ToCreateDate+''''
 		END
 		IF @UserProcess IS NOT NULL AND @UserProcess<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND UserProcess='+cast(@UserProcess AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND UserProcess='''+@UserProcess+''''
 		END
 		IF @UserComments IS NOT NULL AND @UserComments<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND UserComments='+cast(@UserComments AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND UserComments='''+@UserComments+''''
 		END
 		IF @FromReceiveDate IS NOT NULL AND @FromReceiveDate<>'' AND @ToReceiveDate IS NOT NULL AND @ToReceiveDate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND ReceiveDate BETWEEN '+cast(@FromReceiveDate AS NVARCHAR)+' AND '+cast(@ToReceiveDate AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND ReceiveDate BETWEEN '''+@FromReceiveDate+''' AND '''+@ToReceiveDate+''''
 		END
 		IF @Priority IS NOT NULL AND @Priority<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Priority='+cast(@Priority AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND Priority='''+@Priority+''''
 		END
 		IF @Status IS NOT NULL AND @Status<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND Status='''+@Status+''''
 		END		
-		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblDocument'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
 	END
@@ -1141,23 +1141,23 @@ BEGIN
 	SET @Update=' IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=@Update+',Name='+cast(@Name AS NVARCHAR)
+		SET @Update=@Update+',Name='''+@Name+''''
 	END
 	IF @Description IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Decription='+cast(@Description AS NVARCHAR)
+		SET @Update=@Update+',Decription='''+@Description+''''
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
+		SET @Update=@Update+',Content='''+@Content+''''
 	END
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
+		SET @Update=@Update+',Attachs='''+@Attachs+''''
 	END
 	IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 	BEGIN
-		SET @Update=@Update+',IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
+		SET @Update=@Update+',IDUserProcess='''+@IDUserProcess+''''
 	END
 	IF @IDWorkGroup IS NOT NULL AND @IDWorkGroup<>0
 	BEGIN
@@ -1165,23 +1165,23 @@ BEGIN
 	END	
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=@Update+',CreateDate='+cast(@CreateDate AS NVARCHAR)
+		SET @Update=@Update+',CreateDate='''+@CreateDate+''''
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=@Update+',StartProcess='+cast(@StartProcess AS NVARCHAR)
+		SET @Update=@Update+',StartProcess='''+@StartProcess+''''
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',EndProcess='+cast(@EndProcess AS NVARCHAR)
+		SET @Update=@Update+',EndProcess='''+@EndProcess+''''
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
-		SET @Update=@Update+',Status='+cast(@Status AS NVARCHAR)
+		SET @Update=@Update+',Status='''+@Status+''''
 	END
 	IF @Priority IS NOT NULL AND @Priority<>''
 	BEGIN
-		SET @Update=@Update+',Priority='+cast(@Priority AS NVARCHAR)
+		SET @Update=@Update+',Priority='''+@Priority+''''
 	END	
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
@@ -1242,7 +1242,7 @@ BEGIN
 		END
 		IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND IDUserProcess='+cast(@IDUserProcess AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND IDUserProcess='''+@IDUserProcess+''''
 		END
 		IF @IDWorkGroup IS NOT NULL AND @IDWorkGroup<>0
 		BEGIN
@@ -1250,19 +1250,19 @@ BEGIN
 		END
 		IF @FromCreateDate IS NOT NULL AND @FromCreateDate<>'' AND @ToCreateDate IS NOT NULL AND @ToCreateDate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '+cast(@FromCreateDate AS NVARCHAR)+' AND '+cast(@ToCreateDate AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND CreateDate BETWEEN '''+@FromCreateDate+''' AND '''+@ToCreateDate+''''
 		END			
 		IF @StartProcess IS NOT NULL AND @StartProcess<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND (StartProcess=@StartProcess OR StartProcess<@StartProcess)'
+			SET @DieuKien=@DieuKien+' AND StartProcess>='''+@StartProcess+''''
 		END						
 		IF @Priority IS NOT NULL AND @Priority<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Priority='+cast(@Priority AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND Priority='''+@Priority+''''
 		END		
 		IF @Status IS NOT NULL AND @Status<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Status='+cast(@Status AS NVARCHAR)
+			SET @DieuKien=@DieuKien+' AND Status='''+@Status+''''
 		END						
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 			FROM tblWork'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
@@ -1329,15 +1329,15 @@ BEGIN
 	SET @Update=' IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
 	IF @Title IS NOT NULL AND @Title<>''
 	BEGIN
-		SET @Update=@Update+',Title='+cast(@Title AS NVARCHAR)
+		SET @Update=@Update+',Title='''+@Title+''''
 	END
 	IF @Content IS NOT NULL AND @Content<>''
 	BEGIN
-		SET @Update=@Update+',Content='+cast(@Content AS NVARCHAR)
+		SET @Update=@Update+',Content='''+@Content+''''
 	END		
 	IF @IDDocument IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',IDDocument='+cast(@IDDocument AS NVARCHAR)
+		SET @Update=@Update+',IDDocument='''+@IDDocument+''''
 	END	
 	IF @IDWork IS NOT NULL
 	BEGIN
@@ -1345,7 +1345,7 @@ BEGIN
 	END	
 	IF @Attachs IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Attachs='+cast(@Attachs AS NVARCHAR)
+		SET @Update=@Update+',Attachs='''+@Attachs+''''
 	END
 	EXEC('UPDATE tblComment SET'+@Update+' WHERE Comment='+@CommentID)	
 END
@@ -1386,7 +1386,7 @@ BEGIN
 		END
 		IF @IDDocument IS NOT NULL AND @IDDocument<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+'IDDocument='+cast(@IDDocument AS NVARCHAR)
+			SET @DieuKien=@DieuKien+'IDDocument='''+@IDDocument+''''
 		END
 		IF @IDWork IS NOT NULL AND @IDWork<>0
 		BEGIN

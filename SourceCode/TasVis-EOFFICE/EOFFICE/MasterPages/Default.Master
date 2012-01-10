@@ -118,7 +118,7 @@
                         	<a href="../Works/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Create.png" runat="server" /></span>Tạo mới công việc</a>
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc cần hoàn thành</a>
+                        	<a href="../Works/WorkReceived.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc cần hoàn thành</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/OK.png" runat="server" /></span>Công việc đã kết thúc</a>

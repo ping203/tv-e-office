@@ -173,7 +173,7 @@ namespace EOFFICE.Works
             }
             else
             {
-                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(), int.Parse(ddlWorkGroup.SelectedValue), UserProcess);
+                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(),Int32.Parse( ddlWorkGroup.SelectedValue.ToString()), UserProcess);
             }
             
             grvWork.DataBind();

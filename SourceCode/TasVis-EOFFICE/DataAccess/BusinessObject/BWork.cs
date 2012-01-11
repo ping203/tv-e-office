@@ -107,6 +107,27 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblWork_update", sqlPara);
         }
 
+        /// <summary>
+        /// Update trạng thái công việc
+        /// </summary>
+        /// <param name="WorkID"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public bool Update(int WorkID, string Status, int IDUserCreate)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
+            sqlPara[0].Value = WorkID;
+
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
+
+            sqlPara[2] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[2].Value = IDUserCreate;
+
+            return RunProcudure("sp_tblWork_update", sqlPara);
+        }
+
         public bool Delete(int WorkID)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];
@@ -126,8 +147,6 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
-
-        
 
         public IList<OWork> Get(int IDUserCreate)
         {

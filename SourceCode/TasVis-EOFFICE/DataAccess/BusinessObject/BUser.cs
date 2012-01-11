@@ -77,7 +77,7 @@ namespace DataAccess.BusinessObject
              sqlPara[6] = new SqlParameter("@Gender", SqlDbType.VarChar);
              sqlPara[6].Value = obj.Gender;
              sqlPara[7] = new SqlParameter("@BirthDay", SqlDbType.DateTime);
-             sqlPara[7].Value = obj.Birthday;
+             sqlPara[7].Value = obj.BirthDay;
              sqlPara[8] = new SqlParameter("@Address", SqlDbType.NVarChar);
              sqlPara[8].Value = obj.Address;
              sqlPara[9] = new SqlParameter("@Position", SqlDbType.NVarChar);
@@ -138,6 +138,21 @@ namespace DataAccess.BusinessObject
              sqlPara[11] = new SqlParameter("@IDGroup", SqlDbType.Int);
              sqlPara[11].Value = IDGroup;
 
+             return RunProcudure("sp_tblUser_update", sqlPara);
+         }
+         /// <summary>
+         /// Cập nhật trạng thái người dùng
+         /// </summary>
+         /// <param name="UserName">Tài khoản</param>
+         /// <param name="Status">Trạng thái cần cập nhật</param>
+         /// <returns></returns>
+         public bool UpdateStatus(string UserName,string Status)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[2];
+             sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
+             sqlPara[0].Value = UserName;
+             sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+             sqlPara[1].Value = Status;
              return RunProcudure("sp_tblUser_update", sqlPara);
          }
     }

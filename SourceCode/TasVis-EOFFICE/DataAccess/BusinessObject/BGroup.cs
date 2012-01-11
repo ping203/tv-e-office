@@ -72,5 +72,17 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OGroup>(tbl);
             return list;
         }
+
+        public IList<OGroup> Get(string Name)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[0].Value = Name;
+
+            DataTable tbl = RunProcedureGet("sp_tblGroup_get", sqlPara);
+            IList<OGroup> list = new List<OGroup>();
+            list = Common.Common.ConvertTo<OGroup>(tbl);
+            return list;
+        }
     }
 }

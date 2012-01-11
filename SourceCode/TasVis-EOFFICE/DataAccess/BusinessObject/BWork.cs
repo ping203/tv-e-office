@@ -233,5 +233,23 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
+
+        /// <summary>
+        /// Trả lại danh sách công việc mà người dùng phải thực hiện
+        /// </summary>
+        /// <param name="IDUserProcess"></param>
+        /// <returns></returns>
+        public IList<OWork> Get(string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            
+            sqlPara[0] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[0].Value = IDUserProcess;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
+       
     }
 }

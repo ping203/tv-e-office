@@ -84,7 +84,7 @@ namespace EOFFICE.Works
             
             
             //Lấy danh sách người thực hiện công việc
-            string ListUserProcess = string.Empty;
+            string ListUserProcess = ",";
             foreach (ListItem item in CheckBoxBind.Items)
             {
                 

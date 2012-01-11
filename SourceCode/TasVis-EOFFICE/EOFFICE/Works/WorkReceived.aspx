@@ -2,15 +2,10 @@
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
     <div class="list wp-form" id="WorkAssignment">
-            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc giao</h2>
+            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc nhận</h2>
                 
                 	<div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnDung" runat="server" Text="Dừng xử lý" CssClass="btn"></asp:Button></li>
-                            <li><asp:Button ID="btnTiepTuc" runat="server" Text="Tiếp tục xử lý" CssClass="btn" 
-                                     ></asp:Button></li>
-                            <li><asp:Button ID="btnXoa" runat="server" Text="Xóa" CssClass="btn" 
-                                     ></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
@@ -33,34 +28,24 @@
                     	    <td>
                     	        <asp:TextBox runat="server" ID="txtWorkName"></asp:TextBox>
                     	    </td>
-                    	    <td>Người xử lý:</td>
+                    	    <td>Người giao việc:</td>
                     	    <td>
-                    	        <asp:TextBox runat="server" ID="txtUserProcess"></asp:TextBox>
+                    	        <asp:TextBox runat="server" ID="txtUserCreate"></asp:TextBox>
                     	    </td>
                     	</tr>
                     	<tr>
                     	    <td></td>
                     	    <td>
-                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" onclick="btnTim_Click" />
+                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" />
                     	</tr>
                     </table>
                     <br />
-                    <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH CÔNG VIỆC GIAO</h2>
+                    <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH CÔNG VIỆC NHẬN</h2>
                     <asp:Label runat="server" ID="lblThongBao" Text=""></asp:Label>
                     <br />
                         <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
-                            CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated" 
-                            onrowdatabound="grvWork_RowDataBound" >
+                            CssClass="tbl-list" Width="100%"  >
                             <Columns>
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
-                                        <asp:CheckBox ID="CheckAll" runat="server" />
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="MyCheckBox" runat="server" />
-                                    </ItemTemplate>
-                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
-                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="STT">
                                    <ItemTemplate>
                                           <%# Container.DataItemIndex + 1 %>
@@ -70,28 +55,35 @@
                                 <asp:BoundField DataField="Name" HeaderText="Tên công việc">
                                 </asp:BoundField>
                                 <asp:TemplateField>
-                                    <HeaderTemplate>Người xử lý</HeaderTemplate>
+                                    <HeaderTemplate>Người tạo việc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#BindNguoiXuLy(DataBinder.Eval(Container.DataItem,"IDUserProcess").ToString()) %>'></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" ></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderTemplate>Ngày bắt đầu - Hạn kết thúc</HeaderTemplate>
+                                    <HeaderTemplate>Người chuyển việc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#BindThoiGian(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" ></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderTemplate>Trạng thái</HeaderTemplate>
+                                    <HeaderTemplate>Hạn kết thúc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%#BindTrangThai(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
+                                        <asp:Label ID="Label2" runat="server" ></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
-                                    <HeaderTemplate>Ngày tạo</HeaderTemplate>
+                                    <HeaderTemplate>Trạng thái</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%#BindNgayTao(DataBinder.Eval(Container.DataItem,"WorkID").ToString() ) %>'></asp:Label>
+                                        <asp:Label ID="Label3" runat="server" ></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Ngày giao</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label4" runat="server" ></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
@@ -102,11 +94,6 @@
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="Button1" runat="server" Text="Dừng xử lý" CssClass="btn"></asp:Button></li>
-                            <li><asp:Button ID="Button2" runat="server" Text="Tiếp tục xử lý" CssClass="btn" 
-                                     ></asp:Button></li>
-                            <li><asp:Button ID="Button3" runat="server" Text="Xóa" CssClass="btn" 
-                                     ></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>

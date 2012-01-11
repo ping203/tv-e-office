@@ -14,6 +14,15 @@ namespace EOFFICE.Works {
     public partial class WorkAssignment {
         
         /// <summary>
+        /// btnGiaoViec control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGiaoViec;
+        
+        /// <summary>
         /// btnDung control.
         /// </summary>
         /// <remarks>
@@ -104,30 +113,39 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.GridView grvWork;
         
         /// <summary>
-        /// Button1 control.
+        /// btnGiaoViec2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnGiaoViec2;
         
         /// <summary>
-        /// Button2 control.
+        /// btnDung2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnDung2;
         
         /// <summary>
-        /// Button3 control.
+        /// btnTiepTuc2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btnTiepTuc2;
+        
+        /// <summary>
+        /// btnXoa2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnXoa2;
     }
 }

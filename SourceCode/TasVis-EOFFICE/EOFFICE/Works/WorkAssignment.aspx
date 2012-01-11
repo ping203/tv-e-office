@@ -6,10 +6,13 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnDung" runat="server" Text="Dừng xử lý" CssClass="btn"></asp:Button></li>
-                            <li><asp:Button ID="btnTiepTuc" runat="server" Text="Tiếp tục xử lý" CssClass="btn" 
+                    	    <li><asp:Button runat="server" ID="btnGiaoViec" CssClass="btn" Text="Giao Việc" 
+                                    onclick="btnGiaoViec_Click" ></asp:Button></li>
+                        	<li><asp:Button ID="btnDung" runat="server" Text="Dừng xử lý" CssClass="btn" 
+                                    onclick="btnDung_Click"></asp:Button></li>
+                            <li><asp:Button ID="btnTiepTuc" runat="server" Text="Tiếp tục xử lý" CssClass="btn" onclick="btnTiepTuc_Click" 
                                      ></asp:Button></li>
-                            <li><asp:Button ID="btnXoa" runat="server" Text="Xóa" CssClass="btn" 
+                            <li><asp:Button ID="btnXoa" runat="server" Text="Xóa" CssClass="btn" onclick="btnXoa_Click" 
                                      ></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
@@ -102,10 +105,12 @@
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="Button1" runat="server" Text="Dừng xử lý" CssClass="btn"></asp:Button></li>
-                            <li><asp:Button ID="Button2" runat="server" Text="Tiếp tục xử lý" CssClass="btn" 
+                    	    <li><asp:Button runat="server" ID="btnGiaoViec2" CssClass="btn" Text="Giao Việc" onclick="btnGiaoViec_Click"></asp:Button></li>
+                        	<li><asp:Button ID="btnDung2" runat="server" Text="Dừng xử lý" CssClass="btn" 
+                                    onclick="btnDung_Click" ></asp:Button></li>
+                            <li><asp:Button ID="btnTiepTuc2" runat="server" Text="Tiếp tục xử lý" CssClass="btn" onclick="btnTiepTuc_Click"
                                      ></asp:Button></li>
-                            <li><asp:Button ID="Button3" runat="server" Text="Xóa" CssClass="btn" 
+                            <li><asp:Button ID="btnXoa2" runat="server" Text="Xóa" CssClass="btn" onclick="btnXoa_Click" 
                                      ></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>

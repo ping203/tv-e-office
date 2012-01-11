@@ -11,6 +11,11 @@ namespace DataAccess.BusinessObject
 {
     public class BUser:Common.CDBase
     {
+        /// <summary>
+        /// Lấy ra danh sách người dùng theo UserName
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
          public IList<OUser> Get(string UserName)
          {
              SqlParameter[] sqlPara = new SqlParameter[1];
@@ -21,6 +26,23 @@ namespace DataAccess.BusinessObject
              list = Common.Common.ConvertTo<OUser>(tbl);
              return list;
          }
+
+        /// <summary>
+        /// Lấy ra người dùng theo ID
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <returns></returns>
+         public IList<OUser> Get(int UserID)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[1];
+             sqlPara[0] = new SqlParameter("@UserID", SqlDbType.Int);
+             sqlPara[0].Value = UserID;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
+
          public IList<OUser> Get(string FullName, string Order, string OrderBy)
          {
              SqlParameter[] sqlPara = new SqlParameter[3];

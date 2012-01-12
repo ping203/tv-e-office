@@ -207,6 +207,23 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
+        public IList<OWork> Get(string Name, string Status, int IDWorkGroup, string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[0].Value = Name;
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
+            sqlPara[2] = new SqlParameter("@IDWorkGroup", SqlDbType.Int);
+            sqlPara[2].Value = IDWorkGroup;
+            sqlPara[3] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[3].Value = IDUserProcess;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
+
         /// <summary>
         /// Trả lại danh sách công việc tương ứng với người tạo, tên công việc
         /// Trạng thái công việc giao, và người thực hiện
@@ -233,6 +250,23 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
+
+        public IList<OWork> Get( string Name, string Status, string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+           
+            sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlPara[0].Value = Name;
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
+            sqlPara[2] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[2].Value = IDUserProcess;
+            DataTable tbl = RunProcedureGet("sp_tblWork_get", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list;
+        }
+
 
         /// <summary>
         /// Trả lại danh sách công việc mà người dùng phải làm

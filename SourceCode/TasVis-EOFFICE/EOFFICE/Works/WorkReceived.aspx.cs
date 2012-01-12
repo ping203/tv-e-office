@@ -133,6 +133,7 @@ namespace EOFFICE.Works
             string name = txtWorkName.Text;
             string UserCreate = txtUserCreate.Text;
             int IDUserCreate;
+            
             if (UserCreate.Trim() == "")
             {
                 
@@ -193,11 +194,6 @@ namespace EOFFICE.Works
             
 
             grvWork.DataBind();
-            if (grvWork.DataSource == null)
-            {
-                lblThongBao.Text = "Không có công việc nào";
-            }
-            string str = lblThongBao.Text;
         }
     }
 }

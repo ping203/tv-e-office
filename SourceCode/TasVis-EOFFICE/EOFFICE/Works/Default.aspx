@@ -17,8 +17,8 @@
                 	<div class="nav-function">
                     	<ul>
                         	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
-                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
-                                    onclick="btnForward_Click" ></asp:Button></li>
+                            <li><asp:LinkButton ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:LinkButton></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
@@ -78,8 +78,8 @@
                     	<ul>
                         	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" CssClass="btn" 
                                     onclick="btnSave_Click" ></asp:Button></li>
-                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
-                                    onclick="btnForward_Click" ></asp:Button></li>
+                            <li><asp:LinkButton ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:LinkButton></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                             

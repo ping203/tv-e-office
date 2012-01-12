@@ -97,15 +97,15 @@ namespace EOFFICE.Works
             string Priority = string.Empty;
             if (rdoPrior1.Checked == true)
             {
-                Priority = "Rất quan trọng";
+                Priority = "RAT_QUAN_TRONG";
             }
             else if (rdoPrior2.Checked == true)
             {
-                Priority = "Quan trọng";
+                Priority = "QUAN_TRONG";
             }
             else
             {
-                Priority = "Bình thường";
+                Priority = "BINH_THUONG";
             }
 
             //Lưu công việc mới
@@ -118,11 +118,13 @@ namespace EOFFICE.Works
             objWork.IDUserProcess = ListUserProcess;
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             objWork.CreateDate = CurrentTime;
-            objWork.Status = "Chưa giao";
+            objWork.Status = "CHUA_GIAO";
             objWork.Priority = Priority;
             objWork.StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
             objWork.EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
 
+            BWork BobjWork = new BWork();
+            BobjWork.Add(objWork);
         }
 
         private void CheckBoxBind_Load()

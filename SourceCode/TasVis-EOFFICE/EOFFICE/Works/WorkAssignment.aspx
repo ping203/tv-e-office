@@ -71,9 +71,13 @@
                                           <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
+                                </asp:TemplateField>                                
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Tên công việc</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <a href="WorkAssignmentDetail.aspx?WorkID=<%# DataBinder.Eval(Container.DataItem,"WorkID")%>"><%# DataBinder.Eval(Container.DataItem,"Name") %></a>
+                                    </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Tên công việc">
-                                </asp:BoundField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Người xử lý</HeaderTemplate>
                                     <ItemTemplate>

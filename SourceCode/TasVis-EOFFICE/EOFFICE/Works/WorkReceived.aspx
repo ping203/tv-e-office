@@ -36,7 +36,7 @@
                     	<tr>
                     	    <td></td>
                     	    <td>
-                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" />
+                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" onclick="btnTim_Click" />
                     	</tr>
                     </table>
                     <br />
@@ -57,33 +57,34 @@
                                 <asp:TemplateField>
                                     <HeaderTemplate>Người tạo việc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" ></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#BindTaoViec(DataBinder.Eval(Container.DataItem,"IDUserCreate").ToString()) %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Người chuyển việc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" ></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#BindChuyenViec(DataBinder.Eval(Container.DataItem,"IDUserProcess").ToString()) %>'></asp:Label>
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Hạn kết thúc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" ></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#BindHanKetThuc(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
                                     </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Trạng thái</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" ></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#BindTrangThai(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Ngày giao</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" ></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#BindNgayGiao(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>

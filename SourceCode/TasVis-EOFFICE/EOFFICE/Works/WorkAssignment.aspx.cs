@@ -52,6 +52,11 @@ namespace EOFFICE.Works
             BWork objWork = new BWork();
             grvWork.DataSource = objWork.Get(1, "CHUA_GIAO").Union(objWork.Get(1, "DANG_THUC_HIEN")).Union(objWork.Get(1, "DUNG_XU_LY"));
             grvWork.DataBind();
+
+            if ((objWork.Get(1, "CHUA_GIAO").Union(objWork.Get(1, "DANG_THUC_HIEN")).Union(objWork.Get(1, "DUNG_XU_LY"))).Count()==0)
+            {
+                lblThongBao.Text = "Không có công việc nào";
+            }
         }
 
 
@@ -167,7 +172,8 @@ namespace EOFFICE.Works
             {
                 if (ddlWork.SelectedValue == "0")
                 {
-                    grvWork.DataSource = objWork.Get(1, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(1, name, "DANG_THUC_HIEN", UserProcess)).Union(objWork.Get(1, name, "DUNG_XU_LY", UserProcess));                   
+                    grvWork.DataSource = objWork.Get(1, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(1, name, "DANG_THUC_HIEN", UserProcess)).Union(objWork.Get(1, name, "DUNG_XU_LY", UserProcess));
+                    
                 }
                 else
                 {
@@ -187,6 +193,11 @@ namespace EOFFICE.Works
             }
             
             grvWork.DataBind();
+            if (grvWork.DataSource == null)
+            {
+                lblThongBao.Text = "Không có công việc nào";
+            }
+            string str = lblThongBao.Text;
         }       
 
         protected void btnDung_Click(object sender, EventArgs e)
@@ -218,7 +229,7 @@ namespace EOFFICE.Works
                 if (checkbox.Checked == true)
                 {
                     int Id = Convert.ToInt32(grvWork.DataKeys[row.RowIndex].Value);
-                    if (obj.GetWork(Id).First().Status == "CHUA_GIAO")
+                    if (obj.GetWork(Id).First().Status == "DUNG_XU_LY")
                     {
                         obj.Update(Id, "DANG_THUC_HIEN", 1);
                     }

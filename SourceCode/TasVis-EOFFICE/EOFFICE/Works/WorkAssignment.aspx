@@ -49,7 +49,9 @@
                     </table>
                     <br />
                     <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH CÔNG VIỆC GIAO</h2>
-                    <asp:Label runat="server" ID="lblThongBao" Text=""></asp:Label>
+                    <div style="margin-bottom:20px">
+                        <asp:Label runat="server" ID="lblThongBao" ></asp:Label>
+                    </div>
                     <br />
                         <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
                             CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated" 

@@ -10,7 +10,6 @@
         });
     });
 </script>
-<script type="text/javascript" src="../js/jquery.MultiFile.js"></script>
     <div class="list wp-form" id="createWork">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công việc mới</h2>
                 

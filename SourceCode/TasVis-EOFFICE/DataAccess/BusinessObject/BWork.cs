@@ -286,6 +286,19 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
-       
+        public List<OAttach> GetAttachs(int WorkID)
+        {
+            IList<OWork> lstWork = this.GetWork(WorkID);
+            string strAttachID = lstWork[0].Attachs;
+            String[] arrattachs=strAttachID.Split(',');
+            List<OAttach> lstAttachs = new List<OAttach>();
+            BAttach objBAttach = new BAttach();
+            for (int i = 0; i < arrattachs.Count() - 1; i++)
+            {                
+                OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                lstAttachs.Add(objAttach);
+            }
+            return lstAttachs;
+        }
     }
 }

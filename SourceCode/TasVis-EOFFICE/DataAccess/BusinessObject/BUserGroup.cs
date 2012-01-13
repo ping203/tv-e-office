@@ -20,6 +20,8 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlParam = { new SqlParameter("@IDUser",SqlDbType.Int),
                                         new SqlParameter("@IDGroup",SqlDbType.Int) 
                                       };
+            sqlParam[0].Value = objUserGroup.IDUser;
+            sqlParam[1].Value = objUserGroup.IDGroup;
             return RunProcudure("sp_tblUser_Group_add", sqlParam);                        
         }
         /// <summary>
@@ -32,15 +34,31 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlParam = { new SqlParameter("@IDUser",SqlDbType.Int),
                                         new SqlParameter("@IDGroup",SqlDbType.Int) 
                                       };
+            sqlParam[0].Value = objUserGroup.IDUser;
+            sqlParam[1].Value = objUserGroup.IDGroup;
             return RunProcudure("sp_tblUser_Group_delete", sqlParam);
         }
-
+        /// <summary>
+        /// Cập nhật user vào group
+        /// </summary>
+        /// <param name="objUserGroupOld"></param>
+        /// <param name="objUserGroupNew"></param>
+        /// <returns></returns>
         public bool Update(OUserGroup objUserGroupOld,OUserGroup objUserGroupNew)
         {
             if (this.Delete(objUserGroupOld)) {
                 return this.Add(objUserGroupNew);
-            }
+            }            
             return false;
+        }
+        public List<OUserGroup> Get(OUserGroup objUserGroup)
+        {
+            SqlParameter[] sqlParam = { new SqlParameter("@IDUser",SqlDbType.Int),
+                                        new SqlParameter("@IDGroup",SqlDbType.Int) 
+                                      };
+            sqlParam[0].Value = objUserGroup.IDUser;
+            sqlParam[1].Value = objUserGroup.IDGroup;
+            return RunProcudure("sp_tblUser_Group_get", sqlParam);
         }
     }
 }

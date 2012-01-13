@@ -53,8 +53,8 @@
                                 <td colspan="2">
                                     <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand">
                                         <ItemTemplate>
-                                            <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server"></asp:LinkButton>
-                                            <asp:LinkButton ID="lblDeleteFile" runat="server" CommandName="Delete" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"AttachID") %>' Text="Xóa" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa file đính kèm?');"></asp:LinkButton></p>
+                                            <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
+                                            <asp:LinkButton ID="lblDeleteFile" runat="server" CommandName="Delete" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"AttachID") %>' Text="(Xóa)" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa file đính kèm?');" ForeColor="Red"></asp:LinkButton></p>
                                             
                                         </ItemTemplate>
                                     </asp:Repeater>

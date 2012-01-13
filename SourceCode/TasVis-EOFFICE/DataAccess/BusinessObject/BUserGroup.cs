@@ -51,6 +51,11 @@ namespace DataAccess.BusinessObject
             }            
             return false;
         }
+        /// <summary>
+        /// Lấy về danh sách user thuộc group
+        /// </summary>
+        /// <param name="objUserGroup"></param>
+        /// <returns></returns>
         public List<OUserGroup> Get(OUserGroup objUserGroup)
         {
             SqlParameter[] sqlParam = { new SqlParameter("@IDUser",SqlDbType.Int),

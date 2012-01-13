@@ -57,7 +57,7 @@ namespace EOFFICE.Works
             BAttach Bobj = new BAttach();
             HttpFileCollection hfc = Request.Files;
             int n = hfc.Count;
-            string listFile = string.Empty;
+            string listFile = ",";
             try
             {
                 // Get the HttpFileCollection

@@ -65,7 +65,7 @@ namespace DataAccess.DataObject
         }
         private DateTime _Birthday;
 
-        public DateTime Birthday
+        public DateTime BirthDay
         {
             get { return _Birthday; }
             set { _Birthday = value; }

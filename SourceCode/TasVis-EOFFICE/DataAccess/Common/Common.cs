@@ -29,6 +29,20 @@ namespace DataAccess.Common
         /// </summary>
         Other = 3
     };
+    /// <summary>
+    /// Trạng thái người dùng
+    /// </summary>
+    public enum UserStatus
+    {
+        /// <summary>
+        /// Duyệt
+        /// </summary>
+        Approve = 1,
+        /// <summary>
+        /// Khóa
+        /// </summary>
+        UnApprove = 2
+    };
     public class Common
     {
         public static DataTable ConvertTo<T>(IList<T> list)

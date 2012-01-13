@@ -16,29 +16,49 @@
                     <div class="form">
                         <table width="100%" cellpadding="5">
                             <tr>
-                                <td>
+                                <td class="style1" colspan="3">
                                     <asp:Label runat="server" Text="Tên công việc: "></asp:Label>
+                                    <asp:Label runat="server" ID="lblName"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <asp:Label runat="server" Text="Ngào tạo: "></asp:Label>
+                                    <asp:Label runat="server" ID="lblNgayTao"></asp:Label>
                                 </td>
                                 <td>
                                     <asp:Label runat="server" Text="Ngày bắt đầu: "></asp:Label>
+                                    <asp:Label runat="server" ID="lblNgayBatDau"></asp:Label>
                                 </td>
                                 <td>
                                     <asp:Label runat="server" Text="Ngày kết thúc: "></asp:Label>
+                                    <asp:Label runat="server" ID="lblNgayKetThuc"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="3">
                                     <asp:Label runat="server" Text="Yêu cầu xử lý: "></asp:Label>
+                                    <asp:Label runat="server" ID="lblYeuCau"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="1">
                                     <asp:Label runat="server" Text="File kèm theo: "></asp:Label>
+                                    
+                                </td>
+                                <%--<td colspan="2">
+                                    <asp:Panel ID="pnlDownloads" runat="server">
+                                    </asp:Panel>                                    
+                                </td>--%>
+                                <td colspan="2">
+                                    <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand">
+                                        <ItemTemplate>
+                                            <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server"></asp:LinkButton>
+                                            <asp:LinkButton ID="lblDeleteFile" runat="server" CommandName="Delete" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"AttachID") %>' Text="Xóa"></asp:LinkButton></p>
+                                            
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                    <asp:Label runat="server" ID="lblThongBao" CssClass="rq"></asp:Label>
                                 </td>
                             </tr>
                         </table>
@@ -124,3 +144,14 @@
      } 
     </script>    
 </asp:Content>
+<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
+
+    <style type="text/css">
+        .style1
+        {
+            height: 28px;
+        }
+    </style>
+
+</asp:Content>
+

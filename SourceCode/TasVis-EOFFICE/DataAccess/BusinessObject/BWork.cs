@@ -94,18 +94,27 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblWork_update", sqlPara);
         }
 
-        public bool Update(int WorkID,int IDUserCreate)
+        /// <summary>
+        /// Update danh sách File Attach của công việc
+        /// </summary>
+        /// <param name="WorkID"></param>
+        /// <param name="Attachs"></param>
+        /// <returns></returns>
+        public bool UpdateAttach(int WorkID, string Attachs, int IDUserCreate)
         {
-            SqlParameter[] sqlPara = new SqlParameter[2];
+            SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
             sqlPara[0].Value = WorkID;
             
-            sqlPara[1] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
-            sqlPara[1].Value = IDUserCreate;
-            
+            sqlPara[1] = new SqlParameter("@Attachs", SqlDbType.VarChar);
+            sqlPara[1].Value = Attachs;
 
+            sqlPara[2] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[2].Value = IDUserCreate;
             return RunProcudure("sp_tblWork_update", sqlPara);
         }
+
+        
 
         /// <summary>
         /// Update trạng thái công việc
@@ -293,10 +302,13 @@ namespace DataAccess.BusinessObject
             String[] arrattachs=strAttachID.Split(',');
             List<OAttach> lstAttachs = new List<OAttach>();
             BAttach objBAttach = new BAttach();
-            for (int i = 0; i < arrattachs.Count() - 1; i++)
-            {                
-                OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
-                lstAttachs.Add(objAttach);
+            if (arrattachs.Count() > 1)
+            {
+                for (int i = 1; i < arrattachs.Count() - 1; i++)
+                {
+                    OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                    lstAttachs.Add(objAttach);
+                }
             }
             return lstAttachs;
         }

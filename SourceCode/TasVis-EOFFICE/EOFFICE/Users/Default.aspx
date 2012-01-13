@@ -9,269 +9,62 @@
             dùng</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
-                <td colspan="7">
+                <td>
                     <asp:DropDownList runat="server" ID="drdAction">
                         <asp:ListItem Text="Duyệt" Value="Approve"></asp:ListItem>
+                        <asp:ListItem Text="Khóa" Value="UnApprove"></asp:ListItem>
                         <asp:ListItem Text="Xóa" Value="Delete"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click">Thực hiện</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click"
+                        OnClientClick="javascript:return ValidCheckedUser();">Thực hiện</asp:LinkButton>
                     <a class="link-btn" href="Edit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
             </tr>
             <tr>
-                <th>
-                    <input type="checkbox" />
-                </th>
-                <th>
-                    Stt
-                </th>
-                <th>
-                    <a href="#" class="order-desc">Tên công việc</a>
-                </th>
-                <th>
-                    <a href="#">Ngày bắt đầu</a>
-                </th>
-                <th>
-                    <a href="#">Ngày hoàn thành</a>
-                </th>
-                <th>
-                    Ghi chú
-                </th>
-                <th>
-                    Thao tác
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    1
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function update" title="Cập nhật">Cập nhật</a><a href="#"
-                        class="link-function cancel" title="Hủy">Hủy</a><a href="#" class="link-function delete"
-                            title="Xóa">Xóa</a>
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    2
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete"
-                        title="Xóa">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    3
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    4
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    5
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    6
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    7
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    8
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    9
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
-                </td>
-            </tr>
-            <tr class="altenate">
-                <td>
-                    <input type="checkbox" />
-                </td>
-                <td align="center">
-                    10
-                </td>
-                <td>
-                    Báo cáo công việc tuần từ 19/12 -> 24/12/2011
-                </td>
-                <td align="center">
-                    23/12/2011
-                </td>
-                <td align="center">
-                    24/12/2011
-                </td>
-                <td>
-                    Báo cáo tuần
-                </td>
-                <td>
-                    <a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a>
+                <td align="left">
+                    <asp:GridView ID="grvListUsers" runat="server" AutoGenerateColumns="False" CssClass="tbl-list"
+                        Width="100%" OnRowCommand="grvListUsers_RowCommand" DataKeyNames="Username">
+                        <Columns>
+                            <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <input type="checkbox" id="chkCheckUserAll" />
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <input type="checkbox" value="abc" class="chkUserCheck" id="chkCheckUser" runat="server" />
+                                    
+                                </ItemTemplate>
+                                <ItemStyle Width="3%" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="STT">
+                                <ItemTemplate>
+                                    <%# Container.DataItemIndex + 1 %>
+                                </ItemTemplate>
+                                <ItemStyle Width="3%" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="Username" HeaderText="Tên đăng nhập"></asp:BoundField>
+                            <asp:BoundField DataField="FullName" HeaderText="Họ và tên"></asp:BoundField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    Thao tác</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="LinkButton3"  CommandName="cmdApprove" CommandArgument='<%#Eval("Username") %>' ToolTip="Duyệt" Visible='<%#VisibleUnApp(Eval("Status")) %>' 
+                                        CssClass="link-function" runat="server">
+                                     <asp:Image  CssClass="link-function" runat="server" ID="Image1" ImageUrl="~/images/unchecked.gif"  />
+                                        </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton2"  CommandName="cmdUnApprove" CommandArgument='<%#Eval("Username") %>' ToolTip="Khóa" Visible='<%#VisibleApp(Eval("Status")) %>' 
+                                        CssClass="link-function" runat="server">
+                                     <asp:Image  CssClass="link-function" runat="server" ID="imgApprove" ImageUrl="~/images/checked.gif"  />
+                                        </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("Username") %>' ToolTip="Sửa người dùng"
+                                        CssClass="link-function edit" runat="server" />
+                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("Username") %>' ToolTip="Xóa người dùng"
+                                        CssClass="link-function delete" runat="server" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa người dùng?');"></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" Width="10%" />
+                            </asp:TemplateField>
+                        </Columns>
+                        <HeaderStyle ForeColor="#0072BC" />
+                    </asp:GridView>
                 </td>
             </tr>
         </table>
@@ -288,4 +81,26 @@
             </ul>
         </div>
     </div>
+
+    <script type="text/javascript">
+     function ValidCheckedUser() {
+        if ($(".chkUserCheck:checked").length == 0) {
+            alert("Vui lòng chọn người dùng cần thao tác");
+            return false;
+        }
+        return confirm('Bạn chắc chắn muốn thực hiện thao tác này?')
+    }
+    $(document).ready(function() {
+        $('#chkCheckUserAll').bind('click', function() {
+            if ($("#chkCheckUserAll").attr('checked') == 'checked') {
+                $(".chkUserCheck").attr('checked', 'checked');
+            }
+            else {
+                $(".chkUserCheck").attr('checked', false);
+            }
+        });
+
+    });
+    </script>
+
 </asp:Content>

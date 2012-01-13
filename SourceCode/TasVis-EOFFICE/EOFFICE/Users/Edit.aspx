@@ -17,9 +17,10 @@
                             </td>
                             <td>
                                 <asp:TextBox runat="server" ID="txtUsername" CssClass="required"></asp:TextBox>
+                                <asp:Label Font-Bold="true" runat="server" ID="lblUsername" Visible="false"></asp:Label>
                             </td>
                         </tr>
-                        <tr>
+                        <tr runat="server" id="tr_mk">
                             <td align="right">
                                 Mật khẩu:
                             </td>
@@ -27,7 +28,7 @@
                                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass=" required password"></asp:TextBox>
                             </td>
                         </tr>
-                        <tr>
+                        <tr runat="server" id="tr_cmk">
                             <td align="right">
                                 Xác nhận mật khẩu:
                             </td>
@@ -82,6 +83,31 @@
                             </td>
                             <td>
                                 <asp:TextBox runat="server" ID="txtBirthDay" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Địa chỉ:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtAddress"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Vị trí:
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtPossition" CssClass="required"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                Trạng thái:
+                            </td>
+                            <td>
+                                <asp:DropDownList runat="server" id="drdStatus">
+                                </asp:DropDownList>
                             </td>
                         </tr>
                         <tr>

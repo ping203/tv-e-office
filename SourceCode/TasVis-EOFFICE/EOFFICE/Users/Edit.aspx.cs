@@ -12,11 +12,30 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.Common;
 using DataAccess.BusinessObject;
+using DataAccess.DataObject;
 
 namespace EOFFICE.Users
 {
     public partial class Edit : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Lưu mã người dùng
+        /// </summary>
+        public string Username
+        {
+            get {
+                if (Request.QueryString["Username"] != null)
+                {
+                    return Request.QueryString["Username"];
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+        #endregion
         #region "Valid"
         /// <summary>
         /// Kiểm tra sự tồn tại của username
@@ -25,9 +44,12 @@ namespace EOFFICE.Users
         private bool IsUsernameValid()
         {
             BUser ctl = new BUser();
-            if (ctl.Get(txtUsername.Text.Trim()).Count > 0)
+            if (ctl.Get(txtUsername.Text.Trim()).Count > 0 && string.IsNullOrEmpty(Username))
+            {
+                RegisterClientScriptBlock( "notifycation", "<script language='javascript'>alert('Tài khoản đã tồn tại.');</script>");
                 //--Nếu tồn tại 
                 return false;
+            }
             else
                 //--Nếu không tồn tại thì pass
                 return true;
@@ -45,6 +67,16 @@ namespace EOFFICE.Users
             drdGender.Items.Add(new ListItem("Nam", Gender.Male.ToString("D")));
             drdGender.Items.Add(new ListItem("Nữ", Gender.Female.ToString("D")));
             drdGender.Items.Add(new ListItem("Khác", Gender.Other.ToString("D")));
+        }
+
+        /// <summary>
+        /// Load danh sách trạng thái
+        /// </summary>
+        private void BindStatus()
+        {
+            drdStatus.Items.Clear();
+            drdStatus.Items.Add(new ListItem("Duyệt", UserStatus.Approve.ToString("D")));
+            drdStatus.Items.Add(new ListItem("Khóa", UserStatus.UnApprove.ToString("D")));
         }
 
         /// <summary>
@@ -67,6 +99,106 @@ namespace EOFFICE.Users
             drdGroup.DataBind();
         }
 
+        /// <summary>
+        /// Cập nhật thông tin User
+        /// </summary>
+        private void UpdateUser()
+        {
+            if (!IsUsernameValid())
+                return;
+            BUser ctl = new BUser();
+            OUser obj;
+            try
+            {
+                if(!string.IsNullOrEmpty(Username))
+                obj = ctl.Get(Username)[0];
+                else
+                    obj = new OUser();
+            }catch(Exception ex)
+            {
+                obj = new OUser();
+            }
+            //-- gán thông tin cho đổi tượng người dùng
+            obj.BirthDay = Convert.ToDateTime(txtBirthDay.Text.Trim());
+            obj.Email = txtEmail.Text.ToString();
+            obj.FullName = txtFullName.Text.Trim();
+            obj.Gender = drdGender.SelectedValue;
+            obj.IDDepartment = int.Parse(drdDepartment.SelectedValue);
+            obj.IDGroup = int.Parse(drdGroup.SelectedValue);
+            obj.PhoneNumber = txtPhoneNumber.Text.Trim();
+            obj.Tel  = txtTel.Text.Trim();
+            obj.Address = txtAddress.Text.Trim();
+            obj.Position = txtPassword.Text.Trim();
+            obj.Status = drdStatus.SelectedValue;
+            //-- Cập nhật User
+            if (obj.UserID > 0)
+            {
+                ctl.Update(obj.UserName, obj.FullName, obj.Email, obj.PhoneNumber, obj.Tel, obj.Gender, obj.BirthDay, obj.Address, obj.Position, "1", obj.IDDepartment, obj.IDGroup);
+            }
+                //--Thêm mới User
+            else
+            {
+                obj.UserName = txtUsername.Text.Trim();
+                obj.Password = txtPassword.Text.Trim();
+                ctl.Add(obj);
+                Response.Redirect("Default.aspx");
+            }
+            
+        }
+
+        /// <summary>
+        /// Khởi tạo dữ liệu
+        /// </summary>
+        private void InitData()
+        {
+            BUser ctl = new BUser();
+            OUser obj=new OUser();
+            try
+            {
+                //-- kiểm tra và lấy về thí sinh cần sửa
+                if (!string.IsNullOrEmpty(Username))
+                    obj = ctl.Get(Username)[0];
+                else
+                    return;
+                txtUsername.Text = obj.UserName;
+                lblUsername.Text = obj.UserName;
+                tr_mk.Visible = false;
+                tr_cmk.Visible = false;
+                lblUsername.Visible = true;
+                txtUsername.Visible = false;
+                txtFullName.Text = obj.FullName;
+                txtEmail.Text = obj.Email;
+                txtPhoneNumber.Text = obj.PhoneNumber;
+                txtTel.Text = obj.Tel;
+                try
+                {
+                    drdGender.Items.FindByValue(obj.Gender).Selected = true;
+                }
+                catch (Exception ex) { }
+                txtBirthDay.Text = obj.BirthDay.ToString("dd/MM/yyyy");
+                txtAddress.Text = obj.Address;
+                txtPossition.Text = obj.Position;
+                try
+                {
+                    drdStatus.Items.FindByValue(obj.Status).Selected = true;
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    drdDepartment.Items.FindByValue(obj.IDDepartment.ToString()).Selected = true;
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    drdGroup.Items.FindByValue(obj.IDGroup.ToString()).Selected = true;
+                }
+                catch (Exception ex) { }
+                
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         #endregion
 
         #region "Events"
@@ -79,12 +211,20 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //--Load danh sách giới tính
-            BindGender();
-            //--Load danh sách phòng ban
-            BindDepartment();
-            //--Load danh sách nhóm người dùng
-            BindGroup();
+            if (!IsPostBack)
+            {
+                //--Load danh sách giới tính
+                BindGender();
+                //--Load danh sách trạng thái
+                BindStatus();
+                //--Load danh sách phòng ban
+                BindDepartment();
+                //--Load danh sách nhóm người dùng
+                BindGroup();
+                //-- Load dữ liệu insert
+                InitData();
+            }
+           
         }
 
 
@@ -96,7 +236,7 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void lnkUpdate_Click(object sender, EventArgs e)
         {
-
+            UpdateUser();
         }
         #endregion
 

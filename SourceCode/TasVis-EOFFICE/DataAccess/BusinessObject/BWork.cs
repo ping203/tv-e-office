@@ -295,6 +295,12 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OWork>(tbl);
             return list;
         }
+
+        /// <summary>
+        /// Lấy danh sách file Attach của 1 công việc
+        /// </summary>
+        /// <param name="WorkID"></param>
+        /// <returns></returns>
         public List<OAttach> GetAttachs(int WorkID)
         {
             IList<OWork> lstWork = this.GetWork(WorkID);
@@ -312,5 +318,24 @@ namespace DataAccess.BusinessObject
             }
             return lstAttachs;
         }
+
+        public List<OUser> GetUserProcess(int WorkID)
+        {
+            IList<OWork> lstWork = this.GetWork(WorkID);
+            string strAttachID = lstWork[0].IDUserProcess;
+            String[] arrUser = strAttachID.Split(',');
+            List<OUser> lstUser = new List<OUser>();
+            BUser objBUser = new BUser();
+            if (arrUser.Count() > 1)
+            {
+                for (int i = 1; i < arrUser.Count() - 1; i++)
+                {
+                    OUser objUser = objBUser.Get(arrUser[i]).First();
+                    lstUser.Add(objUser);
+                }
+            }
+            return lstUser;
+        }
+
     }
 }

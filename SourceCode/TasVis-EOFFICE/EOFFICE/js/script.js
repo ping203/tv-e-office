@@ -11,3 +11,10 @@ $(document).ready(function(){
 	});
 	$("#du-thao-cong-van .a-parent").parent().next().slideToggle("slow");
 });
+
+    $(document).ready(function() {
+        $("#listUserProcess").hide();
+        $("#btnHide").click(function() {
+            $("#listUserProcess").slideToggle("slow");
+        });
+    });

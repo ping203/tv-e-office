@@ -1,16 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Works.Default" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
-
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#listUserProcess").hide();
-        $("#btnHide").click(function() {
-            $("#listUserProcess").slideToggle("slow");
-        });
-    });
-</script>
-    <div class="list wp-form" id="createWork">
+<div class="list wp-form" id="createWork">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công việc mới</h2>
                 
                 	<div class="nav-function">

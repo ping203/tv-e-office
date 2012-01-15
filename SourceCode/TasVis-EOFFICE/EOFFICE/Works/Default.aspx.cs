@@ -51,7 +51,7 @@ namespace EOFFICE.Works
             string hour = CurrentTime.Hour.ToString();
             string minute = CurrentTime.Minute.ToString();
             string millisecond = CurrentTime.Millisecond.ToString();
-            string str = " " + day + "-" + month + "-" + year + "-" + "-" + hour + "-" + minute + "-" + millisecond;
+            string str = "-" + day + "-" + month + "-" + year + "-" + "-" + hour + "-" + minute + "-" + millisecond;
 
             //Lấy danh sách file Attach
             BAttach Bobj = new BAttach();
@@ -67,10 +67,10 @@ namespace EOFFICE.Works
                     HttpPostedFile hpf = hfc[i];
                     if (hpf.ContentLength > 0)
                     {
-                        hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName) + str + System.IO.Path.GetExtension(hpf.FileName));
+                        hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ","_") + str + System.IO.Path.GetExtension(hpf.FileName));
                         OAttach obj = new OAttach();
                         obj.Name = System.IO.Path.GetFileName(hpf.FileName);
-                        obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName) + str + System.IO.Path.GetExtension(hpf.FileName);
+                        obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ","_") + str + System.IO.Path.GetExtension(hpf.FileName);
                         obj.Description = "";
                         Bobj.Add(obj);
                         listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";

@@ -95,6 +95,24 @@ namespace DataAccess.BusinessObject
         }
 
         /// <summary>
+        /// Update danh sách người thực hiện công việc
+        /// </summary>
+        /// <param name="WorkID"></param>
+        /// <param name="IDUserProcess"></param>
+        /// <returns></returns>
+        public bool Update(int WorkID, string IDUserProcess)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
+            sqlPara[0].Value = WorkID;
+            sqlPara[1] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
+            sqlPara[1].Value = IDUserProcess;
+            
+
+            return RunProcudure("sp_tblWork_update", sqlPara);
+        }
+
+        /// <summary>
         /// Update danh sách File Attach của công việc
         /// </summary>
         /// <param name="WorkID"></param>

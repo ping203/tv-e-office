@@ -52,8 +52,12 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Tên công việc">
-                                </asp:BoundField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Tên công việc</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <a href="WorkReceivedDetail.aspx?WorkID=<%# DataBinder.Eval(Container.DataItem,"WorkID")%>"><%# DataBinder.Eval(Container.DataItem,"Name") %></a>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Người tạo việc</HeaderTemplate>
                                     <ItemTemplate>

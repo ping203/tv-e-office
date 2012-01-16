@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Contacts.Default" MasterPageFile="~/MasterPages/Default.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ContactGroup.aspx.cs" Inherits="EOFFICE.Contacts.ContactCreate" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
     <script type="text/javascript">
@@ -17,10 +17,12 @@
     } 
     </script>
     <div class="list wp-form" id="createWorkGroup">
-            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo nhóm công việc mới</h2>
+            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Quản lý nhóm danh bạ</h2>
                 
                 	<div class="nav-function">
                     	<ul>
+                    	    <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"/></li>
+                    	    <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"/></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"/></li>
                         </ul>
                     </div>

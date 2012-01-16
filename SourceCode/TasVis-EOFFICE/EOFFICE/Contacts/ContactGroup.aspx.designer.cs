@@ -11,7 +11,7 @@
 namespace EOFFICE.Contacts {
     
     
-    public partial class Default {
+    public partial class ContactCreate {
         
         /// <summary>
         /// txtWorkGroupName control.

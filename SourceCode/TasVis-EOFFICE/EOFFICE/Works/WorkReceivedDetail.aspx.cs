@@ -59,8 +59,11 @@ namespace EOFFICE.Works
             //Load CheckBoxListUser
             
             string username = string.Empty;
-            CheckBoxBind.DataSource = BobjUser.Get(username);
-            CheckBoxBind.DataBind();
+            //CheckBoxBind.DataSource = BobjUser.Get(username);
+            //CheckBoxBind.DataBind();
+
+            rptUserProcess.DataSource = BobjUser.Get(username); ;
+            rptUserProcess.DataBind();
         }
 
         
@@ -136,16 +139,33 @@ namespace EOFFICE.Works
             //Lấy danh sách người chuyển tiếp
             int count = 0;//biến đếm số người được chuyển tiếp
             string ListUserProcess = ",";
-            foreach (ListItem item in CheckBoxBind.Items)
-            {
+            //foreach (ListItem item in CheckBoxBind.Items)
+            //{
 
-                if (item.Selected)
+            //    if (item.Selected)
+            //    {
+            //        count += 1;
+            //        ListUserProcess += item.Value.ToString() + ",";
+            //    }
+            //}
+
+            //for (int i = 0; i < CheckBoxBind.Items.Count; i++)
+            //{
+            //    if (CheckBoxBind.Items[i].Selected)
+            //    {
+            //        count += 1;
+            //        ListUserProcess += CheckBoxBind.Items[i].Value.ToString() + ",";
+            //    }
+            //}
+            for (int i = 0; i < rptUserProcess.Items.Count; i++)
+            {
+                CheckBox cb = (CheckBox)rptUserProcess.Items[i].FindControl("cbUser");
+                if (cb.Checked == true)
                 {
                     count += 1;
-                    ListUserProcess += item.Value.ToString() + ",";
+                    ListUserProcess += cb.Text.ToString() + ",";
                 }
             }
-
 
             //////////////////////////////////////////////
             //Tạo Comment mới
@@ -168,7 +188,7 @@ namespace EOFFICE.Works
                 OWork objWork = new OWork();
                 objWork = BobjWork.GetWork(WorkID).First();
                 string newlistUserProcess = objWork.IDUserProcess + ListUserProcess;
-                BobjWork.Update(WorkID, newlistUserProcess);
+                BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,1);
             }
         }
     }

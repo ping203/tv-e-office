@@ -67,7 +67,15 @@
                     <br />
                     <table width="100%" cellpadding="5">
                         <tr>
-                            <td style="width:20%;vertical-align:top">Danh sách người thực hiện</td>
+                            <td style="width:20%;vertical-align:top">Danh sách người thực hiện<br />
+                                <asp:Repeater ID="rptListUser" runat="server">
+                                    <ItemTemplate>
+                                        <img src="../Images/user.png" alt="" />
+                                        <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>'></asp:LinkButton>
+                                        <br />
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </td>
                             <td style="width:80%">
                                 Nội dung xử lý:
                                 <br />
@@ -102,7 +110,7 @@
                             </td>
                             <td style="width:80%">
                                 <asp:FileUpload ID="FileUpload1" runat="server" class="multi" /> &nbsp
-                                <asp:LinkButton runat="server" Text="Upload" CssClass="link-btn"></asp:LinkButton>
+                                
                             </td>
                         </tr>
                         <tr>

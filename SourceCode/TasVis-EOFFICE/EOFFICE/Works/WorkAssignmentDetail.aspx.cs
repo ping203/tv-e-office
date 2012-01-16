@@ -43,6 +43,9 @@ namespace EOFFICE.Works
             lblNgayKetThuc.Text = obj.EndProcess.ToString("dd/MM/yyyy");
             lblYeuCau.Text = obj.Description;
 
+            rptListUser.DataSource = Bobj.GetUserProcess(WorkID);
+            rptListUser.DataBind();
+
             //Lấy file Attachs
             string list = obj.Attachs.ToString();
             string[] item;

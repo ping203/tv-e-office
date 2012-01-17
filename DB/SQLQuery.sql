@@ -169,9 +169,9 @@ BEGIN
 		SET @DieuKien=' WHERE (1=1)'
 		IF @Name IS NOT NULL AND @Name<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND Name LIKE(N''%'+@Name+'%'')'
+			SET @DieuKien=@DieuKien+' AND Name='''+@Name+''''
 		END
-		EXEC('WITH tblRecords AS (SELECT ROW_NUMBER() OVER (ODERY BY '+@OrderBy+' '+@Order+') AS RowIndex,* 
+		EXEC('WITH tblRecords AS (SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,* 
 			FROM tblGroup'+@DieuKien+'),tblTotalResult AS (SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
@@ -279,8 +279,7 @@ CREATE TABLE tblUser
 	[Address] NVARCHAR(200),
 	Position NVARCHAR(200),
 	[Status] VARCHAR(50),
-	IDDepartment INT FOREIGN KEY REFERENCES tblDepartment(DepartmentID),
-	IDGroup INT FOREIGN KEY REFERENCES tblGroup(GroupID)
+	IDDepartment INT FOREIGN KEY REFERENCES tblDepartment(DepartmentID)	
 )
 GO
 /* add */
@@ -299,13 +298,13 @@ CREATE PROC sp_tblUser_add
 	@Address NVARCHAR(200),
 	@Position NVARCHAR(200),
 	@Status VARCHAR(50),
-	@IDDepartment INT,
-	@IDGroup INT
+	@IDDepartment INT	
 AS
 BEGIN
-	INSERT INTO tblUser(UserName,[Password],FullName,Email,PhoneNumber,Tel,Gender,BirthDay,[Address],Position,[Status],IDDepartment,IDGroup)
-	 VALUES(@UserName,@Password,@FullName,@Email,@PhoneNumber,@Tel,@Gender,@BirthDay,@Address,@Position,@Status,@IDDepartment,@IDGroup)
+	INSERT INTO tblUser(UserName,[Password],FullName,Email,PhoneNumber,Tel,Gender,BirthDay,[Address],Position,[Status],IDDepartment)
+	 VALUES(@UserName,@Password,@FullName,@Email,@PhoneNumber,@Tel,@Gender,@BirthDay,@Address,@Position,@Status,@IDDepartment)
 END
+GO
 /* update */
 IF OBJECT_ID('sp_tblUser_update','P') IS NOT NULL
 	DROP PROC sp_tblUser_update
@@ -322,8 +321,7 @@ CREATE PROC sp_tblUser_update
 	@Address NVARCHAR(200)=NULL,
 	@Position NVARCHAR(200)=NULL,
 	@Status VARCHAR(50)=NULL,
-	@IDDepartment INT=NULL,
-	@IDGroup INT=NULL
+	@IDDepartment INT=NULL	
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
@@ -371,11 +369,7 @@ BEGIN
 	IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
 	BEGIN
 		SET @Update=@Update+',IDDepartment='+cast(@IDDepartment AS VARCHAR)
-	END
-	IF @IDGroup IS NOT NULL AND @IDGroup<>0
-	BEGIN
-		SET @Update=@Update+',IDGroup='+cast(@IDGroup AS VARCHAR)
-	END
+	END	
 	EXEC('UPDATE tblUser SET'+@Update+' WHERE UserName='''+@UserName+'''')
 END
 GO
@@ -406,8 +400,7 @@ CREATE PROC sp_tblUser_get
 	@Address NVARCHAR(200)=NULL,
 	@Position NVARCHAR(200)=NULL,
 	@Status VARCHAR(50)=NULL,
-	@IDDepartment INT=NULL,
-	@IDGroup INT=NULL,
+	@IDDepartment INT=NULL,	
 	@Order VARCHAR(20)='DESC',
 	@OrderBy VARCHAR(100)='FullName',
 	@PageIndex INT=1,
@@ -467,11 +460,7 @@ BEGIN
 			IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
 			BEGIN
 				SET @DieuKien=@DieuKien+' AND IDDepartment='+cast(@IDDepartment AS NVARCHAR)
-			END
-			IF @IDGroup IS NOT NULL AND @IDGroup<>0
-			BEGIN
-				SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
-			END
+			END			
 			EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
 				FROM tblUser'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
 				SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
@@ -483,6 +472,61 @@ BEGIN
 	END
 END
 GO
+/* table User_Group */
+IF OBJECT_ID('tblUser_Group','U') IS NOT NULL
+	DROP TABLE tblUser_Group
+GO
+CREATE TABLE tblUser_Group
+(
+	IDUser INT FOREIGN KEY REFERENCES tblUser(UserID),
+	IDGroup INT FOREIGN KEY REFERENCES tblGroup(GroupID),
+	PRIMARY KEY(IDUser,IDGroup)
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblUser_Group_add','P') IS NOT NULL
+	DROP PROC sp_tblUser_Group_add
+GO
+CREATE PROC sp_tblUser_Group_add
+	@IDUser INT,
+	@IDGroup INT
+AS
+BEGIN
+	INSERT INTO tblUser_Group(IDUser,IDGroup) VALUES(@IDUser,@IDGroup)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblUser_Group_delete','P') IS NOT NULL
+	DROP PROC sp_tblUser_Group_delete
+GO
+CREATE PROC sp_tblUser_Group_delete
+	@IDUser INT,
+	@IDGroup INT
+AS
+BEGIN
+	DELETE tblUser_Group WHERE IDUser=@IDUser AND IDGroup=@IDGroup
+END
+/* get */
+IF OBJECT_ID('sp_tblUser_Group_get','P') IS NOT NULL
+	DROP PROC sp_tblUser_Group_get
+GO
+CREATE PROC sp_tblUser_Group_get
+	@IDUser INT=NULL,
+	@IDGroup INT=NULL
+AS
+BEGIN
+	DECLARE @DieuKien NVARCHAR(500)
+	SET @DieuKien=' WHERE (1=1)'
+	IF @IDUser IS NOT NULL AND @IDUser<>0
+	BEGIN
+		SET @DieuKien=@DieuKien+' AND IDUser='+cast(@IDUser AS NVARCHAR)
+	END
+	IF @IDGroup IS NOT NULL AND @IDGroup<>0
+	BEGIN
+		SET @DieuKien=@DieuKien+' AND IDGroup='+cast(@IDGroup AS NVARCHAR)
+	END
+	EXEC('SELECT * FROM tblUser_Group'+@DieuKien)
+END
 /* table DocumentKind */
 IF OBJECT_ID('tblDocumentKind','U') IS NOT NULL
 	DROP TABLE tblDocumentKind
@@ -1488,3 +1532,259 @@ BEGIN
 		SELECT * FROM tblCalendar WHERE CalendarID=@CalendarID
 	END
 END	
+GO
+/* tbl ContactGroup */
+IF OBJECT_ID('tblContactGroup','U') IS NOT NULL
+	DROP TABLE tblContactGroup
+GO
+CREATE TABLE tblContactGroup
+(
+	ContactGroupID INT IDENTITY(1,1) PRIMARY KEY,
+	GroupName NVARCHAR(200),
+	[Description] NVARCHAR(200),
+	IDUser INT FOREIGN KEY REFERENCES tblUser(UserID)		
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblContactGroup_add','P') IS NOT NULL
+	DROP PROC sp_tblContactGroup_add
+GO
+CREATE PROC sp_tblContactGroup_add
+	@GroupName NVARCHAR(200),
+	@Description NVARCHAR(200),
+	@IDUser INT
+AS
+BEGIN
+	INSERT INTO tblContactGroup(GroupName,[Description],IDUser) VALUES(@GroupName,@Description,@IDUser)
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblContactGroup_update','P') IS NOT NULL
+	DROP PROC sp_tblContactGroup_update
+GO
+CREATE PROC sp_tblContactGroup_update
+	@ContactGroupID INT,
+	@GroupName NVARCHAR(200),
+	@Description NVARCHAR(200)
+AS
+BEGIN
+	UPDATE tblContactGroup SET GroupName=@GroupName,[Description]=@Description WHERE ContactGroupID=@ContactGroupID
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblContactGroup_delete','P') IS NOT NULL
+	DROP PROC sp_tblContactGroup_delete
+GO
+CREATE PROC sp_tblContactGroup_delete
+	@ContactGroupID INT
+AS
+BEGIN
+	DELETE tblContactGroup WHERE ContactGroupID=@ContactGroupID
+END
+GO
+/* get */
+IF OBJECT_ID('sp_tblContactGroup_get','P') IS NOT NULL
+	DROP PROC sp_tblContactGroup_get
+GO
+CREATE PROC sp_tblContactGroup_get
+	@ContactGroupID INT=NULL,
+	@IDUser INT=NULL	
+AS
+BEGIN
+	IF @ContactGroupID IS NOT NULL AND @ContactGroupID <> 0
+	BEGIN
+		SELECT * FROM tblContactGroup WHERE ContactGroupID=@ContactGroupID
+	END
+	ELSE
+	BEGIN
+		IF @IDUser IS NOT NULL AND @IDUser<>0
+		BEGIN
+			SELECT * FROM tblContactGroup WHERE IDUser=@IDUser 
+		END		
+	END
+END
+GO
+/* tbl contact */
+IF OBJECT_ID('tblContact','U') IS NOT NULL
+	DROP TABLE tblContact
+GO
+CREATE TABLE tblContact
+(
+	ContactID INT IDENTITY(1,1) PRIMARY KEY,
+	ContactName NVARCHAR(200),
+	FullName NVARCHAR(200),
+	Phone VARCHAR(20),
+	Tel VARCHAR(20),
+	BirthDay DATETIME,
+	Gender NVARCHAR(20),
+	Job NVARCHAR(200),
+	[Address] NVARCHAR(200),
+	IDContactGroup INT FOREIGN KEY REFERENCES tblContactGroup(ContactGroupID),
+	IDUser INT FOREIGN KEY REFERENCES tblUser(UserID)
+)
+GO
+/* add */
+IF OBJECT_ID('sp_tblContact_add','U') IS NOT NULL
+	DROP PROC sp_tblContact_add
+GO
+CREATE PROC sp_tblContact_add
+	@ContactName NVARCHAR(200),
+	@FullName NVARCHAR(200),
+	@Phone VARCHAR(20),
+	@Tel VARCHAR(20),
+	@BirthDay DATETIME,
+	@Gender NVARCHAR(20),
+	@Job NVARCHAR(200),
+	@Address NVARCHAR(200),
+	@IDContactGroup INT,
+	@IDUser INT	
+AS
+BEGIN
+	INSERT INTO tblContact(ContactName,FullName,Phone,Tel,BirthDay,Gender,Job,[Address],IDContactGroup,IDUser)
+						VALUES(@ContactName,@FullName,@Phone,@Tel,@BirthDay,@Gender,@Job,@Address,@IDContactGroup,@IDUser) 
+END
+GO
+/* update */
+IF OBJECT_ID('sp_tblContact_update','P') IS NOT NULL
+	DROP PROC sp_tblContact_update
+GO
+CREATE PROC sp_tblContact_update
+	@ContactID INT,
+	@ContactName NVARCHAR(200)=NULL,
+	@FullName NVARCHAR(200)=NULL,
+	@Phone VARCHAR(20)=NULL,
+	@Tel VARCHAR(20)=NULL,
+	@BirthDay DATETIME=NULL,
+	@Gender NVARCHAR(20)=NULL,
+	@Job NVARCHAR(200)=NULL,
+	@Address NVARCHAR(200)=NULL,
+	@IDContactGroup INT=NULL,
+	@IDUser INT
+AS
+BEGIN
+	DECLARE @Update NVARCHAR(500)
+	SET @Update=' IDUser='+cast(@IDUser AS VARCHAR)
+	IF @ContactName IS NOT NULL AND @ContactName <>''
+	BEGIN
+		SET @Update=@Update+',ContactName='''+cast(@ContactName AS NVARCHAR)+''''
+	END
+	IF @FullName IS NOT NULL AND @FullName <>''
+	BEGIN
+		SET @Update=@Update+',FullName='''+cast(@FullName AS NVARCHAR)+''''
+	END
+	IF @Phone IS NOT NULL AND @Phone <>''
+	BEGIN
+		SET @Update=@Update+',Phone='''+cast(@Phone AS VARCHAR)+''''
+	END
+	IF @Tel IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Tel='''+cast(@Tel AS VARCHAR)+''''
+	END
+	IF @BirthDay IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',BirthDay='''+cast(@BirthDay AS NVARCHAR)+''''
+	END
+	IF @Gender IS NOT NULL AND @Gender <>''
+	BEGIN
+		SET @Update=@Update+',Gender='''+cast(@Gender AS NVARCHAR)+''''
+	END
+	IF @Job IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Job='''+cast(@Job AS NVARCHAR)+''''
+	END
+	IF @Address IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Address='''+cast(@Address AS NVARCHAR)+''''
+	END
+	IF @IDContactGroup IS NOT NULL AND @IDContactGroup<>0
+	BEGIN
+		SET @Update=@Update+',IDGroupContact='+cast(@IDContactGroup AS VARCHAR)
+	END
+	EXEC('UPDATE tblContact SET'+@Update+' WHERE ContactID='+@ContactID)	
+END
+GO
+/* delete */
+IF OBJECT_ID('sp_tblContact_delete','P') IS NOT NULL
+	DROP PROC sp_tblCnotact_delete
+GO
+CREATE PROC sp_tblContact_delete
+	@ContactID INT
+AS
+BEGIN
+	DELETE tblContact WHERE ContactID=@ContactID
+END
+GO
+/* get */
+IF OBJECT_ID('sp_tblContact_get','P') IS NOT NULL
+	DROP PROC sp_tblContact_get
+GO
+CREATE PROC sp_tblContact_get
+	@ContactID INT,
+	@ContactName NVARCHAR(200)=NULL,
+	@FullName NVARCHAR(200)=NULL,
+	@Phone VARCHAR(20)=NULL,
+	@Tel VARCHAR(20)=NULL,
+	@Gender NVARCHAR(20)=NULL,
+	@Job NVARCHAR(200)=NULL,
+	@Address NVARCHAR(200)=NULL,
+	@IDContactGroup INT=NULL,
+	@IDUser INT,
+	@Order VARCHAR(10)='ASC',
+	@OrderBy VARCHAR(20)='ContactName',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @ContactID IS NULL OR @ContactID=0
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'		
+		IF @ContactName IS NOT NULL AND @ContactName<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND ContactName LIKE(N''%'+cast(@ContactName AS NVARCHAR)+'%'')'
+		END
+		IF @FullName IS NOT NULL AND @FullName<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND FullName LIKE(N''%'+cast(@FullName AS NVARCHAR)+'%'')'
+		END
+		IF @Phone IS NOT NULL AND @Phone<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Phone LIKE(N''%'+cast(@Phone AS NVARCHAR)+'%'')'
+		END
+		IF @Tel IS NOT NULL AND @Tel<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Tel LIKE(''%'+cast(@Tel AS NVARCHAR)+'%'')'
+		END
+		IF @Gender IS NOT NULL AND @Gender<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Gender='''+cast(@Gender AS NVARCHAR)+''''
+		END
+		IF @Job IS NOT NULL AND @Job<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Job LIKE(''%'+cast(@Job AS NVARCHAR)+'%'')'
+		END			
+		IF @Address IS NOT NULL AND @Address<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Address LIKE(''%'+cast(@Address AS NVARCHAR)+'%'')'
+		END						
+		IF @IDContactGroup IS NOT NULL AND @IDContactGroup<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND IDContactGroup='+cast(@IDContactGroup AS NVARCHAR)
+		END
+		IF @IDUser<>0
+		BEGIN		
+			SET @DieuKien=@DieuKien+' AND IDUser='+cast(@IDUser AS VARCHAR)
+		END
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,*
+			FROM tblContact'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblContact WHERE ContactID=@ContactID
+	END
+END

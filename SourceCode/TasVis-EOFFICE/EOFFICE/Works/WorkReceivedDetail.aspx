@@ -116,6 +116,9 @@
                             <td colspan="3">
                                 <input type="button" id="btnHide" value="Chọn người chuyển tiếp" style="margin-bottom:10px" />
                                 <div id="listUserProcess" style="width:100%" >
+
+                                    <asp:CheckBoxList ID="cbxListUserProcess" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
+
                                     <%--<asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>--%>
                                     <asp:Repeater ID="rptUserProcess" runat="server">
                                         <HeaderTemplate>
@@ -137,6 +140,7 @@
                                             </table>
                                         </FooterTemplate>
                                     </asp:Repeater>
+
                                 </div>
                             </td>
                         </tr>

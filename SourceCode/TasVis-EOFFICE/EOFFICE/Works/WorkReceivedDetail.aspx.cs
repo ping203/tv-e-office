@@ -59,11 +59,16 @@ namespace EOFFICE.Works
             //Load CheckBoxListUser
             
             string username = string.Empty;
+
+            cbxListUserProcess.DataSource = BobjUser.Get(username);
+            cbxListUserProcess.DataBind();
+
             //CheckBoxBind.DataSource = BobjUser.Get(username);
             //CheckBoxBind.DataBind();
 
             rptUserProcess.DataSource = BobjUser.Get(username); ;
             rptUserProcess.DataBind();
+
         }
 
         
@@ -113,32 +118,39 @@ namespace EOFFICE.Works
             HttpFileCollection hfc = Request.Files;
             int n = hfc.Count;
             string listFile = ",";
-            try
+            if (n > 0)
             {
-                // Get the HttpFileCollection
-
-                for (int i = 0; i < hfc.Count; i++)
+                
+                try
                 {
-                    HttpPostedFile hpf = hfc[i];
-                    if (hpf.ContentLength > 0)
+                    // Get the HttpFileCollection
+
+                    for (int i = 0; i < hfc.Count; i++)
                     {
-                        hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName));
-                        OAttach obj = new OAttach();
-                        obj.Name = System.IO.Path.GetFileName(hpf.FileName);
-                        obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName);
-                        obj.Description = "";
-                        Bobj.Add(obj);
-                        listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
+                        HttpPostedFile hpf = hfc[i];
+                        if (hpf.ContentLength > 0)
+                        {
+                            hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName));
+                            OAttach obj = new OAttach();
+                            obj.Name = System.IO.Path.GetFileName(hpf.FileName);
+                            obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName);
+                            obj.Description = "";
+                            Bobj.Add(obj);
+                            listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+                catch (Exception ex)
+                {
 
+                }
             }
             //Lấy danh sách người chuyển tiếp
             int count = 0;//biến đếm số người được chuyển tiếp
             string ListUserProcess = ",";
+
+            foreach (ListItem item in cbxListUserProcess.Items)
+
             //foreach (ListItem item in CheckBoxBind.Items)
             //{
 
@@ -158,6 +170,7 @@ namespace EOFFICE.Works
             //    }
             //}
             for (int i = 0; i < rptUserProcess.Items.Count; i++)
+
             {
                 CheckBox cb = (CheckBox)rptUserProcess.Items[i].FindControl("cbUser");
                 if (cb.Checked == true)
@@ -182,6 +195,7 @@ namespace EOFFICE.Works
 
             BobjComment.Add(objComment);
 
+            
             //Thêm danh sách người chuyển tiếp nếu có chuyển tiếp
             if (count > 0)
             {

@@ -68,13 +68,31 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.Button btnSubmit;
         
         /// <summary>
-        /// grvWorkGroup control.
+        /// lblThongBao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvWorkGroup;
+        protected global::System.Web.UI.WebControls.Label lblThongBao;
+        
+        /// <summary>
+        /// lblThongBao2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblThongBao2;
+        
+        /// <summary>
+        /// grvContactGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvContactGroup;
         
         /// <summary>
         /// LinkButton5 control.

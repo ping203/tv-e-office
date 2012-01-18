@@ -1,21 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ContactGroup.aspx.cs" Inherits="EOFFICE.Contacts.ContactGroup" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
-    <script type="text/javascript">
-
-    function SelectAll(id) {
-
-        var frm = document.forms[0];
-
-        for (i=0;i<frm.elements.length;i++) {
-
-            if (frm.elements[i].type == "checkbox") {
-
-                frm.elements[i].checked = document.getElementById(id).checked;
-            }
-        }
-    } 
-    </script>
+    
     <div class="list wp-form" id="createWorkGroup">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Quản lý nhóm danh bạ</h2>
                 
@@ -42,17 +28,26 @@
                         <tr>
                             <td></td>
                             <td>
-                                <asp:Button ID="btnSubmit" runat="server" Text="Thêm"  />
+                                <asp:Button ID="btnSubmit" runat="server" Text="Thêm" ToolTip="Thêm nhóm danh bạ" 
+                                    onclick="btnSubmit_Click"  /> &nbsp &nbsp
+                               
+                                <asp:Label runat="server" ID="lblThongBao"  ForeColor="Red"></asp:Label>
                             </td>
                         </tr>     
                     </table>
                     <div class="list" id="list-congvieccanlam">
             	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM DANH BẠ</h2>
             	        
-            	        <br />
-                        <asp:GridView ID="grvWorkGroup" runat="server" AutoGenerateColumns="False" 
+            	        
+            	        <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red"></asp:Label>
+                        <asp:GridView ID="grvContactGroup" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" 
-                            DataKeyNames="WorkGroupID"  >
+                            DataKeyNames="ContactGroupID" 
+                                    onrowcancelingedit="grvContactGroup_RowCancelingEdit" 
+                                    onrowcreated="grvContactGroup_RowCreated" 
+                                    onrowdatabound="grvContactGroup_RowDataBound" 
+                                    onrowediting="grvContactGroup_RowEditing" 
+                                    onrowupdating="grvContactGroup_RowUpdating"  >
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
@@ -69,29 +64,20 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Tên nhóm công việc">
+                                <asp:BoundField DataField="GroupName" HeaderText="Tên nhóm danh bạ">
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Description" HeaderText="Mô tả" >
-                                    <ItemStyle Width="45%"  />
+                                    
                                 </asp:BoundField>
-                                <asp:TemplateField>
-                                    <HeaderTemplate>Nhóm công việc cha</HeaderTemplate>                                    
-                                    <ItemTemplate>                                        
-                                        <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px"  Enabled="false"></asp:DropDownList>
-                                    </ItemTemplate>                                    
-                                    <EditItemTemplate>
-                                        <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px"></asp:DropDownList>
-                                    </EditItemTemplate>
-                                </asp:TemplateField>                                                                   
                                 <asp:TemplateField>
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit"  runat="server" />
-                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit"  runat="server" ToolTip="Sửa" />
+                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server" ToolTip="Xóa"></asp:LinkButton>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update"   runat="server" />
-                                        <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel"  runat="server" />
+                                        <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update" ToolTip="Cập nhật"   runat="server" />
+                                        <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel" ToolTip="Hủy"  runat="server" />
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="7%" />                   
                                 </asp:TemplateField>
@@ -127,5 +113,19 @@
                     </div>
                 
             </div>
-    
+<script type="text/javascript">
+
+    function SelectAll(id) {
+
+        var frm = document.forms[0];
+
+        for (i = 0; i < frm.elements.length; i++) {
+
+            if (frm.elements[i].type == "checkbox") {
+
+                frm.elements[i].checked = document.getElementById(id).checked;
+            }
+        }
+    } 
+    </script>    
 </asp:Content>

@@ -99,15 +99,17 @@ namespace DataAccess.BusinessObject
         /// </summary>
         /// <param name="WorkID"></param>
         /// <param name="IDUserProcess"></param>
+        /// <param name="IDUserCreate"></param>
         /// <returns></returns>
-        public bool Update(int WorkID, string IDUserProcess)
+        public bool UpdateUserProcess(int WorkID, string IDUserProcess,int IDUserCreate)
         {
-            SqlParameter[] sqlPara = new SqlParameter[2];
+            SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@WorkID", SqlDbType.Int);
             sqlPara[0].Value = WorkID;
             sqlPara[1] = new SqlParameter("@IDUserProcess", SqlDbType.VarChar);
             sqlPara[1].Value = IDUserProcess;
-            
+            sqlPara[2] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[2].Value = IDUserCreate;
 
             return RunProcudure("sp_tblWork_update", sqlPara);
         }

@@ -18,6 +18,33 @@ namespace EOFFICE.Users
 {
     public partial class Default : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Trang hiện tại
+        /// </summary>
+        public int CurrentPage
+        {
+            get
+            {
+                if (Request.QueryString["currentpage"] != null)
+                {
+                    try
+                    {
+                        return int.Parse(Request.QueryString["currentpage"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        #endregion
+
         #region "Common Function"
 
         /// <summary>
@@ -28,6 +55,8 @@ namespace EOFFICE.Users
             BUser ctl = new BUser();
             grvListUsers.DataSource = ctl.Get("");
             grvListUsers.DataBind();
+            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.ItemCount = 200;
         }
 
         /// <summary>

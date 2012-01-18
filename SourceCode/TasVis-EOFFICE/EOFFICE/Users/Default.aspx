@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Users.Default"
     MasterPageFile="~/MasterPages/Default.Master" %>
-
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server" ID="ContentUser">
     <div class="list" id="list-congvieccanlam">
         <h2>
@@ -31,7 +31,6 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <input type="checkbox" value="abc" class="chkUserCheck" id="chkCheckUser" runat="server" />
-                                    
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
@@ -47,20 +46,26 @@
                                 <HeaderTemplate>
                                     Thao tác</HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="LinkButton3"  CommandName="cmdApprove" CommandArgument='<%#Eval("Username") %>' ToolTip="Duyệt" Visible='<%#VisibleUnApp(Eval("Status")) %>' 
-                                        CssClass="link-function" runat="server">
-                                     <asp:Image  CssClass="link-function" runat="server" ID="Image1" ImageUrl="~/images/unchecked.gif"  />
-                                        </asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton2"  CommandName="cmdUnApprove" CommandArgument='<%#Eval("Username") %>' ToolTip="Khóa" Visible='<%#VisibleApp(Eval("Status")) %>' 
-                                        CssClass="link-function" runat="server">
-                                     <asp:Image  CssClass="link-function" runat="server" ID="imgApprove" ImageUrl="~/images/checked.gif"  />
-                                        </asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("Username") %>' ToolTip="Sửa người dùng"
-                                        CssClass="link-function edit" runat="server" />
-                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("Username") %>' ToolTip="Xóa người dùng"
-                                        CssClass="link-function delete" runat="server" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa người dùng?');"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton3" CommandName="cmdApprove" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Duyệt" Visible='<%#VisibleUnApp(Eval("Status")) %>' CssClass="link-function"
+                                        runat="server">
+                                        <asp:Image CssClass="link-function" runat="server" ID="Image1" ImageUrl="~/images/unchecked.gif" />
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton2" CommandName="cmdUnApprove" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Khóa" Visible='<%#VisibleApp(Eval("Status")) %>' CssClass="link-function"
+                                        runat="server">
+                                        <asp:Image CssClass="link-function" runat="server" ID="imgApprove" ImageUrl="~/images/checked.gif" />
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton5" CommandName="cmdUserGroup" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Quyền" CssClass="link-function" runat="server">
+                                        <asp:Image CssClass="link-function" runat="server" ID="Image2" ImageUrl="~/images/User-group.png" />
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Sửa người dùng" CssClass="link-function edit" runat="server" />
+                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Xóa người dùng" CssClass="link-function delete" runat="server" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa người dùng?');"></asp:LinkButton>
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" Width="10%" />
+                                <ItemStyle HorizontalAlign="Center" Width="15%" />
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />
@@ -69,6 +74,7 @@
             </tr>
         </table>
         <div class="pagenav">
+            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url"  PageSize="5" PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
             <ul>
                 <li><a href="#">Trang đầu</a></li>
                 <li><a href="#" class="pagecurrent">1</a></li>

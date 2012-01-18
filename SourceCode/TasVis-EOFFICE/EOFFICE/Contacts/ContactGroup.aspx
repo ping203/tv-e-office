@@ -21,9 +21,12 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button ID="btnDanhSach" runat="server" Text="Danh sách liên hệ" CssClass="btn"  /></li>
-                    	    <li><asp:Button ID="btnNhom" runat="server" Text="Quản lý nhóm" CssClass="btn" /></li>
-                            <li><asp:Button ID="btnThem" runat="server" Text="Thêm liên hệ" CssClass="btn" /></li>
+                    	    <li><asp:LinkButton ID="btnDanhSach" runat="server" Text="Danh sách liên hệ" 
+                                    CssClass="btn" onclick="btnDanhSach_Click"></asp:LinkButton></li>
+                    	    <li><asp:LinkButton ID="btnNhom" runat="server" Text="Quản lý nhóm" CssClass="btn" 
+                                    onclick="btnNhom_Click"></asp:LinkButton></li>
+                            <li><asp:LinkButton ID="btnThem" runat="server" Text="Thêm liên hệ" CssClass="btn" 
+                                    onclick="btnThem_Click" ></asp:LinkButton></li>
                         </ul>
                     </div>
                     <div class="form">
@@ -114,9 +117,12 @@
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="Button1" runat="server" Text="Danh sách liên hệ" CssClass="btn"  /></li>
-                    	    <li><asp:Button ID="Button2" runat="server" Text="Quản lý nhóm" CssClass="btn" /></li>
-                            <li><asp:Button ID="Button3" runat="server" Text="Thêm liên hệ" CssClass="btn" /></li>
+                        	<li><asp:LinkButton ID="LinkButton5" runat="server" Text="Danh sách liên hệ" 
+                                    CssClass="btn" onclick="btnDanhSach_Click"></asp:LinkButton></li>
+                    	    <li><asp:LinkButton ID="LinkButton6" runat="server" Text="Quản lý nhóm" 
+                                    CssClass="btn" onclick="btnNhom_Click"></asp:LinkButton></li>
+                            <li><asp:LinkButton ID="LinkButton7" runat="server" Text="Thêm liên hệ" 
+                                    CssClass="btn" onclick="btnThem_Click" ></asp:LinkButton></li>
                         </ul>
                     </div>
                 

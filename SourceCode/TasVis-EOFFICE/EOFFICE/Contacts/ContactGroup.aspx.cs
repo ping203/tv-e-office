@@ -19,5 +19,20 @@ namespace EOFFICE.Contacts
         {
 
         }
+
+        protected void btnDanhSach_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnNhom_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ContactGroup.aspx");
+        }
+
+        protected void btnThem_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ContactCreate.aspx");
+        }
     }
 }

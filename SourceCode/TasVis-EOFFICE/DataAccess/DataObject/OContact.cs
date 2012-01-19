@@ -21,6 +21,13 @@ namespace DataAccess.DataObject
             get { return _ContactName; }
             set { _ContactName = value; }
         }
+        private string _TitleName;
+
+        public string TitleName
+        {
+            get { return _TitleName; }
+            set { _TitleName = value; }
+        }
         private string _FullName;
 
         public string FullName
@@ -41,6 +48,13 @@ namespace DataAccess.DataObject
         {
             get { return _Tel; }
             set { _Tel = value; }
+        }
+        private string _Email;
+
+        public string Email
+        {
+            get { return _Email; }
+            set { _Email = value; }
         }
         private DateTime _BirthDay;
 
@@ -69,6 +83,13 @@ namespace DataAccess.DataObject
         {
             get { return _Address; }
             set { _Address = value; }
+        }
+        private string _Other;
+
+        public string Other
+        {
+            get { return _Other; }
+            set { _Other = value; }
         }
         private int _IDContactGroup;
 

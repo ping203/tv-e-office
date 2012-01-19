@@ -19,7 +19,7 @@ namespace DataAccess.BusinessObject
         /// <returns></returns>
         public bool Add(OContact obj)
         {
-            SqlParameter[] sqlPara = new SqlParameter[10];
+            SqlParameter[] sqlPara = new SqlParameter[13];
             sqlPara[0] = new SqlParameter("@ContactName", SqlDbType.NVarChar);
             sqlPara[0].Value = obj.ContactName;
             sqlPara[1] = new SqlParameter("@FullName", SqlDbType.NVarChar);
@@ -40,7 +40,12 @@ namespace DataAccess.BusinessObject
             sqlPara[8].Value = obj.IDContactGroup;
             sqlPara[9] = new SqlParameter("@IDUser", SqlDbType.Int);
             sqlPara[9].Value = obj.IDUser;
-
+            sqlPara[10] = new SqlParameter("@TitleName", SqlDbType.NVarChar);
+            sqlPara[10].Value = obj.TitleName;
+            sqlPara[11] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[11].Value = obj.Email;
+            sqlPara[12] = new SqlParameter("@Other", SqlDbType.NVarChar);
+            sqlPara[12].Value = obj.Other;
             return RunProcudure("sp_tblContact_add", sqlPara);
         }
 

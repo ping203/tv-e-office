@@ -1612,13 +1612,16 @@ CREATE TABLE tblContact
 (
 	ContactID INT IDENTITY(1,1) PRIMARY KEY,
 	ContactName NVARCHAR(200),
+	TitleName NVARCHAR(30),
 	FullName NVARCHAR(200),
 	Phone VARCHAR(20),
 	Tel VARCHAR(20),
+	Email VARCHAR(50),	
 	BirthDay DATETIME,
 	Gender NVARCHAR(20),
 	Job NVARCHAR(200),
 	[Address] NVARCHAR(200),
+	Other NVARCHAR(200),
 	IDContactGroup INT FOREIGN KEY REFERENCES tblContactGroup(ContactGroupID),
 	IDUser INT FOREIGN KEY REFERENCES tblUser(UserID)
 )
@@ -1629,19 +1632,22 @@ IF OBJECT_ID('sp_tblContact_add','U') IS NOT NULL
 GO
 CREATE PROC sp_tblContact_add
 	@ContactName NVARCHAR(200),
+	@TitleName NVARCHAR(30),
 	@FullName NVARCHAR(200),
 	@Phone VARCHAR(20),
 	@Tel VARCHAR(20),
+	@Email VARCHAR(50),
 	@BirthDay DATETIME,
 	@Gender NVARCHAR(20),
 	@Job NVARCHAR(200),
 	@Address NVARCHAR(200),
+	@Other NVARCHAR(200),
 	@IDContactGroup INT,
 	@IDUser INT	
 AS
 BEGIN
-	INSERT INTO tblContact(ContactName,FullName,Phone,Tel,BirthDay,Gender,Job,[Address],IDContactGroup,IDUser)
-						VALUES(@ContactName,@FullName,@Phone,@Tel,@BirthDay,@Gender,@Job,@Address,@IDContactGroup,@IDUser) 
+	INSERT INTO tblContact(ContactName,TitleName,FullName,Phone,Tel,Email,BirthDay,Gender,Job,[Address],Other,IDContactGroup,IDUser)
+						VALUES(@ContactName,@TitleName,@FullName,@Phone,@Tel,@Email,@BirthDay,@Gender,@Job,@Address,@Other,@IDContactGroup,@IDUser) 
 END
 GO
 /* update */
@@ -1651,13 +1657,16 @@ GO
 CREATE PROC sp_tblContact_update
 	@ContactID INT,
 	@ContactName NVARCHAR(200)=NULL,
+	@TitleName NVARCHAR(30)=NULL,
 	@FullName NVARCHAR(200)=NULL,
 	@Phone VARCHAR(20)=NULL,
 	@Tel VARCHAR(20)=NULL,
+	@Email VARCHAR(50)=NULL,
 	@BirthDay DATETIME=NULL,
 	@Gender NVARCHAR(20)=NULL,
 	@Job NVARCHAR(200)=NULL,
 	@Address NVARCHAR(200)=NULL,
+	@Other NVARCHAR(200)=NULL,
 	@IDContactGroup INT=NULL,
 	@IDUser INT
 AS
@@ -1667,6 +1676,10 @@ BEGIN
 	IF @ContactName IS NOT NULL AND @ContactName <>''
 	BEGIN
 		SET @Update=@Update+',ContactName='''+cast(@ContactName AS NVARCHAR)+''''
+	END
+	IF @TitleName IS NOT NULL AND @TitleName <>''
+	BEGIN
+		SET @Update=@Update+',TitleName='''+cast(@TitleName AS NVARCHAR)+''''
 	END
 	IF @FullName IS NOT NULL AND @FullName <>''
 	BEGIN
@@ -1679,6 +1692,10 @@ BEGIN
 	IF @Tel IS NOT NULL
 	BEGIN
 		SET @Update=@Update+',Tel='''+cast(@Tel AS VARCHAR)+''''
+	END
+	IF @Email IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Email='''+cast(@Email AS VARCHAR)+''''
 	END
 	IF @BirthDay IS NOT NULL
 	BEGIN
@@ -1695,6 +1712,10 @@ BEGIN
 	IF @Address IS NOT NULL
 	BEGIN
 		SET @Update=@Update+',Address='''+cast(@Address AS NVARCHAR)+''''
+	END
+	IF @Other IS NOT NULL
+	BEGIN
+		SET @Update=@Update+',Other='''+cast(@Other AS NVARCHAR)+''''
 	END
 	IF @IDContactGroup IS NOT NULL AND @IDContactGroup<>0
 	BEGIN
@@ -1721,9 +1742,11 @@ GO
 CREATE PROC sp_tblContact_get
 	@ContactID INT,
 	@ContactName NVARCHAR(200)=NULL,
+	@TitleName NVARCHAR(30)=NULL,
 	@FullName NVARCHAR(200)=NULL,
 	@Phone VARCHAR(20)=NULL,
 	@Tel VARCHAR(20)=NULL,
+	@Email VARCHAR(50)=NULL,
 	@Gender NVARCHAR(20)=NULL,
 	@Job NVARCHAR(200)=NULL,
 	@Address NVARCHAR(200)=NULL,
@@ -1747,6 +1770,10 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND ContactName LIKE(N''%'+cast(@ContactName AS NVARCHAR)+'%'')'
 		END
+		IF @TitleName IS NOT NULL AND @TitleName<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND TitleName LIKE(N''%'+cast(@TitleName AS NVARCHAR)+'%'')'
+		END
 		IF @FullName IS NOT NULL AND @FullName<>''
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND FullName LIKE(N''%'+cast(@FullName AS NVARCHAR)+'%'')'
@@ -1758,6 +1785,10 @@ BEGIN
 		IF @Tel IS NOT NULL AND @Tel<>''
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND Tel LIKE(''%'+cast(@Tel AS NVARCHAR)+'%'')'
+		END
+		IF @Email IS NOT NULL AND @Email<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Email LIKE(''%'+cast(@Email AS NVARCHAR)+'%'')'
 		END
 		IF @Gender IS NOT NULL AND @Gender<>''
 		BEGIN

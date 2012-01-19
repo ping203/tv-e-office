@@ -29,7 +29,7 @@
                             <td></td>
                             <td>
                                 <asp:Button ID="btnSubmit" runat="server" Text="Thêm" ToolTip="Thêm nhóm danh bạ" 
-                                    onclick="btnSubmit_Click"  /> &nbsp &nbsp
+                                    onclick="btnSubmit_Click" CssClass="btn"  /> &nbsp &nbsp
                                
                                 <asp:Label runat="server" ID="lblThongBao"  ForeColor="Red"></asp:Label>
                             </td>

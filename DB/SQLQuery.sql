@@ -1726,7 +1726,7 @@ END
 GO
 /* delete */
 IF OBJECT_ID('sp_tblContact_delete','P') IS NOT NULL
-	DROP PROC sp_tblCnotact_delete
+	DROP PROC sp_tblContact_delete
 GO
 CREATE PROC sp_tblContact_delete
 	@ContactID INT

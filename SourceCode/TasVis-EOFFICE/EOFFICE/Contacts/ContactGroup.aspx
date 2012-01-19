@@ -38,8 +38,13 @@
                     <div class="list" id="list-congvieccanlam">
             	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM DANH BẠ</h2>
             	        
+            	        <div style="margin-bottom:10px">
+            	            <asp:LinkButton runat="server" ID="btnXoa" Text="Xóa" CssClass="link-btn" 
+                                onclick="btnXoa_Click"></asp:LinkButton> &nbsp &nbsp
+            	            <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
+            	        </div>
             	        
-            	        <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red"></asp:Label>
+            	        
                         <asp:GridView ID="grvContactGroup" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" 
                             DataKeyNames="ContactGroupID" 
@@ -47,7 +52,8 @@
                                     onrowcreated="grvContactGroup_RowCreated" 
                                     onrowdatabound="grvContactGroup_RowDataBound" 
                                     onrowediting="grvContactGroup_RowEditing" 
-                                    onrowupdating="grvContactGroup_RowUpdating"  >
+                                    onrowupdating="grvContactGroup_RowUpdating" 
+                                    onrowdeleting="grvContactGroup_RowDeleting"  >
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
@@ -73,7 +79,7 @@
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit"  runat="server" ToolTip="Sửa" />
-                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server" ToolTip="Xóa"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server" ToolTip="Xóa" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa nhóm danh bạ?');"></asp:LinkButton>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update" ToolTip="Cập nhật"   runat="server" />

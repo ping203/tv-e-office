@@ -77,6 +77,15 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.Label lblThongBao;
         
         /// <summary>
+        /// btnXoa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnXoa;
+        
+        /// <summary>
         /// lblThongBao2 control.
         /// </summary>
         /// <remarks>

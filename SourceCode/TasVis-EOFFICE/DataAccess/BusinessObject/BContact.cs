@@ -107,16 +107,380 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblContact_update", sqlPara);
         }
 
+        public bool Update(int ContactID,string FullName, string Phone, string Tel, string Address,string Email, int IDUser)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[7];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;            
+            sqlPara[1] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[1].Value = FullName;
+            sqlPara[2] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[2].Value = Phone;
+            sqlPara[3] = new SqlParameter("@Tel", SqlDbType.VarChar);
+            sqlPara[3].Value = Tel;            
+            sqlPara[4] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[4].Value = Address;
+            sqlPara[5] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[5].Value = Email;
+            sqlPara[6] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[6].Value = IDUser;
+
+            return RunProcudure("sp_tblContact_update", sqlPara);
+        }
+
         /// <summary>
         /// Get Contact theo ID
         /// </summary>
         /// <param name="ContactID"></param>
         /// <returns></returns>
-        public IList<OContact> Get(int ContactID)
+        public IList<OContact> Get(int ContactID,int IDUser)
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
+            SqlParameter[] sqlPara = new SqlParameter[2];
             sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
             sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> Get(int ContactID, int IDUser,string Gender)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[2].Value = Gender;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> Get(int ContactID, int IDUser,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[2].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> Get(int ContactID, int IDUser, string Gender, int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[2].Value = Gender;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+
+        /// <summary>
+        /// Get Contact theo FullName
+        /// </summary>
+        /// <param name="ContactID"></param>
+        /// <param name="IDUser"></param>
+        /// <param name="FullName"></param>
+        /// <returns></returns>
+        public IList<OContact> GetFullName(int ContactID, int IDUser,string FullName)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[2].Value = FullName;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetFullName(int ContactID, int IDUser, string FullName,string Gender)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[2].Value = FullName;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetFullName(int ContactID, int IDUser, string FullName,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[2].Value = FullName;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetFullName(int ContactID, int IDUser, string FullName, string Gender, int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[5];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[2].Value = FullName;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            sqlPara[4] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[4].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+
+        /// <summary>
+        /// get Contact theo Phone
+        /// </summary>
+        /// <param name="ContactID"></param>
+        /// <param name="IDUser"></param>
+        /// <param name="Phone"></param>
+        /// <returns></returns>
+        public IList<OContact> GetPhone(int ContactID, int IDUser, string Phone)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[2].Value = Phone;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetPhone(int ContactID, int IDUser, string Phone,string Gender)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[2].Value = Phone;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetPhone(int ContactID, int IDUser, string Phone,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[2].Value = Phone;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetPhone(int ContactID, int IDUser, string Phone, string Gender,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[5];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[2].Value = Phone;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            sqlPara[4] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[4].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetEmail(int ContactID, int IDUser, string Email)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[2].Value = Email;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetEmail(int ContactID, int IDUser, string Email,string Gender)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[2].Value = Email;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetEmail(int ContactID, int IDUser, string Email,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[2].Value = Email;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetEmail(int ContactID, int IDUser, string Email, string Gender, int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[5];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[2].Value = Email;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            sqlPara[4] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[4].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetAddress(int ContactID, int IDUser, string Address)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[2].Value = Address;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetAddress(int ContactID, int IDUser, string Address,string Gender)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[2].Value = Address;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetAddress(int ContactID, int IDUser, string Address,int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[2].Value = Address;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> GetAddress(int ContactID, int IDUser, string Address, string Gender, int IDContactGroup)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[5];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[2].Value = Address;
+            sqlPara[3] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[3].Value = Gender;
+            sqlPara[4] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[4].Value = IDContactGroup;
             DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
             IList<OContact> list = new List<OContact>();
             list = Common.Common.ConvertTo<OContact>(tbl);

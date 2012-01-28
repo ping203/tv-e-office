@@ -120,7 +120,7 @@
                         	<a href="../Contacts/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Message.png" runat="server" /></span>Danh bạ cá nhân</a>
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Person.png" runat="server" /></span>Thông tin cá nhân</a>
+                        	<a href="../Users/UserInfo.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Person.png" runat="server" /></span>Thông tin cá nhân</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Đổi mật khẩu</a>

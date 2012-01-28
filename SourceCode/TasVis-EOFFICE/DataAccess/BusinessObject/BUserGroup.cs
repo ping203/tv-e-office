@@ -63,7 +63,10 @@ namespace DataAccess.BusinessObject
                                       };
             sqlParam[0].Value = objUserGroup.IDUser;
             sqlParam[1].Value = objUserGroup.IDGroup;
-            return Common.Common.ConvertTo<OUserGroup>(RunProcedureGet("sp_tblUser_Group_get", sqlParam));
+            DataTable tbl = RunProcedureGet("sp_tblUser_Group_get", sqlParam);
+            IList<OUserGroup> list = new List<OUserGroup>();
+            list = Common.Common.ConvertTo<OUserGroup>(tbl);
+            return list;
         }
     }
 }

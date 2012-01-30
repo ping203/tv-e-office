@@ -7,59 +7,76 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="btnCapNhat" CssClass="btn" Text="Cập nhật" 
+                    	    <li><asp:Button runat="server" ID="btnCapNhat" CssClass="btn" Text="Cập nhật" onclick="btnCapNhat_Click" 
                                     ></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
                     <div class="form">
-                        <table width="100%" cellpadding="5">
+                        <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
                             <tr>
-                                <td colspan="3">
-                                    <asp:Label ID="Label1" runat="server" Text="Tên công việc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblName"></asp:Label>
+                                <td align="left">
+                                    <table>
+                                        <tr>
+                                            <td align="right">Tên tài khoản:</td>
+                                            <td>
+                                                <asp:Label runat="server" ID="lblUserName" Font-Bold="true"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Họ và tên:<span class="rq">*</span></td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtFullName" CssClass="required"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Ngày sinh:<span class="rq">*</span></td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtDate" CssClass="required date datepicker"></asp:TextBox>(ngày/tháng/năm)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Email:<span class="rq">*</span></td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtEmail" CssClass="required email"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Số di động:</td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtPhone"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Số máy bàn:</td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtTel"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Giới tính:</td>
+                                            <td>
+                                                <asp:DropDownList runat="server" ID="ddlGender"></asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Địa chỉ:</td>
+                                            <td>
+                                                <asp:TextBox runat="server" ID="txtAddress"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <asp:Label ID="Label7" runat="server" Text="Người tạo việc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblUserCreate"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="Label2" runat="server" Text="Ngào tạo: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayTao"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="Label3" runat="server" Text="Ngày bắt đầu: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayBatDau"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="Label4" runat="server" Text="Ngày kết thúc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayKetThuc"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <asp:Label ID="Label5" runat="server" Text="Yêu cầu xử lý: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblYeuCau"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="1">
-                                    <asp:Label ID="Label6" runat="server" Text="File kèm theo: "></asp:Label>
-                                    
-                                </td>                              
-                                
-                            </tr>
+                            </tr>    
                         </table>
                         <br />
+                        <asp:Label runat="server" ID="lblThongBao" CssClass="rq"></asp:Label>
                     </div>
+                    
                     <div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="btnCapNhat2" CssClass="btn" Text="Cập nhật" 
+                    	    <li><asp:Button runat="server" ID="btnCapNhat2" CssClass="btn" Text="Cập nhật" onclick="btnCapNhat_Click" 
                                     ></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
@@ -67,12 +84,5 @@
                     </div>
                     
             </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#listUserProcess").hide();
-        $("#btnHide").click(function() {
-            $("#listUserProcess").slideToggle("slow");
-        });
-    });
-</script>
+
 </asp:Content>

@@ -140,6 +140,30 @@ namespace DataAccess.BusinessObject
 
              return RunProcudure("sp_tblUser_update", sqlPara);
          }
+
+         public bool Update(string UserName, string FullName, string Email, string PhoneNumber, string Tel, string Gender, DateTime Birthday, string Address)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[8];
+             sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
+             sqlPara[0].Value = UserName;
+             sqlPara[1] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+             sqlPara[1].Value = FullName;
+             sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+             sqlPara[2].Value = Email;
+             sqlPara[3] = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
+             sqlPara[3].Value = PhoneNumber;
+             sqlPara[4] = new SqlParameter("@Tel", SqlDbType.VarChar);
+             sqlPara[4].Value = Tel;
+             sqlPara[5] = new SqlParameter("@Gender", SqlDbType.VarChar);
+             sqlPara[5].Value = Gender;
+             sqlPara[6] = new SqlParameter("@BirthDay", SqlDbType.DateTime);
+             sqlPara[6].Value = Birthday;
+             sqlPara[7] = new SqlParameter("@Address", SqlDbType.NVarChar);
+             sqlPara[7].Value = Address;            
+
+             return RunProcudure("sp_tblUser_update", sqlPara);
+         }
+
          /// <summary>
          /// Cập nhật trạng thái người dùng
          /// </summary>

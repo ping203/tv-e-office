@@ -106,7 +106,7 @@ namespace DataAccess.BusinessObject
              sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
              sqlPara[0].Value = UserName;
              sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);
-             sqlPara[1].Value = UserName;
+             sqlPara[1].Value = Password;
 
              return RunProcudure("sp_tblUser_update", sqlPara);
          }

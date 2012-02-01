@@ -1518,14 +1518,13 @@ IF OBJECT_ID('sp_tblCalendar_get','P') IS NOT NULL
 GO
 CREATE PROC sp_tblCalendar_get
 	@CalendarID INT=NULL,
-	@FromDate DATETIME=NULL,
-	@ToDate DATETIME=NULL
+	@UserID VARCHAR(200)=NULL
 AS
 BEGIN
 	IF @CalendarID IS NULL OR @CalendarID=0
 	BEGIN
-		IF @FromDate IS NOT NULL AND @FromDate<>'' AND @ToDate IS NOT NULL AND @ToDate<>''		
-			SELECT * FROM tblCalendar WHERE StartDate BETWEEN @FromDate AND @ToDate		
+		IF @UserID IS NOT NULL AND @UserID<>''
+			SELECT * FROM tblCalendar WHERE UserJoin LIKE '%'+@UserID+'%'
 	END
 	ELSE
 	BEGIN

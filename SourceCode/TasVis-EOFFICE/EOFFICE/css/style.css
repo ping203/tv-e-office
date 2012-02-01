@@ -74,7 +74,7 @@ search-doc{}
 .nav-function{padding:2px;}
 .nav-function ul{overflow:hidden;padding-left:10px;}
 .nav-function ul li{float:left;margin-right:10px;border:1px solid #CCC;padding:1px;}
-.btn{display:block;padding:3px 5px;background:#0066CC;color:#FFF;}
+.btn{display:block;padding:3px 5px;background:#0066CC;color:#FFF;border:none;}
 .btn:hover{background:#5E9AF0;}
 .link-btn{padding:3px 5px;background:#0066CC;color:#FFF;}
 .link-btn:hover{background:#5E9AF0;}

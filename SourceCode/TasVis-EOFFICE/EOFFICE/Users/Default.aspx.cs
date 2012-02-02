@@ -34,12 +34,12 @@ namespace EOFFICE.Users
                     }
                     catch (Exception ex)
                     {
-                        return 0;
+                        return 1;
                     }
                 }
                 else
                 {
-                    return 0;
+                    return 1;
                 }
             }
         }
@@ -53,9 +53,10 @@ namespace EOFFICE.Users
         private void BindData()
         {
             BUser ctl = new BUser();
+            int c = ctl.GetCount("", "", "");
             grvListUsers.DataSource = ctl.Get("");
             grvListUsers.DataBind();
-            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.CurrentIndex = c;
             ctlPagging.ItemCount = 200;
         }
 

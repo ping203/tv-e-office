@@ -127,5 +127,43 @@ namespace DataAccess.Common
             return false;
         }
 
+
+        /// <summary>
+        /// Lấy về giá trị
+        /// </summary>
+        /// <param name="procedureName"></param>
+        /// <param name="sqlParameter"></param>
+        /// <returns></returns>
+        public int RunProcudureScalar(string procedureName, SqlParameter[] sqlParameter)
+        {
+            Connect();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = procedureName;
+            int numRecordsEffect = 0;
+            try
+            {
+                foreach (SqlParameter sqlPara in sqlParameter)
+                {
+                    cmd.Parameters.Add(sqlPara);
+                }
+                numRecordsEffect = int.Parse(cmd.ExecuteScalar().ToString());
+
+            }
+            catch (Exception ex) { }
+
+            finally
+            {
+                cmd.Dispose();
+                closeConnection();
+            }
+            if (numRecordsEffect > 0)
+            {
+                return numRecordsEffect;
+            }
+            return numRecordsEffect;
+        }
+
+
     }
 }

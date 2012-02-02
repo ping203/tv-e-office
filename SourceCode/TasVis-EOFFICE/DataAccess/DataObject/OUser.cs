@@ -105,5 +105,13 @@ namespace DataAccess.DataObject
             get { return _IDGroup; }
             set { _IDGroup = value; }
         }
+        private int _TotalResult;
+
+        public int TotalResult
+        {
+            get { return _TotalResult; }
+            set { _TotalResult = value; }
+        }
+        
     }
 }

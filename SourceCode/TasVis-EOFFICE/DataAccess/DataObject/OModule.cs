@@ -7,12 +7,12 @@ namespace DataAccess.DataObject
 {
     public class OModule
     {
-        private int _Code;
+        private string _Code;
 
         /// <summary>
         /// Mã module
         /// </summary>
-        public int Code
+        public string Code
         {
             get { return _Code; }
             set { _Code = value; }
@@ -32,7 +32,7 @@ namespace DataAccess.DataObject
         /// </summary>
         /// <param name="Code">Mã module</param>
         /// <param name="Description">Mô tả</param>
-        public OModule(int Code, string Description)
+        public OModule(string Code, string Description)
         {
             this._Code = Code;
             this._Description = Description;

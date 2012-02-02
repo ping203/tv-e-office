@@ -472,6 +472,99 @@ BEGIN
 	END
 END
 GO
+/* get */
+IF OBJECT_ID('sp_tblUser_getcount','P') IS NOT NULL
+	DROP PROC sp_tblUser_get
+GO
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROC [dbo].[sp_tblUser_getcount]
+	@UserID INT=NULL,
+	@UserName VARCHAR(200)=NULL,	
+	@FullName NVARCHAR(300)=NULL,
+	@Email VARCHAR(200)=NULL,
+	@PhoneNumber VARCHAR(100)=NULL,
+	@Tel VARCHAR(100)=NULL,
+	@Gender VARCHAR(20)=NULL,
+	@BirthDay DATETIME=NULL,
+	@Address NVARCHAR(200)=NULL,
+	@Position NVARCHAR(200)=NULL,
+	@Status VARCHAR(50)=NULL,
+	@IDDepartment INT=NULL,	
+	@Order VARCHAR(20)='DESC',
+	@OrderBy VARCHAR(100)='FullName',
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @UserID IS NOT NULL AND @UserID<>0
+	BEGIN
+		SELECT * FROM tblUser WHERE UserID=@UserID
+	END
+	ELSE
+	BEGIN
+		IF @UserName IS NULL OR @UserName=''
+		BEGIN
+			DECLARE @Start INT
+			DECLARE @End INT
+			DECLARE @DieuKien NVARCHAR(500)
+			SET @Start=(@PageIndex-1)*@PageSize+1
+			SET @End=@PageIndex*@PageSize
+			SET @DieuKien=' WHERE (1=1)'
+			IF @FullName IS NOT NULL AND @FullName<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND FullName LIKE(N''%'+@FullName+'%'')'
+			END
+			IF @Email IS NOT NULL AND @Email<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Email LIKE(N''%'+@Email+'%'')'
+			END
+			IF @PhoneNumber IS NOT NULL AND @PhoneNumber<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND PhoneNumber LIKE(N''%'+@PhoneNumber+'%'')'
+			END
+			IF @Tel IS NOT NULL AND @Tel<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Tel LIKE(N''%'+@Tel+'%'')'
+			END
+			IF @Gender IS NOT NULL AND @Gender<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Gender ='''+cast(@Gender AS NVARCHAR)+''''
+			END
+			IF @BirthDay IS NOT NULL AND @BirthDay<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND BirthDay='''+cast(@BirthDay AS NVARCHAR)+''''
+			END
+			IF @Address IS NOT NULL AND @Address<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Address LIKE(N''%'+@Address+'%'')'
+			END
+			IF @Position IS NOT NULL AND @Position<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Position LIKE(N''%'+@Position+'%'')'
+			END
+			IF @Status IS NOT NULL AND @Status<>''
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND Status='''+cast(@Status AS NVARCHAR)+''''
+			END
+			IF @IDDepartment IS NOT NULL AND @IDDepartment<>0
+			BEGIN
+				SET @DieuKien=@DieuKien+' AND IDDepartment='+cast(@IDDepartment AS NVARCHAR)
+			END			
+			EXEC('SELECT COUNT(UserId)
+				FROM tblUser '+@DieuKien)
+		END
+		ELSE
+		BEGIN
+			SELECT COUNT(UserId) FROM tblUser WHERE UserName=@UserName
+		END
+	END
+END
+
+
+GO
 /* table User_Group */
 IF OBJECT_ID('tblUser_Group','U') IS NOT NULL
 	DROP TABLE tblUser_Group

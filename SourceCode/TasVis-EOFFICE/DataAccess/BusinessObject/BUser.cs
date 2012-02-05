@@ -66,13 +66,88 @@ namespace DataAccess.BusinessObject
              DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
              IList<OUser> list = new List<OUser>();
              list = Common.Common.ConvertTo<OUser>(tbl);
-             
              return list;
+         }
+         public IList<OUser> Get(string FullName, string Order, string OrderBy,int PageIndex, int PageSize)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[5];
+             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+             sqlPara[0].Value = FullName;
+             sqlPara[1] = new SqlParameter("@Order", SqlDbType.VarChar);
+             sqlPara[1].Value = Order;
+             sqlPara[2] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
+             sqlPara[2].Value = OrderBy;
+             sqlPara[3] = new SqlParameter("@PageIndex", SqlDbType.Int );
+             sqlPara[3].Value = PageIndex;
+             sqlPara[4] = new SqlParameter("@PageSize", SqlDbType.Int);
+             sqlPara[4].Value = PageSize;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
+         public IList<OUser> Get(string FullName, string Username, string Email, int DepartmentId, string Status, string Order, string OrderBy, int PageIndex, int PageSize)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[9];
+             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+             sqlPara[0].Value = FullName;
+             sqlPara[1] = new SqlParameter("@UserName", SqlDbType.VarChar);
+             sqlPara[1].Value = Username;
+             sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+             sqlPara[2].Value = Email;
+             sqlPara[3] = new SqlParameter("@IDDepartment", SqlDbType.Int);
+             sqlPara[3].Value = DepartmentId;
+             sqlPara[4] = new SqlParameter("@Status", SqlDbType.NVarChar);
+             sqlPara[4].Value = Status;
+             sqlPara[5] = new SqlParameter("@Order", SqlDbType.NVarChar);
+             sqlPara[5].Value = Order;
+             sqlPara[6] = new SqlParameter("@OrderBy", SqlDbType.NVarChar);
+             sqlPara[6].Value = OrderBy;
+             sqlPara[7] = new SqlParameter("@PageIndex", SqlDbType.Int);
+             sqlPara[7].Value = PageIndex;
+             sqlPara[8] = new SqlParameter("@PageSize", SqlDbType.Int);
+             sqlPara[8].Value = PageSize;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
+         public int GetCount(string FullName, string Order, string OrderBy)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[3];
+             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+             sqlPara[0].Value = FullName;
+             sqlPara[1] = new SqlParameter("@Order", SqlDbType.VarChar);
+             sqlPara[1].Value = Order;
+             sqlPara[2] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
+             sqlPara[2].Value = OrderBy;
+             int result = RunProcudureScalar("sp_tblUser_getcount", sqlPara);
+             return result;
+         }
+         public int GetCount(string FullName, string Username,string Email,int DepartmentId,string Status, string Order, string OrderBy)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[7];
+             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+             sqlPara[0].Value = FullName;
+             sqlPara[1] = new SqlParameter("@UserName", SqlDbType.VarChar);
+             sqlPara[1].Value = Username;
+             sqlPara[2] = new SqlParameter("@Email", SqlDbType.VarChar);
+             sqlPara[2].Value = Email;
+             sqlPara[3] = new SqlParameter("@IDDepartment", SqlDbType.Int);
+             sqlPara[3].Value = DepartmentId;
+             sqlPara[4] = new SqlParameter("@Status", SqlDbType.NVarChar);
+             sqlPara[4].Value = Status ;
+             sqlPara[5] = new SqlParameter("@Order", SqlDbType.NVarChar);
+             sqlPara[5].Value = Order;
+             sqlPara[6] = new SqlParameter("@OrderBy", SqlDbType.NVarChar);
+             sqlPara[6].Value = OrderBy;
+             int result = RunProcudureScalar("sp_tblUser_getcount", sqlPara);
+             return result;
          }
 
          public bool Add(OUser obj)
          {
-             SqlParameter[] sqlPara = new SqlParameter[13];
+             SqlParameter[] sqlPara = new SqlParameter[12];
              sqlPara[0] = new SqlParameter("@UserName",SqlDbType.VarChar);
              sqlPara[0].Value = obj.UserName;
              sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);
@@ -97,8 +172,8 @@ namespace DataAccess.BusinessObject
              sqlPara[10].Value = obj.Status;
              sqlPara[11] = new SqlParameter("@IDDepartment", SqlDbType.Int);
              sqlPara[11].Value = obj.IDDepartment;
-             sqlPara[12] = new SqlParameter("@IDGroup", SqlDbType.Int);
-             sqlPara[12].Value = obj.IDGroup;
+             //sqlPara[12] = new SqlParameter("@IDGroup", SqlDbType.Int);
+             //sqlPara[12].Value = obj.IDGroup;
 
              return RunProcudure("sp_tblUser_add",sqlPara);
          }
@@ -121,9 +196,9 @@ namespace DataAccess.BusinessObject
 
              return RunProcudure("sp_tblUser_update", sqlPara);
          }
-         public bool Update(string UserName, string FullName, string Email, string PhoneNumber, string Tel, string Gender, DateTime Birthday, string Address, string Position, string Status, int IDDepartment, int IDGroup)
+         public bool Update(string UserName, string FullName, string Email, string PhoneNumber, string Tel, string Gender, DateTime Birthday, string Address, string Position, string Status, int IDDepartment)
          {
-             SqlParameter[] sqlPara = new SqlParameter[12];
+             SqlParameter[] sqlPara = new SqlParameter[11];
              sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
              sqlPara[0].Value = UserName;
              sqlPara[1] = new SqlParameter("@FullName", SqlDbType.NVarChar);
@@ -146,8 +221,8 @@ namespace DataAccess.BusinessObject
              sqlPara[9].Value = Status;
              sqlPara[10] = new SqlParameter("@IDDepartment", SqlDbType.Int);
              sqlPara[10].Value = IDDepartment;
-             sqlPara[11] = new SqlParameter("@IDGroup", SqlDbType.Int);
-             sqlPara[11].Value = IDGroup;
+             //sqlPara[11] = new SqlParameter("@IDGroup", SqlDbType.Int);
+             //sqlPara[11].Value = IDGroup;
 
              return RunProcudure("sp_tblUser_update", sqlPara);
          }

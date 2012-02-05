@@ -62,10 +62,10 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
             sqlPara[0].Value = Name;
-            sqlPara[0] = new SqlParameter("@Order", SqlDbType.VarChar);
-            sqlPara[0].Value = Order;
-            sqlPara[0] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
-            sqlPara[0].Value = OrderBy;
+            sqlPara[1] = new SqlParameter("@Order", SqlDbType.VarChar);
+            sqlPara[1].Value = Order;
+            sqlPara[2] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
+            sqlPara[2].Value = OrderBy;
 
             DataTable tbl = RunProcedureGet("sp_tblGroup_get", sqlPara);
             IList<OGroup> list = new List<OGroup>();

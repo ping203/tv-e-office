@@ -134,7 +134,7 @@
                         	<a href="/Users" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Người dùng</a>
                         </li>
                     	<li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/User-group.png" runat="server" /></span>Nhóm người dùng</a>
+                        	<a href="/Users/Group.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/User-group.png" runat="server" /></span>Nhóm người dùng</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Boss.png" runat="server" /></span>Phân quyền</a>

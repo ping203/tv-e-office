@@ -43,6 +43,17 @@ namespace DataAccess.BusinessObject
              return list;
          }
 
+         public IList<OUser> GetByDepartment(int DepartmentID)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[1];
+             sqlPara[0] = new SqlParameter("@IDDepartment", SqlDbType.Int);
+             sqlPara[0].Value = DepartmentID;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
+
          public IList<OUser> Get(string FullName, string Order, string OrderBy)
          {
              SqlParameter[] sqlPara = new SqlParameter[3];

@@ -104,13 +104,13 @@ namespace EOFFICE.Users {
         protected global::System.Web.UI.WebControls.TextBox txtTel;
         
         /// <summary>
-        /// drdGender control.
+        /// ddlGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drdGender;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
         
         /// <summary>
         /// txtBirthDay control.
@@ -140,31 +140,31 @@ namespace EOFFICE.Users {
         protected global::System.Web.UI.WebControls.TextBox txtPossition;
         
         /// <summary>
-        /// drdStatus control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drdStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
-        /// drdDepartment control.
+        /// ddlDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drdDepartment;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartment;
         
         /// <summary>
-        /// drdGroup control.
+        /// ddlGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drdGroup;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGroup;
         
         /// <summary>
         /// lnkUpdate control.
@@ -174,5 +174,14 @@ namespace EOFFICE.Users {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkUpdate;
+        
+        /// <summary>
+        /// lnkBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBack;
     }
 }

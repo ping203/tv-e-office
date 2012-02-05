@@ -73,7 +73,7 @@
                                 Giới tính:
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" id="drdGender">
+                                <asp:DropDownList runat="server" id="ddlGender">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -106,7 +106,7 @@
                                 Trạng thái:
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" id="drdStatus">
+                                <asp:DropDownList runat="server" id="ddlStatus">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -115,7 +115,7 @@
                                 Phòng ban:
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" id="drdDepartment" DataValueField="DepartmentID" DataTextField="Name">
+                                <asp:DropDownList runat="server" id="ddlDepartment" DataValueField="DepartmentID" DataTextField="Name">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -124,7 +124,7 @@
                                 Nhóm người dùng:
                             </td>
                             <td>
-                                <asp:DropDownList runat="server" id="drdGroup" DataValueField="GroupID" DataTextField="Name">
+                                <asp:DropDownList runat="server" id="ddlGroup" DataValueField="GroupID" DataTextField="Name">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -133,6 +133,8 @@
                                 <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" 
                                     OnClientClick="javascript:return $('form').valid();" 
                                     onclick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="lnkBack" CssClass="link-btn" 
+                                    onclick="lnkBack_Click">Quay lại</asp:LinkButton>
                             </td>
                             <td>
                             </td>

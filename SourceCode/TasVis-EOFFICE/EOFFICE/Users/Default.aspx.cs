@@ -53,11 +53,42 @@ namespace EOFFICE.Users
         private void BindData()
         {
             BUser ctl = new BUser();
-            int c = ctl.GetCount("", "", "");
-            grvListUsers.DataSource = ctl.Get("");
+            string _fullname = "";
+            string _username= "";
+            string _email = "";
+            string _status = "";
+            int _departmentid = int.Parse(ddlDepartment.SelectedValue);
+            //--Set key tìm kiếm
+            if (txtKey.Text.Trim().Length > 0)
+            {
+                switch (ddlColumnName.SelectedValue)
+                {
+                    case "Username":
+                        _username = txtKey.Text.Trim();
+                        break;
+                    case "Fullname":
+                        _fullname = txtKey.Text.Trim();
+                        break;
+                    case "Email":
+                        _email = txtKey.Text.Trim();
+                        break;
+                }
+            }
+
+            int count = ctl.GetCount(_fullname, _username, _email, _departmentid, _status, "", "");
+            ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            if (count > ctlPagging.PageSize)
+            {
+                ctlPagging.Visible = true;
+            }
+            else
+            {
+                ctlPagging.Visible = false;
+            }
+            grvListUsers.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", CurrentPage, ctlPagging.PageSize);
             grvListUsers.DataBind();
-            ctlPagging.CurrentIndex = c;
-            ctlPagging.ItemCount = 200;
+            ctlPagging.CurrentIndex =CurrentPage;
+            ctlPagging.ItemCount = count;
         }
 
         /// <summary>
@@ -88,6 +119,28 @@ namespace EOFFICE.Users
             else
                 return false;
         }
+
+        /// <summary>
+        /// Load danh sách trạng thái
+        /// </summary>
+        private void BindStatus()
+        {
+            ddlStatus.Items.Clear();
+            ddlStatus.Items.Add(new ListItem("Duyệt", UserStatus.Approve.ToString("D")));
+            ddlStatus.Items.Add(new ListItem("Khóa", UserStatus.UnApprove.ToString("D")));
+        }
+
+        /// <summary>
+        /// Load danh sách phòng ban
+        /// </summary>
+        private void BindDepartment()
+        {
+            ddlDepartment.Items.Clear();
+            BDepartment ctl = new BDepartment();
+            ddlDepartment.DataSource = ctl.Get(0);
+            ddlDepartment.DataBind();
+            ddlDepartment.Items.Insert(0, new ListItem("Tất cả", "0"));
+        }
         #endregion
 
         #region "Events"
@@ -100,18 +153,26 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            BindData();
+            if (!IsPostBack)
+            {
+                //--Load danh sách trạng thái
+                BindStatus();
+                //--Load danh sách phòng ban
+                BindDepartment();
+                //-- Load danh sách tài khoản
+                BindData();
+
+            }
         }
         /// <summary>
         /// Thực hiện thao tác
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void lnkAccept_Click(object sender, EventArgs e)
+        protected void lbtAccept_Click(object sender, EventArgs e)
         {
             BUser ctl = new BUser();
-            switch (drdAction.SelectedValue)
+            switch (ddlAction.SelectedValue)
             {
                 //-- Xóa
                 case "Delete":
@@ -165,8 +226,15 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void grvListUsers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            
+                //-- Phân quyền người dùng
+            if (e.CommandName.Equals("cmdUserGroup", StringComparison.OrdinalIgnoreCase))
+            {
+                //-- Chuyển tới trang phân quyền người dùng
+                Response.Redirect("GroupForUser.aspx?username=" + e.CommandArgument.ToString());
+            }
             //-- Sửa người dùng
-            if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
+            else if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
                 //-- Chuyển tới trang sửa người dùng 
                 Response.Redirect("Edit.aspx?username=" + e.CommandArgument.ToString());
@@ -224,7 +292,56 @@ namespace EOFFICE.Users
             }
 
         }
+
+        /// <summary>
+        /// Thay đổi số lượng kết quả hiển thị
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //--Load lại danh sách người dùng
+            BindData();
+        }
+
+
+        /// <summary>
+        /// Thay đổi phòng ban
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //--Load lại danh sách người dùng
+            BindData();
+        }
+
+        /// <summary>
+        /// Thay đổi trạng thái
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //--Load lại danh sách người dùng
+            BindData();
+        }
+
+        /// <summary>
+        /// Tìm kiếm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lbtSearch_Click(object sender, EventArgs e)
+        {
+            BindData();
+        }
         #endregion
+
+
+
+
+
 
 
     }

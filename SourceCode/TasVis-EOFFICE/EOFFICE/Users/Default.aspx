@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Users.Default"
     MasterPageFile="~/MasterPages/Default.Master" %>
+
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server" ID="ContentUser">
     <div class="list" id="list-congvieccanlam">
@@ -10,18 +11,47 @@
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
-                    <asp:DropDownList runat="server" ID="drdAction">
+                    <asp:DropDownList runat="server" ID="ddlAction">
                         <asp:ListItem Text="Duyệt" Value="Approve"></asp:ListItem>
                         <asp:ListItem Text="Khóa" Value="UnApprove"></asp:ListItem>
                         <asp:ListItem Text="Xóa" Value="Delete"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click"
+                    <asp:LinkButton runat="server" ID="lbtAccept" CssClass="link-btn" OnClick="lbtAccept_Click"
                         OnClientClick="javascript:return ValidCheckedUser();">Thực hiện</asp:LinkButton>
                     <a class="link-btn" href="Edit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
+                <td>
+                    <asp:TextBox runat="server" ID="txtKey" Width="200px"></asp:TextBox>
+                    <asp:DropDownList runat="server" ID="ddlColumnName">
+                        <asp:ListItem Text="Tài khoản" Value="Username"></asp:ListItem>
+                        <asp:ListItem Text="Họ và tên" Value="Fullname"></asp:ListItem>
+                        <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:LinkButton runat="server" ID="lbtSearch" CssClass="link-btn" onclick="lbtSearch_Click" 
+                      >Tìm kiếm</asp:LinkButton>
+                </td>
             </tr>
             <tr>
-                <td align="left">
+                <td align="left" colspan="2">
+                    <div align="right">
+                        Phòng ban:<asp:DropDownList runat="server" AutoPostBack="true" ID="ddlDepartment"  
+                            DataValueField="DepartmentID" DataTextField="Name" 
+                            onselectedindexchanged="ddlDepartment_SelectedIndexChanged">
+                        </asp:DropDownList>
+                        Trạng thái:<asp:DropDownList runat="server" AutoPostBack="true" ID="ddlStatus" 
+                            onselectedindexchanged="ddlStatus_SelectedIndexChanged">
+                        </asp:DropDownList>
+                        Hiển thị:
+                         <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                            onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                            <asp:ListItem Text="2 kết quả" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                            <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
+                            <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                            <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                        </asp:DropDownList>
+                        
+                    </div>
                     <asp:GridView ID="grvListUsers" runat="server" AutoGenerateColumns="False" CssClass="tbl-list"
                         Width="100%" OnRowCommand="grvListUsers_RowCommand" DataKeyNames="Username">
                         <Columns>
@@ -74,17 +104,8 @@
             </tr>
         </table>
         <div class="pagenav">
-            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url"  PageSize="5" PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
-            <ul>
-                <li><a href="#">Trang đầu</a></li>
-                <li><a href="#" class="pagecurrent">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">Trang cuối</a></li>
-            </ul>
+            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
+                PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
         </div>
     </div>
 

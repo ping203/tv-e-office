@@ -63,10 +63,10 @@ namespace EOFFICE.Users
         /// </summary>
         private void BindGender()
         {
-            drdGender.Items.Clear();
-            drdGender.Items.Add(new ListItem("Nam", Gender.Male.ToString("D")));
-            drdGender.Items.Add(new ListItem("Nữ", Gender.Female.ToString("D")));
-            drdGender.Items.Add(new ListItem("Khác", Gender.Other.ToString("D")));
+            ddlGender.Items.Clear();
+            ddlGender.Items.Add(new ListItem("Nam", Gender.Male.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Nữ", Gender.Female.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Khác", Gender.Other.ToString("D")));
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace EOFFICE.Users
         /// </summary>
         private void BindStatus()
         {
-            drdStatus.Items.Clear();
-            drdStatus.Items.Add(new ListItem("Duyệt", UserStatus.Approve.ToString("D")));
-            drdStatus.Items.Add(new ListItem("Khóa", UserStatus.UnApprove.ToString("D")));
+            ddlStatus.Items.Clear();
+            ddlStatus.Items.Add(new ListItem("Duyệt", UserStatus.Approve.ToString("D")));
+            ddlStatus.Items.Add(new ListItem("Khóa", UserStatus.UnApprove.ToString("D")));
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace EOFFICE.Users
         private void BindDepartment()
         {
             BDepartment ctl = new BDepartment();
-            drdDepartment.DataSource = ctl.Get(0);
-            drdDepartment.DataBind();
+            ddlDepartment.DataSource = ctl.Get(0);
+            ddlDepartment.DataBind();
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace EOFFICE.Users
         private void BindGroup()
         {
             BGroup ctl = new BGroup();
-            drdGroup.DataSource = ctl.Get(0);
-            drdGroup.DataBind();
+            ddlGroup.DataSource = ctl.Get(0);
+            ddlGroup.DataBind();
         }
 
         /// <summary>
@@ -122,18 +122,20 @@ namespace EOFFICE.Users
             obj.BirthDay = Convert.ToDateTime(txtBirthDay.Text.Trim());
             obj.Email = txtEmail.Text.ToString();
             obj.FullName = txtFullName.Text.Trim();
-            obj.Gender = drdGender.SelectedValue;
-            obj.IDDepartment = int.Parse(drdDepartment.SelectedValue);
-            obj.IDGroup = int.Parse(drdGroup.SelectedValue);
+            obj.Gender = ddlGender.SelectedValue;
+            obj.IDDepartment = int.Parse(ddlDepartment.SelectedValue);
+            obj.IDGroup = int.Parse(ddlGroup.SelectedValue);
             obj.PhoneNumber = txtPhoneNumber.Text.Trim();
             obj.Tel  = txtTel.Text.Trim();
             obj.Address = txtAddress.Text.Trim();
-            obj.Position = txtPassword.Text.Trim();
-            obj.Status = drdStatus.SelectedValue;
+            obj.Position = txtPossition.Text.Trim();
+            obj.Status = ddlStatus.SelectedValue;
             //-- Cập nhật User
             if (obj.UserID > 0)
             {
-                ctl.Update(obj.UserName, obj.FullName, obj.Email, obj.PhoneNumber, obj.Tel, obj.Gender, obj.BirthDay, obj.Address, obj.Position, "1", obj.IDDepartment, obj.IDGroup);
+                ctl.Update(obj.UserName, obj.FullName, obj.Email, obj.PhoneNumber, obj.Tel, obj.Gender, obj.BirthDay, obj.Address, obj.Position, "1", obj.IDDepartment);
+                //RegisterClientScriptBlock("notifycation", "<script language='javascript'>alert('Cập nhật thành công.');</script>");
+                Response.Redirect("Default.aspx");
             }
                 //--Thêm mới User
             else
@@ -172,7 +174,7 @@ namespace EOFFICE.Users
                 txtTel.Text = obj.Tel;
                 try
                 {
-                    drdGender.Items.FindByValue(obj.Gender).Selected = true;
+                    ddlGender.Items.FindByValue(obj.Gender).Selected = true;
                 }
                 catch (Exception ex) { }
                 txtBirthDay.Text = obj.BirthDay.ToString("dd/MM/yyyy");
@@ -180,17 +182,17 @@ namespace EOFFICE.Users
                 txtPossition.Text = obj.Position;
                 try
                 {
-                    drdStatus.Items.FindByValue(obj.Status).Selected = true;
+                    ddlStatus.Items.FindByValue(obj.Status).Selected = true;
                 }
                 catch (Exception ex) { }
                 try
                 {
-                    drdDepartment.Items.FindByValue(obj.IDDepartment.ToString()).Selected = true;
+                    ddlDepartment.Items.FindByValue(obj.IDDepartment.ToString()).Selected = true;
                 }
                 catch (Exception ex) { }
                 try
                 {
-                    drdGroup.Items.FindByValue(obj.IDGroup.ToString()).Selected = true;
+                    ddlGroup.Items.FindByValue(obj.IDGroup.ToString()).Selected = true;
                 }
                 catch (Exception ex) { }
                 
@@ -238,7 +240,18 @@ namespace EOFFICE.Users
         {
             UpdateUser();
         }
+
+        /// <summary>
+        /// Quay lại trang quản trị người dùng
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Users/");
+        }
         #endregion
+
 
 
 

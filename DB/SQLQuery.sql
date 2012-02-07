@@ -1557,6 +1557,7 @@ CREATE TABLE tblCalendar
 	EndDate DATETIME,
 	UserJoin VARCHAR(200),
 	[Address] NVARCHAR(300),
+	UserCreate INT FOREIGN KEY REFERENCES tblUser(UserID)
 )
 GO
 /* add */
@@ -1569,11 +1570,12 @@ CREATE PROC sp_tblCalendar_add
 	@StartDate DATETIME,
 	@EndDate DATETIME,
 	@UserJoin VARCHAR(200),
-	@Address NVARCHAR(300)
+	@Address NVARCHAR(300),
+	@UserCreate INT
 AS
 BEGIN
-	INSERT INTO tblCalendar([Name],[Content],StartDate,EndDate,UserJoin,[Address]) 
-				VALUES(@Name,@Content,@StartDate,@EndDate,@UserJoin,@Address)
+	INSERT INTO tblCalendar([Name],[Content],StartDate,EndDate,UserJoin,[Address],UserCreate) 
+				VALUES(@Name,@Content,@StartDate,@EndDate,@UserJoin,@Address,@UserCreate)
 END
 GO
 /* update */
@@ -1611,13 +1613,23 @@ IF OBJECT_ID('sp_tblCalendar_get','P') IS NOT NULL
 GO
 CREATE PROC sp_tblCalendar_get
 	@CalendarID INT=NULL,
-	@UserID VARCHAR(200)=NULL
+	@UserJoin VARCHAR(200)=NULL,
+	@UserCreate INT=NULL
 AS
 BEGIN
 	IF @CalendarID IS NULL OR @CalendarID=0
 	BEGIN
-		IF @UserID IS NOT NULL AND @UserID<>''
-			SELECT * FROM tblCalendar WHERE UserJoin LIKE '%'+@UserID+'%'
+		DECLARE @DieuKien NVARCHAR(MAX)
+		SET @DieuKien='WHERE (1=1)'
+		IF @UserJoin IS NOT NULL AND @UserJoin<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND UserJoin LIKE(''%'+cast(@UserJoin AS VARCHAR)+'%'')'
+		END
+		IF @UserCreate IS NOT NULL AND @UserCreate<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND UserCreate='+cast(@UserCreate AS VARCHAR)
+		END
+		EXEC('SELECT * FROM tblCalendar '+@DieuKien)		
 	END
 	ELSE
 	BEGIN

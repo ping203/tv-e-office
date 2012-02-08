@@ -352,7 +352,7 @@ BEGIN
 	END
 	IF @BirthDay IS NOT NULL AND @BirthDay<>''
 	BEGIN
-		SET @Update=@Update+',BirthDay='''+@BirthDay+''''
+		SET @Update=@Update+',BirthDay='''+cast(@BirthDay AS VARCHAR)+''''
 	END
 	IF @Address IS NOT NULL AND @Address<>''
 	BEGIN
@@ -404,7 +404,8 @@ CREATE PROC sp_tblUser_get
 	@Order VARCHAR(20)='DESC',
 	@OrderBy VARCHAR(100)='FullName',
 	@PageIndex INT=1,
-	@PageSize INT=50
+	@PageSize INT=50,
+	@Password VARCHAR(200)=NULL
 AS
 BEGIN
 	IF @UserID IS NOT NULL AND @UserID<>0
@@ -467,7 +468,7 @@ BEGIN
 		END
 		ELSE
 		BEGIN
-			SELECT * FROM tblUser WHERE UserName=@UserName
+			SELECT * FROM tblUser WHERE UserName=@UserName AND (Password=@Password OR @Password IS NULL)
 		END
 	END
 END

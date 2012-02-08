@@ -34,6 +34,7 @@
             <tr>
                 <td align="left" colspan="2">
                     <div align="right">
+                        <span runat="server" id="spResultCount" style="float:left"></span>
                         Phòng ban:<asp:DropDownList runat="server" AutoPostBack="true" ID="ddlDepartment"  
                             DataValueField="DepartmentID" DataTextField="Name" 
                             onselectedindexchanged="ddlDepartment_SelectedIndexChanged">
@@ -45,6 +46,7 @@
                          <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
                             onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
                             <asp:ListItem Text="2 kết quả" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="3 kết quả" Value="3"></asp:ListItem>
                             <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
                             <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
                             <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
@@ -115,7 +117,7 @@
             alert("Vui lòng chọn người dùng cần thao tác");
             return false;
         }
-        return confirm('Bạn chắc chắn muốn thực hiện thao tác này?')
+        return confirm('Bạn chắc chắn muốn thực hiện thao tác này?');
     }
     $(document).ready(function() {
         $('#chkCheckUserAll').bind('click', function() {

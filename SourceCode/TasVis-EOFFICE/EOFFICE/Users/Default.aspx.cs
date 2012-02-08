@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using DataAccess.Common;
 using DataAccess.BusinessObject;
 using DataAccess.DataObject;
+using EOFFICE;
 
 namespace EOFFICE.Users
 {
@@ -24,12 +25,14 @@ namespace EOFFICE.Users
         /// </summary>
         public int CurrentPage
         {
+         
             get
             {
                 if (Request.QueryString["currentpage"] != null)
                 {
                     try
                     {
+                  
                         return int.Parse(Request.QueryString["currentpage"]);
                     }
                     catch (Exception ex)
@@ -46,6 +49,93 @@ namespace EOFFICE.Users
         #endregion
 
         #region "Common Function"
+
+        /// <summary>
+        /// Khởi tạo các thông tin của form
+        /// </summary>
+        private void InitData()
+        { 
+            //--Pagesize
+            if (Request.QueryString["pagesize"] != null)
+            {
+                try {
+                    ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Trạng thái
+            if (Request.QueryString["status"] != null)
+            {
+                try
+                {
+                    ddlStatus.Items.FindByValue(Request.QueryString["status"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Phòng ban
+            if (Request.QueryString["dpm"] != null)
+            {
+                try
+                {
+                    ddlDepartment.Items.FindByValue(Request.QueryString["dpm"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Tiêu chí tìm kiếm
+            if (Request.QueryString["type"] != null)
+            {
+                try
+                {
+                    ddlColumnName.Items.FindByValue(Request.QueryString["type"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        /// <summary>
+        /// Gửi kèm các paramater
+        /// </summary>
+        public string GenParamRedirect()
+        {
+            string strParam = "";
+            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fstatus=" + ddlStatus.SelectedValue;
+            strParam += "&fdpm=" + ddlDepartment.SelectedValue;
+            strParam += "&ftype=" + ddlColumnName.SelectedValue;
+            if (txtKey.Text.Trim().Length > 0)
+            {
+                strParam += "&fkey=" + Server.UrlEncode(txtKey.Text.Trim());
+            }
+            //--Pagesize
+            if (Request.QueryString["currentpage"] != null)
+            {
+                try
+                {
+                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                }
+                catch (Exception ex) { }
+            }
+
+            return strParam;
+        }
+
+        /// <summary>
+        /// Tạo các parmater phục vụ phân trang
+        /// </summary>
+        /// <returns></returns>
+        private string GenarateParam()
+        {
+            string strParam = "";
+            strParam += "pagesize="+ddlPageSize.SelectedValue;
+            strParam += "&status=" + ddlStatus.SelectedValue;
+            strParam += "&dpm=" + ddlDepartment.SelectedValue;
+            strParam += "&type=" + ddlColumnName.SelectedValue;
+            if (txtKey.Text.Trim().Length > 0)
+            {
+                strParam += "&type=" +Server.UrlEncode( txtKey.Text.Trim());
+            }
+            return strParam;
+        }
 
         /// <summary>
         /// Bind dannh sách người dùng
@@ -77,6 +167,7 @@ namespace EOFFICE.Users
 
             int count = ctl.GetCount(_fullname, _username, _email, _departmentid, _status, "", "");
             ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
             if (count > ctlPagging.PageSize)
             {
                 ctlPagging.Visible = true;
@@ -89,6 +180,7 @@ namespace EOFFICE.Users
             grvListUsers.DataBind();
             ctlPagging.CurrentIndex =CurrentPage;
             ctlPagging.ItemCount = count;
+            ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         /// <summary>
@@ -159,6 +251,8 @@ namespace EOFFICE.Users
                 BindStatus();
                 //--Load danh sách phòng ban
                 BindDepartment();
+                //-- Thiết lập các thông tin trong form
+                InitData();
                 //-- Load danh sách tài khoản
                 BindData();
 
@@ -231,7 +325,7 @@ namespace EOFFICE.Users
             if (e.CommandName.Equals("cmdUserGroup", StringComparison.OrdinalIgnoreCase))
             {
                 //-- Chuyển tới trang phân quyền người dùng
-                Response.Redirect("GroupForUser.aspx?username=" + e.CommandArgument.ToString());
+                Response.Redirect("GroupForUser.aspx?username=" + e.CommandArgument.ToString() + "&" + GenParamRedirect());
             }
             //-- Sửa người dùng
             else if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))

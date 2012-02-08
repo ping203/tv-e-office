@@ -259,7 +259,7 @@ namespace EOFFICE.Common
         /// <summary>
         /// Gets or sets the hidden hyperlinks' QueryString parameter name.
         /// </summary>
-        private string _queryStringParameterName = "pagerControlCurrentPageIndex";
+        private string _queryStringParameterName = "QueryStringParameterName";
         [Category("Behavioural")]
         public string QueryStringParameterName
         {
@@ -515,7 +515,7 @@ namespace EOFFICE.Common
                         nc = "?";
                     else
                         nc = "&";
-                    return this.Page.Request.RawUrl + nc + "currentpage=" + page;
+                    return this.Page.Request.RawUrl + nc + "currentpage=" + page +"&" + QueryStringParameterName;
                 }
             }
         }

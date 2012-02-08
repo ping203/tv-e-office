@@ -59,6 +59,15 @@ namespace EOFFICE.Users {
         protected global::System.Web.UI.WebControls.LinkButton lbtSearch;
         
         /// <summary>
+        /// spResultCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spResultCount;
+        
+        /// <summary>
         /// ddlDepartment control.
         /// </summary>
         /// <remarks>

@@ -77,6 +77,90 @@ namespace EOFFICE.Users
         #region "Common Function"
 
         /// <summary>
+        /// Gửi kèm các paramater
+        /// </summary>
+        public string GenParamRedirectF()
+        {
+            string strParam = "";
+            string spt = "?";
+            //--currentpage
+            if (Request.QueryString["fcurrentpage"] != null)
+            {
+                try
+                {
+                    strParam += spt + "currentpage=" + Request.QueryString["fcurrentpage"];
+                }
+                catch (Exception ex) { }
+            }
+            //--currentpage
+            if (strParam == "")
+                spt = "?";
+            else
+                spt = "&";
+            if (Request.QueryString["fpagesize"] != null)
+            {
+                try
+                {
+                    strParam += spt + "pagesize=" + Request.QueryString["fpagesize"];
+                }
+                catch (Exception ex) { }
+            }
+            //--status
+            if (strParam == "")
+                spt = "?";
+            else
+                spt = "&";
+            if (Request.QueryString["fstatus"] != null)
+            {
+                try
+                {
+                    strParam += spt + "status=" + Request.QueryString["fstatus"];
+                }
+                catch (Exception ex) { }
+            }
+            //--status
+            if (strParam == "")
+                spt = "?";
+            else
+                spt = "&";
+            if (Request.QueryString["fdpm"] != null)
+            {
+                try
+                {
+                    strParam += spt + "dpm=" + Request.QueryString["fdpm"];
+                }
+                catch (Exception ex) { }
+            }
+            //--status
+            if (strParam == "")
+                spt = "?";
+            else
+                spt = "&";
+            if (Request.QueryString["ftype"] != null)
+            {
+                try
+                {
+                    strParam += spt + "type=" + Request.QueryString["ftype"];
+                }
+                catch (Exception ex) { }
+            }
+            //--status
+            if (strParam == "")
+                spt = "?";
+            else
+                spt = "&";
+            if (Request.QueryString["fkey"] != null)
+            {
+                try
+                {
+                    strParam += spt + "key=" + Request.QueryString["fkey"];
+                }
+                catch (Exception ex) { }
+            }
+            return strParam;
+        }
+
+        /// <summary>
         /// Bind danh sách người dùng theo nhóm
         /// </summary>
         private void BindData()
@@ -233,7 +317,18 @@ namespace EOFFICE.Users
             }
 
         }
+
+        /// <summary>
+        /// Quay về trang quản trị người dùng
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Users/Default.aspx" +GenParamRedirectF());
+        }
         #endregion
+
 
 
     }

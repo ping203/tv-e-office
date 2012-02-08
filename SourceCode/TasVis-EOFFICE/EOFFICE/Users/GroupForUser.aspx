@@ -15,6 +15,8 @@
                     <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click"
                         OnClientClick="javascript:return ValidCheckedGroup();">Thực hiện</asp:LinkButton>
                     <a class="link-btn" href="EditGroup.aspx?frm=ref"><span class="create">Thêm mới nhóm người dùng</span></a>
+                    <asp:LinkButton runat="server" ID="lnkReturn" CssClass="link-btn" 
+                        onclick="lnkReturn_Click">Quay lại</asp:LinkButton>
                 </td>
             </tr>
             <tr>
@@ -51,7 +53,7 @@
             alert("Vui lòng chọn nhóm người dùng cần thao tác");
             return false;
         }
-        return confirm('Bạn chắc chắn muốn thực hiện thao tác này?')
+        return confirm('Bạn chắc chắn muốn thực hiện thao tác này?');
     }
     $(document).ready(function() {
         $('#chkCheckGroupAll').bind('click', function() {
@@ -62,7 +64,6 @@
                 $(".chkGroupCheck").attr('checked', false);
             }
         });
-
     });
     </script>
 

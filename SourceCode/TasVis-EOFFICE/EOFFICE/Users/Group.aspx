@@ -59,16 +59,6 @@
             </tr>
         </table>
         <div class="pagenav">
-            <ul>
-                <li><a href="#">Trang đầu</a></li>
-                <li><a href="#" class="pagecurrent">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">Trang cuối</a></li>
-            </ul>
         </div>
     </div>
 

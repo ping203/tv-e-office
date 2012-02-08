@@ -8,11 +8,28 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Xml.Linq;
 using DataAccess.Common;
-
+using DataAccess.DataObject;
 namespace EOFFICE
 {
     public class Global : System.Web.HttpApplication
     {
+        public static OUser UserInfo
+        {
+
+            get
+            {
+                try
+                {
+                    if (HttpContext.Current.Session["MyUserInfo"] != null)
+                    {
+                        return (OUser)HttpContext.Current.Session["MyUserInfo"];
+                    }
+                    return new OUser();
+                }
+                catch (Exception ex)
+                { return new OUser(); }
+            }
+        }
 
         protected void Application_Start(object sender, EventArgs e)
         {

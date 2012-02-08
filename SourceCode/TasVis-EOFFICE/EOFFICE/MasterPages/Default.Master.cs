@@ -17,9 +17,24 @@ namespace EOFFICE.MasterPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblUser.Text = "Vinh";
+            if (Session["MyUserInfo"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+            lblUser.Text = Global.UserInfo.FullName;
             lblUser.DataBind();
             
+        }
+
+        /// <summary>
+        /// Đăng xuất
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

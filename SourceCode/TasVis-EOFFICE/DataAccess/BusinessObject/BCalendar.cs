@@ -12,7 +12,7 @@ namespace DataAccess.BusinessObject
     {
         public bool Add(OCalendar obj)
         {
-            SqlParameter[] sqlPara = new SqlParameter[6];
+            SqlParameter[] sqlPara = new SqlParameter[7];
             sqlPara[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
             sqlPara[0].Value = obj.Name;
             sqlPara[1] = new SqlParameter("@Content", SqlDbType.NVarChar);
@@ -25,7 +25,8 @@ namespace DataAccess.BusinessObject
             sqlPara[4].Value = obj.UserJoin;
             sqlPara[5] = new SqlParameter("@Address", SqlDbType.NVarChar);
             sqlPara[5].Value = obj.Address;
-
+            sqlPara[6] = new SqlParameter("@UserCreate", SqlDbType.Int);
+            sqlPara[6].Value = obj.UserCreate;
             return RunProcudure("sp_tblCalendar_add", sqlPara);
         }
 
@@ -70,17 +71,30 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OCalendar> Get(DateTime FromDate,DateTime ToDate)
+        public IList<OCalendar> Get(int CalenderID,string UserJoin)
         {
             SqlParameter[] sqlPara = new SqlParameter[2];
-            sqlPara[0] = new SqlParameter("@FromDate", SqlDbType.DateTime);
-            sqlPara[0].Value = FromDate;
-            sqlPara[1] = new SqlParameter("@ToDate", SqlDbType.DateTime);
-            sqlPara[1].Value = ToDate;
+            sqlPara[0] = new SqlParameter("@CalendarID", SqlDbType.Int);
+            sqlPara[0].Value = CalenderID;
+            sqlPara[1] = new SqlParameter("@UserJoin", SqlDbType.VarChar);
+            sqlPara[1].Value = UserJoin;
             DataTable tbl = RunProcedureGet("sp_tblCalendar_get", sqlPara);
             IList<OCalendar> list = new List<OCalendar>();
             list = Common.Common.ConvertTo<OCalendar>(tbl);
             return list;
         }
+
+        public IList<OCalendar> GetCreate(int CalenderID, int UserCreate)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@CalendarID", SqlDbType.Int);
+            sqlPara[0].Value = CalenderID;
+            sqlPara[1] = new SqlParameter("@UserCreate", SqlDbType.Int);
+            sqlPara[1].Value = UserCreate;
+            DataTable tbl = RunProcedureGet("sp_tblCalendar_get", sqlPara);
+            IList<OCalendar> list = new List<OCalendar>();
+            list = Common.Common.ConvertTo<OCalendar>(tbl);
+            return list;
+        }       
     }
 }

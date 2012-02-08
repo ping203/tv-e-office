@@ -56,6 +56,13 @@ namespace DataAccess.DataObject
             get { return _Address; }
             set { _Address = value; }
         }
+        private int _UserCreate;
+
+        public int UserCreate
+        {
+            get { return _UserCreate; }
+            set { _UserCreate = value; }
+        }
 
     }
 }

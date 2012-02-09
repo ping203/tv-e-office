@@ -33,19 +33,6 @@ namespace EOFFICE.Calender
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            friend a = new friend();
-            friend b = new friend();
-            friend c = new friend();
-            List<friend> list1 = new List<friend>();
-            List<friend> list2 = new List<friend>();
-            List<friend> list3 = new List<friend>();
-            list1.Add(a);
-            list1.Add(b);
-            list2.Add(a);
-            list2.Add(c);
-            list3 = list1.Union(list2).ToList();
-            lblThongBao.Text = list3.Count.ToString();
             if (!Page.IsPostBack)
             {
                 //Hiển thị lịch công tác
@@ -59,6 +46,7 @@ namespace EOFFICE.Calender
 
             RadScheduler1.DataSource = BobjCalendar.Get(0,",vanhung,");//UserName lấy sau
             RadScheduler1.DataBind();
+            
         }
 
         protected void RadScheduler1_FormCreated(object sender, Telerik.Web.UI.SchedulerFormCreatedEventArgs e)
@@ -220,11 +208,13 @@ namespace EOFFICE.Calender
                 if (Status == "Insert")
                 {
                     RadTextBox txtName = (RadTextBox)e.Container.FindControl("txtName");
-
+                    
                     //HiddenField hdfTime = (HiddenField)e.Container.FindControl("hdfTime");
                     //lblThongBao.Text = hdfTime.Value;
+                    
+                    lblThongBao.Text = hdf.Value;
                 }
             }
-        }        
+        }           
     }
 }

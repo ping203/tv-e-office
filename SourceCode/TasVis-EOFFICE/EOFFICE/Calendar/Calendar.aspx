@@ -36,7 +36,7 @@
                             
                             
                             OnAppointmentCommand="RadScheduler1_AppointmentCommand" 
-                            OnClientTimeSlotClick="OnClientTimeSlotClick"
+                             OnClientTimeSlotClick="OnClientTimeSlotClick"
                             >                                             
                             <WeekView GroupingDirection="Horizontal" />
                             <Localization AdvancedAllDayEvent="Cả ngày" AdvancedCalendarCancel="Hủy" 
@@ -124,7 +124,7 @@
                                                                     <br />
                                                                     <p style="font-size:12pt">Thay đổi thành phần tham gia:<p>                                                               
                                                                     <div>                                                                    
-                                                                        <asp:Repeater ID="rptDepartment" runat="server" DataSource="<%#BindDepartment() %>">
+                                                                        <asp:Repeater ID="rptDepartment" runat="server"  DataSource="<%#BindDepartment() %>">
                                                                             <HeaderTemplate><table></HeaderTemplate>
                                                                             <ItemTemplate>
                                                                                 <tr>
@@ -266,7 +266,7 @@
                                                     TextMode="MultiLine" Rows="4" EmptyMessage="Tên lịch công tác" Columns="30"
                                                     Skin="Windows7" ClientEvents-OnValueChanged="OnValueChanged">
                                                 </telerik:RadTextBox>
-                                                
+                                                                                        
                                             </td>
                                         </tr>
                                         <tr>
@@ -300,15 +300,13 @@
                     </div>
             </div>           
             
-            
+            <asp:HiddenField runat="server" ID="hdf" />
              <script type="text/javascript">
                  function OnClientTimeSlotClick(sender, eventArgs) {
-                     alert(eventArgs.get_time());
-                     
-                     //hdfTime.value = eventArgs.get_time().toString();
-                     
-                     //hdfTime.value = eventArgs.get_time();
-//                     alert(hdfTime.value);
+                     //$('<%= hdf.ClientID %>').value = eventArgs.get_time();
+                     var Messages = $get('<%=hdf.ClientID%>');
+                     Messages.value = eventArgs.get_time();
+                     alert(Messages.value);                     
                  }
             </script>
             

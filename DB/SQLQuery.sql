@@ -1558,7 +1558,7 @@ CREATE TABLE tblCalendar
 	EndDate DATETIME,
 	UserJoin VARCHAR(200),
 	[Address] NVARCHAR(300),
-	UserCreate INT FOREIGN KEY REFERENCES tblUser(UserID)
+	UserCreate VARCHAR(200)
 )
 GO
 /* add */
@@ -1572,7 +1572,7 @@ CREATE PROC sp_tblCalendar_add
 	@EndDate DATETIME,
 	@UserJoin VARCHAR(200),
 	@Address NVARCHAR(300),
-	@UserCreate INT
+	@UserCreate VARCHAR(200)
 AS
 BEGIN
 	INSERT INTO tblCalendar([Name],[Content],StartDate,EndDate,UserJoin,[Address],UserCreate) 
@@ -1615,7 +1615,7 @@ GO
 CREATE PROC sp_tblCalendar_get
 	@CalendarID INT=NULL,
 	@UserJoin VARCHAR(200)=NULL,
-	@UserCreate INT=NULL
+	@UserCreate VARCHAR(200)=NULL
 AS
 BEGIN
 	IF @CalendarID IS NULL OR @CalendarID=0
@@ -1628,7 +1628,7 @@ BEGIN
 		END
 		IF @UserCreate IS NOT NULL AND @UserCreate<>0
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND UserCreate='+cast(@UserCreate AS VARCHAR)
+			SET @DieuKien=@DieuKien+' AND UserCreate='''+cast(@UserCreate AS VARCHAR)+''''
 		END
 		EXEC('SELECT * FROM tblCalendar '+@DieuKien)		
 	END

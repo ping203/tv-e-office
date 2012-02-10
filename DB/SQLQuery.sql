@@ -1626,7 +1626,7 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND UserJoin LIKE(''%'+cast(@UserJoin AS VARCHAR)+'%'')'
 		END
-		IF @UserCreate IS NOT NULL AND @UserCreate<>0
+		IF @UserCreate IS NOT NULL AND @UserCreate<>''
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND UserCreate='''+cast(@UserCreate AS VARCHAR)+''''
 		END
@@ -1636,7 +1636,7 @@ BEGIN
 	BEGIN
 		SELECT * FROM tblCalendar WHERE CalendarID=@CalendarID
 	END
-END	
+END
 GO
 /* tbl ContactGroup */
 IF OBJECT_ID('tblContactGroup','U') IS NOT NULL

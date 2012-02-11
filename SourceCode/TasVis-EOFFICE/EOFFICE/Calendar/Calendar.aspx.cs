@@ -16,16 +16,14 @@ using DataAccess.DataObject;
 using Telerik.Web.UI;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Globalization;
 
 
 namespace EOFFICE.Calender
 {
     public partial class Calendar : System.Web.UI.Page
     {
-        public class friend
-        {
-            string name;
-        }
+        string UserName = "vanhung";
 
         Label lblUserJoin;
         string Status = string.Empty;
@@ -43,8 +41,15 @@ namespace EOFFICE.Calender
         private void RadScheduler_Load()
         {
             BCalendar BobjCalendar = new BCalendar();
-
-            RadScheduler1.DataSource = BobjCalendar.Get(0,",vanhung,");//UserName lấy sau
+            List<OCalendar> listJoin = BobjCalendar.Get(0, ","+UserName+",").ToList();
+            
+            List<OCalendar> listCreate = BobjCalendar.GetCreate(0, UserName).ToList();
+            var list1 = from x in listJoin
+                        where x.UserCreate != UserName
+                        select x;
+            List<OCalendar> list = list1.Union(listCreate).ToList();
+            
+            RadScheduler1.DataSource = list;
             RadScheduler1.DataBind();
             
         }
@@ -110,80 +115,7 @@ namespace EOFFICE.Calender
             return BobjDepartment.Get(0).ToList();
         }
 
-        protected void RadScheduler1_AppointmentUpdate(object sender, AppointmentUpdateEventArgs e)
-        {            
-            ControlCollection ccControl = RadScheduler1.Controls;
-            if (ccControl.Count>0)
-            {
-                ControlCollection ccControlWeb=ccControl[0].Controls;
-                
-                string Name=((TextBox)ccControlWeb[0].FindControl("SubjectTextBox")).Text;
-
-                string Description = ((TextBox)ccControlWeb[0].FindControl("txtDescription")).Text;
-                
-                RadDateTimePicker RadStartDate = (RadDateTimePicker)ccControlWeb[0].FindControl("StartInput");
-                DateTime StartDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
-
-                RadDateTimePicker RadEndDate = (RadDateTimePicker)ccControlWeb[0].FindControl("EndInput");
-                DateTime EndDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
-
-                string Address = ((TextBox)ccControlWeb[0].FindControl("txtAddress")).Text;
-
-                string UserJoin = "," + Request.Form["ckxUser"] +",";
-                
-                BCalendar BobjCalendar = new BCalendar();
-
-                BobjCalendar.Update(int.Parse(e.Appointment.ID.ToString()), Name, Description, StartDate, EndDate, UserJoin, Address);
-                RadScheduler_Load();
-            }
-                              
-        }
-
-        protected void RadScheduler1_AppointmentInsert(object sender, AppointmentInsertEventArgs e)
-        {
-            if (Status == "AdvancedInsert")
-            {
-                ControlCollection ccControl = RadScheduler1.Controls;
-                if (ccControl.Count > 0)
-                {
-                    ControlCollection ccControlWeb = ccControl[0].Controls;
-
-                    string Name = ((TextBox)ccControlWeb[0].FindControl("SubjectTextBox")).Text;
-
-                    string Description = ((TextBox)ccControlWeb[0].FindControl("txtDescription")).Text;
-
-                    RadDateTimePicker RadStartDate = (RadDateTimePicker)ccControlWeb[0].FindControl("StartInput");
-                    DateTime StartDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
-
-                    RadDateTimePicker RadEndDate = (RadDateTimePicker)ccControlWeb[0].FindControl("EndInput");
-                    DateTime EndDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
-
-                    string Address = ((TextBox)ccControlWeb[0].FindControl("txtAddress")).Text;
-
-                    string UserJoin = "," + Request.Form["ckxUser"] + ",";
-
-                    BCalendar BobjCalendar = new BCalendar();
-                    OCalendar objCalendar = new OCalendar();
-
-                    objCalendar.Name = Name;
-                    objCalendar.Content = Description;
-                    objCalendar.StartDate = StartDate;
-                    objCalendar.EndDate = EndDate;
-                    objCalendar.Address = Address;
-                    objCalendar.UserJoin = UserJoin;
-
-                    BobjCalendar.Add(objCalendar);
-                    RadScheduler_Load();
-                }
-            }
-
-            if (Status == "Insert")
-            {
-                string Name = HiddenField1.Value;
-                lblThongBao.Text = Request.Form["txtName"];
-                
-            }
-        }
+       
 
         protected void RadScheduler1_AppointmentCommand(object sender, AppointmentCommandEventArgs e)
         {
@@ -202,18 +134,84 @@ namespace EOFFICE.Calender
                 BCalendar BobjCalendar = new BCalendar();
                 BobjCalendar.Update(int.Parse(CalendarID), Name, Description, StartDate, EndDate, UserJoin, Address);
                 RadScheduler_Load();
+                
             }
             if (e.CommandName == "Insert")
             {
                 if (Status == "Insert")
                 {
+                    //CultureInfo culture = new CultureInfo("fr-FR", true);
                     RadTextBox txtName = (RadTextBox)e.Container.FindControl("txtName");
+
+                    BCalendar BobjCalendar = new BCalendar();
+                    OCalendar objCalendar = new OCalendar();
+                    objCalendar.Name = txtName.Text;
+                    objCalendar.StartDate = DateTime.Parse(hdf.Value);
+                    objCalendar.EndDate = DateTime.Parse(hdf.Value);
+                    objCalendar.Address = string.Empty;
+                    objCalendar.Content = string.Empty;
+                    objCalendar.UserJoin = string.Empty;
+                    objCalendar.UserCreate = UserName;
+                    BobjCalendar.Add(objCalendar);
+                    RadScheduler_Load();
                     
-                    //HiddenField hdfTime = (HiddenField)e.Container.FindControl("hdfTime");
-                    //lblThongBao.Text = hdfTime.Value;
-                    
-                    lblThongBao.Text = hdf.Value;
                 }
+                if (Status == "AdvancedInsert")
+                {
+                    string Name = ((TextBox)e.Container.FindControl("SubjectTextBox")).Text;
+
+                    string Description = ((TextBox)e.Container.FindControl("txtDescription")).Text;
+
+                    RadDateTimePicker RadStartDate = (RadDateTimePicker)e.Container.FindControl("StartInput");
+                    DateTime StartDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
+
+                    RadDateTimePicker RadEndDate = (RadDateTimePicker)e.Container.FindControl("EndInput");
+                    DateTime EndDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
+
+                    string Address = ((TextBox)e.Container.FindControl("txtAddress")).Text;
+
+                    string UserJoin = "," + Request.Form["ckxUser"] + ",";
+
+                    BCalendar BobjCalendar = new BCalendar();
+                    OCalendar objCalendar = new OCalendar();
+
+                    objCalendar.Name = Name;
+                    objCalendar.Content = Description;
+                    objCalendar.StartDate = StartDate;
+                    objCalendar.EndDate = EndDate;
+                    objCalendar.Address = Address;
+                    objCalendar.UserJoin = UserJoin;
+                    objCalendar.UserCreate = UserName;
+                    BobjCalendar.Add(objCalendar);
+                    RadScheduler_Load();
+                    
+                }
+            }
+            
+        }
+
+        protected void RadScheduler1_AppointmentDelete(object sender, AppointmentDeleteEventArgs e)
+        {
+            int CalendarID = int.Parse(e.Appointment.ID.ToString());
+            BCalendar BobjCalendar = new BCalendar();
+            BobjCalendar.Delete(CalendarID);
+        }
+
+        protected void RadScheduler1_AppointmentCreated(object sender, AppointmentCreatedEventArgs e)
+        {
+            int CalendarID = int.Parse(e.Appointment.ID.ToString());
+            BCalendar BobjCalendar = new BCalendar();
+            OCalendar objCalendar = new OCalendar();
+            objCalendar = BobjCalendar.Get(CalendarID).First();
+            if (objCalendar.UserCreate == UserName)
+            {
+                e.Appointment.AllowEdit = true;
+                e.Appointment.AllowDelete = true;
+            }
+            else
+            {
+                e.Appointment.AllowEdit = false;
+                e.Appointment.AllowDelete = false;
             }
         }           
     }

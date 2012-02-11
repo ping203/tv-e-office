@@ -36,7 +36,8 @@
                             
                             
                             OnAppointmentCommand="RadScheduler1_AppointmentCommand" 
-                             OnClientTimeSlotClick="OnClientTimeSlotClick"
+                             OnClientTimeSlotClick="OnClientTimeSlotClick" 
+                            onappointmentcreated="RadScheduler1_AppointmentCreated" onappointmentdelete="RadScheduler1_AppointmentDelete"
                             >                                             
                             <WeekView GroupingDirection="Horizontal" />
                             <Localization AdvancedAllDayEvent="Cả ngày" AdvancedCalendarCancel="Hủy" 
@@ -283,7 +284,7 @@
                                 </div>
                             </InlineInsertTemplate>
                         </telerik:RadScheduler>
-                        
+                         
                     <asp:HiddenField ID="HiddenField1" runat="server" /> 
                     <script type="text/javascript">
                         function OnValueChanged(sender) {
@@ -295,8 +296,7 @@
                     <div class="nav-function">
                     	<ul>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>                            
-                        </ul>
-                        <asp:Label runat="server" ID="lblThongBao" Text="sadsadsa"></asp:Label>
+                        </ul>                        
                     </div>
             </div>           
             
@@ -305,8 +305,7 @@
                  function OnClientTimeSlotClick(sender, eventArgs) {
                      //$('<%= hdf.ClientID %>').value = eventArgs.get_time();
                      var Messages = $get('<%=hdf.ClientID%>');
-                     Messages.value = eventArgs.get_time();
-                     alert(Messages.value);                     
+                     Messages.value = eventArgs.get_time().format('MM/dd/yyyy hh:mm:ss');
                  }
             </script>
             

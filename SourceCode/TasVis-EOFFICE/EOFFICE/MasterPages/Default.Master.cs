@@ -19,7 +19,16 @@ namespace EOFFICE.MasterPages
         {
             if (Session["MyUserInfo"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                string strReturn = "";
+                if (Request.QueryString["returnURL"] == null)
+                {
+                    strReturn = "?returnURL=" + Server.UrlEncode(HttpContext.Current.Request.RawUrl);
+                }
+                else
+                {
+                    strReturn = "?returnURL=" + Request.QueryString["returnURL"];
+                }
+                Response.Redirect("~/Login.aspx" + strReturn);
             }
             lblUser.Text = Global.UserInfo.FullName;
             lblUser.DataBind();

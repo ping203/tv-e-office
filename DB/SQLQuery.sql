@@ -1429,7 +1429,7 @@ CREATE TABLE tblComment
 	CommentID VARCHAR(500) PRIMARY KEY,
 	Title NVARCHAR(MAX),
 	[Content] NVARCHAR(MAX),
-	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
+	IDUserCreate VARCHAR(50),
 	IDDocument VARCHAR(500),
 	IDWork INT,
 	Attachs VARCHAR(50),
@@ -1444,7 +1444,7 @@ CREATE PROC sp_tblComment_add
 	@CommentID VARCHAR(500),
 	@Title NVARCHAR(MAX),
 	@Content NVARCHAR(MAX),
-	@IDUserCreate INT,
+	@IDUserCreate VARCHAR(50),
 	@IDDocument VARCHAR(500)=NULL,
 	@IDWork INT=NULL,
 	@Attachs VARCHAR(50)=NULL,
@@ -1462,8 +1462,8 @@ GO
 CREATE PROC sp_tblComment_update
 	@CommentID VARCHAR(500),
 	@Title NVARCHAR(MAX)=NULL,
-	@Content NVARCHAR(MAX)=NULL,
-	@IDUserCreate INT,
+	@Content NVARCHAR(MAX)=NULL,	
+	@IDUserCreate VARCHAR(50),
 	@IDDocument VARCHAR(500)=NULL,
 	@IDWork INT=NULL,
 	@Attachs VARCHAR(50)=NULL,
@@ -1471,7 +1471,7 @@ CREATE PROC sp_tblComment_update
 AS
 BEGIN
 	DECLARE @Update NVARCHAR(500)
-	SET @Update=' IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
+	SET @Update=' IDUserCreate='''+cast(@IDUserCreate AS NVARCHAR)+''''
 	IF @Title IS NOT NULL AND @Title<>''
 	BEGIN
 		SET @Update=@Update+',Title='''+cast(@Title AS NVARCHAR)+''''
@@ -1512,7 +1512,7 @@ GO
 CREATE PROC sp_tblComment_get
 	@CommentID VARCHAR(500)=NULL,
 	@Title NVARCHAR(MAX)=NULL,
-	@IDUserCreate INT=NULL,
+	@IDUserCreate VARCHAR(50)=NULL,
 	@IDDocument VARCHAR(500)=NULL,
 	@IDWork INT=NULL
 AS
@@ -1525,9 +1525,9 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+'Title LIKE(N''%'+@Title+'%'')'
 		END
-		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>0
+		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+'IDUserCreate='+cast(@IDUserCreate AS NVARCHAR)
+			SET @DieuKien=@DieuKien+'IDUserCreate='''+cast(@IDUserCreate AS VARCHAR)+''''
 		END
 		IF @IDDocument IS NOT NULL AND @IDDocument<>''
 		BEGIN

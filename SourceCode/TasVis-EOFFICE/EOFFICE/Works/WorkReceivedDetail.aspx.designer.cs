@@ -14,6 +14,15 @@ namespace EOFFICE.Works {
     public partial class WorkReceivedDetail {
         
         /// <summary>
+        /// TheScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager TheScriptManager;
+        
+        /// <summary>
         /// btnCapNhat control.
         /// </summary>
         /// <remarks>
@@ -167,6 +176,15 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Repeater rptListUser;
         
         /// <summary>
+        /// UpdatePanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        
+        /// <summary>
         /// TextBox1 control.
         /// </summary>
         /// <remarks>
@@ -194,6 +212,15 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.CheckBox chkXem;
         
         /// <summary>
+        /// lblUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUpdate;
+        
+        /// <summary>
         /// txtContent control.
         /// </summary>
         /// <remarks>
@@ -212,22 +239,13 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// cbxListUserProcess control.
+        /// rptDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbxListUserProcess;
-        
-        /// <summary>
-        /// rptUserProcess control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptUserProcess;
+        protected global::System.Web.UI.WebControls.Repeater rptDepartment;
         
         /// <summary>
         /// btnCapNhat2 control.

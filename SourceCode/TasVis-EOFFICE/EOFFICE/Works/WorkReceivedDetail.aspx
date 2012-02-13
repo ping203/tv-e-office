@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkReceivedDetail.aspx.cs" Inherits="EOFFICE.Works.WorkReceivedDetail" MasterPageFile="~/MasterPages/Default.Master" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">  
-          
+   <asp:ScriptManager ID="TheScriptManager" runat="server"></asp:ScriptManager>
     <div class="list wp-form" id="WorkAssignment">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc nhận</h2>
                 
@@ -53,11 +54,10 @@
                                 </td>
                                
                                 <td colspan="2">
-                                    <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand">
+                                    <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand" >
                                         <ItemTemplate>
                                             <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
                                             </p>
-                                            
                                         </ItemTemplate>
                                     </asp:Repeater>
                                     <asp:Label runat="server" ID="lblThongBao" CssClass="rq"></asp:Label>
@@ -71,23 +71,32 @@
                         <tr>
                             <td style="width:20%;vertical-align:top">
                                 Danh sách người thực hiện:<br />
-                                <asp:Repeater ID="rptListUser" runat="server">
+                                <asp:Repeater ID="rptListUser" runat="server" 
+                                    onitemcommand="rptListUser_ItemCommand">
                                     <ItemTemplate>
                                         <img src="../Images/user.png" alt="" />
-                                        <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>' CommandName="trigger"></asp:LinkButton>
                                         <br />
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </td>
                             <td style="width:80%">
-                                Nội dung xử lý:
-                                <br />
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="textarea" TextMode="multiline" Rows="5" ReadOnly="true"></asp:TextBox>
-                                <br />
-                                File báo cáo:
-                                <br />
-                                Quyền: <asp:CheckBox runat="server" ID="chkChuyentiep" Text="Chuyển tiếp" /> &nbsp <asp:CheckBox runat="server" ID="chkXem" Text="Xem xử lý khác" />
-                                <br />
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="conditional">
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="rptListUser" />
+                                    </Triggers>
+                                    <ContentTemplate>
+                                        Nội dung xử lý:
+                                        <br />
+                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="textarea" TextMode="multiline" Rows="5" ReadOnly="true"></asp:TextBox>
+                                        <br />
+                                        File báo cáo:
+                                        <br />
+                                        Quyền: <asp:CheckBox runat="server" ID="chkChuyentiep" Text="Chuyển tiếp" /> &nbsp <asp:CheckBox runat="server" ID="chkXem" Text="Xem xử lý khác" />
+                                        <br />
+                                        <asp:Label runat="server" ID="lblUpdate"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </td>
                         </tr>
                     </table>
@@ -112,39 +121,29 @@
                             </td>
                         </tr>
                         <tr>
-                        	<td>Chuyển tiếp: </td>
-                            <td colspan="3">
-                                <input type="button" id="btnHide" value="Chọn người chuyển tiếp" style="margin-bottom:10px" />
-                                <div id="listUserProcess" style="width:100%" >
-
-                                    <asp:CheckBoxList ID="cbxListUserProcess" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
-
-                                    <%--<asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>--%>
-                                    <asp:Repeater ID="rptUserProcess" runat="server">
-                                        <HeaderTemplate>
-                                            <table width="100%">
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>
-                                                    <asp:CheckBox ID="cbUser" runat="server" Text='<%#Eval("FullName") %>' />
-                                                </td>
-                                        </ItemTemplate>
-                                        <AlternatingItemTemplate>
-                                            <td>
-                                                    <asp:CheckBox ID="cbUser" runat="server" Text='<%#Eval("FullName") %>' />
-                                                </td>
-                                            </tr>
-                                        </AlternatingItemTemplate>
-                                        <FooterTemplate>
-                                            </table>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-
-                                </div>
+                            <td>Chuyển tiếp:</td>
+                            <td>
                             </td>
                         </tr>
                     </table>
+                    
+                    <asp:Repeater ID="rptDepartment" runat="server">
+                        <HeaderTemplate><table></HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td>
+                                    <div class="link-department">
+                                        <a href="http://localhost:92/Ajax/ajLoadUserByDepartment.aspx" class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
+                                            <%#Eval("Name") %>
+                                        </a>
+                                    </div>
+                                    <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate></table></FooterTemplate>
+                    </asp:Repeater> 
                     </div>
                     <div class="nav-function">
                     	<ul>

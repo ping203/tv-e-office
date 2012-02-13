@@ -14,6 +14,8 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.IO;
 using System.Web.UI.MobileControls;
+using Telerik.Web.UI;
+using System.Collections.Generic;
 
 namespace EOFFICE.Works
 {
@@ -21,7 +23,20 @@ namespace EOFFICE.Works
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Infomation_Load();
+            if (!IsPostBack)
+            {
+                Infomation_Load();
+                lstDepartment_Load();
+                BindDepartment();
+            }
+            
+        }
+
+        public void BindDepartment()
+        {
+            BDepartment BobjDepartment = new BDepartment();
+            rptDepartment.DataSource= BobjDepartment.Get(0);
+            rptDepartment.DataBind();
         }
 
         protected void Infomation_Load()
@@ -55,20 +70,6 @@ namespace EOFFICE.Works
             //Load ListUserProcess
             rptListUser.DataSource = Bobj.GetUserProcess(WorkID);
             rptListUser.DataBind();
-
-            //Load CheckBoxListUser
-            
-            string username = string.Empty;
-
-            cbxListUserProcess.DataSource = BobjUser.Get(username);
-            cbxListUserProcess.DataBind();
-
-            //CheckBoxBind.DataSource = BobjUser.Get(username);
-            //CheckBoxBind.DataBind();
-
-            rptUserProcess.DataSource = BobjUser.Get(username); ;
-            rptUserProcess.DataBind();
-
         }
 
         
@@ -148,37 +149,16 @@ namespace EOFFICE.Works
             //Lấy danh sách người chuyển tiếp
             int count = 0;//biến đếm số người được chuyển tiếp
             string ListUserProcess = ",";
+            //for (int i = 0; i < rptUserProcess.Items.Count; i++)
 
-            foreach (ListItem item in cbxListUserProcess.Items)
-
-            //foreach (ListItem item in CheckBoxBind.Items)
             //{
-
-            //    if (item.Selected)
+            //    CheckBox cb = (CheckBox)rptUserProcess.Items[i].FindControl("cbUser");
+            //    if (cb.Checked == true)
             //    {
             //        count += 1;
-            //        ListUserProcess += item.Value.ToString() + ",";
+            //        ListUserProcess += cb.Text.ToString() + ",";
             //    }
             //}
-
-            //for (int i = 0; i < CheckBoxBind.Items.Count; i++)
-            //{
-            //    if (CheckBoxBind.Items[i].Selected)
-            //    {
-            //        count += 1;
-            //        ListUserProcess += CheckBoxBind.Items[i].Value.ToString() + ",";
-            //    }
-            //}
-            for (int i = 0; i < rptUserProcess.Items.Count; i++)
-
-            {
-                CheckBox cb = (CheckBox)rptUserProcess.Items[i].FindControl("cbUser");
-                if (cb.Checked == true)
-                {
-                    count += 1;
-                    ListUserProcess += cb.Text.ToString() + ",";
-                }
-            }
 
             //////////////////////////////////////////////
             //Tạo Comment mới
@@ -205,5 +185,29 @@ namespace EOFFICE.Works
                 BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,1);
             }
         }
+
+        protected void lstDepartment_Load()
+        {
+            BDepartment BobjDepartment = new BDepartment();
+            ODepartment objDepartment = new ODepartment();
+
+            //lsvDepartment.DataSource = BobjDepartment.Get(0);
+            //lsvDepartment.DataBind();
+            
+        }
+
+        protected void rptListUser_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "trigger")
+            {
+                LinkButton btn = e.CommandSource as LinkButton;
+
+                if (btn != null)
+                {
+                    lblUpdate.Text = "Update triggered by " + btn.ID + e.Item.ItemIndex.ToString();
+                }
+            }
+        }
+
     }
 }

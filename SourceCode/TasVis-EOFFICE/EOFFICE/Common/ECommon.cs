@@ -9,10 +9,12 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-
+using DataAccess.DataObject;
 namespace EOFFICE.Common
 {
     public class ECommon
     {
+
+        
     }
 }

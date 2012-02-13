@@ -28,9 +28,9 @@ namespace DataAccess.DataObject
             get { return _Content; }
             set { _Content = value; }
         }
-        private int _IDUserCreate;
+        private string _IDUserCreate;
 
-        public int IDUserCreate
+        public string IDUserCreate
         {
             get { return _IDUserCreate; }
             set { _IDUserCreate = value; }

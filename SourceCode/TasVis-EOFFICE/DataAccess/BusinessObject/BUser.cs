@@ -53,7 +53,18 @@ namespace DataAccess.BusinessObject
              list = Common.Common.ConvertTo<OUser>(tbl);
              return list;
          }
-
+         public IList<OUser> Get(string Username, string Password)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[2];
+             sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
+             sqlPara[0].Value = Username;
+             sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);
+             sqlPara[1].Value = Password;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
          public IList<OUser> Get(string FullName, string Order, string OrderBy)
          {
              SqlParameter[] sqlPara = new SqlParameter[3];

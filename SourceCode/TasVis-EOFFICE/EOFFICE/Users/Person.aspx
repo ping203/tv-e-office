@@ -11,8 +11,8 @@
             <tr>
                 <td align="left">
                     <div style="border-bottom: 3px solid #06C; height: 19px">
-                        <asp:LinkButton runat="server" ID="lbtChangedInfo" CssClass="link-btn">Cập nhật thông tin</asp:LinkButton>
-                        <asp:LinkButton runat="server" ID="lbtChangedPassword" CssClass="link-btn">Thay đổi mật khẩu</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="lbtTabChangedInfo" CssClass="link-btn">Cập nhật thông tin</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="lbtTabChangedPassword" CssClass="link-btn">Thay đổi mật khẩu</asp:LinkButton>
                     </div>
                     <!--Cập nhật password-->
                     <asp:Panel runat="server" ID="pnUpdatePassword">
@@ -22,7 +22,7 @@
                                 Nhập mật khẩu hiện tại:
                             </td>
                             <td>
-                            <asp:TextBox runat="server" ID="txtCurrentPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
+                            <asp:TextBox runat="server" TextMode="Password" ID="txtCurrentPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -30,7 +30,7 @@
                                 Nhập mật khẩu mới:
                             </td>
                             <td>
-                            <asp:TextBox runat="server" ID="txtNewPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
+                            <asp:TextBox runat="server" TextMode="Password" ID="txtNewPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -38,12 +38,16 @@
                                 Xác nhận mật khẩu mới:
                             </td>
                             <td>
-                            <asp:TextBox runat="server" ID="txtConfirmNewPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
+                            <asp:TextBox runat="server" TextMode="Password" ID="txtConfirmNewPassword" Width="150px" MaxLength="30" CssClass="required"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <asp:LinkButton runat="server" ID="LinkButton1" CssClass="link-btn" OnClientClick="javascript:return $('form').valid();">Thay đổi mật khẩu</asp:LinkButton>
+                            <asp:Label runat="server" ID="lblErrorChangedPass" ForeColor="Red"></asp:Label>
+                            <br />
+                                <asp:LinkButton runat="server" ID="lbtChangedPassword" CssClass="link-btn" 
+                                    OnClientClick="javascript:return $('form').valid();" 
+                                    onclick="lbtChangedPassword_Click">Thay đổi mật khẩu</asp:LinkButton>
                             </td>
                         </tr>
                         </table>

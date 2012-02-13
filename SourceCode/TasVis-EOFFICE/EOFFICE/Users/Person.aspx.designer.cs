@@ -14,22 +14,22 @@ namespace EOFFICE.Users {
     public partial class Person {
         
         /// <summary>
-        /// lbtChangedInfo control.
+        /// lbtTabChangedInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtChangedInfo;
+        protected global::System.Web.UI.WebControls.LinkButton lbtTabChangedInfo;
         
         /// <summary>
-        /// lbtChangedPassword control.
+        /// lbtTabChangedPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtChangedPassword;
+        protected global::System.Web.UI.WebControls.LinkButton lbtTabChangedPassword;
         
         /// <summary>
         /// pnUpdatePassword control.
@@ -68,13 +68,22 @@ namespace EOFFICE.Users {
         protected global::System.Web.UI.WebControls.TextBox txtConfirmNewPassword;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// lblErrorChangedPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.Label lblErrorChangedPass;
+        
+        /// <summary>
+        /// lbtChangedPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtChangedPassword;
         
         /// <summary>
         /// pnUpdateInfo control.

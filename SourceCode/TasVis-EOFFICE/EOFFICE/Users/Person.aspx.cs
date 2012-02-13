@@ -47,7 +47,34 @@ namespace EOFFICE.Users
             BindData();
         }
 
+        /// <summary>
+        /// Cập nhật mật khẩu mới
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lbtChangedPassword_Click(object sender, EventArgs e)
+        {
+            if (Global.UserInfo.Password != txtCurrentPassword.Text.Trim())
+            {
+                lblErrorChangedPass.Text = "Mật khẩu hiện tại không hợp lệ!.";
+            }
+            else
+            {
+                if (txtNewPassword.Text.Trim() != txtConfirmNewPassword.Text.Trim())
+                {
+                    lblErrorChangedPass.Text = "Mật khẩu mới hoặc xác nhận mật khẩu mới không hợp lệ!.";
+                }
+                lblErrorChangedPass.Text = "";
+                Global.UserInfo.Password=txtConfirmNewPassword.Text.Trim();
+                OUser obj = Global.UserInfo;
+                (new BUser()).Update(obj.UserName, obj.Password);
+                RegisterClientScriptBlock("Notification", "<script language='javascript'>alert('Thay đổi mật khẩu thành công');</script>");
+            }
+        }
+
         #endregion
+
+
 
 
     }

@@ -1523,19 +1523,19 @@ BEGIN
 		SET @DieuKien=' WHERE (1=1)'
 		IF @Title IS NOT NULL AND @Title<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+'Title LIKE(N''%'+@Title+'%'')'
+			SET @DieuKien=@DieuKien+'AND Title LIKE(N''%'+@Title+'%'')'
 		END
 		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+'IDUserCreate='''+cast(@IDUserCreate AS VARCHAR)+''''
+			SET @DieuKien=@DieuKien+'AND IDUserCreate='''+cast(@IDUserCreate AS VARCHAR)+''''
 		END
 		IF @IDDocument IS NOT NULL AND @IDDocument<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+'IDDocument='''+cast(@IDDocument AS NVARCHAR)+''''
+			SET @DieuKien=@DieuKien+'AND IDDocument='''+cast(@IDDocument AS NVARCHAR)+''''
 		END
 		IF @IDWork IS NOT NULL AND @IDWork<>0
 		BEGIN
-			SET @DieuKien=@DieuKien+'IDWork='+cast(@IDWork AS NVARCHAR)
+			SET @DieuKien=@DieuKien+'AND IDWork='+cast(@IDWork AS NVARCHAR)
 		END
 		EXEC('SELECT * FROM tblComment'+@DieuKien)
 	END

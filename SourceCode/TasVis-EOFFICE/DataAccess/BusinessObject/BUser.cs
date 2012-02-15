@@ -276,5 +276,16 @@ namespace DataAccess.BusinessObject
              sqlPara[1].Value = Status;
              return RunProcudure("sp_tblUser_update", sqlPara);
          }
+
+         public IList<OUser> GetUserByDepartment(int IDDepartment)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[1];
+             sqlPara[0] = new SqlParameter("@IDDepartment", SqlDbType.Int);
+             sqlPara[0].Value = IDDepartment;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
     }
 }

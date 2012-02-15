@@ -325,18 +325,25 @@ namespace DataAccess.BusinessObject
         {
             IList<OWork> lstWork = this.GetWork(WorkID);
             string strAttachID = lstWork[0].Attachs;
-            String[] arrattachs=strAttachID.Split(',');
-            List<OAttach> lstAttachs = new List<OAttach>();
-            BAttach objBAttach = new BAttach();
-            if (arrattachs.Count() > 1)
+            if ((strAttachID == "") || (strAttachID == ","))
             {
-                for (int i = 1; i < arrattachs.Count() - 1; i++)
-                {
-                    OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
-                    lstAttachs.Add(objAttach);
-                }
+                return null;
             }
-            return lstAttachs;
+            else
+            {
+                String[] arrattachs = strAttachID.Split(',');
+                List<OAttach> lstAttachs = new List<OAttach>();
+                BAttach objBAttach = new BAttach();
+                if (arrattachs.Count() > 1)
+                {
+                    for (int i = 1; i < arrattachs.Count() - 1; i++)
+                    {
+                        OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                        lstAttachs.Add(objAttach);
+                    }
+                }
+                return lstAttachs;
+            }
         }
 
         public List<OUser> GetUserProcess(int WorkID)

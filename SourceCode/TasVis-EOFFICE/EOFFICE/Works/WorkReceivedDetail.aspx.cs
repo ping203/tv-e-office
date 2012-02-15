@@ -66,7 +66,7 @@ namespace EOFFICE.Works
             {
                 lblThongBao.Text = "Không có file đính kèm!";
             }
-
+            
             //Load ListUserProcess
             rptListUser.DataSource = Bobj.GetUserProcess(WorkID);
             rptListUser.DataBind();
@@ -102,7 +102,7 @@ namespace EOFFICE.Works
             //Lấy IDWWork
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
             //Lấy IDUserCreate
-            int IDUserCreate=1;
+            string IDUserCreate="vanhung";//Lấy lại sau
             //Lấy nội dung xử lý
             string Content = txtContent.Text;
             //Upload File
@@ -147,24 +147,14 @@ namespace EOFFICE.Works
                 }
             }
             //Lấy danh sách người chuyển tiếp
-            int count = 0;//biến đếm số người được chuyển tiếp
-            string ListUserProcess = ",";
-            //for (int i = 0; i < rptUserProcess.Items.Count; i++)
-
-            //{
-            //    CheckBox cb = (CheckBox)rptUserProcess.Items[i].FindControl("cbUser");
-            //    if (cb.Checked == true)
-            //    {
-            //        count += 1;
-            //        ListUserProcess += cb.Text.ToString() + ",";
-            //    }
-            //}
+            string UserJoin=string.Empty;
+            UserJoin = "," + Request.Form["ckxUser"] + ",";
 
             //////////////////////////////////////////////
             //Tạo Comment mới
             BComment BobjComment = new BComment();
             OComment objComment = new OComment();
-            objComment.CommentID = WorkID.ToString() + "_" +CurrentTime.ToString();
+            objComment.CommentID = WorkID.ToString() + "" +CurrentTime.ToString();
             objComment.Title = "Xử lý công việc: "+BobjWork.GetWork(WorkID).First().Name;
             objComment.Content = Content;
             objComment.IDUserCreate = IDUserCreate;
@@ -172,17 +162,18 @@ namespace EOFFICE.Works
             objComment.IDWork = WorkID;
             objComment.Attachs = listFile;
             objComment.CreateDate = CurrentTime;
-
+            
             BobjComment.Add(objComment);
 
             
             //Thêm danh sách người chuyển tiếp nếu có chuyển tiếp
-            if (count > 0)
+
+            if ((UserJoin != "") || (UserJoin==",,"))
             {
                 OWork objWork = new OWork();
                 objWork = BobjWork.GetWork(WorkID).First();
-                string newlistUserProcess = objWork.IDUserProcess + ListUserProcess;
-                BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,1);
+                string newlistUserProcess = objWork.IDUserProcess + UserJoin;
+                BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,1);//Lấy IDUserCreate sau
             }
         }
 
@@ -190,21 +181,48 @@ namespace EOFFICE.Works
         {
             BDepartment BobjDepartment = new BDepartment();
             ODepartment objDepartment = new ODepartment();
-
-            //lsvDepartment.DataSource = BobjDepartment.Get(0);
-            //lsvDepartment.DataBind();
-            
         }
 
         protected void rptListUser_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
             if (e.CommandName == "trigger")
             {
                 LinkButton btn = e.CommandSource as LinkButton;
-
+                
                 if (btn != null)
                 {
-                    lblUpdate.Text = "Update triggered by " + btn.ID + e.Item.ItemIndex.ToString();
+                    RepeaterItem ri = e.Item;
+                    HiddenField hdfID = (HiddenField)ri.FindControl("hdfID");
+
+                    BComment BobjComment = new BComment();
+                    OComment objComment = new OComment();
+                    objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
+
+                    txtContentComment.Text = objComment.Content;
+                    rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
+                    rptFileAttachs.DataBind();
+                }
+            }
+        }
+
+        protected void rptFileAttachs_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Download")
+            {
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
         }

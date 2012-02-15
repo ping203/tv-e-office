@@ -76,6 +76,7 @@
                                     <ItemTemplate>
                                         <img src="../Images/user.png" alt="" />
                                         <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>' CommandName="trigger"></asp:LinkButton>
+                                        <asp:HiddenField ID="hdfID" runat="server" Value='<%#Eval("UserName") %>' />
                                         <br />
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -88,13 +89,16 @@
                                     <ContentTemplate>
                                         Nội dung xử lý:
                                         <br />
-                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="textarea" TextMode="multiline" Rows="5" ReadOnly="true"></asp:TextBox>
+                                        <asp:TextBox ID="txtContentComment" runat="server" CssClass="textarea" TextMode="multiline" Rows="10" ReadOnly="true"></asp:TextBox>
                                         <br />
-                                        File báo cáo:
+                                        File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" 
+                                            onitemcommand="rptFileAttachs_ItemCommand"  >
+                                                        <ItemTemplate>
+                                                            <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
+                                                            </p>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
                                         <br />
-                                        Quyền: <asp:CheckBox runat="server" ID="chkChuyentiep" Text="Chuyển tiếp" /> &nbsp <asp:CheckBox runat="server" ID="chkXem" Text="Xem xử lý khác" />
-                                        <br />
-                                        <asp:Label runat="server" ID="lblUpdate"></asp:Label>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </td>
@@ -132,13 +136,7 @@
                         <ItemTemplate>
                             <tr>
                                 <td>
-                                    <div class="link-department">
-                                        <a href="http://localhost:92/Ajax/ajLoadUserByDepartment.aspx" class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
-                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
-                                            <%#Eval("Name") %>
-                                        </a>
-                                    </div>
-                                    <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
+                                    
                                 </td>
                             </tr>
                         </ItemTemplate>

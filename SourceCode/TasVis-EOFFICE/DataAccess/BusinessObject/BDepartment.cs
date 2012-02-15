@@ -32,6 +32,8 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
+        
+
         public bool Add(ODepartment obj)
         {
             SqlParameter[] sqlPara = new SqlParameter[3];

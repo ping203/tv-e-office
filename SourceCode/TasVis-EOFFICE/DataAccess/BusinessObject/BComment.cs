@@ -20,7 +20,7 @@ namespace DataAccess.BusinessObject
             sqlPara[1].Value = obj.Title;
             sqlPara[2] = new SqlParameter("@Content", SqlDbType.NVarChar);
             sqlPara[2].Value = obj.Content;
-            sqlPara[3] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[3] = new SqlParameter("@IDUserCreate", SqlDbType.VarChar);
             sqlPara[3].Value = obj.IDUserCreate;
             sqlPara[4] = new SqlParameter("@IDDocument", SqlDbType.VarChar);
             sqlPara[4].Value = obj.IDDocument;
@@ -34,7 +34,7 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblComment_add", sqlPara);
         }
 
-        public bool Update(string CommentID,string Title,string Content,int IDUserCreate,string IDDocument,int IDWork,string Attachs,DateTime CreateDate)
+        public bool Update(string CommentID,string Title,string Content,string IDUserCreate,string IDDocument,int IDWork,string Attachs,DateTime CreateDate)
         {
             SqlParameter[] sqlPara = new SqlParameter[8];
             sqlPara[0] = new SqlParameter("@CommentID", SqlDbType.VarChar);
@@ -43,7 +43,7 @@ namespace DataAccess.BusinessObject
             sqlPara[1].Value = Title;
             sqlPara[2] = new SqlParameter("@Content", SqlDbType.NVarChar);
             sqlPara[2].Value = Content;
-            sqlPara[3] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[3] = new SqlParameter("@IDUserCreate", SqlDbType.VarChar);
             sqlPara[3].Value = IDUserCreate;
             sqlPara[4] = new SqlParameter("@IDDocument", SqlDbType.VarChar);
             sqlPara[4].Value = IDDocument;
@@ -90,16 +90,30 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OComment> Get(int IDUserCreate)
+        public IList<OComment> GetCreate(string IDUserCreate)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.VarChar);
             sqlPara[0].Value = IDUserCreate;
             DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
             IList<OComment> list = new List<OComment>();
             list = Common.Common.ConvertTo<OComment>(tbl);
             return list;
         }
+
+        public IList<OComment> GetCreate(string IDUserCreate,int IDWork)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[2];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.VarChar);
+            sqlPara[0].Value = IDUserCreate;
+            sqlPara[1] = new SqlParameter("@IDWork", SqlDbType.Int);
+            sqlPara[1].Value = IDWork;
+            DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
+            IList<OComment> list = new List<OComment>();
+            list = Common.Common.ConvertTo<OComment>(tbl);
+            return list;
+        }
+
 
         public IList<OComment> Get(string Title,string IDDocument, string IDWork)
         {
@@ -114,19 +128,32 @@ namespace DataAccess.BusinessObject
             IList<OComment> list = new List<OComment>();
             list = Common.Common.ConvertTo<OComment>(tbl);
             return list;
-        }        
+        }
 
-        public IList<OComment> Get(string Title,int IDUserCreate)
+        public List<OAttach> GetAttachs(string CommentID)
         {
-            SqlParameter[] sqlPara = new SqlParameter[2];
-            sqlPara[0] = new SqlParameter("@Title", SqlDbType.NVarChar);
-            sqlPara[0].Value = Title;
-            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
-            sqlPara[0].Value = IDUserCreate;
-            DataTable tbl = RunProcedureGet("sp_tblComment_get", sqlPara);
-            IList<OComment> list = new List<OComment>();
-            list = Common.Common.ConvertTo<OComment>(tbl);
-            return list;
+            IList<OComment> lstComment = this.Get(CommentID);
+            string strAttachID = lstComment[0].Attachs;
+            if ((strAttachID == "") || (strAttachID == ","))
+            {
+                return null;
+            }
+            else
+            { 
+                String[] arrattachs = strAttachID.Split(',');
+                List<OAttach> lstAttachs = new List<OAttach>();
+                BAttach objBAttach = new BAttach();
+                if (arrattachs.Count() > 1)
+                {
+                    for (int i = 1; i < arrattachs.Count() - 1; i++)
+                    {
+                        OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                        lstAttachs.Add(objAttach);
+                    }
+                }
+                return lstAttachs;
+            }
+            
         }
     }
 }

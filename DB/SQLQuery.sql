@@ -1303,7 +1303,7 @@ BEGIN
 	END
 	IF @IDUserProcess IS NOT NULL AND @IDUserProcess<>''
 	BEGIN
-		SET @Update=@Update+',IDUserProcess='''+cast(@IDUserProcess AS NVARCHAR)+''''
+		SET @Update=@Update+',IDUserProcess='''+cast(@IDUserProcess AS VARCHAR(100))+''''
 	END
 	IF @IDWorkGroup IS NOT NULL AND @IDWorkGroup<>0
 	BEGIN
@@ -1331,7 +1331,6 @@ BEGIN
 	END	
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
-exec  [sp_tblWork_update]  @WorkID=17,@IDUserProcess=',vanhung,vinhnt,minhhv,admin,nvb,',@IDUserCreate=1
 GO
 /* delete */
 IF OBJECT_ID('sp_tblWork_delete','P') IS NOT NULL

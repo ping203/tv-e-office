@@ -1230,7 +1230,7 @@ CREATE TABLE tblWork
 	[Content] NVARCHAR(MAX),
 	Attachs VARCHAR(50),	
 	IDUserCreate INT FOREIGN KEY REFERENCES tblUser(UserID),
-	IDUserProcess VARCHAR(50),
+	IDUserProcess VARCHAR(100),
 	IDWorkGroup INT,
 	CreateDate DATETIME DEFAULT(GetDate()),
 	StartProcess DATETIME DEFAULT(GetDate()),
@@ -1249,7 +1249,7 @@ CREATE PROC sp_tblWork_add
 	@Content NVARCHAR(MAX),
 	@Attachs VARCHAR(50),	
 	@IDUserCreate INT,
-	@IDUserProcess VARCHAR(50),
+	@IDUserProcess VARCHAR(100),
 	@IDWorkGroup INT,
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
@@ -1274,7 +1274,7 @@ CREATE PROC sp_tblWork_update
 	@Content NVARCHAR(MAX)=NULL,
 	@Attachs VARCHAR(50)=NULL,	
 	@IDUserCreate INT,
-	@IDUserProcess VARCHAR(50)=NULL,
+	@IDUserProcess VARCHAR(100)=NULL,
 	@IDWorkGroup INT=NULL,
 	@CreateDate DATETIME=NULL,
 	@StartProcess DATETIME=NULL,
@@ -1331,6 +1331,7 @@ BEGIN
 	END	
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
+exec  [sp_tblWork_update]  @WorkID=17,@IDUserProcess=',vanhung,vinhnt,minhhv,admin,nvb,',@IDUserCreate=1
 GO
 /* delete */
 IF OBJECT_ID('sp_tblWork_delete','P') IS NOT NULL
@@ -1352,7 +1353,7 @@ CREATE PROC sp_tblWork_get
 	@Name NVARCHAR(300)=NULL,
 	@Content NVARCHAR(MAX)=NULL,
 	@IDUserCreate INT=NULL,
-	@IDUserProcess VARCHAR(50)=NULL,
+	@IDUserProcess VARCHAR(100)=NULL,
 	@IDWorkGroup INT=NULL,
 	@FromCreateDate DATETIME=NULL,
 	@ToCreateDate DATETIME=NULL,

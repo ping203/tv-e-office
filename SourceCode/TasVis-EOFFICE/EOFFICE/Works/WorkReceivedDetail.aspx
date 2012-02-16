@@ -2,6 +2,23 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">  
    <asp:ScriptManager ID="TheScriptManager" runat="server"></asp:ScriptManager>
+   <telerik:RadAjaxLoadingPanel runat="server" ID="LoadingPanel1"></telerik:RadAjaxLoadingPanel>
+   
+   <%--<telerik:RadAjaxManager runat="server" ID="RadAjaxManager1">
+            <AjaxSettings>
+                <telerik:AjaxSetting AjaxControlID="TabDepartment">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="TabDepartment" />
+                        <telerik:AjaxUpdatedControl ControlID="RadMultiPage1" LoadingPanelID="LoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+                <telerik:AjaxSetting AjaxControlID="RadMultiPage1">
+                    <UpdatedControls>
+                        <telerik:AjaxUpdatedControl ControlID="RadMultiPage1" LoadingPanelID="LoadingPanel1" />
+                    </UpdatedControls>
+                </telerik:AjaxSetting>
+            </AjaxSettings>
+        </telerik:RadAjaxManager>--%>
     <div class="list wp-form" id="WorkAssignment">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc nhận</h2>
                 
@@ -125,23 +142,33 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Chuyển tiếp:</td>
+                            <td><b>Chuyển tiếp:</b></td>
                             <td>
                             </td>
                         </tr>
-                    </table>
+                        <tr>
+                            <td colspan="2">
+                                <asp:Repeater runat="server" ID="rptDepartment" 
+                                    onitemdatabound="rptDepartment_ItemDataBound">
+                                    <HeaderTemplate><table width="100%"></HeaderTemplate>
+                                    <ItemTemplate>
+                                            <tr>
+                                                <td width="100%" class="user-list">
+                                                   <b><%# Eval("Name") %></b>
+                                                   <asp:HiddenField runat="server" ID="hdfID" Value='<%# Eval("DepartmentID") %>' />
+                                                   <asp:CheckBoxList runat="server" ID="cblUser" DataTextField="FullName" DataValueField="UserName" CellPadding="5" RepeatColumns="4" Width="100%">
+                                                        
+                                                   </asp:CheckBoxList>
+                                                </td>
+                                            </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate></table></FooterTemplate>
+                                </asp:Repeater>
+                            </td>
+                            
+                        </tr>
+                    </table>                  
                     
-                    <asp:Repeater ID="rptDepartment" runat="server">
-                        <HeaderTemplate><table></HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate></table></FooterTemplate>
-                    </asp:Repeater> 
                     </div>
                     <div class="nav-function">
                     	<ul>
@@ -153,6 +180,7 @@
                     </div>
                     
             </div>
+   
 <script type="text/javascript">
     $(document).ready(function() {
         $("#listUserProcess").hide();
@@ -161,4 +189,5 @@
         });
     });
 </script>
+
 </asp:Content>

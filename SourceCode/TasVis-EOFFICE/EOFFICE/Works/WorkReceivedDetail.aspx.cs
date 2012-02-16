@@ -27,18 +27,19 @@ namespace EOFFICE.Works
             {
                 Infomation_Load();
                 lstDepartment_Load();
-                BindDepartment();
+                rptDepartment_Load();
+                
             }
             
         }
 
-        public void BindDepartment()
+        protected void rptDepartment_Load()
         {
             BDepartment BobjDepartment = new BDepartment();
-            rptDepartment.DataSource= BobjDepartment.Get(0);
+            rptDepartment.DataSource = BobjDepartment.Get(0);
             rptDepartment.DataBind();
         }
-
+        
         protected void Infomation_Load()
         {
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
@@ -147,9 +148,8 @@ namespace EOFFICE.Works
                 }
             }
             //Lấy danh sách người chuyển tiếp
-            string UserJoin=string.Empty;
-            UserJoin = "," + Request.Form["ckxUser"] + ",";
-
+            string UserJoin="";
+            
             //////////////////////////////////////////////
             //Tạo Comment mới
             BComment BobjComment = new BComment();
@@ -164,17 +164,30 @@ namespace EOFFICE.Works
             objComment.CreateDate = CurrentTime;
             
             BobjComment.Add(objComment);
-
-            
-            //Thêm danh sách người chuyển tiếp nếu có chuyển tiếp
-
-            if ((UserJoin != "") || (UserJoin==",,"))
+            for (int i = 0; i < rptDepartment.Items.Count; i++)
             {
-                OWork objWork = new OWork();
-                objWork = BobjWork.GetWork(WorkID).First();
-                string newlistUserProcess = objWork.IDUserProcess + UserJoin;
-                BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,1);//Lấy IDUserCreate sau
+                CheckBoxList cblUser = (CheckBoxList)rptDepartment.Items[i].FindControl("cblUser");
+                for (int j = 0; j < cblUser.Items.Count; j++)
+                {
+                    if (cblUser.Items[j].Selected)
+                    {
+                        UserJoin += cblUser.Items[j].Value+",";
+                    }
+                }
             }
+            
+
+                //Thêm danh sách người chuyển tiếp nếu có chuyển tiếp
+
+                if (UserJoin != "")
+                {
+                    OWork objWork = new OWork();
+                    objWork = BobjWork.GetWork(WorkID).First();
+                    string newlistUserProcess = objWork.IDUserProcess + UserJoin;
+                    BobjWork.UpdateUserProcess(WorkID, newlistUserProcess, 1);//Lấy IDUserCreate sau
+                }
+
+                Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
         }
 
         protected void lstDepartment_Load()
@@ -227,5 +240,16 @@ namespace EOFFICE.Works
             }
         }
 
+        protected void rptDepartment_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            BUser BobjUser = new BUser();
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                CheckBoxList cblUser = (CheckBoxList)e.Item.FindControl("cblUser");
+                HiddenField hdfID = (HiddenField)e.Item.FindControl("hdfID");
+                cblUser.DataSource = BobjUser.GetByDepartment(int.Parse(hdfID.Value));
+                cblUser.DataBind();
+            }
+        }
     }
 }

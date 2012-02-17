@@ -114,7 +114,7 @@ namespace EOFFICE.Works
             objWork.Description = txtDescription.Text;
             objWork.Content = txtContent.Text;
             objWork.Attachs = listFile;
-            objWork.IDUserCreate = 1;    //--Lấy IDUserCreate sau
+            objWork.IDUserCreate = Global.UserInfo.UserID;   //--Lấy IDUserCreate sau
             objWork.IDUserProcess = ListUserProcess;
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             objWork.CreateDate = CurrentTime;

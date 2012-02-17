@@ -49,11 +49,12 @@ namespace EOFFICE.Works
         
         protected void grvWork_Load()
         {
+            int UserID = Global.UserInfo.UserID;
             BWork objWork = new BWork();
-            grvWork.DataSource = objWork.Get(1, "CHUA_GIAO").Union(objWork.Get(1, "DANG_THUC_HIEN")).Union(objWork.Get(1, "DUNG_XU_LY"));
+            grvWork.DataSource = objWork.Get(UserID, "CHUA_GIAO").Union(objWork.Get(UserID, "DANG_THUC_HIEN")).Union(objWork.Get(UserID, "DUNG_XU_LY"));
             grvWork.DataBind();
 
-            if ((objWork.Get(1, "CHUA_GIAO").Union(objWork.Get(1, "DANG_THUC_HIEN")).Union(objWork.Get(1, "DUNG_XU_LY"))).Count()==0)
+            if ((objWork.Get(UserID, "CHUA_GIAO").Union(objWork.Get(UserID, "DANG_THUC_HIEN")).Union(objWork.Get(UserID, "DUNG_XU_LY"))).Count() == 0)
             {
                 lblThongBao.Text = "Không có công việc nào";
             }
@@ -163,6 +164,7 @@ namespace EOFFICE.Works
 
         protected void btnTim_Click(object sender, EventArgs e)
         {
+            int UserID = Global.UserInfo.UserID;
             BWork objWork = new BWork();
 
             string name = txtWorkName.Text;
@@ -172,23 +174,23 @@ namespace EOFFICE.Works
             {
                 if (ddlWork.SelectedValue == "0")
                 {
-                    grvWork.DataSource = objWork.Get(1, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(1, name, "DANG_THUC_HIEN", UserProcess)).Union(objWork.Get(1, name, "DUNG_XU_LY", UserProcess));
+                    grvWork.DataSource = objWork.Get(UserID, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(UserID, name, "DANG_THUC_HIEN", UserProcess)).Union(objWork.Get(UserID, name, "DUNG_XU_LY", UserProcess));
                     
                 }
                 else
                 {
-                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(), UserProcess);
+                    grvWork.DataSource = objWork.Get(UserID, name, ddlWork.SelectedValue.ToString(), UserProcess);
                 }
             }
             else
             {
                 if (ddlWork.SelectedValue == "0")
                 {
-                    grvWork.DataSource = objWork.Get(1, name, "CHUA_GIAO", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess).Union(objWork.Get(1, name, "DANG_THUC_HIEN", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess)).Union(objWork.Get(1, name, "DUNG_XU_LY", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess));
+                    grvWork.DataSource = objWork.Get(UserID, name, "CHUA_GIAO", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess).Union(objWork.Get(UserID, name, "DANG_THUC_HIEN", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess)).Union(objWork.Get(UserID, name, "DUNG_XU_LY", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess));
                 }
                 else
                 {
-                    grvWork.DataSource = objWork.Get(1, name, ddlWork.SelectedValue.ToString(), Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess);
+                    grvWork.DataSource = objWork.Get(UserID, name, ddlWork.SelectedValue.ToString(), Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess);
                 }
             }
             
@@ -202,6 +204,7 @@ namespace EOFFICE.Works
 
         protected void btnDung_Click(object sender, EventArgs e)
         {
+            int UserID = Global.UserInfo.UserID;
             BWork obj = new BWork();
             foreach (GridViewRow row in grvWork.Rows)
             {
@@ -212,7 +215,7 @@ namespace EOFFICE.Works
                     int Id = Convert.ToInt32(grvWork.DataKeys[row.RowIndex].Value);
                     if (obj.GetWork(Id).First().Status != "CHUA_GIAO")
                     {
-                        obj.Update(Id, "DUNG_XU_LY",1);
+                        obj.Update(Id, "DUNG_XU_LY", UserID);
                     }
                 }
             }
@@ -221,6 +224,7 @@ namespace EOFFICE.Works
 
         protected void btnTiepTuc_Click(object sender, EventArgs e)
         {
+            int UserID = Global.UserInfo.UserID;
             BWork obj = new BWork();
             foreach (GridViewRow row in grvWork.Rows)
             {
@@ -231,7 +235,7 @@ namespace EOFFICE.Works
                     int Id = Convert.ToInt32(grvWork.DataKeys[row.RowIndex].Value);
                     if (obj.GetWork(Id).First().Status == "DUNG_XU_LY")
                     {
-                        obj.Update(Id, "DANG_THUC_HIEN", 1);
+                        obj.Update(Id, "DANG_THUC_HIEN", UserID);
                     }
                 }
             }
@@ -256,6 +260,7 @@ namespace EOFFICE.Works
 
         protected void btnGiaoViec_Click(object sender, EventArgs e)
         {
+            int UserID = Global.UserInfo.UserID;
             BWork obj = new BWork();
             foreach (GridViewRow row in grvWork.Rows)
             {
@@ -266,7 +271,7 @@ namespace EOFFICE.Works
                     int Id = Convert.ToInt32(grvWork.DataKeys[row.RowIndex].Value);
                     if (obj.GetWork(Id).First().Status == "CHUA_GIAO")
                     {
-                        obj.Update(Id, "DANG_THUC_HIEN", 1);
+                        obj.Update(Id, "DANG_THUC_HIEN", UserID);
                     }
                 }
             }

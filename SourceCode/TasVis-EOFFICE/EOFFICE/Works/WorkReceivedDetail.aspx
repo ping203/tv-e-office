@@ -3,23 +3,7 @@
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">  
    <asp:ScriptManager ID="TheScriptManager" runat="server"></asp:ScriptManager>
    <telerik:RadAjaxLoadingPanel runat="server" ID="LoadingPanel1"></telerik:RadAjaxLoadingPanel>
-   
-   <%--<telerik:RadAjaxManager runat="server" ID="RadAjaxManager1">
-            <AjaxSettings>
-                <telerik:AjaxSetting AjaxControlID="TabDepartment">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="TabDepartment" />
-                        <telerik:AjaxUpdatedControl ControlID="RadMultiPage1" LoadingPanelID="LoadingPanel1" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-                <telerik:AjaxSetting AjaxControlID="RadMultiPage1">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="RadMultiPage1" LoadingPanelID="LoadingPanel1" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-            </AjaxSettings>
-        </telerik:RadAjaxManager>--%>
-    <div class="list wp-form" id="WorkAssignment">
+   <div class="list wp-form" id="WorkAssignment">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc nhận</h2>
                 
                 	<div class="nav-function">

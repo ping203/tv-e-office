@@ -14,6 +14,15 @@ namespace EOFFICE.Works {
     public partial class WorkAssignmentDetail {
         
         /// <summary>
+        /// TheScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager TheScriptManager;
+        
+        /// <summary>
         /// btnThemXuLy control.
         /// </summary>
         /// <remarks>
@@ -95,67 +104,31 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Repeater rptListUser;
         
         /// <summary>
-        /// TextBox1 control.
+        /// UpdatePanel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// chkChuyentiep control.
+        /// txtContentComment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkChuyentiep;
+        protected global::System.Web.UI.WebControls.TextBox txtContentComment;
         
         /// <summary>
-        /// chkXem control.
+        /// rptFileAttachs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkXem;
-        
-        /// <summary>
-        /// rdoNoiDung control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdoNoiDung;
-        
-        /// <summary>
-        /// rdoFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdoFile;
-        
-        /// <summary>
-        /// rdoTatCa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdoTatCa;
-        
-        /// <summary>
-        /// btnXoa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnXoa;
+        protected global::System.Web.UI.WebControls.Repeater rptFileAttachs;
         
         /// <summary>
         /// txtContent control.
@@ -176,31 +149,31 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// RadioButton1 control.
+        /// rdoHoanThanh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
+        protected global::System.Web.UI.WebControls.RadioButton rdoHoanThanh;
         
         /// <summary>
-        /// RadioButton2 control.
+        /// rdoTamDung control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
+        protected global::System.Web.UI.WebControls.RadioButton rdoTamDung;
         
         /// <summary>
-        /// RadioButton3 control.
+        /// rdoTiepTuc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton3;
+        protected global::System.Web.UI.WebControls.RadioButton rdoTiepTuc;
         
         /// <summary>
         /// btnCapNhat control.

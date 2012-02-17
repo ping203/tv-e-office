@@ -1,13 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkAssignmentDetail.aspx.cs" Inherits="EOFFICE.Works.WorkAssignmentDetail" MasterPageFile="~/MasterPages/Default.Master" %>
 
 
-<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
+<asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">  
+    <asp:ScriptManager ID="TheScriptManager" runat="server"></asp:ScriptManager>      
     <div class="list wp-form" id="WorkAssignment">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc giao</h2>
                 
                 	<div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="btnThemXuLy" CssClass="btn" Text="Thêm xử lý" 
+                    	    <li><asp:Button runat="server" ID="btnThemXuLy" CssClass="btn" Text="Thêm xử lý" onclick="btnThemXuLy_Click" 
                                      ></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
@@ -68,27 +69,34 @@
                     <table width="100%" cellpadding="5">
                         <tr>
                             <td style="width:20%;vertical-align:top">Danh sách người thực hiện<br />
-                                <asp:Repeater ID="rptListUser" runat="server">
+                                <asp:Repeater ID="rptListUser" runat="server" onitemcommand="rptListUser_ItemCommand">
                                     <ItemTemplate>
                                         <img src="../Images/user.png" alt="" />
-                                        <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>' CommandName="trigger"></asp:LinkButton>
+                                        <asp:HiddenField ID="hdfID" runat="server" Value='<%#Eval("UserName") %>' />
                                         <br />
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </td>
                             <td style="width:80%">
-                                Nội dung xử lý:
-                                <br />
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="textarea" TextMode="multiline" Rows="5" ReadOnly="true"></asp:TextBox>
-                                <br />
-                                File báo cáo:
-                                <br />
-                                Quyền: <asp:CheckBox runat="server" ID="chkChuyentiep" Text="Chuyển tiếp" /> &nbsp <asp:CheckBox runat="server" ID="chkXem" Text="Xem xử lý khác" />
-                                <br />
-                                Chọn: &nbsp <asp:RadioButton runat="server" ID="rdoNoiDung" Text="Xóa nội dung" GroupName="rdoXoa"/>
-                                &nbsp <asp:RadioButton runat="server" ID="rdoFile" Text="Xóa các file" GroupName="rdoXoa"/>
-                                &nbsp <asp:RadioButton runat="server" ID="rdoTatCa" Text="Xóa cả nội dung và file" GroupName="rdoXoa"/>
-                                &nbsp &nbsp <asp:LinkButton CssClass="link-btn" runat="server" Text="    Xóa    " ID="btnXoa"></asp:LinkButton>
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="conditional">
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="rptListUser" />
+                                    </Triggers>
+                                    <ContentTemplate>
+                                        Nội dung xử lý:
+                                        <br />
+                                        <asp:TextBox ID="txtContentComment" runat="server" CssClass="textarea" TextMode="multiline" Rows="10" ReadOnly="true"></asp:TextBox>
+                                        <br />
+                                        File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" >
+                                                        <ItemTemplate>
+                                                            <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
+                                                            </p>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                        <br />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </td>
                         </tr>
                     </table>
@@ -101,7 +109,7 @@
                                 Nội dung:<span class="rq">*</span>
                             </td>
                             <td style="width:80%">
-                                <asp:TextBox ID="txtContent" runat="server" CssClass="textarea" TextMode="multiline" Rows="10"></asp:TextBox>
+                                <asp:TextBox ID="txtContent" runat="server" CssClass="textarea required" TextMode="multiline" Rows="10"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -118,17 +126,18 @@
                                 Trạng thái công việc:
                             </td>
                             <td style="width:80%">
-                                 <asp:RadioButton runat="server" ID="RadioButton1" Text="Hoàn thành" GroupName="rdoTrangThai"/>
-                                &nbsp <asp:RadioButton runat="server" ID="RadioButton2" Text="Tạm dừng" GroupName="rdoTrangThai"/>
-                                &nbsp <asp:RadioButton runat="server" ID="RadioButton3" Text="Tiếp tục xử lý" GroupName="rdoTrangThai"/>
-                                &nbsp &nbsp <asp:LinkButton CssClass="link-btn" runat="server" Text="Cập nhật trạng thái" ID="btnCapNhat"></asp:LinkButton>
+                                 <asp:RadioButton runat="server" Checked="true" ID="rdoHoanThanh" Text="Hoàn thành" GroupName="rdoTrangThai"/>
+                                &nbsp <asp:RadioButton runat="server" ID="rdoTamDung" Text="Tạm dừng" GroupName="rdoTrangThai"/>
+                                &nbsp <asp:RadioButton runat="server" ID="rdoTiepTuc" Text="Tiếp tục xử lý" GroupName="rdoTrangThai"/>
+                                &nbsp &nbsp <asp:LinkButton CssClass="link-btn" runat="server" 
+                                     Text="Cập nhật trạng thái" ID="btnCapNhat" onclick="btnCapNhat_Click"></asp:LinkButton>
                             </td>
                         </tr>
                     </table>
                     </div>
                     <div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="Button1" CssClass="btn" Text="Thêm xử lý" 
+                    	    <li><asp:Button runat="server" ID="Button1" CssClass="btn" Text="Thêm xử lý" onclick="btnThemXuLy_Click" 
                                      ></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>

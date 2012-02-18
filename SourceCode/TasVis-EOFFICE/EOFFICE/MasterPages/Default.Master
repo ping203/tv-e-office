@@ -89,7 +89,7 @@
 
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/View.png" runat="server" /></span>Xem lịch họp</a>
+                        	<a href="../Calendar/Calendar.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/View.png" runat="server" /></span>Xem lịch họp</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Ngày được đăng ký</a>

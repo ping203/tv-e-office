@@ -33,6 +33,7 @@ namespace EOFFICE.Calender
         {
             if (!Page.IsPostBack)
             {
+                Response.Write(Request.Url.Host);
                 //Hiển thị lịch công tác
                 RadScheduler_Load();
             }

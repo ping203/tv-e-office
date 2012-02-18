@@ -16,7 +16,7 @@ namespace EOFFICE.MasterPages
     public partial class Default : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {			
             if (Session["MyUserInfo"] == null)
             {
                 string strReturn = "";
@@ -31,8 +31,7 @@ namespace EOFFICE.MasterPages
                 Response.Redirect("~/Login.aspx" + strReturn);
             }
             lblUser.Text = Global.UserInfo.FullName;
-            lblUser.DataBind();
-            
+            lblUser.DataBind();            
         }
 
         /// <summary>

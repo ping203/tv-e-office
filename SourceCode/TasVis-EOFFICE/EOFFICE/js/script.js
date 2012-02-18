@@ -13,6 +13,8 @@ $(document).ready(function() {
     $(".lbtDepartment").click(function() {
         id=($(this).attr("id"));
         url = $(this).attr("href");
+        url ="http://"+url+":85/Ajax/ajLoadUserByDepartment.aspx";
+        $('.result-'+id).html('<img src="/images/icon_loading.gif" />');        
         $.post(url,{ DepartmentID: ''+id+'' }, function(data) {
             $('.result-'+id).html(data);
         });

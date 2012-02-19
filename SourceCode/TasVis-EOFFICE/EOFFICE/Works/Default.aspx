@@ -30,8 +30,14 @@
                         </tr>
                         <tr>
                         	<td>Ngày bắt đầu: <span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required date datepicker"></asp:TextBox>(dd/mm/yyyy)</td>
-                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required date datepicker"></asp:TextBox>(dd/mm/yyyy)</td>                            
+                            <td><asp:TextBox ID="txtStartDate" runat="server" CssClass="required datepicker"></asp:TextBox>(dd/mm/yyyy)<asp:RegularExpressionValidator 
+                                    ID="RegularExpressionValidator1" runat="server" 
+                                    ControlToValidate="txtStartDate" ErrorMessage="Sai định dạng ngày tháng" 
+                                    ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"></asp:RegularExpressionValidator></td>
+                            <td colspan="2">Ngày kết thúc: <span class="rq">*</span><asp:TextBox ID="txtEndDate" runat="server" CssClass="required datepicker"></asp:TextBox>(dd/mm/yyyy)<asp:RegularExpressionValidator 
+                                    ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEndDate" 
+                                    ErrorMessage="Sai định dạng ngày tháng" 
+                                    ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"></asp:RegularExpressionValidator></td>                            
                         </tr>
                         <tr>
                         	<td>Nội dung tóm tắt: </td>
@@ -56,9 +62,28 @@
                         <tr>
                         	<td>Người nhận việc: </td>
                             <td colspan="3">
-                                <input type="button" id="btnHide" value="Chọn người nhận việc" style="margin-bottom:10px" />
+                                <%--<input type="button" id="btnHide" value="Chọn người nhận việc" style="margin-bottom:10px" />
                                 <div id="listUserProcess" style="width:100%" >
                                     <asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
+                                </div>--%>
+                                <div>                                                                    
+                                    <asp:Repeater ID="rptDepartment" runat="server">
+                                        <HeaderTemplate><table></HeaderTemplate>
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <div class="link-department">
+                                                        <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
+                                                            <%#Eval("Name") %>
+                                                        </a>
+                                                    </div>
+                                                    <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                        <FooterTemplate></table></FooterTemplate>
+                                    </asp:Repeater>                                                                    
                                 </div>
                             </td>
                         </tr>

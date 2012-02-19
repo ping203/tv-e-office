@@ -14,6 +14,7 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using DataAccess.Common;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace EOFFICE.Works
 {
@@ -25,7 +26,8 @@ namespace EOFFICE.Works
             if (!Page.IsPostBack)
             {
                 ddlWorkGroup_Load();
-                CheckBoxBind_Load();
+                //CheckBoxBind_Load();
+                BindDepartment();
             }
         }
 
@@ -37,6 +39,13 @@ namespace EOFFICE.Works
             ddlWorkGroup.DataTextField = "Name";
             ddlWorkGroup.DataValueField = "WorkGroupID";
             ddlWorkGroup.DataBind();
+        }
+
+        public void BindDepartment()
+        {
+            BDepartment BobjDepartment = new BDepartment();
+            rptDepartment.DataSource= BobjDepartment.Get(0);
+            rptDepartment.DataBind();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -84,15 +93,10 @@ namespace EOFFICE.Works
             
             
             //Lấy danh sách người thực hiện công việc
-            string ListUserProcess = ",";
-            foreach (ListItem item in CheckBoxBind.Items)
-            {
-                
-                if (item.Selected)
-                {
-                    ListUserProcess += item.Value.ToString()+",";
-                }
-            }
+            
+            string UserJoin = "," + Request.Form["ckxUser"] + ",";
+
+
             //Lấy mức độ ưu tiên
             string Priority = string.Empty;
             if (rdoPrior1.Checked == true)
@@ -115,7 +119,7 @@ namespace EOFFICE.Works
             objWork.Content = txtContent.Text;
             objWork.Attachs = listFile;
             objWork.IDUserCreate = Global.UserInfo.UserID;   //--Lấy IDUserCreate sau
-            objWork.IDUserProcess = ListUserProcess;
+            objWork.IDUserProcess = UserJoin;
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             objWork.CreateDate = CurrentTime;
             objWork.Status = "CHUA_GIAO";
@@ -127,13 +131,13 @@ namespace EOFFICE.Works
             BobjWork.Add(objWork);
         }
 
-        private void CheckBoxBind_Load()
-        {
-            BUser obj = new BUser();
-            string username = string.Empty;
-            CheckBoxBind.DataSource = obj.Get(username);
-            CheckBoxBind.DataBind();
-        }
+        //private void CheckBoxBind_Load()
+        //{
+        //    BUser obj = new BUser();
+        //    string username = string.Empty;
+        //    CheckBoxBind.DataSource = obj.Get(username);
+        //    CheckBoxBind.DataBind();
+        //}
 
         protected void btnForward_Click(object sender, EventArgs e)
         {

@@ -23,7 +23,7 @@ namespace EOFFICE.Calender
 {
     public partial class Calendar : System.Web.UI.Page
     {
-        string UserName = "vanhung";
+        
 
         Label lblUserJoin;
         string Status = string.Empty;
@@ -32,8 +32,7 @@ namespace EOFFICE.Calender
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
-                Response.Write(Request.Url.Host);
+            {                
                 //Hiển thị lịch công tác
                 RadScheduler_Load();
             }
@@ -41,6 +40,7 @@ namespace EOFFICE.Calender
 
         private void RadScheduler_Load()
         {
+            string UserName = Global.UserInfo.UserName;
             BCalendar BobjCalendar = new BCalendar();
             List<OCalendar> listJoin = BobjCalendar.Get(0, ","+UserName+",").ToList();
             
@@ -64,6 +64,10 @@ namespace EOFFICE.Calender
             if(e.Container.Mode == SchedulerFormMode.AdvancedInsert)
             {
                 Status = "AdvancedInsert";
+                RadDateTimePicker startInput = (RadDateTimePicker)e.Container.FindControl("StartInput");
+                startInput.SelectedDate = DateTime.Parse(hdf.Value);
+                RadDateTimePicker endInput = (RadDateTimePicker)e.Container.FindControl("endInput");
+                endInput.SelectedDate = DateTime.Parse(hdf.Value);
             }
             if (e.Container.Mode == SchedulerFormMode.AdvancedEdit)
             {
@@ -120,6 +124,7 @@ namespace EOFFICE.Calender
 
         protected void RadScheduler1_AppointmentCommand(object sender, AppointmentCommandEventArgs e)
         {
+            string UserName = Global.UserInfo.UserName;
             if (e.CommandName == "Update")
             {
                 string CalendarID = ((HiddenField)e.Container.FindControl("hdfID")).Value;
@@ -185,7 +190,6 @@ namespace EOFFICE.Calender
                     objCalendar.UserCreate = UserName;
                     BobjCalendar.Add(objCalendar);
                     RadScheduler_Load();
-                    
                 }
             }
             
@@ -200,6 +204,7 @@ namespace EOFFICE.Calender
 
         protected void RadScheduler1_AppointmentCreated(object sender, AppointmentCreatedEventArgs e)
         {
+            string UserName = Global.UserInfo.UserName;
             int CalendarID = int.Parse(e.Appointment.ID.ToString());
             BCalendar BobjCalendar = new BCalendar();
             OCalendar objCalendar = new OCalendar();

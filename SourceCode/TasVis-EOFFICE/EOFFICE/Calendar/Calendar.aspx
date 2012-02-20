@@ -83,10 +83,10 @@
                                                                 <td>
                                                                     <telerik:RadDateTimePicker ID="StartInput" Runat="server" Culture="Vietnamese (Vietnam)" Skin="Web20">
                                                                         <Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20"></Calendar>
-                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
+                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)" Columns="2" RenderDirection="Vertical"></TimeView>
                                                                         <TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
-                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy hh:mm:ss" DateFormat="dd/MM/yyyy"></DateInput>
+                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
                                                                 </td>
                                                             </tr>
@@ -95,11 +95,13 @@
                                                                 <td>
                                                                     <telerik:RadDateTimePicker ID="EndInput" Runat="server" Culture="Vietnamese (Vietnam)" Skin="Web20">
                                                                         <Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20"></Calendar>
-                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
+                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)" Columns="2" RenderDirection="Vertical"></TimeView>
                                                                         <TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
-                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy hh:mm:ss" DateFormat="dd/MM/yyyy" runat="server" ID="dateStart"></DateInput>
+                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
+                                                                    Operator="GreaterThanEqual"></asp:CompareValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -185,10 +187,10 @@
                                                                 <td>
                                                                     <telerik:RadDateTimePicker ID="StartInput" Runat="server" Culture="Vietnamese (Vietnam)" Skin="Web20">
                                                                         <Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20"></Calendar>
-                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
+                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)" Columns="2" RenderDirection="Vertical"></TimeView>
                                                                         <TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
-                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy hh:mm:ss" DateFormat="dd/MM/yyyy"></DateInput>
+                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
                                                                 </td>
                                                             </tr>
@@ -196,12 +198,14 @@
                                                                 <td align="right">Thời gian kết thúc:</td>
                                                                 <td>
                                                                     <telerik:RadDateTimePicker ID="EndInput" Runat="server" Culture="Vietnamese (Vietnam)" Skin="Web20">
-                                                                        <Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20"></Calendar>
-                                                                        <TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
+                                                                        <Calendar runat="server" UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20"></Calendar>
+                                                                        <TimeView runat="server" CellSpacing="-1" Culture="Vietnamese (Vietnam)" Columns="2" RenderDirection="Vertical"></TimeView>
                                                                         <TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
-                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy hh:mm:ss" DateFormat="dd/MM/yyyy" runat="server" ID="dateStart"></DateInput>
+                                                                        <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
+                                                                    Operator="GreaterThanEqual"></asp:CompareValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -226,7 +230,7 @@
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class="link-department">
-                                                                                            <a href="http://localhost:92/Ajax/ajLoadUserByDepartment.aspx" class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
                                                                                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
                                                                                                 <%#Eval("Name") %>
                                                                                             </a>
@@ -308,5 +312,17 @@
                      Messages.value = eventArgs.get_time().format('MM/dd/yyyy hh:mm:ss');
                  }
             </script>
-            
+            <telerik:RadDateTimePicker ID="RadDateTimePicker1" runat="server" 
+        Culture="English (United States)">
+<Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x"></Calendar>
+
+<TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
+
+<TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
+
+<DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
+
+<DateInput DisplayDateFormat="M/d/yyyy" DateFormat="M/d/yyyy"></DateInput>
+</telerik:RadDateTimePicker>
 </asp:Content>
+

@@ -196,5 +196,13 @@ namespace EOFFICE.Works
 
             grvWork.DataBind();
         }
+
+        protected void grvWork_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowState == DataControlRowState.Normal)
+                e.Row.CssClass = "normal";
+            if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.CssClass = "altenate";
+        }
     }
 }

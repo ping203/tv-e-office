@@ -44,7 +44,7 @@
                     <asp:Label runat="server" ID="lblThongBao" Text=""></asp:Label>
                     <br />
                         <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
-                            CssClass="tbl-list" Width="100%"  >
+                            CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated"  >
                             <Columns>
                                 <asp:TemplateField HeaderText="STT">
                                    <ItemTemplate>

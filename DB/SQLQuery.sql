@@ -1205,12 +1205,17 @@ IF OBJECT_ID('sp_tblWorkGroup_get','P') IS NOT NULL
 	DROP PROC sp_tblWorkGroup_get
 GO
 CREATE PROC sp_tblWorkGroup_get
-	@WorkGroupID INT=NULL
+	@WorkGroupID INT=NULL,
+	@Order VARCHAR(20)='ASC',
+	@OrderBy VARCHAR(100)='Name',
+	@PageIndex INT=1,
+	@PageSize INT=50
 AS
 BEGIN
 	IF @WorkGroupID IS NULL OR @WorkGroupID=0
 	BEGIN
-		SELECT * FROM tblWorkGroup
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,* FROM tblWorkGroup)
+		SELECT * FROM tblRecords')
 	END
 	ELSE
 	BEGIN
@@ -1732,7 +1737,7 @@ CREATE TABLE tblContact
 )
 GO
 /* add */
-IF OBJECT_ID('sp_tblContact_add','U') IS NOT NULL
+IF OBJECT_ID('sp_tblContact_add','P') IS NOT NULL
 	DROP PROC sp_tblContact_add
 GO
 CREATE PROC sp_tblContact_add

@@ -143,7 +143,7 @@ namespace EOFFICE.Works
             //Lấy IDWWork
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
             //Lấy IDUserCreate
-            string IDUserCreate = "vanhung";//Lấy lại sau
+            string IDUserCreate = Global.UserInfo.UserName;//Lấy lại sau
             //Lấy nội dung xử lý
             string Content = txtContent.Text;
             //Upload File
@@ -221,8 +221,9 @@ namespace EOFFICE.Works
             {
                 Status = "CONG_VIEC_DA_XU_LY";
             }
-            int IDUserCreate = 1;//Lấy sau
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
+            int IDUserCreate = BobjWork.Get(WorkID).First().IDUserCreate;//Lấy sau
+            
             BobjWork.Update(WorkID, Status, IDUserCreate);
         }
     }

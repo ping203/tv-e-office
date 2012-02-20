@@ -6,7 +6,7 @@
                     
                 	<div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
+                        	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click" OnClientClick='return get_check_value();'></asp:Button></li>
                             <li><asp:LinkButton ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
                                     onclick="btnForward_Click" ></asp:LinkButton></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>

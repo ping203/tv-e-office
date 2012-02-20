@@ -8,7 +8,7 @@
                 
                 	<div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="btnCapNhat" CssClass="btn" Text="Cập nhật" 
+                    	    <li><asp:Button runat="server" ID="btnCapNhat" CssClass="btn" Text="Cập nhật" OnClientClick='return get_check_value();'
                                     onclick="btnCapNhat_Click"></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
@@ -132,31 +132,34 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <asp:Repeater runat="server" ID="rptDepartment" 
-                                    onitemdatabound="rptDepartment_ItemDataBound">
-                                    <HeaderTemplate><table width="100%"></HeaderTemplate>
-                                    <ItemTemplate>
+                                <div>                                                                    
+                                    <asp:Repeater ID="rptDepartment" runat="server">
+                                        <HeaderTemplate><table></HeaderTemplate>
+                                        <ItemTemplate>
                                             <tr>
-                                                <td width="100%" class="user-list">
-                                                   <b><%# Eval("Name") %></b>
-                                                   <asp:HiddenField runat="server" ID="hdfID" Value='<%# Eval("DepartmentID") %>' />
-                                                   <asp:CheckBoxList runat="server" ID="cblUser" DataTextField="FullName" DataValueField="UserName" CellPadding="5" RepeatColumns="4" Width="100%">
-                                                        
-                                                   </asp:CheckBoxList>
+                                                <td>
+                                                    <div class="link-department">
+                                                        <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
+                                                            <%#Eval("Name") %>
+                                                        </a>
+                                                    </div>
+                                                    <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
                                                 </td>
                                             </tr>
-                                    </ItemTemplate>
-                                    <FooterTemplate></table></FooterTemplate>
-                                </asp:Repeater>
+                                        </ItemTemplate>
+                                        <FooterTemplate></table></FooterTemplate>
+                                    </asp:Repeater>                                                                    
+                                </div>
                             </td>
                             
                         </tr>
                     </table>                  
-                    
+                    <asp:HiddenField ID="hdfUsers" runat="server" />
                     </div>
                     <div class="nav-function">
                     	<ul>
-                    	    <li><asp:Button runat="server" ID="btnCapNhat2" CssClass="btn" Text="Cập nhật" 
+                    	    <li><asp:Button runat="server" ID="btnCapNhat2" CssClass="btn" Text="Cập nhật" OnClientClick='return get_check_value();'
                                    onclick="btnCapNhat_Click"  ></asp:Button></li>
                         	<li><input type="reset" value="Hủy bỏ" class="btn" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>

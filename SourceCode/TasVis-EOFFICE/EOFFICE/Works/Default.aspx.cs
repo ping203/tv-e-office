@@ -101,9 +101,8 @@ namespace EOFFICE.Works
             }
             else
             {
-                UserJoin += ",";
+                UserJoin = "," + UserJoin;
             }
-
             //Lấy mức độ ưu tiên
             string Priority = string.Empty;
             if (rdoPrior1.Checked == true)

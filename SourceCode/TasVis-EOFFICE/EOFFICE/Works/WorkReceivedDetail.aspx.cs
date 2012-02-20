@@ -26,14 +26,12 @@ namespace EOFFICE.Works
             if (!IsPostBack)
             {
                 Infomation_Load();
-                lstDepartment_Load();
-                rptDepartment_Load();
-                
+                BindDepartment();
             }
             
         }
 
-        protected void rptDepartment_Load()
+        public void BindDepartment()
         {
             BDepartment BobjDepartment = new BDepartment();
             rptDepartment.DataSource = BobjDepartment.Get(0);
@@ -103,7 +101,7 @@ namespace EOFFICE.Works
             //Lấy IDWWork
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
             //Lấy IDUserCreate
-            string IDUserCreate="vanhung";//Lấy lại sau
+            string IDUserCreate=Global.UserInfo.UserName;//Lấy lại sau
             //Lấy nội dung xử lý
             string Content = txtContent.Text;
             //Upload File
@@ -148,7 +146,11 @@ namespace EOFFICE.Works
                 }
             }
             //Lấy danh sách người chuyển tiếp
-            string UserJoin="";
+            string UserJoin = hdfUsers.Value;            
+            if (UserJoin == ",")
+            {
+                UserJoin = "";
+            }
             
             //////////////////////////////////////////////
             //Tạo Comment mới
@@ -163,19 +165,7 @@ namespace EOFFICE.Works
             objComment.Attachs = listFile;
             objComment.CreateDate = CurrentTime;
             
-            BobjComment.Add(objComment);
-            for (int i = 0; i < rptDepartment.Items.Count; i++)
-            {
-                CheckBoxList cblUser = (CheckBoxList)rptDepartment.Items[i].FindControl("cblUser");
-                for (int j = 0; j < cblUser.Items.Count; j++)
-                {
-                    if (cblUser.Items[j].Selected)
-                    {
-                        UserJoin += cblUser.Items[j].Value+",";
-                    }
-                }
-            }
-            
+            BobjComment.Add(objComment);                     
 
                 //Thêm danh sách người chuyển tiếp nếu có chuyển tiếp
 
@@ -184,16 +174,10 @@ namespace EOFFICE.Works
                     OWork objWork = new OWork();
                     objWork = BobjWork.GetWork(WorkID).First();
                     string newlistUserProcess = objWork.IDUserProcess + UserJoin;
-                    BobjWork.UpdateUserProcess(WorkID, newlistUserProcess, 1);//Lấy IDUserCreate sau
+                    BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,objWork.IDUserCreate);//Lấy IDUserCreate sau
                 }
 
                 Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
-        }
-
-        protected void lstDepartment_Load()
-        {
-            BDepartment BobjDepartment = new BDepartment();
-            ODepartment objDepartment = new ODepartment();
         }
 
         protected void rptListUser_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -223,22 +207,46 @@ namespace EOFFICE.Works
         {
             if (e.CommandName == "Download")
             {
-                try
-                {
-                    HttpContext.Current.Response.ContentType =
-                                "application/octet-stream";
-                    HttpContext.Current.Response.AddHeader("Content-Disposition",
-                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
-                    HttpContext.Current.Response.Clear();
-                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
-                    HttpContext.Current.Response.End();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                //try
+                //{
+                    
+                    //HttpContext.Current.Response.ContentType =
+                    //            "application/octet-stream";
+                    //HttpContext.Current.Response.AddHeader("Content-Disposition",
+                    //  "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    //HttpContext.Current.Response.Clear();
+                    //HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    //HttpContext.Current.Response.End();
+                    string fName = Server.MapPath(e.CommandArgument.ToString());
+                    FileInfo fi = new FileInfo(fName);
+                    long sz = fi.Length;
+
+                    Response.ClearContent();
+                    Response.ContentType = MimeType(Path.GetExtension(fName));
+                    Response.AddHeader("Content-Disposition", string.Format("attachment; filename = {0}", System.IO.Path.GetFileName(fName)));
+                    Response.AddHeader("Content-Length", sz.ToString("F0"));
+                    Response.TransmitFile(fName);
+                    Response.End();
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw ex;
+                //}
             }
         }
+
+        public static string MimeType(string Extension)
+        {
+            string mime = "application/octetstream";
+            if (string.IsNullOrEmpty(Extension))
+                return mime;
+
+            string ext = Extension.ToLower();
+            Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (rk != null && rk.GetValue("Content Type") != null)
+                mime = rk.GetValue("Content Type").ToString();
+            return mime;
+        } 
 
         protected void rptDepartment_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

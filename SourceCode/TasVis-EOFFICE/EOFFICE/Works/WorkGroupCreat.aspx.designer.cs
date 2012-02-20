@@ -50,6 +50,24 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.LinkButton btnDelete;
         
         /// <summary>
+        /// spResultCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spResultCount;
+        
+        /// <summary>
+        /// ddlPageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        
+        /// <summary>
         /// grvWorkGroup control.
         /// </summary>
         /// <remarks>
@@ -57,5 +75,14 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvWorkGroup;
+        
+        /// <summary>
+        /// ctlPagging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EOFFICE.Common.PaggingControl ctlPagging;
     }
 }

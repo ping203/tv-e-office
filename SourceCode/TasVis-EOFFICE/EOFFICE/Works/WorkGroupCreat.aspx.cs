@@ -17,25 +17,116 @@ namespace EOFFICE.Works
 {
     public partial class WorkGroupCreat : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Trang hiện tại
+        /// </summary>
+        public int CurrentPage
+        {
+
+            get
+            {
+                if (Request.QueryString["currentpage"] != null)
+                {
+                    try
+                    {
+
+                        return int.Parse(Request.QueryString["currentpage"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+        #endregion
+
+        private void InitData()
+        {
+            //--Pagesize
+            if (Request.QueryString["pagesize"] != null)
+            {
+                try
+                {
+                    ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        /// <summary>
+        /// Gửi kèm các paramater
+        /// </summary>
+        public string GenParamRedirect()
+        {
+            string strParam = "";
+            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
+            //--Pagesize
+            if (Request.QueryString["currentpage"] != null)
+            {
+                try
+                {
+                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                }
+                catch (Exception ex) { }
+            }
+
+            return strParam;
+        }
+
+        /// <summary>
+        /// Tạo các parmater phục vụ phân trang
+        /// </summary>
+        /// <returns></returns>
+        private string GenarateParam()
+        {
+            string strParam = "";
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            
+            return strParam;
+        }
        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 grvWorkGroup_Load();
-                
+                InitData();
             }
         }
 
         protected void grvWorkGroup_Load()
         {            
             BWorkGroup objWorkGroup = new BWorkGroup();
-            grvWorkGroup.DataSource= objWorkGroup.Get(0);
-            grvWorkGroup.DataBind();
+            int count = objWorkGroup.Get(0).Count;
+            ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
+            if (count > ctlPagging.PageSize)
+            {
+                ctlPagging.Visible = true;
+            }
+            else
+            {
+                ctlPagging.Visible = false;
+            }
+            grvWorkGroup.DataSource = objWorkGroup.Get(0, CurrentPage, ctlPagging.PageSize);
+            grvWorkGroup.DataBind();            
             ddlGroupParent_Load();
+            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.ItemCount = count;
+            ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
-        
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            grvWorkGroup_Load();
+        }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {

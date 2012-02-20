@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkGroupCreat.aspx.cs" Inherits="EOFFICE.Works.WorkGroupCreat" MasterPageFile="~/MasterPages/Default.Master" %>
-
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
     <script type="text/javascript">
 
@@ -43,14 +43,31 @@
                     </table>
                     <div class="list" id="list-congvieccanlam">
             	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM CÔNG VIỆC</h2>
-            	        <asp:LinkButton ID="btnDelete" runat="server" Text="Xóa nhóm công việc" onclick="btnDelete_Click" CssClass="link-btn"></asp:LinkButton>	
-            	        <br />
+            	        <div>
+            	            <asp:LinkButton ID="btnDelete" runat="server" Text="Xóa nhóm công việc" onclick="btnDelete_Click" CssClass="link-btn"></asp:LinkButton>	    
+            	        </div>            	        
+            	        <table width="100%">
+            	            <tr>
+            	                <td align="left"><span runat="server" id="spResultCount" style="float:left"></span></td>
+            	                <td align="right">
+            	                    Hiển thị:
+                                     <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                                        onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                                        <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
+                                        <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                                        <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>                                        
+                                        <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                                        <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                                    </asp:DropDownList>
+            	                </td>
+            	            </tr>
+            	        </table>
                         <asp:GridView ID="grvWorkGroup" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" onrowcreated="grvWorkGroup_RowCreated" 
                                     onrowdatabound="grvWorkGroup_RowDataBound" 
                             DataKeyNames="WorkGroupID" onrowcancelingedit="grvWorkGroup_RowCancelingEdit" 
                             onrowediting="grvWorkGroup_RowEditing" 
-                            onrowupdating="grvWorkGroup_RowUpdating" >
+                            onrowupdating="grvWorkGroup_RowUpdating">
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
@@ -95,21 +112,11 @@
                                 </asp:TemplateField>
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />
-                        </asp:GridView>
-                        <div class="pagenav">
-                	        <ul>
-                    	        <li><a href="#">Trang đầu</a></li>
-                                <li><a href="#" class="pagecurrent">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">Trang cuối</a></li>
-                            </ul>
+                        </asp:GridView>                       
+                       <div class="pagenav">
+                            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
+                                PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
                         </div>
-                        <br />
-                       
                         
                     </div>
                     </div>

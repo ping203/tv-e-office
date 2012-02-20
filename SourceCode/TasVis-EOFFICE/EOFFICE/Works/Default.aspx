@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
 <div class="list wp-form" id="createWork">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công việc mới</h2>
-                
+                    
                 	<div class="nav-function">
                     	<ul>
                         	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click"></asp:Button></li>
@@ -14,6 +14,7 @@
                         </ul>
                     </div>
                     <div class="form">
+                    <input type="checkbox" class="cbxUser" value="abc" /> User
                 	<table width="100%" cellspacing="5">
                     	<tr>
                         	<td>Nhóm công việc:<span class="rq">*</span></td>
@@ -59,40 +60,43 @@
                             <td><asp:RadioButton ID="rdoPrior2" runat="server" GroupName="rdoPrior" Text="Quan trọng" /></td>
                             <td><asp:RadioButton ID="rdoPrior3" runat="server" GroupName="rdoPrior" Text="Bình thường" /></td>
                         </tr>
-                        <tr>
-                        	<td>Người nhận việc: </td>
-                            <td colspan="3">
-                                <%--<input type="button" id="btnHide" value="Chọn người nhận việc" style="margin-bottom:10px" />
-                                <div id="listUserProcess" style="width:100%" >
-                                    <asp:CheckBoxList ID="CheckBoxBind" runat="Server" DataTextField="FullName" DataValueField="UserName"  RepeatColumns="3" RepeatLayout="Table" Width="100%"></asp:CheckBoxList>
-                                </div>--%>
-                                <div>                                                                    
-                                    <asp:Repeater ID="rptDepartment" runat="server">
-                                        <HeaderTemplate><table></HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>
-                                                    <div class="link-department">
-                                                        <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
-                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
-                                                            <%#Eval("Name") %>
-                                                        </a>
-                                                    </div>
-                                                    <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                        <FooterTemplate></table></FooterTemplate>
-                                    </asp:Repeater>                                                                    
-                                </div>
-                            </td>
-                        </tr>
+                        
                     </table>
+                    <form name="orderform">
+                        <table>
+                            <tr>
+                        	    <td>Người nhận việc: </td>
+                                <td colspan="3">
+                                    <div>                                                                    
+                                        <asp:Repeater ID="rptDepartment" runat="server">
+                                            <HeaderTemplate><table></HeaderTemplate>
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td>
+                                                        <div class="link-department">
+                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                                <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
+                                                                <%#Eval("Name") %>
+                                                            </a>
+                                                        </div>
+                                                        <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                            <FooterTemplate></table></FooterTemplate>
+                                        </asp:Repeater>                                                                    
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <asp:HiddenField ID="hdfUsers" runat="server" />
+                    </form>
+                    
                     </div>
                     <div class="nav-function">
                     	<ul>
-                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" CssClass="btn" 
-                                    onclick="btnSave_Click" ></asp:Button></li>
+                        	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" OnClick="btnSave_Click" CssClass="btn" OnClientClick='return get_check_value();'   
+                                    ></asp:Button></li>
                             <li><asp:LinkButton ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
                                     onclick="btnForward_Click" ></asp:LinkButton></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
@@ -102,5 +106,4 @@
                     </div>
                     
             </div>
-            
 </asp:Content>

@@ -1214,8 +1214,13 @@ AS
 BEGIN
 	IF @WorkGroupID IS NULL OR @WorkGroupID=0
 	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
 		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY '+@OrderBy+' '+@Order+') AS RowIndex,* FROM tblWorkGroup)
-		SELECT * FROM tblRecords')
+		SELECT * FROM tblRecords WHERE RowIndex BETWEEN '+@Start+' AND '+@End)
 	END
 	ELSE
 	BEGIN

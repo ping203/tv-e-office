@@ -84,12 +84,12 @@
                                 <asp:TemplateField>
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit"  runat="server" />
-                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete"  runat="server"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" CommandName="Edit" CssClass="link-function edit" ToolTip="Sửa"  runat="server" />
+                                        <asp:LinkButton ID="LinkButton4" CommandName="Delete" CssClass="link-function delete" ToolTip="Xóa"  runat="server"></asp:LinkButton>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update"   runat="server" />
-                                        <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel"  runat="server" />
+                                        <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update" ToolTip="Cập nhật"   runat="server" />
+                                        <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel" ToolTip="Hủy"  runat="server" />
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="7%" />                   
                                 </asp:TemplateField>

@@ -11,12 +11,12 @@ $(document).ready(function() {
     });
     /* ajax load user by department */
     $(".lbtDepartment").click(function() {
-        id=($(this).attr("id"));
+        id = ($(this).attr("id"));
         url = $(this).attr("href");
-        url ="http://"+url+":85/Ajax/ajLoadUserByDepartment.aspx";
-        $('.result-'+id).html('<img src="/images/icon_loading.gif" />');        
-        $.post(url,{ DepartmentID: ''+id+'' }, function(data) {
-            $('.result-'+id).html(data);
+        url = "http://" + url + ":85/Ajax/ajLoadUserByDepartment.aspx";
+        $('.result-' + id).html('<img src="/images/icon_loading.gif" />');
+        $.post(url, { DepartmentID: '' + id + '' }, function(data) {
+            $('.result-' + id).html(data);
         });
         return false;
     });
@@ -25,4 +25,17 @@ $(document).ready(function() {
     $("#btnHide").click(function() {
         $("#listUserProcess").slideToggle("slow");
     });
+
 });
+/* check box */
+function get_check_value() {
+    var c_value = "";
+
+    $(".cbxUser:checked").each
+        (
+            function() {
+                c_value += $(this).val();
+            }
+        );
+            $("#ctl00_cphContent_hdfUsers").val(c_value);                 
+} 

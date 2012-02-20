@@ -34,8 +34,8 @@ function get_check_value() {
     $(".cbxUser:checked").each
         (
             function() {
-                c_value += $(this).val();
+                c_value += $(this).val()+",";
             }
         );
-            $("#ctl00_cphContent_hdfUsers").val(c_value);                 
+            $("#ctl00_cphContent_hdfUsers").val(c_value);             
 } 

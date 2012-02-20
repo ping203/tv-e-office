@@ -50,11 +50,26 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblWorkGroup_delete", sqlPara);
         }
 
+        public IList<OWorkGroup> Get(int WorkGroupID, int PageIndex,int PageSize)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@WorkGroupID", SqlDbType.Int);
+            sqlPara[0].Value = WorkGroupID;
+            sqlPara[1] = new SqlParameter("@PageIndex", SqlDbType.Int);
+            sqlPara[1].Value = PageIndex;
+            sqlPara[2] = new SqlParameter("@PageSize", SqlDbType.Int);
+            sqlPara[2].Value = PageSize;
+            DataTable tbl = RunProcedureGet("sp_tblWorkGroup_get", sqlPara);
+            IList<OWorkGroup> list = new List<OWorkGroup>();
+            list = Common.Common.ConvertTo<OWorkGroup>(tbl);
+            return list;
+        }
+
         public IList<OWorkGroup> Get(int WorkGroupID)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];
             sqlPara[0] = new SqlParameter("@WorkGroupID", SqlDbType.Int);
-            sqlPara[0].Value = WorkGroupID;
+            sqlPara[0].Value = WorkGroupID;            
             DataTable tbl = RunProcedureGet("sp_tblWorkGroup_get", sqlPara);
             IList<OWorkGroup> list = new List<OWorkGroup>();
             list = Common.Common.ConvertTo<OWorkGroup>(tbl);

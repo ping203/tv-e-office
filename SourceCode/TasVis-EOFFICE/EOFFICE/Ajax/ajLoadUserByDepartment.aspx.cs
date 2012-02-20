@@ -34,7 +34,7 @@ namespace EOFFICE.Ajax
                     html += "<tr>";
                 }
                 html += "<td width='25%'>";
-                html += "<input id='ckxUser' name='ckxUser' type='checkbox' value='"+obj.UserName+"' title='"+obj.FullName+"' />";
+                html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='"+obj.UserName+"' title='"+obj.FullName+"' />";
                 html += "&nbsp";
                 html += ""+obj.FullName+"";
                 html += "</td>";

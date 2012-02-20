@@ -50,6 +50,7 @@ namespace EOFFICE.Ajax
             }
             html += "</table>";           
             Response.Write(html);
+            Response.End();
         }
     }
 }

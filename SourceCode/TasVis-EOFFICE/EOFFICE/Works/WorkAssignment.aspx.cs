@@ -22,6 +22,35 @@ namespace EOFFICE.Works
 {
     public partial class WorkAssignment : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Trang hiện tại
+        /// </summary>
+        public int CurrentPage
+        {
+
+            get
+            {
+                if (Request.QueryString["currentpage"] != null)
+                {
+                    try
+                    {
+
+                        return int.Parse(Request.QueryString["currentpage"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -29,7 +58,95 @@ namespace EOFFICE.Works
                 ddlWorkGroup_Load();
                 grvWork_Load();
                 ddlWork_Load();
+                InitData();                
             }
+        }
+
+        private void InitData()
+        {
+            //--Pagesize
+            if (Request.QueryString["pagesize"] != null)
+            {
+                try
+                {
+                    ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Nhóm công việc
+            if (Request.QueryString["group"] != null)
+            {
+                try
+                {
+                    ddlWorkGroup.Items.FindByValue(Request.QueryString["group"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Trạng thái
+            if (Request.QueryString["status"] != null)
+            {
+                try
+                {
+                    ddlWork.Items.FindByValue(Request.QueryString["status"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Tiêu chí tìm kiếm
+            if (Request.QueryString["type"] != null)
+            {
+                try
+                {
+                    ddlTieuChi.Items.FindByValue(Request.QueryString["type"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        public string GenParamRedirect()
+        {
+            string strParam = "";
+            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "&status=" + ddlWork.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyword.Text.Trim().Length > 0)
+            {
+                strParam += "&fkey=" + Server.UrlEncode(txtKeyword.Text.Trim());
+            }
+            //--Pagesize
+            if (Request.QueryString["currentpage"] != null)
+            {
+                try
+                {
+                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                }
+                catch (Exception ex) { }
+            }
+
+            return strParam;
+        }
+
+        /// <summary>
+        /// Tạo các parmater phục vụ phân trang
+        /// </summary>
+        /// <returns></returns>
+        private string GenarateParam()
+        {
+            string strParam = "";
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "&status=" + ddlWork.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyword.Text.Trim().Length > 0)
+            {
+                strParam += "&type=" + Server.UrlEncode(txtKeyword.Text.Trim());
+            }
+            return strParam;
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvWork_Load();
         }
 
         protected void ddlWorkGroup_Load()
@@ -51,13 +168,39 @@ namespace EOFFICE.Works
         {
             int UserID = Global.UserInfo.UserID;
             BWork objWork = new BWork();
-            grvWork.DataSource = objWork.Get(UserID, "CHUA_GIAO").Union(objWork.Get(UserID, "DANG_THUC_HIEN")).Union(objWork.Get(UserID, "DUNG_XU_LY"));
-            grvWork.DataBind();
-
-            if ((objWork.Get(UserID, "CHUA_GIAO").Union(objWork.Get(UserID, "DANG_THUC_HIEN")).Union(objWork.Get(UserID, "DUNG_XU_LY"))).Count() == 0)
+            string _name = "";
+            string _idUserProcess = "";
+            int _workgroup = int.Parse(ddlWorkGroup.SelectedValue);
+            string _status =ddlWork.SelectedValue;
+            //--Set key tìm kiếm
+            if (txtKeyword.Text.Trim().Length > 0)
             {
-                lblThongBao.Text = "Không có công việc nào";
+                switch (ddlTieuChi.SelectedValue)
+                {
+                    case "WorkName":
+                        _name = txtKeyword.Text.Trim();
+                        break;
+                    case "User":
+                        _idUserProcess = txtKeyword.Text.Trim();
+                        break;
+                }
             }
+            ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            int count = objWork.Get(_name, _status, _workgroup, _idUserProcess).Count;
+            spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
+            if (count > ctlPagging.PageSize)
+            {
+                ctlPagging.Visible = true;
+            }
+            else
+            {
+                ctlPagging.Visible = false;
+            }
+            grvWork.DataSource = objWork.Get(_name, _status, _workgroup, _idUserProcess, "ASC", "Name", CurrentPage, ctlPagging.PageSize);
+            grvWork.DataBind();
+            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.ItemCount = count;
+            ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
 
@@ -151,55 +294,20 @@ namespace EOFFICE.Works
             string str = appSettings["CHUA_GIAO"];
             string str1 = appSettings["DANG_THUC_HIEN"];
             string str2 = appSettings["DUNG_XU_LY"];
-            ListItem[] lit = new ListItem[4];
-            lit[0]= new ListItem("Tất cả","0");
-            lit[1] = new ListItem(str, "CHUA_GIAO");
-            lit[2] = new ListItem(str1,"DANG_THUC_HIEN");
-            lit[3] = new ListItem(str2, "DUNG_XU_LY");
+            ListItem[] lit = new ListItem[3];
+            
+            lit[0] = new ListItem(str, "CHUA_GIAO");
+            lit[1] = new ListItem(str1,"DANG_THUC_HIEN");
+            lit[2] = new ListItem(str2, "DUNG_XU_LY");
+            
             ddlWork.Items.Add(lit[0]);
             ddlWork.Items.Add(lit[1]);
             ddlWork.Items.Add(lit[2]);
-            ddlWork.Items.Add(lit[3]);
         }
 
         protected void btnTim_Click(object sender, EventArgs e)
         {
-            int UserID = Global.UserInfo.UserID;
-            BWork objWork = new BWork();
-
-            string name = txtWorkName.Text;
-            string UserProcess = txtUserProcess.Text;
-
-            if (ddlWorkGroup.SelectedValue == "0")
-            {
-                if (ddlWork.SelectedValue == "0")
-                {
-                    grvWork.DataSource = objWork.Get(UserID, name, "CHUA_GIAO", UserProcess).Union(objWork.Get(UserID, name, "DANG_THUC_HIEN", UserProcess)).Union(objWork.Get(UserID, name, "DUNG_XU_LY", UserProcess));
-                    
-                }
-                else
-                {
-                    grvWork.DataSource = objWork.Get(UserID, name, ddlWork.SelectedValue.ToString(), UserProcess);
-                }
-            }
-            else
-            {
-                if (ddlWork.SelectedValue == "0")
-                {
-                    grvWork.DataSource = objWork.Get(UserID, name, "CHUA_GIAO", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess).Union(objWork.Get(UserID, name, "DANG_THUC_HIEN", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess)).Union(objWork.Get(UserID, name, "DUNG_XU_LY", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess));
-                }
-                else
-                {
-                    grvWork.DataSource = objWork.Get(UserID, name, ddlWork.SelectedValue.ToString(), Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), UserProcess);
-                }
-            }
-            
-            grvWork.DataBind();
-            if (grvWork.DataSource == null)
-            {
-                lblThongBao.Text = "Không có công việc nào";
-            }
-            string str = lblThongBao.Text;
+            grvWork_Load();            
         }       
 
         protected void btnDung_Click(object sender, EventArgs e)
@@ -275,6 +383,16 @@ namespace EOFFICE.Works
                     }
                 }
             }
+            grvWork_Load();
+        }
+
+        protected void ddlWork_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvWork_Load();
+        }
+
+        protected void ddlWorkGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
             grvWork_Load();
         }
     }

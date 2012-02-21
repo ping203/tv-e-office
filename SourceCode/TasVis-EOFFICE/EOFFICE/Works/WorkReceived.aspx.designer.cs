@@ -32,22 +32,22 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.DropDownList ddlWorkGroup;
         
         /// <summary>
-        /// txtWorkName control.
+        /// txtKeyword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWorkName;
+        protected global::System.Web.UI.WebControls.TextBox txtKeyword;
         
         /// <summary>
-        /// txtUserCreate control.
+        /// ddlTieuChi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserCreate;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTieuChi;
         
         /// <summary>
         /// btnTim control.
@@ -59,13 +59,22 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Button btnTim;
         
         /// <summary>
-        /// lblThongBao control.
+        /// spResultCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblThongBao;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spResultCount;
+        
+        /// <summary>
+        /// ddlPageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
         
         /// <summary>
         /// grvWork control.
@@ -75,5 +84,14 @@ namespace EOFFICE.Works {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvWork;
+        
+        /// <summary>
+        /// ctlPagging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EOFFICE.Common.PaggingControl ctlPagging;
     }
 }

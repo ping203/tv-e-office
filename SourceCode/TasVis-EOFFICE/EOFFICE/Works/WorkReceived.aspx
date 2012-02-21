@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WorkReceived.aspx.cs" Inherits="EOFFICE.Works.WorkReceived" MasterPageFile="~/MasterPages/Default.Master" %>
-
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">        
     <div class="list wp-form" id="WorkAssignment">
             	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Công việc nhận</h2>
@@ -10,39 +10,52 @@
                         </ul>
                     </div>
                     <div class="form">
-                	<table width="100%" cellspacing="5">
+                	<table width="80%" cellspacing="1">
                     	<tr>
                     	    <td>Xem công việc:</td>
                     	    <td>
-                    	        <asp:DropDownList runat="server" ID="ddlWork">
+                    	        <asp:DropDownList runat="server" ID="ddlWork" 
+                                    onselectedindexchanged="ddlWork_SelectedIndexChanged" AutoPostBack="true">
                     	            
                     	        </asp:DropDownList>
                     	    </td>
                     	    <td>Nhóm công việc:</td>
                     	    <td>
-                    	        <asp:DropDownList runat="server" ID="ddlWorkGroup"></asp:DropDownList>
+                    	        <asp:DropDownList runat="server" ID="ddlWorkGroup" 
+                                    onselectedindexchanged="ddlWorkGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     	    </td>
                     	</tr>
                     	<tr>
-                    	    <td>Tên công việc:</td>
+                    	    <td>Từ khóa:</td>
                     	    <td>
-                    	        <asp:TextBox runat="server" ID="txtWorkName"></asp:TextBox>
-                    	    </td>
-                    	    <td>Người giao việc:</td>
-                    	    <td>
-                    	        <asp:TextBox runat="server" ID="txtUserCreate"></asp:TextBox>
-                    	    </td>
-                    	</tr>
-                    	<tr>
-                    	    <td></td>
-                    	    <td>
+                    	        <asp:TextBox runat="server" ID="txtKeyword"></asp:TextBox>
+                    	        <asp:DropDownList runat="server" ID="ddlTieuChi">
+                    	            <asp:ListItem Text="Tên công việc" Value="WorkName"></asp:ListItem>
+                    	            <asp:ListItem Text="Người xử lý" Value="User"></asp:ListItem>
+                    	        </asp:DropDownList>
                     	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" onclick="btnTim_Click" />
+                    	    </td>
                     	</tr>
                     </table>
-                    <br />
-                    <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH CÔNG VIỆC NHẬN</h2>
-                    <asp:Label runat="server" ID="lblThongBao" Text=""></asp:Label>
-                    <br />
+                   <table width="100%">
+                        <tr>
+                            <td align="left">  
+                                <span runat="server" id="spResultCount" style="float:left"></span>
+                            </td>
+                            <td align="right">
+                                Hiển thị:
+                                 <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                                    onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                                    <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
+                                    <asp:ListItem Text="30 kết quả" Value="30"></asp:ListItem>
+                                    <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                                    <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
                         <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
                             CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated"  >
                             <Columns>
@@ -95,7 +108,10 @@
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />
                         </asp:GridView>
-                        
+                        <div class="pagenav">
+                            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
+                                PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
+                        </div>
                     </div>
                     <div class="nav-function">
                     	<ul>

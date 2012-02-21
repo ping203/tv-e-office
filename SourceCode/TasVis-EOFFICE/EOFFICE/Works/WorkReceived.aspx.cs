@@ -20,6 +20,35 @@ namespace EOFFICE.Works
 {
     public partial class WorkReceived : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Trang hiện tại
+        /// </summary>
+        public int CurrentPage
+        {
+
+            get
+            {
+                if (Request.QueryString["currentpage"] != null)
+                {
+                    try
+                    {
+
+                        return int.Parse(Request.QueryString["currentpage"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -27,7 +56,95 @@ namespace EOFFICE.Works
                 ddlWorkGroup_Load();
                 ddlWork_Load();
                 grvWork_Load();
+                InitData();
             }
+        }
+
+        private void InitData()
+        {
+            //--Pagesize
+            if (Request.QueryString["pagesize"] != null)
+            {
+                try
+                {
+                    ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Nhóm công việc
+            if (Request.QueryString["group"] != null)
+            {
+                try
+                {
+                    ddlWorkGroup.Items.FindByValue(Request.QueryString["group"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Trạng thái
+            if (Request.QueryString["status"] != null)
+            {
+                try
+                {
+                    ddlWork.Items.FindByValue(Request.QueryString["status"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Tiêu chí tìm kiếm
+            if (Request.QueryString["type"] != null)
+            {
+                try
+                {
+                    ddlTieuChi.Items.FindByValue(Request.QueryString["type"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        public string GenParamRedirect()
+        {
+            string strParam = "";
+            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "&status=" + ddlWork.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyword.Text.Trim().Length > 0)
+            {
+                strParam += "&fkey=" + Server.UrlEncode(txtKeyword.Text.Trim());
+            }
+            //--Pagesize
+            if (Request.QueryString["currentpage"] != null)
+            {
+                try
+                {
+                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                }
+                catch (Exception ex) { }
+            }
+
+            return strParam;
+        }
+
+        /// <summary>
+        /// Tạo các parmater phục vụ phân trang
+        /// </summary>
+        /// <returns></returns>
+        private string GenarateParam()
+        {
+            string strParam = "";
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "&status=" + ddlWork.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyword.Text.Trim().Length > 0)
+            {
+                strParam += "&type=" + Server.UrlEncode(txtKeyword.Text.Trim());
+            }
+            return strParam;
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvWork_Load();
         }
 
         protected void ddlWorkGroup_Load()
@@ -47,22 +164,54 @@ namespace EOFFICE.Works
             NameValueCollection appSettings = WebConfigurationManager.AppSettings as NameValueCollection;
             string str = appSettings["DANG_THUC_HIEN"];
             string str1 = appSettings["CONG_VIEC_DA_XU_LY"];
-            ListItem[] lit = new ListItem[3];
-            lit[0] = new ListItem("Tất cả", "0");
-            lit[1] = new ListItem("Công việc cần xử lý", "DANG_THUC_HIEN");
-            lit[2] = new ListItem(str1, "CONG_VIEC_DA_XU_LY");
+            ListItem[] lit = new ListItem[2];
+            
+            lit[0] = new ListItem("Công việc cần xử lý", "DANG_THUC_HIEN");
+            lit[1] = new ListItem(str1, "CONG_VIEC_DA_XU_LY");
+            
             ddlWork.Items.Add(lit[0]);
             ddlWork.Items.Add(lit[1]);
-            ddlWork.Items.Add(lit[2]);
             
         }
 
 
         protected void grvWork_Load()
         {
+            int UserID = Global.UserInfo.UserID;
             BWork objWork = new BWork();
-            grvWork.DataSource = objWork.Get(",admin,", "DANG_THUC_HIEN").Union(objWork.Get(",admin,", "CONG_VIEC_DA_XU_LY"));
+            string _name = "";
+            string _idUserProcess = "";
+            int _workgroup = int.Parse(ddlWorkGroup.SelectedValue);
+            string _status = ddlWork.SelectedValue;
+            //--Set key tìm kiếm
+            if (txtKeyword.Text.Trim().Length > 0)
+            {
+                switch (ddlTieuChi.SelectedValue)
+                {
+                    case "WorkName":
+                        _name = txtKeyword.Text.Trim();
+                        break;
+                    case "User":
+                        _idUserProcess = txtKeyword.Text.Trim();
+                        break;
+                }
+            }
+            ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            int count = objWork.Get(_name, _status, _workgroup, _idUserProcess).Count;
+            spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
+            if (count > ctlPagging.PageSize)
+            {
+                ctlPagging.Visible = true;
+            }
+            else
+            {
+                ctlPagging.Visible = false;
+            }
+            grvWork.DataSource = objWork.Get(_name, _status, _workgroup, _idUserProcess, "ASC", "Name", CurrentPage, ctlPagging.PageSize);
             grvWork.DataBind();
+            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.ItemCount = count;
+            ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         protected string BindTaoViec(string IDUserCreate)
@@ -129,72 +278,7 @@ namespace EOFFICE.Works
 
         protected void btnTim_Click(object sender, EventArgs e)
         {
-            BWork objWork = new BWork();
-            BUser objUser = new BUser();
-            string name = txtWorkName.Text;
-            string UserCreate = txtUserCreate.Text;
-            int IDUserCreate;
-            
-            if (UserCreate.Trim() == "")
-            {
-                
-                    if (ddlWorkGroup.SelectedValue == "0")
-                    {
-                        if (ddlWork.SelectedValue == "0")
-                        {
-                            grvWork.DataSource = objWork.Get(name, "DANG_THUC_HIEN", ",admin,").Union(objWork.Get( name, "CONG_VIEC_DA_XU_LY", ",admin,"));
-
-                        }
-                        else
-                        {
-                            grvWork.DataSource = objWork.Get( name, ddlWork.SelectedValue.ToString(), ",admin,");
-                        }
-                    }
-                    else
-                    {
-                        if (ddlWork.SelectedValue == "0")
-                        {
-                            grvWork.DataSource = objWork.Get( name, "DANG_THUC_HIEN", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,").Union(objWork.Get( name, "CONG_VIEC_DA_XU_LY", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,"));
-                        }
-                        else
-                        {
-                            grvWork.DataSource = objWork.Get(name, ddlWork.SelectedValue.ToString(), Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,");
-                        }
-                    }
-            }
-            else
-            {
-                if (objUser.Get(UserCreate).Count > 0)
-                {
-                    IDUserCreate = objUser.Get(UserCreate).First().UserID;
-                    if (ddlWorkGroup.SelectedValue == "0")
-                    {
-                        if (ddlWork.SelectedValue == "0")
-                        {
-                            grvWork.DataSource = objWork.Get(IDUserCreate, name, "DANG_THUC_HIEN", ",admin,").Union(objWork.Get(IDUserCreate, name, "CONG_VIEC_DA_XU_LY", ",admin,"));
-
-                        }
-                        else
-                        {
-                            grvWork.DataSource = objWork.Get(IDUserCreate, name, ddlWork.SelectedValue.ToString(), ",admin,");
-                        }
-                    }
-                    else
-                    {
-                        if (ddlWork.SelectedValue == "0")
-                        {
-                            grvWork.DataSource = objWork.Get(IDUserCreate, name, "DANG_THUC_HIEN", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,").Union(objWork.Get(IDUserCreate, name, "CONG_VIEC_DA_XU_LY", Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,"));
-                        }
-                        else
-                        {
-                            grvWork.DataSource = objWork.Get(IDUserCreate, name, ddlWork.SelectedValue.ToString(), Int32.Parse(ddlWorkGroup.SelectedValue.ToString()), ",admin,");
-                        }
-                    }
-                }
-            }
-            
-
-            grvWork.DataBind();
+            grvWork_Load();
         }
 
         protected void grvWork_RowCreated(object sender, GridViewRowEventArgs e)
@@ -203,6 +287,16 @@ namespace EOFFICE.Works
                 e.Row.CssClass = "normal";
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowState == DataControlRowState.Alternate)
                 e.Row.CssClass = "altenate";
+        }
+
+        protected void ddlWork_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvWork_Load();
+        }
+
+        protected void ddlWorkGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvWork_Load();
         }
     }
 }

@@ -195,6 +195,66 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
+        public IList<OContact> Get(string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy, int PageIndex,int PageSize)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[11];
+            sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[0].Value = FullName;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[2].Value = Gender;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            sqlPara[4] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[4].Value = Email;
+            sqlPara[5] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[5].Value = Phone;
+            sqlPara[6] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[6].Value = Address;
+            sqlPara[7] = new SqlParameter("@Order", SqlDbType.VarChar);
+            sqlPara[7].Value = Order;
+            sqlPara[8] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
+            sqlPara[8].Value = OrderBy;
+            sqlPara[9] = new SqlParameter("@PageIndex", SqlDbType.Int);
+            sqlPara[9].Value = PageIndex;
+            sqlPara[10] = new SqlParameter("@PageSize", SqlDbType.Int);
+            sqlPara[10].Value = PageSize;
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
+
+        public IList<OContact> Get(string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[9];
+            sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[0].Value = FullName;
+            sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[1].Value = IDUser;
+            sqlPara[2] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[2].Value = Gender;
+            sqlPara[3] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[3].Value = IDContactGroup;
+            sqlPara[4] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[4].Value = Email;
+            sqlPara[5] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[5].Value = Phone;
+            sqlPara[6] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[6].Value = Address;
+            sqlPara[7] = new SqlParameter("@Order", SqlDbType.VarChar);
+            sqlPara[7].Value = Order;
+            sqlPara[8] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
+            sqlPara[8].Value = OrderBy;
+            
+
+            DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
+            IList<OContact> list = new List<OContact>();
+            list = Common.Common.ConvertTo<OContact>(tbl);
+            return list;
+        }
 
         /// <summary>
         /// Get Contact theo FullName

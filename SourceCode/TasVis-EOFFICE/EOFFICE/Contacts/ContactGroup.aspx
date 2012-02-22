@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ContactGroup.aspx.cs" Inherits="EOFFICE.Contacts.ContactGroup" MasterPageFile="~/MasterPages/Default.Master" %>
-
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
     
     <div class="list wp-form" id="createWorkGroup">
@@ -90,18 +90,7 @@
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />
                         </asp:GridView>
-                        <div class="pagenav">
-                	        <ul>
-                    	        <li><a href="#">Trang đầu</a></li>
-                                <li><a href="#" class="pagecurrent">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">Trang cuối</a></li>
-                            </ul>
-                        </div>
+                        
                         <br />
                        
                         

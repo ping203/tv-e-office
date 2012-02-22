@@ -17,6 +17,8 @@ namespace EOFFICE.Contacts
 {
     public partial class ContactGroup : System.Web.UI.Page
     {
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -144,6 +146,11 @@ namespace EOFFICE.Contacts
                 }
 
             }
+            grvContactGroup_Load();
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
             grvContactGroup_Load();
         }
     }

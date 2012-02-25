@@ -254,10 +254,6 @@ namespace EOFFICE.Works
                 cblUser.DataBind();
             }
         }
-
-        protected void btn_Click(object sender, EventArgs e)
-        {
-            lblTest.Text = "ádsada";
-        }
+        
     }
 }

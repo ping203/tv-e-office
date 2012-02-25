@@ -278,7 +278,7 @@ namespace EOFFICE.Works
 
         protected void btnTim_Click(object sender, EventArgs e)
         {
-            grvWork_Load();
+            grvWork_Load();            
         }
 
         protected void grvWork_RowCreated(object sender, GridViewRowEventArgs e)

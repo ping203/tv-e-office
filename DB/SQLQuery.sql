@@ -1524,7 +1524,7 @@ CREATE PROC sp_tblComment_get
 	@Title NVARCHAR(MAX)=NULL,
 	@IDUserCreate VARCHAR(50)=NULL,
 	@IDDocument VARCHAR(500)=NULL,
-	@IDWork INT=NULL
+	@IDWork INT=NULL	
 AS
 BEGIN
 	IF @CommentID IS NULL OR @CommentID=''
@@ -1547,7 +1547,7 @@ BEGIN
 		BEGIN
 			SET @DieuKien=@DieuKien+' AND IDWork='+cast(@IDWork AS NVARCHAR)
 		END
-		EXEC('SELECT * FROM tblComment'+@DieuKien)
+		EXEC('SELECT * FROM tblComment'+@DieuKien+'ORDER BY CreateDate DESC')
 	END
 	ELSE
 	BEGIN

@@ -27,8 +27,8 @@ namespace EOFFICE.Works
             {
                 Infomation_Load();
                 BindDepartment();
+                
             }
-            
         }
 
         public void BindDepartment()
@@ -173,11 +173,22 @@ namespace EOFFICE.Works
                 {
                     OWork objWork = new OWork();
                     objWork = BobjWork.GetWork(WorkID).First();
-                    string newlistUserProcess = objWork.IDUserProcess + UserJoin;
+                    //Xử lý người chuyển tiếp trùng lặp
+                    string CurrentList = objWork.IDUserProcess;
+
+                    string[] divUser = UserJoin.Split(',');
+                    
+                    for (int i = 0; i < divUser.Count(); i++)
+                    {
+                        divUser[i] = ","+divUser[i]+",";
+                        CurrentList=CurrentList.Replace(divUser[i], ",");
+                    }
+                    string newlistUserProcess = CurrentList + UserJoin;
                     BobjWork.UpdateUserProcess(WorkID, newlistUserProcess,objWork.IDUserCreate);//Lấy IDUserCreate sau
                 }
 
                 Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+               
         }
 
         protected void rptListUser_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -195,13 +206,28 @@ namespace EOFFICE.Works
                     BComment BobjComment = new BComment();
                     OComment objComment = new OComment();
                     objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
-
-                    txtContentComment.Text = objComment.Content;
+                    if (objComment.Content == "")
+                    {
+                        txtContentComment.Text = "Chưa có ý kiến xử lý!";
+                    }
+                    else
+                    { 
+                        txtContentComment.Text = objComment.Content;
+                    }
+                    
                     rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
                     rptFileAttachs.DataBind();
+
+                    foreach (OAttach obj in BobjComment.GetAttachs(objComment.CommentID).ToList())
+                    {
+                        LinkButton lbtn = new LinkButton();
+                        lbtn.Text = obj.Name;
+                        testDiv.Controls.Add(lbtn);
+
+                    }
                 }
             }
-        }
+        }        
 
         protected void rptFileAttachs_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -258,6 +284,11 @@ namespace EOFFICE.Works
                 cblUser.DataSource = BobjUser.GetByDepartment(int.Parse(hdfID.Value));
                 cblUser.DataBind();
             }
+        }
+
+        protected void btn_Click(object sender, EventArgs e)
+        {
+            lblTest.Text = "ádsada";
         }
     }
 }

@@ -207,6 +207,7 @@ namespace EOFFICE.Works
 
         protected void btnCapNhat_Click(object sender, EventArgs e)
         {
+            
             BWork BobjWork = new BWork();
             string Status = string.Empty;
             if(rdoTiepTuc.Checked)

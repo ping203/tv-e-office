@@ -79,9 +79,10 @@
                                 </asp:Repeater>
                             </td>
                             <td style="width:80%">
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="conditional">
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="rptListUser" />
+                                        
                                     </Triggers>
                                     <ContentTemplate>
                                         Nội dung xử lý:

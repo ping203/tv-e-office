@@ -134,9 +134,9 @@ namespace DataAccess.BusinessObject
         {
             IList<OComment> lstComment = this.Get(CommentID);
             string strAttachID = lstComment[0].Attachs;
-            if ((strAttachID == "") || (strAttachID == ","))
+            if ((strAttachID == "") || (strAttachID == ",")||(strAttachID==",,"))
             {
-                return null;
+                return new List<OAttach>();
             }
             else
             { 
@@ -147,8 +147,12 @@ namespace DataAccess.BusinessObject
                 {
                     for (int i = 1; i < arrattachs.Count() - 1; i++)
                     {
-                        OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
-                        lstAttachs.Add(objAttach);
+                        //OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                        foreach (OAttach obj in objBAttach.Get(int.Parse(arrattachs[i])))
+                        {
+                            lstAttachs.Add(obj);
+                        }
+                        //lstAttachs.Add(objAttach);
                     }
                 }
                 return lstAttachs;

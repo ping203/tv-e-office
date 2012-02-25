@@ -195,9 +195,9 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OContact> Get(string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy, int PageIndex,int PageSize)
+        public IList<OContact> Get(int ContactID,string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy, int PageIndex,int PageSize)
         {
-            SqlParameter[] sqlPara = new SqlParameter[11];
+            SqlParameter[] sqlPara = new SqlParameter[12];
             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
             sqlPara[0].Value = FullName;
             sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
@@ -220,6 +220,8 @@ namespace DataAccess.BusinessObject
             sqlPara[9].Value = PageIndex;
             sqlPara[10] = new SqlParameter("@PageSize", SqlDbType.Int);
             sqlPara[10].Value = PageSize;
+            sqlPara[11] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[11].Value = ContactID;
 
             DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);
             IList<OContact> list = new List<OContact>();
@@ -227,9 +229,9 @@ namespace DataAccess.BusinessObject
             return list;
         }
 
-        public IList<OContact> Get(string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy)
+        public IList<OContact> Get(int ContactID,string FullName, int IDUser, string Gender, int IDContactGroup, string Email, string Phone, string Address, string Order, string OrderBy)
         {
-            SqlParameter[] sqlPara = new SqlParameter[9];
+            SqlParameter[] sqlPara = new SqlParameter[10];
             sqlPara[0] = new SqlParameter("@FullName", SqlDbType.NVarChar);
             sqlPara[0].Value = FullName;
             sqlPara[1] = new SqlParameter("@IDUser", SqlDbType.Int);
@@ -248,6 +250,8 @@ namespace DataAccess.BusinessObject
             sqlPara[7].Value = Order;
             sqlPara[8] = new SqlParameter("@OrderBy", SqlDbType.VarChar);
             sqlPara[8].Value = OrderBy;
+            sqlPara[9] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[9].Value = ContactID;
             
 
             DataTable tbl = RunProcedureGet("sp_tblContact_get", sqlPara);

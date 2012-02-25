@@ -12,18 +12,146 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.DataObject;
 using DataAccess.BusinessObject;
-
+using DataAccess.Common;
 namespace EOFFICE.Contacts
 {
     public partial class Default : System.Web.UI.Page
     {
+        #region "Propertys"
+        /// <summary>
+        /// Trang hiện tại
+        /// </summary>
+        public int CurrentPage
+        {
+
+            get
+            {
+                if (Request.QueryString["currentpage"] != null)
+                {
+                    try
+                    {
+
+                        return int.Parse(Request.QueryString["currentpage"]);
+                    }
+                    catch (Exception ex)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+        #endregion        
+
+        private void InitData()
+        {
+            //--Pagesize
+            if (Request.QueryString["pagesize"] != null)
+            {
+                try
+                {
+                    ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Nhóm liên hệ
+            if (Request.QueryString["group"] != null)
+            {
+                try
+                {
+                    ddlContactGroup.Items.FindByValue(Request.QueryString["group"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Giới tính
+            if (Request.QueryString["gender"] != null)
+            {
+                try
+                {
+                    ddlGender.Items.FindByValue(Request.QueryString["gender"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+            //--Tiêu chí tìm kiếm
+            if (Request.QueryString["type"] != null)
+            {
+                try
+                {
+                    ddlTieuChi.Items.FindByValue(Request.QueryString["type"]).Selected = true;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        public string GenParamRedirect()
+        {
+            string strParam = "";
+            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlContactGroup.SelectedValue;
+            strParam += "&fgender=" + ddlGender.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyWord.Text.Trim().Length > 0)
+            {
+                strParam += "&fkey=" + Server.UrlEncode(txtKeyWord.Text.Trim());
+            }
+            //--Pagesize
+            if (Request.QueryString["currentpage"] != null)
+            {
+                try
+                {
+                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                }
+                catch (Exception ex) { }
+            }
+
+            return strParam;
+        }
+
+        /// <summary>
+        /// Tạo các parmater phục vụ phân trang
+        /// </summary>
+        /// <returns></returns>
+        private string GenarateParam()
+        {
+            string strParam = "";
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&fgroup=" + ddlContactGroup.SelectedValue;
+            strParam += "&fgender=" + ddlGender.SelectedValue;
+            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            if (txtKeyWord.Text.Trim().Length > 0)
+            {
+                strParam += "&type=" + Server.UrlEncode(txtKeyWord.Text.Trim());
+            }
+            return strParam;
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvContact_Load();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 ddlContactGroup_Load();
                 grvContact_Load();
+                BindGender();
+                InitData();
             }
+        }
+
+        private void BindGender()
+        {
+            ddlGender.Items.Clear();
+            ddlGender.Items.Add(new ListItem("--Tất cả--",""));
+            ddlGender.Items.Add(new ListItem("Nam", Gender.Male.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Nữ", Gender.Female.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Khác", Gender.Other.ToString("D")));
+            ddlGender.DataBind();
         }
 
         protected void btnDanhSach_Click(object sender, EventArgs e)
@@ -43,9 +171,58 @@ namespace EOFFICE.Contacts
 
         protected void grvContact_Load()
         {
+            int IdUser = Global.UserInfo.UserID;
+
             BContact BobjContact = new BContact();
-            grvContact.DataSource = BobjContact.Get(0,1);//Lấy IDUSer sau
+            int ContactGroupID = int.Parse(ddlContactGroup.SelectedValue);
+            string Gender = ddlGender.SelectedValue;
+            string Name = "";
+            string Phone = "";
+            string Email = "";
+            string Address = "";
+            
+            //--Set key tìm kiếm
+            if (txtKeyWord.Text.Trim().Length > 0)
+            {
+                switch (ddlTieuChi.SelectedValue)
+                {
+                    case "All":
+                        Name = txtKeyWord.Text.Trim();
+                        Phone = txtKeyWord.Text.Trim();
+                        Email = txtKeyWord.Text.Trim();
+                        Address = txtKeyWord.Text.Trim();
+                        break;
+                    case "Name":
+                        Name = txtKeyWord.Text.Trim();
+                        break;
+                    case "Phone":
+                        Phone = txtKeyWord.Text.Trim();
+                        break;
+                    case "Email":
+                        Email = txtKeyWord.Text.Trim();
+                        break;
+                    case "Address":
+                        Address = txtKeyWord.Text.Trim();
+                        break;
+                }
+            }
+
+            ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
+            int count = BobjContact.Get(0,Name,IdUser,Gender,ContactGroupID,Email,Phone,Address,"ASC","FullName").Count;
+            spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
+            if (count > ctlPagging.PageSize)
+            {
+                ctlPagging.Visible = true;
+            }
+            else
+            {
+                ctlPagging.Visible = false;
+            }
+            grvContact.DataSource = BobjContact.Get(0,Name,IdUser,Gender,ContactGroupID,Email,Phone,Address,"ASC","FullName", CurrentPage, ctlPagging.PageSize);
             grvContact.DataBind();
+            ctlPagging.CurrentIndex = CurrentPage;
+            ctlPagging.ItemCount = count;
+            ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         protected void ddlContactGroup_Load()
@@ -123,6 +300,7 @@ namespace EOFFICE.Contacts
 
         protected void grvContact_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            int UserID = Global.UserInfo.UserID;
             int Id = Convert.ToInt32(grvContact.DataKeys[e.RowIndex].Value);
             string textName = ((TextBox)grvContact.Rows[e.RowIndex].Cells[2].Controls[0]).Text;
             string textPhone = ((TextBox)grvContact.Rows[e.RowIndex].Cells[3].Controls[0]).Text;
@@ -130,7 +308,7 @@ namespace EOFFICE.Contacts
             string textEmail = ((TextBox)grvContact.Rows[e.RowIndex].Cells[5].Controls[0]).Text;
             string textAddress = ((TextBox)grvContact.Rows[e.RowIndex].Cells[6].Controls[0]).Text;
             BContact obj = new BContact();
-            if (obj.Update(Id, textName, textPhone, textTel, textAddress, textEmail, 1)) //Lấy IDUSer sau
+            if (obj.Update(Id, textName, textPhone, textTel, textAddress, textEmail, UserID)) //Lấy IDUSer sau
             {
                 lblThongBao2.Text = "BẠN ĐÃ CẬP NHẬT THÀNH CÔNG DANH BẠ!";
             }
@@ -140,100 +318,7 @@ namespace EOFFICE.Contacts
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            BContact BobjContact = new BContact();
-            string KeyWord= txtKeyWord.Text;
-            if (ddlContactGroup.SelectedValue == "0")
-            {
-                if (ddlGender.SelectedValue == "0")
-                {
-                    switch (ddlTieuChi.SelectedValue.ToString())
-                    {
-                        case "0":
-                            grvContact.DataSource = BobjContact.Get(0, 1);
-                            break;
-                        case "1":
-                            grvContact.DataSource = BobjContact.GetFullName(0, 1, KeyWord);
-                            break;
-                        case "2":
-                            grvContact.DataSource = BobjContact.GetPhone(0, 1, KeyWord);
-                            break;
-                        case "3":
-                            grvContact.DataSource = BobjContact.GetEmail(0, 1, KeyWord);
-                            break;
-                        case "4":
-                            grvContact.DataSource = BobjContact.GetAddress(0, 1, KeyWord);
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (ddlTieuChi.SelectedValue.ToString())
-                    {
-                        case "0":
-                            grvContact.DataSource = BobjContact.Get(0, 1, ddlGender.SelectedValue.ToString());
-                            break;
-                        case "1":
-                            grvContact.DataSource = BobjContact.GetFullName(0, 1, KeyWord, ddlGender.SelectedValue.ToString());
-                            break;
-                        case "2":
-                            grvContact.DataSource = BobjContact.GetPhone(0, 1, KeyWord, ddlGender.SelectedValue.ToString());
-                            break;
-                        case "3":
-                            grvContact.DataSource = BobjContact.GetEmail(0, 1, KeyWord, ddlGender.SelectedValue.ToString());
-                            break;
-                        case "4":
-                            grvContact.DataSource = BobjContact.GetAddress(0, 1, KeyWord, ddlGender.SelectedValue.ToString());
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                int IDContactGroup =int.Parse( ddlContactGroup.SelectedValue.ToString());
-                if (ddlGender.SelectedValue == "0")
-                {
-                    switch (ddlTieuChi.SelectedValue.ToString())
-                    {
-                        case "0":
-                            grvContact.DataSource = BobjContact.Get(0, 1,IDContactGroup);
-                            break;
-                        case "1":
-                            grvContact.DataSource = BobjContact.GetFullName(0, 1, KeyWord, IDContactGroup);
-                            break;
-                        case "2":
-                            grvContact.DataSource = BobjContact.GetPhone(0, 1, KeyWord, IDContactGroup);
-                            break;
-                        case "3":
-                            grvContact.DataSource = BobjContact.GetEmail(0, 1, KeyWord, IDContactGroup);
-                            break;
-                        case "4":
-                            grvContact.DataSource = BobjContact.GetAddress(0, 1, KeyWord, IDContactGroup);
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (ddlTieuChi.SelectedValue.ToString())
-                    {
-                        case "0":
-                            grvContact.DataSource = BobjContact.Get(0, 1, ddlGender.SelectedValue.ToString(), IDContactGroup);
-                            break;
-                        case "1":
-                            grvContact.DataSource = BobjContact.GetFullName(0, 1, KeyWord, ddlGender.SelectedValue.ToString(), IDContactGroup);
-                            break;
-                        case "2":
-                            grvContact.DataSource = BobjContact.GetPhone(0, 1, KeyWord, ddlGender.SelectedValue.ToString(), IDContactGroup);
-                            break;
-                        case "3":
-                            grvContact.DataSource = BobjContact.GetEmail(0, 1, KeyWord, ddlGender.SelectedValue.ToString(), IDContactGroup);
-                            break;
-                        case "4":
-                            grvContact.DataSource = BobjContact.GetAddress(0, 1, KeyWord, ddlGender.SelectedValue.ToString(), IDContactGroup);
-                            break;
-                    }
-                }
-            }
-            grvContact.DataBind();
+            grvContact_Load();
         }
     }
 }

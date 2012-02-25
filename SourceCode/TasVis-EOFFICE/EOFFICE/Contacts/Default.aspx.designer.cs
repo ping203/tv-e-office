@@ -104,6 +104,24 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.Label lblThongBao2;
         
         /// <summary>
+        /// spResultCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spResultCount;
+        
+        /// <summary>
+        /// ddlPageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        
+        /// <summary>
         /// grvContact control.
         /// </summary>
         /// <remarks>
@@ -111,6 +129,15 @@ namespace EOFFICE.Contacts {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvContact;
+        
+        /// <summary>
+        /// ctlPagging control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EOFFICE.Common.PaggingControl ctlPagging;
         
         /// <summary>
         /// LinkButton5 control.

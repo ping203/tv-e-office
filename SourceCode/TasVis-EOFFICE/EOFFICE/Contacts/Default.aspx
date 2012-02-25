@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Contacts.Default" MasterPageFile="~/MasterPages/Default.Master" %>
-
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">    
     
     <div class="list wp-form" id="createWorkGroup">
@@ -25,19 +25,17 @@
                     	    <td class="style1" >Giới tính:</td>
                     	    <td >
                     	        <asp:DropDownList runat="server" ID="ddlGender">
-                    	            <asp:ListItem Text="-- Tất cả --" Value="0"></asp:ListItem>
-                    	            <asp:ListItem Text="Nam" Value="Nam"></asp:ListItem>
-                    	            <asp:ListItem Text="Nữ" Value="Nữ"></asp:ListItem>
+                    	            
                     	        </asp:DropDownList>
                     	    </td>
                     	    <td class="style2" >Tiêu chí tìm kiếm:</td>
                     	    <td>
                     	        <asp:DropDownList runat="server" ID="ddlTieuChi">
-                    	            <asp:ListItem Text="-- Tất cả --" Value="0"></asp:ListItem>
-                    	            <asp:ListItem Text="Tên" Value="1"></asp:ListItem>
-                    	            <asp:ListItem Text="Số điện thoại" Value="2"></asp:ListItem>
-                    	            <asp:ListItem Text="Email" Value="3"></asp:ListItem>
-                    	            <asp:ListItem Text="Địa chỉ" Value="4"></asp:ListItem>
+                    	            <asp:ListItem Text="-- Tất cả --" Value="All"></asp:ListItem>
+                    	            <asp:ListItem Text="Tên" Value="Name"></asp:ListItem>
+                    	            <asp:ListItem Text="Số điện thoại" Value="Phone"></asp:ListItem>
+                    	            <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
+                    	            <asp:ListItem Text="Địa chỉ" Value="Address"></asp:ListItem>
                     	        </asp:DropDownList>
                     	    </td>
                     	</tr>
@@ -63,7 +61,25 @@
                                 ></asp:LinkButton> &nbsp &nbsp &nbsp &nbsp
             	            <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
             	        </div>
-            	        
+            	        <table width="100%">
+                        <tr>
+                            <td align="left">  
+                                <span runat="server" id="spResultCount" style="float:left"></span>
+                            </td>
+                            <td align="right">
+                                Hiển thị:
+                                 <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                                    onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                                    <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
+                                    <asp:ListItem Text="30 kết quả" Value="30"></asp:ListItem>
+                                    <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                                    <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
             	        
                         <asp:GridView ID="grvContact" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" 
@@ -119,16 +135,8 @@
                             <HeaderStyle ForeColor="#0072BC" />
                         </asp:GridView>
                         <div class="pagenav">
-                	        <ul>
-                    	        <li><a href="#">Trang đầu</a></li>
-                                <li><a href="#" class="pagecurrent">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">Trang cuối</a></li>
-                            </ul>
+                            <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
+                                PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
                         </div>
                         <br />
                        

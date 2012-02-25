@@ -34,8 +34,7 @@
                     	    <td>Giới tính:</td>
                     	    <td class="style1">
                     	        <asp:DropDownList runat="server" ID="ddlGender">
-                    	            <asp:ListItem Text="Nam" Value="Nam"></asp:ListItem>
-                    	            <asp:ListItem Text="Nữ" Value="Nữ"></asp:ListItem>
+                    	            
                     	        </asp:DropDownList>
                     	    </td>
                     	    <td>Xưng danh:</td>
@@ -43,6 +42,9 @@
                     	        <asp:DropDownList runat="server" ID="ddlXungDanh">
                     	            <asp:ListItem Text="Ông" Value="Ông"></asp:ListItem>
                     	            <asp:ListItem Text="Bà" Value="Bà"></asp:ListItem>
+                    	            <asp:ListItem Text="Bác" Value="Bác"></asp:ListItem>
+                    	            <asp:ListItem Text="Chú" Value="Chú"></asp:ListItem>
+                    	            <asp:ListItem Text="Cô" Value="Cô"></asp:ListItem>
                     	            <asp:ListItem Text="Anh" Value="Anh"></asp:ListItem>
                     	            <asp:ListItem Text="Chị" Value="Chị"></asp:ListItem>
                     	            <asp:ListItem Text="Em" Value="Em"></asp:ListItem>
@@ -53,7 +55,7 @@
                     	<tr>
                     	    <td>Ngày sinh:</td>
                     	    <td colspan="2">
-                    	        <asp:TextBox runat="server" ID="txtBirthDay" CssClass="datepicker"></asp:TextBox>(dd/mm/yyyy)
+                    	        <asp:TextBox runat="server" ID="txtBirthDay" CssClass="datepicker"></asp:TextBox>(ngày/tháng/năm)
                     	    </td>
                     	    <td>Địa chỉ:</td>
                     	    <td colspan="3">

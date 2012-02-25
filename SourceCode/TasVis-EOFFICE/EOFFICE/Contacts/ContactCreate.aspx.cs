@@ -13,7 +13,7 @@ using System.Xml.Linq;
 using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.Globalization;
-
+using DataAccess.Common;
 namespace EOFFICE.Contacts
 {
     public partial class ContactCreate : System.Web.UI.Page
@@ -23,6 +23,7 @@ namespace EOFFICE.Contacts
             if (!Page.IsPostBack)
             { 
                 ddlContactGroup_Load();
+                BindGender();
             }
         }
 
@@ -48,6 +49,16 @@ namespace EOFFICE.Contacts
             ddlContactGroup.DataTextField = "GroupName";
             ddlContactGroup.DataValueField = "ContactGroupID";
             ddlContactGroup.DataBind();
+        }
+
+        private void BindGender()
+        {
+            ddlGender.Items.Clear();
+            
+            ddlGender.Items.Add(new ListItem("Nam", Gender.Male.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Nữ", Gender.Female.ToString("D")));
+            ddlGender.Items.Add(new ListItem("Khác", Gender.Other.ToString("D")));
+            ddlGender.DataBind();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

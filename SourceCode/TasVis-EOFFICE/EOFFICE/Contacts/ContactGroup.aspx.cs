@@ -52,7 +52,7 @@ namespace EOFFICE.Contacts
             objContactGroup.IDUser = 1;//Sau này thay bằng IDUser đăng nhập
             if (BobjContactGroup.Add(objContactGroup))
             {
-                lblThongBao.Text = "Bạn đã thêm thành công nhóm danh bạ!";
+                lblThongBao.Text = "BẠN ĐÃ THÊM THÀNH CÔNG NHÓM DANH BẠ!";
             }
             grvContactGroup_Load();
             txtContent.Text = string.Empty;
@@ -61,14 +61,15 @@ namespace EOFFICE.Contacts
 
         protected void grvContactGroup_Load()
         {
+            int UserID = Global.UserInfo.UserID;
             BContactGroup BobjCG = new BContactGroup();
-            if (BobjCG.GetByUser(1).Count == 0)
+            if (BobjCG.GetByUser(UserID).Count == 0)
             {
-                lblThongBao2.Text = "BẠN CHƯA TẠO NHÓM DANH BẠ NÀO!";
+                
             }
             else
             {
-                grvContactGroup.DataSource = BobjCG.GetByUser(1);
+                grvContactGroup.DataSource = BobjCG.GetByUser(UserID);
                 grvContactGroup.DataBind();
             }
             

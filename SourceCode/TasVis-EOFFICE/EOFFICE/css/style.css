@@ -93,6 +93,12 @@ search-doc{}
 #wpfrmlogin{width:500px;margin:0 auto;background:#CFO;padding-top:100px;}
 #frmlogin{background:#CD4900;color:#FFF;}
 #frmlogin .txt{color:#FFF;}
+
+#frmlogin h2{color:#FFF;margin-bottom:10px;font-size:25px;background:#0072BC;padding:5px 10px;}
+.error
+{
+	color:Red;
+	}
 #frmlogin h2{color:#FFF;margin-bottom:10px;font-size:25px;background:#0072BC;padding:5px 10px;}
 /*DatePicker*/
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -102,3 +108,19 @@ search-doc{}
 .ui-timepicker-div td { font-size: 90%; }
 .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
 /*End DatePicker*/
+
+
+/*Comment*/
+.item_comment li {
+    margin: 5px 0;
+    padding: 0 10px;    
+}
+.item_comment li p.comment_content {
+    background: none repeat scroll 0 0 #F4F4F4;
+    border: 1px solid #0072BC;
+    border-radius: 5px 5px 5px 5px;
+    color: #333333;
+    margin-top: 5px;
+    padding: 5px;
+}
+/*End Comment*/

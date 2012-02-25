@@ -212,24 +212,6 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.Repeater rptFileAttachs;
         
         /// <summary>
-        /// btn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn;
-        
-        /// <summary>
-        /// testDiv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl testDiv;
-        
-        /// <summary>
         /// lblTest control.
         /// </summary>
         /// <remarks>

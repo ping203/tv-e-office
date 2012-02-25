@@ -217,14 +217,6 @@ namespace EOFFICE.Works
                     
                     rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
                     rptFileAttachs.DataBind();
-
-                    foreach (OAttach obj in BobjComment.GetAttachs(objComment.CommentID).ToList())
-                    {
-                        LinkButton lbtn = new LinkButton();
-                        lbtn.Text = obj.Name;
-                        testDiv.Controls.Add(lbtn);
-
-                    }
                 }
             }
         }        
@@ -233,31 +225,20 @@ namespace EOFFICE.Works
         {
             if (e.CommandName == "Download")
             {
-                //try
-                //{
-                    
-                    //HttpContext.Current.Response.ContentType =
-                    //            "application/octet-stream";
-                    //HttpContext.Current.Response.AddHeader("Content-Disposition",
-                    //  "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
-                    //HttpContext.Current.Response.Clear();
-                    //HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
-                    //HttpContext.Current.Response.End();
-                    string fName = Server.MapPath(e.CommandArgument.ToString());
-                    FileInfo fi = new FileInfo(fName);
-                    long sz = fi.Length;
-
-                    Response.ClearContent();
-                    Response.ContentType = MimeType(Path.GetExtension(fName));
-                    Response.AddHeader("Content-Disposition", string.Format("attachment; filename = {0}", System.IO.Path.GetFileName(fName)));
-                    Response.AddHeader("Content-Length", sz.ToString("F0"));
-                    Response.TransmitFile(fName);
-                    Response.End();
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw ex;
-                //}
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 

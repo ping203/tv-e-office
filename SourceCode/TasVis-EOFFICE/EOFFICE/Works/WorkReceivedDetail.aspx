@@ -86,7 +86,7 @@
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="conditional">
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="rptListUser" />
-                                        <asp:PostBackTrigger ControlID="btn" />
+                                        <asp:PostBackTrigger ControlID="rptFileAttachs" />
                                     </Triggers>
                                     <ContentTemplate>
                                         Nội dung xử lý:
@@ -100,9 +100,6 @@
                                                             </p>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
-                                                    <asp:Button runat="server" ID="btn" Text="abc" 
-                                            onclick="btn_Click" />
-                                        <div runat="server" id="testDiv"></div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                                 <asp:Label runat="server" ID="lblTest"></asp:Label>

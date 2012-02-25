@@ -65,9 +65,9 @@ namespace EOFFICE.Calender
             {
                 Status = "AdvancedInsert";
                 RadDateTimePicker startInput = (RadDateTimePicker)e.Container.FindControl("StartInput");
-                startInput.SelectedDate = DateTime.Parse(hdf.Value);
+                //startInput.SelectedDate = DateTime.Parse(hdf.Value);
                 RadDateTimePicker endInput = (RadDateTimePicker)e.Container.FindControl("EndInput");
-                endInput.SelectedDate = DateTime.Parse(hdf.Value);
+                //endInput.SelectedDate = DateTime.Parse(hdf.Value);
             }
             if (e.Container.Mode == SchedulerFormMode.AdvancedEdit)
             {

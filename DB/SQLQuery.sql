@@ -1551,7 +1551,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		SELECT * FROM tblComment WHERE CommentID=@CommentID
+		SELECT * FROM tblComment WHERE CommentID=@CommentID ORDER CreateDate DESC
 	END
 END
 GO

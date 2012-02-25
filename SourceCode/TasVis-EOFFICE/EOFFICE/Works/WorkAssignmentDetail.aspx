@@ -82,20 +82,34 @@
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="rptListUser" />
-                                        
+                                        <asp:PostBackTrigger ControlID="rptFileAttachs" />
                                     </Triggers>
                                     <ContentTemplate>
                                         Nội dung xử lý:
                                         <br />
-                                        <asp:TextBox ID="txtContentComment" runat="server" CssClass="textarea" TextMode="multiline" Rows="10" ReadOnly="true"></asp:TextBox>
-                                        <br />
-                                        File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" >
+                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;width:600px;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
+                                            <asp:Repeater runat="server" ID="rptComment">
+                                                <HeaderTemplate>
+                                                    <ul class="item_comment">
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <p><img alt="img" style="vertical-align: middle;" src="../Images/arrow.png" /> Thời gian xử lý: <%#BindTime(DataBinder.Eval(Container.DataItem, "CommentID").ToString())%></p>
+                                                        <p class="comment_content">
+                                                            <%#DataBinder.Eval(Container.DataItem, "Content")%>
+                                                        </p>
+                                                        <br />
+                                                    </li>
+                                                </ItemTemplate>                                                
+                                                <FooterTemplate></ul></FooterTemplate>
+                                            </asp:Repeater>
+                                        </div>                                        
+                                        File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" onitemcommand="rptFileAttachs_ItemCommand" >
                                                         <ItemTemplate>
                                                             <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
                                                             </p>
                                                         </ItemTemplate>
-                                                    </asp:Repeater>
-                                        <br />
+                                                    </asp:Repeater>                                        
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </td>

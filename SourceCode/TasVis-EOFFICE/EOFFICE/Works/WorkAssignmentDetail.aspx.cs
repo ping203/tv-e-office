@@ -44,12 +44,23 @@ namespace EOFFICE.Works
                     BComment BobjComment = new BComment();
                     OComment objComment = new OComment();
                     objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
+                    BUser Buser = new BUser();
+                    
 
-                    txtContentComment.Text = objComment.Content;
                     rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
                     rptFileAttachs.DataBind();
+
+                    rptComment.DataSource = BobjComment.GetCreate(hdfID.Value, WorkID);
+                    rptComment.DataBind();
                 }
             }
+        }
+
+        protected string BindTime(string CommentID)
+        {
+            BComment Bcomment = new BComment();
+            string CreateDate = Bcomment.Get(CommentID).First().CreateDate.ToString("dd/MM/yyyy hh:mm:ss");
+            return CreateDate;
         }
 
         protected void Infomation_Load()
@@ -203,6 +214,27 @@ namespace EOFFICE.Works
 
             BobjComment.Add(objComment);
             Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+        }
+
+        protected void rptFileAttachs_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Download")
+            {
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         protected void btnCapNhat_Click(object sender, EventArgs e)

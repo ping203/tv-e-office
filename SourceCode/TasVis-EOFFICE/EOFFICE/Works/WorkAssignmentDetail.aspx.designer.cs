@@ -113,13 +113,13 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// txtContentComment control.
+        /// rptComment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContentComment;
+        protected global::System.Web.UI.WebControls.Repeater rptComment;
         
         /// <summary>
         /// rptFileAttachs control.

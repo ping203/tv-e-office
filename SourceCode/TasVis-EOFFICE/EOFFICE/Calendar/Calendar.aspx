@@ -88,6 +88,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="StartInput" ErrorMessage="Phải chọn thời điểm bắt đầu"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -100,8 +101,11 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EndInput" ErrorMessage="Phải chọn thời điểm kết thúc"></asp:RequiredFieldValidator>
+                                                                    <br />
                                                                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
                                                                     Operator="GreaterThanEqual"></asp:CompareValidator>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -192,6 +196,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="StartInput" ErrorMessage="Phải chọn thời điểm bắt đầu"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -204,8 +209,11 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="EndInput" ErrorMessage="Phải chọn thời điểm kết thúc"></asp:RequiredFieldValidator>
+                                                                    <br />
                                                                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
                                                                     Operator="GreaterThanEqual"></asp:CompareValidator>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -307,22 +315,10 @@
             <asp:HiddenField runat="server" ID="hdf" />
              <script type="text/javascript">
                  function OnClientTimeSlotClick(sender, eventArgs) {
-                     //$('<%= hdf.ClientID %>').value = eventArgs.get_time();
+                     
                      var Messages = $get('<%=hdf.ClientID%>');
                      Messages.value = eventArgs.get_time().format('MM/dd/yyyy hh:mm:ss');
                  }
             </script>
-            <telerik:RadDateTimePicker ID="RadDateTimePicker1" runat="server" 
-        Culture="English (United States)">
-<Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x"></Calendar>
-
-<TimeView CellSpacing="-1" Culture="Vietnamese (Vietnam)"></TimeView>
-
-<TimePopupButton ImageUrl="" HoverImageUrl=""></TimePopupButton>
-
-<DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
-
-<DateInput DisplayDateFormat="M/d/yyyy" DateFormat="M/d/yyyy"></DateInput>
-</telerik:RadDateTimePicker>
 </asp:Content>
 

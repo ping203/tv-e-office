@@ -206,20 +206,21 @@ namespace EOFFICE.Works
                     BComment BobjComment = new BComment();
                     OComment objComment = new OComment();
                     objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
-                    if (objComment.Content == "")
-                    {
-                        txtContentComment.Text = "Chưa có ý kiến xử lý!";
-                    }
-                    else
-                    { 
-                        txtContentComment.Text = objComment.Content;
-                    }
+                    rptComment.DataSource = BobjComment.GetCreate(hdfID.Value, WorkID);
+                    rptComment.DataBind();
                     
                     rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
                     rptFileAttachs.DataBind();
                 }
             }
-        }        
+        }
+
+        protected string BindTime(string CommentID)
+        {
+            BComment Bcomment = new BComment();
+            string CreateDate = Bcomment.Get(CommentID).First().CreateDate.ToString("dd/MM/yyyy hh:mm:ss");
+            return CreateDate;
+        }
 
         protected void rptFileAttachs_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -240,20 +241,7 @@ namespace EOFFICE.Works
                     throw ex;
                 }
             }
-        }
-
-        public static string MimeType(string Extension)
-        {
-            string mime = "application/octetstream";
-            if (string.IsNullOrEmpty(Extension))
-                return mime;
-
-            string ext = Extension.ToLower();
-            Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
-            if (rk != null && rk.GetValue("Content Type") != null)
-                mime = rk.GetValue("Content Type").ToString();
-            return mime;
-        } 
+        }        
 
         protected void rptDepartment_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

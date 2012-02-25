@@ -91,8 +91,23 @@
                                     <ContentTemplate>
                                         Nội dung xử lý:
                                         <br />
-                                        <asp:TextBox ID="txtContentComment" runat="server" CssClass="textarea" TextMode="multiline" Rows="10" ReadOnly="true"></asp:TextBox>
-                                        <br />
+                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;width:600px;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
+                                            <asp:Repeater runat="server" ID="rptComment">
+                                                <HeaderTemplate>
+                                                    <ul class="item_comment">
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <p><img alt="img" style="vertical-align: middle;" src="../Images/arrow.png" /> Thời gian xử lý: <%#BindTime(DataBinder.Eval(Container.DataItem, "CommentID").ToString())%></p>
+                                                        <p class="comment_content">
+                                                            <%#DataBinder.Eval(Container.DataItem, "Content")%>
+                                                        </p>
+                                                        <br />
+                                                    </li>
+                                                </ItemTemplate>                                                
+                                                <FooterTemplate></ul></FooterTemplate>
+                                            </asp:Repeater>
+                                        </div>      
                                         File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" 
                                             onitemcommand="rptFileAttachs_ItemCommand"  >
                                                         <ItemTemplate>

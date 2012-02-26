@@ -51,6 +51,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="Telerik.Web.UI, Version=2011.2.712.35, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
@@ -58,13 +59,35 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ECommon.cs" />
-    <Compile Include="Default.aspx.cs">
+    <Compile Include="Calendar\Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar\Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ECommon.cs" />
+    <Compile Include="Common\Pagging.cs" />
+    <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentEdit.aspx.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentEdit.aspx.designer.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentKindCreate.aspx.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentKindCreate.aspx.designer.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -88,6 +111,41 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Person.aspx.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Person.aspx.designer.cs">
+      <DependentUpon>Person.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\GroupForUser.aspx.cs">
+      <DependentUpon>GroupForUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\GroupForUser.aspx.designer.cs">
+      <DependentUpon>GroupForUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\UserGroup.aspx.cs">
+      <DependentUpon>UserGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\UserGroup.aspx.designer.cs">
+      <DependentUpon>UserGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\EditGroup.aspx.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\EditGroup.aspx.designer.cs">
+      <DependentUpon>EditGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Group.aspx.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Group.aspx.designer.cs">
+      <DependentUpon>Group.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -118,7 +176,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\DataAccess.dll" />
+    <Content Include="bin\DataAccess.pdb" />
+    <Content Include="bin\Telerik.Web.UI.dll" />
+    <Content Include="Calendar\Calendar.aspx" />
+    <Content Include="css\datepicker-style.css" />
     <Content Include="css\style.css" />
+    <Content Include="Document\DocumentEdit.aspx" />
+    <Content Include="Document\DocumentKindCreate.aspx" />
     <Content Include="Images\Accordion_Module_button_collapse_left_grey.png" />
     <Content Include="Images\Accordion_Module_button_expand_left_grey.png" />
     <Content Include="Images\Boss.png" />
@@ -168,10 +233,17 @@
     <Content Include="Images\Yes.png" />
     <Content Include="js\jquery-latest.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\jquery.ui.core.js" />
     <Content Include="js\jquery.validate.js" />
     <Content Include="js\script.js" />
+    <Content Include="js\ui.datetimepicker.js" />
     <Content Include="Login.aspx" />
     <Content Include="MasterPages\Default.Master" />
+    <Content Include="Users\Person.aspx" />
+    <Content Include="Users\GroupForUser.aspx" />
+    <Content Include="Users\UserGroup.aspx" />
+    <Content Include="Users\EditGroup.aspx" />
+    <Content Include="Users\Group.aspx" />
     <Content Include="Users\Default.aspx" />
     <Content Include="obj\Debug\EOFFICE.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\EOFFICE.dll" />
@@ -212,7 +284,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50351</DevelopmentServerPort>
+          <DevelopmentServerPort>64947</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

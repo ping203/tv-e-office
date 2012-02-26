@@ -37,7 +37,8 @@ namespace EOFFICE
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            txtPassword.Attributes.Add("onkeydown", "if ((event.which && event.which ==13) || (event.keyCode && event.keyCode == 13)){__doPostBack('" + btnLogin.UniqueID + "','')} else return true; ");
+            txtUsername.Attributes.Add("onkeydown", "if ((event.which && event.which ==13) || (event.keyCode && event.keyCode == 13)){__doPostBack('" + btnLogin.UniqueID + "','')} else return true; ");
         }
 
         /// <summary>
@@ -54,7 +55,16 @@ namespace EOFFICE
                 if (lst != null && lst.Count > 0)
                 {
                     UInfo = lst[0];
-                    Response.Redirect("/");
+                    string strReturn = "";
+                    if (Request.QueryString["returnURL"] == null)
+                    {
+                        strReturn = "/";
+                    }
+                    else
+                    {
+                        strReturn = Server.UrlDecode(Request.QueryString["returnURL"]);
+                    }
+                    Response.Redirect(strReturn);
                 }
                 else
                 {

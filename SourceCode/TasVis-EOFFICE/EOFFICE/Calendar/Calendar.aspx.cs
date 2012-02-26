@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Globalization;
 
-
 namespace EOFFICE.Calender
 {
     public partial class Calendar : System.Web.UI.Page

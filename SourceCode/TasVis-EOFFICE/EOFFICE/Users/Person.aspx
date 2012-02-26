@@ -11,7 +11,7 @@
             <tr>
                 <td align="left">
                     <div style="border-bottom: 3px solid #06C; height: 19px">
-                        <asp:LinkButton runat="server" ID="lbtTabChangedInfo" CssClass="link-btn">Cập nhật thông tin</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="lbtTabChangedInfo" CssClass="link-btn" Visible="false">Cập nhật thông tin</asp:LinkButton>
                         <asp:LinkButton runat="server" ID="lbtTabChangedPassword" CssClass="link-btn">Thay đổi mật khẩu</asp:LinkButton>
                     </div>
                     <!--Cập nhật password-->

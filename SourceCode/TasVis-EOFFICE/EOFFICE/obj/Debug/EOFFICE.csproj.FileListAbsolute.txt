@@ -5,3 +5,10 @@ D:\TASVIS\E-office\SourceCode\TasVis-EOFFICE\EOFFICE\bin\DataAccess.pdb
 D:\TASVIS\E-office\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\ResolveAssemblyReference.cache
 D:\TASVIS\E-office\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\EOFFICE.dll
 D:\TASVIS\E-office\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\EOFFICE.pdb
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\bin\EOFFICE.dll
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\bin\EOFFICE.pdb
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\bin\DataAccess.dll
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\bin\DataAccess.pdb
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\ResolveAssemblyReference.cache
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\EOFFICE.dll
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\EOFFICE\obj\Debug\EOFFICE.pdb

@@ -51,7 +51,7 @@ namespace DataAccess.BusinessObject
         public IList<ODocumentKind> Get(int DocumentKindID)
         {
             SqlParameter[] sqlPara = new SqlParameter[1];
-            sqlPara[0] = new SqlParameter("@CommentID", SqlDbType.Int);
+            sqlPara[0] = new SqlParameter("@DocumentKindID", SqlDbType.Int);
             sqlPara[0].Value = DocumentKindID;
             DataTable tbl = RunProcedureGet("sp_tblDocumentKind_get", sqlPara);
             IList<ODocumentKind> list = new List<ODocumentKind>();

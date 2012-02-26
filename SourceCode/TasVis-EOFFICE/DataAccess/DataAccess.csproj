@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,6 +49,8 @@
     <Compile Include="BusinessObject\BAttach.cs" />
     <Compile Include="BusinessObject\BCalendar.cs" />
     <Compile Include="BusinessObject\BComment.cs" />
+    <Compile Include="BusinessObject\BContact.cs" />
+    <Compile Include="BusinessObject\BContactGroup.cs" />
     <Compile Include="BusinessObject\BDepartment.cs" />
     <Compile Include="BusinessObject\BDocument.cs" />
     <Compile Include="BusinessObject\BDocumentKind.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="BusinessObject\BOffical.cs" />
     <Compile Include="BusinessObject\BPermission.cs" />
     <Compile Include="BusinessObject\BUser.cs" />
+    <Compile Include="BusinessObject\BUserGroup.cs" />
     <Compile Include="BusinessObject\BWork.cs" />
     <Compile Include="BusinessObject\BWorkGroup.cs" />
     <Compile Include="Class1.cs" />
@@ -63,13 +67,17 @@
     <Compile Include="DataObject\OAttach.cs" />
     <Compile Include="DataObject\OCalendar.cs" />
     <Compile Include="DataObject\OComment.cs" />
+    <Compile Include="DataObject\OContact.cs" />
+    <Compile Include="DataObject\OContactGroup.cs" />
     <Compile Include="DataObject\ODepartment.cs" />
     <Compile Include="DataObject\ODocument.cs" />
     <Compile Include="DataObject\ODocumentKind.cs" />
     <Compile Include="DataObject\OGroup.cs" />
+    <Compile Include="DataObject\OModule.cs" />
     <Compile Include="DataObject\OOffical.cs" />
     <Compile Include="DataObject\OPermission.cs" />
     <Compile Include="DataObject\OUser.cs" />
+    <Compile Include="DataObject\OUserGroup.cs" />
     <Compile Include="DataObject\OWork.cs" />
     <Compile Include="DataObject\OWorkGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,5 @@
-E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\obj\Release\ResolveAssemblyReference.cache
 E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\bin\Release\DataAccess.dll
 E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\bin\Release\DataAccess.pdb
+E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\obj\Release\ResolveAssemblyReference.cache
 E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\obj\Release\DataAccess.dll
 E:\Tasvis\Project\eoffice_nganson\SourceCode\TasVis-EOFFICE\DataAccess\obj\Release\DataAccess.pdb

@@ -13,7 +13,7 @@ $(document).ready(function() {
     $(".lbtDepartment").click(function() {
         id = ($(this).attr("id"));
         url = $(this).attr("href");
-        user = $('#ctl00_cphContent_RadScheduler1_Form_hdfUserJoin').attr("value");
+        user = $('#ctl00_cphContent_RadScheduler1_Form_hdfUserJoin').attr("value");        
         url = "http://" + url + ":85/Ajax/ajLoadUserByDepartment.aspx";
         $('.result-' + id).html('<img src="/images/icon_loading.gif" />');
         $.post(url, { DepartmentID: '' + id + '' , UserJoin: user}, function(data) {
@@ -28,6 +28,30 @@ $(document).ready(function() {
     });
 
 });
+/* ajax load user by department work */
+$(".lbtDepartmentAjax").click(function() {
+        id = ($(this).attr("id"));
+        url = $(this).attr("href");
+        user = $('#ctl00_cphContent_hdfUserJoin').attr("value");        
+        url = "http://" + url + ":85/Ajax/ajLoadUserByDepartment.aspx";
+        $('.result-' + id).html('<img src="/images/icon_loading.gif" />');
+        $.post(url, { DepartmentID: '' + id + '' , UserJoin: user}, function(data) {
+            $('.result-' + id).html(data);
+        });
+        return false;
+    });
+
+    /* ajax load user by department work */
+    $(".lbtDepartmentCreate").click(function() {
+        id = ($(this).attr("id"));
+        url = $(this).attr("href");
+        url = "http://" + url + ":85/Ajax/ajLoadUser.aspx";
+        $('.result-' + id).html('<img src="/images/icon_loading.gif" />');
+        $.post(url, { DepartmentID: '' + id + ''}, function(data) {
+            $('.result-' + id).html(data);
+        });
+        return false;
+    });      
 /* check box */
 function get_check_value() {
     var c_value = "";

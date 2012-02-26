@@ -21,6 +21,8 @@ namespace EOFFICE.Ajax
         {
             string html = "";
             int DepartmentID=int.Parse(Request.Params["DepartmentID"].ToString());
+            string UserJoin = Request.Params["UserJoin"].ToString();            
+            
             html += "<table width='800px'>";
             
             BUser BobjUser = new BUser();
@@ -34,7 +36,14 @@ namespace EOFFICE.Ajax
                     html += "<tr>";
                 }
                 html += "<td width='25%'>";
-                html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='"+obj.UserName+"' title='"+obj.FullName+"' />";
+                if (UserJoin.IndexOf("," + obj.UserName + ",") == -1)
+                {
+                    html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName + "' />";
+                }
+                else
+                {
+                    html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName+"'" +" checked='checked' " +"' />";
+                }
                 html += "&nbsp";
                 html += ""+obj.FullName+"";
                 html += "</td>";

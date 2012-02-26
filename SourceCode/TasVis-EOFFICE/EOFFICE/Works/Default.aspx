@@ -80,7 +80,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="link-department">
-                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartmentCreate" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
                                                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
                                                                 <%#Eval("Name") %>
                                                             </a>

@@ -13,9 +13,10 @@ $(document).ready(function() {
     $(".lbtDepartment").click(function() {
         id = ($(this).attr("id"));
         url = $(this).attr("href");
+        user = $('#ctl00_cphContent_RadScheduler1_Form_hdfUserJoin').attr("value");
         url = "http://" + url + ":85/Ajax/ajLoadUserByDepartment.aspx";
         $('.result-' + id).html('<img src="/images/icon_loading.gif" />');
-        $.post(url, { DepartmentID: '' + id + '' }, function(data) {
+        $.post(url, { DepartmentID: '' + id + '' , UserJoin: user}, function(data) {
             $('.result-' + id).html(data);
         });
         return false;

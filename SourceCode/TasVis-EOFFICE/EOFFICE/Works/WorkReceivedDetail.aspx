@@ -55,6 +55,7 @@
                                 </td>
                                
                                 <td colspan="2">
+                                    
                                     <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand" >
                                         <ItemTemplate>
                                             <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
@@ -72,6 +73,7 @@
                         <tr>
                             <td style="width:20%;vertical-align:top">
                                 Danh sách người thực hiện:<br />
+                                <asp:HiddenField runat="server" ID="hdfUserJoin" />
                                 <asp:Repeater ID="rptListUser" runat="server" 
                                     onitemcommand="rptListUser_ItemCommand">
                                     <ItemTemplate>
@@ -155,7 +157,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="link-department">
-                                                        <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                        <a href='<%#Request.Url.Host %>' class="lbtDepartmentAjax" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
                                                             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
                                                             <%#Eval("Name") %>
                                                         </a>

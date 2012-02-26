@@ -69,6 +69,8 @@ namespace EOFFICE.Works
             //Load ListUserProcess
             rptListUser.DataSource = Bobj.GetUserProcess(WorkID);
             rptListUser.DataBind();
+
+            hdfUserJoin.Value = Bobj.GetWork(WorkID).First().IDUserProcess;
         }
 
         

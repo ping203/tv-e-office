@@ -64,7 +64,7 @@ namespace EOFFICE.Calender
             {
                 Status = "AdvancedInsert";
                 RadDateTimePicker startInput = (RadDateTimePicker)e.Container.FindControl("StartInput");
-                //startInput.SelectedDate = DateTime.Parse(hdf.Value);
+                //startInput.SelectedDate = DateTime.Parse(hdf.Value);                
                 RadDateTimePicker endInput = (RadDateTimePicker)e.Container.FindControl("EndInput");
                 //endInput.SelectedDate = DateTime.Parse(hdf.Value);
             }
@@ -101,7 +101,8 @@ namespace EOFFICE.Calender
                     
                     mesage += "- "+BobjUser.Get(listUser[i]).First().FullName + "<br/>";
                 }
-                
+                HiddenField hdfUserJoin = (HiddenField)e.Container.FindControl("hdfUserJoin");
+                hdfUserJoin.Value = UserJoin;
                 lblUserJoin = (Label)e.Container.FindControl("lblUserJoin");
                 lblUserJoin.Text = mesage;
 

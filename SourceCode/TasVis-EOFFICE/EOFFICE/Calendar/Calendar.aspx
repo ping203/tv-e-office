@@ -76,6 +76,8 @@
                                                                 <td>
                                                                     <asp:HiddenField runat="server" ID="hdfID" />
                                                                     <asp:TextBox runat="server" ID="SubjectTextBox" Width="100%" CssClass="txt"></asp:TextBox>
+                                                                    <br />
+                                                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="SubjectTextBox" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -88,7 +90,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
-                                                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="StartInput" ErrorMessage="Phải chọn thời điểm bắt đầu"></asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="StartInput" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -101,7 +103,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
-                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EndInput" ErrorMessage="Phải chọn thời điểm kết thúc"></asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EndInput" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                     <br />
                                                                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
                                                                     Operator="GreaterThanEqual"></asp:CompareValidator>
@@ -118,6 +120,7 @@
                                                                 <td align="right">Thành phần tham gia:</td>
                                                                 <td>
                                                                     <asp:Label runat="server" ID="lblUserJoin"></asp:Label>
+                                                                    <asp:HiddenField runat="server" ID="hdfUserJoin" />
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -184,6 +187,8 @@
                                                                 <td align="right" width="135px">Tên lịch công tác:</td>
                                                                 <td>
                                                                     <asp:TextBox runat="server" ID="SubjectTextBox" Width="100%" CssClass="txt"></asp:TextBox>
+                                                                    <br />
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="SubjectTextBox" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -196,7 +201,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss"></DateInput>
                                                                     </telerik:RadDateTimePicker>
-                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="StartInput" ErrorMessage="Phải chọn thời điểm bắt đầu"></asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="StartInput" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -209,7 +214,7 @@
                                                                         <DatePopupButton ImageUrl="" HoverImageUrl=""></DatePopupButton>
                                                                         <DateInput DisplayDateFormat="dd/MM/yyyy HH:mm:ss" DateFormat="dd/MM/yyyy HH:mm:ss" runat="server" ID="dateStart"></DateInput>
                                                                     </telerik:RadDateTimePicker>
-                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="EndInput" ErrorMessage="Phải chọn thời điểm kết thúc"></asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="EndInput" ErrorMessage="Thông tin cần nhập"></asp:RequiredFieldValidator>
                                                                     <br />
                                                                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Thời gian kết thúc phải lớn hơn thời gian bắt đầu" ControlToCompare="StartInput" ControlToValidate="EndInput"
                                                                     Operator="GreaterThanEqual"></asp:CompareValidator>
@@ -317,7 +322,7 @@
                  function OnClientTimeSlotClick(sender, eventArgs) {
                      
                      var Messages = $get('<%=hdf.ClientID%>');
-                     Messages.value = eventArgs.get_time().format('MM/dd/yyyy hh:mm:ss');
+                     Messages.value = eventArgs.get_time().format('dd/MM/yyyy hh:mm:ss');
                  }
             </script>
 </asp:Content>

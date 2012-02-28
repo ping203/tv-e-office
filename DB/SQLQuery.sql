@@ -1934,3 +1934,73 @@ BEGIN
 		SELECT * FROM tblContact WHERE ContactID=@ContactID
 	END
 END
+
+
+GO
+/* table tblDepartment */
+/* create table */
+IF OBJECT_ID('tblPermisionDefinition','U') IS NOT NULL
+	DROP TABLE tblPermisionDefinition
+GO
+
+
+CREATE TABLE tblPermisionDefinition
+(
+ID   INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+Code  NVARCHAR(150)  NOT NULL,
+[Name]  NVARCHAR(50)
+)
+GO
+/* get */
+IF OBJECT_ID('sp_tblPermisionDefinition_get','P') IS NOT NULL
+	DROP PROC sp_tblPermisionDefinition_get
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblPermisionDefinition_get]
+	@ID INT=0,
+	@Code NVARCHAR(150)=NULL,
+	@Name NVARCHAR(500)=NULL,
+	@PageIndex INT=1,
+	@PageSize INT=50
+AS
+BEGIN
+	IF @ID IS NULL OR @ID=0
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'		
+		IF @Code IS NOT NULL AND @Code<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND Code = N'''+cast(@Code AS NVARCHAR)+''''
+		END
+		IF @Name IS NOT NULL AND @Name<>''
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND [Name] LIKE(N''%'+cast(@Name AS NVARCHAR)+'%'')'
+		END
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY ID) AS RowIndex,*
+			FROM tblPermisionDefinition'+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblPermisionDefinition WHERE ID=@ID
+	END
+END
+
+
+
+
+
+
+
+
+
+
+

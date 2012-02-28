@@ -23,19 +23,27 @@
             <tr>
                 <td align="left">
                     <asp:GridView ID="grvListPermission" runat="server" AutoGenerateColumns="False" CssClass="tbl-list"
-                        Width="100%" DataKeyNames="ID">
+                        Width="100%" DataKeyNames="ID" onrowcommand="grvListPermission_RowCommand">
                         <Columns>
-                            <asp:TemplateField HeaderText="Chọn quyền">
+                            <asp:TemplateField HeaderText="Mã quyền">
                                 <ItemTemplate>
                                     <%#Eval("Code") %>
                                 </ItemTemplate>
-                                <ItemStyle Width="3%" HorizontalAlign="Center" />
+                                <ItemStyle Width="200px" HorizontalAlign="Center" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Quyền">
+                            <asp:TemplateField HeaderText="Tên quyền">
                                 <ItemTemplate>
                                     <%#Eval("Name") %>
                                 </ItemTemplate>
-                                <ItemStyle Width="20%" HorizontalAlign="Center" />
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Sửa">
+                                <ItemTemplate>
+                                    <asp:LinkButton runat="server" ID="cmdEdit" CssClass="link-function edit" CommandName="cmdEdit" CommandArgument='<%#Eval("ID") %>'>
+                                   
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="50px" HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />

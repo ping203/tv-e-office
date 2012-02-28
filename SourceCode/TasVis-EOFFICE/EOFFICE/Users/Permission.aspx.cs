@@ -68,18 +68,76 @@ namespace EOFFICE.Users
                 OPermisionDefinition obj = new OPermisionDefinition();
                 if (hdfId.Value != "-1")
                 {
-
+                    try
+                    {
+                       
+                        //--- Lấy thông tin update
+                        obj = ctl.Get(int.Parse(hdfId.Value), "", "")[0];
+                        if (obj != null)
+                        {
+                            obj.Name = txtName.Text.Trim();
+                            obj.Code = txtCode.Text.Trim();
+                            ctl.Update(obj.ID, obj.Code, obj.Name);
+                            BindData();
+                            txtName.Text = "";
+                            txtCode.Text = "";
+                            hdfId.Value = "-1";
+                        }
+                    }
+                    catch (Exception exx)
+                    { }
                 }
                 else
                 {
-                    obj.Name = txtName.Text.Trim();
-                    obj.Code = txtCode.Text.Trim();
-                    ctl.Add(obj);
-                    BindData();
+                    IList<OPermisionDefinition> lst = ctl.Get(0, txtCode.Text, "");
+                    if (lst!=null &&  lst.Count  > 0)
+                    {
+                        RegisterClientScriptBlock("Aler", "<script laguage='javácript'>alert('Mã quyền đã tồn tại');</script>");
+                    }
+                    else
+                    {
+                        //--- Thêm mới quyền
+                        obj.Name = txtName.Text.Trim();
+                        obj.Code = txtCode.Text.Trim();
+                        ctl.Add(obj);
+                        BindData();
+                        txtName.Text = "";
+                        txtCode.Text = "";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Thao tác trên danh sách quyền
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void grvListPermission_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "cmdEdit")
+            {
+                hdfId.Value  = e.CommandArgument.ToString();
+                BPermisionDefinition ctl = new BPermisionDefinition();
+                OPermisionDefinition obj = new OPermisionDefinition();
+                 //--- Lấy thông tin update
+                try
+                {
+                    obj = ctl.Get(int.Parse(e.CommandArgument.ToString()),"","")[0];
+                    if (obj != null)
+                    {
+                        txtCode.Text = obj.Code;
+                        txtName.Text = obj.Name;
+                    }
+                }
+                catch (Exception exxx)
+                { 
+                
                 }
             }
         }
         #endregion
+
 
 
 

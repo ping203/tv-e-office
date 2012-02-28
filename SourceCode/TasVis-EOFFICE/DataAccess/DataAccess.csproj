@@ -61,9 +61,11 @@
     <Compile Include="BusinessObject\BUserGroup.cs" />
     <Compile Include="BusinessObject\BWork.cs" />
     <Compile Include="BusinessObject\BWorkGroup.cs" />
+    <Compile Include="BusinessObject\BPermisionDefinition.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CDBase.cs" />
     <Compile Include="Common\Common.cs" />
+    <Compile Include="DataObject\OPermisionDefinition.cs" />
     <Compile Include="DataObject\OAttach.cs" />
     <Compile Include="DataObject\OCalendar.cs" />
     <Compile Include="DataObject\OComment.cs" />

@@ -20,7 +20,7 @@ namespace EOFFICE.Users
     public partial class UserInfo : System.Web.UI.Page
     {
         //Lấy tạm userName="vanhung"
-        private string UserName = "vanhung";
+        private string UserName = Global.UserInfo.UserName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

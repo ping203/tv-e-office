@@ -51,7 +51,7 @@ namespace EOFFICE
             BUser ctlUser = new BUser();
             if (txtUsername.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
-                IList<OUser> lst = ctlUser.Get(txtUsername.Text, txtPassword.Text);
+                IList<OUser> lst = ctlUser.Get(txtUsername.Text);
                 if (lst != null && lst.Count > 0)
                 {
                     UInfo = lst[0];

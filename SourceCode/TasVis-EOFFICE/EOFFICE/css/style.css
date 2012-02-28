@@ -49,6 +49,7 @@ search-doc{}
 #hot-function ul li:hover .icon-go{display:block;}
 .list{background:#FFF;margin-bottom:20px;overflow:hidden;}
 .list h2{background:#0072BC;color:#FFF;padding:5px 0px 5px 5px;font-size:14px;font-weight:bold;}
+.list .RadScheduler h2{padding:0px;background:none;}
 .tbl-list{background:#0072BC;}
 .tbl-list th{background:#6F9;}
 .tbl-list tr,.tbl-list td{background:#FFF;}
@@ -75,13 +76,13 @@ search-doc{}
 .nav-function ul{overflow:hidden;padding-left:10px;}
 .nav-function ul li{float:left;margin-right:10px;border:1px solid #CCC;padding:1px;}
 .btn{display:block;padding:3px 5px;background:#0066CC;color:#FFF;border:none;}
-.btn:hover{background:#5E9AF0;}
+.btn:hover{background:#5E9AF0;cursor:pointer;}
 .link-btn{padding:3px 5px;background:#0066CC;color:#FFF;}
 .link-btn:hover{background:#5E9AF0;}
 .link-btn .create{padding-left:20px;background:url('../Images/create.png') no-repeat;}
-.txt{width:150px;background:none;border:1px solid #CCC;height:20px;}
-.textarea{width:600px;background:none;border:1px solid #CCC;}
-.select{height:22px;background:none;border:1px solid #CCC;min-width:100px;}
+.txt{padding:2px;width:150px;background:#FFF;border:1px solid #CCC;height:18px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.textarea{padding:5px;background:none;border:1px solid #CCC;-moz-border-radius:3px;-webkit-border-radius:3px;}
+select{height:25px;padding:2px;background:none;border:1px solid #CCC;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .rq{color:#F00;}
 .title-process{border-bottom:2px solid #0072BC;padding-bottom:3px;margin-bottom:10px;}
 .listcb{float:left;width:200px;margin-right:20px;}
@@ -95,10 +96,7 @@ search-doc{}
 #frmlogin .txt{color:#FFF;}
 
 #frmlogin h2{color:#FFF;margin-bottom:10px;font-size:25px;background:#0072BC;padding:5px 10px;}
-.error
-{
-	color:Red;
-	}
+.error{color:Red;display:block;}
 #frmlogin h2{color:#FFF;margin-bottom:10px;font-size:25px;background:#0072BC;padding:5px 10px;}
 /*DatePicker*/
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -107,6 +105,10 @@ search-doc{}
 .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
 .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+/*End DatePicker*/
+.RadScheduler_Outlook .rsMonthView .rsContentTable td.rsTodayCell {
+    background: #D5E5FA;    
+}
 /*End DatePicker*/
 
 

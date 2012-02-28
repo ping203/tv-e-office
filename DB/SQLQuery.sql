@@ -1948,7 +1948,7 @@ CREATE TABLE tblPermisionDefinition
 (
 ID   INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 Code  NVARCHAR(150)  NOT NULL,
-[Name]  NVARCHAR(050)
+[Name]  NVARCHAR(500)
 )
 GO
 /* get */
@@ -1965,7 +1965,7 @@ CREATE PROC [dbo].[sp_tblPermisionDefinition_get]
 	@Code NVARCHAR(150)=NULL,
 	@Name NVARCHAR(500)=NULL,
 	@PageIndex INT=1,
-	@PageSize INT=50
+	@PageSize INT=500
 AS
 BEGIN
 	IF @ID IS NULL OR @ID=0
@@ -1992,6 +1992,50 @@ BEGIN
 	BEGIN
 		SELECT * FROM tblPermisionDefinition WHERE ID=@ID
 	END
+END
+
+
+GO
+/* get */
+IF OBJECT_ID('sp_tblPermisionDefinition_delete','P') IS NOT NULL
+	DROP PROC sp_tblPermisionDefinition_delete
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblPermisionDefinition_delete]
+	@ID INT=0
+AS
+BEGIN
+	BEGIN
+			DELETE 	FROM tblPermisionDefinition WHERE ID=@ID
+	END
+
+END
+
+
+GO
+/* get */
+IF OBJECT_ID('sp_tblPermisionDefinition_update','P') IS NOT NULL
+	DROP PROC sp_tblPermisionDefinition_update
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblPermisionDefinition_update]
+	@ID INT=0,
+	@Code NVARCHAR(150)=NULL,
+	@Name NVARCHAR(500)=NULL
+AS
+BEGIN
+	BEGIN
+			UPDATE tblPermisionDefinition SET Code=@Code,[Name]=@Name WHERE ID=@ID
+	END
+
 END
 
 

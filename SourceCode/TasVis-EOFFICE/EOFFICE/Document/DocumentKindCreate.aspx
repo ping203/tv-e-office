@@ -76,7 +76,7 @@
                             </ItemTemplate>
                             <ItemStyle Width="3%" HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Name" HeaderText="Tên nhóm công việc"></asp:BoundField>
+                        <asp:BoundField DataField="Name" HeaderText="Loại văn bản"></asp:BoundField>
                         <asp:BoundField DataField="Description" HeaderText="Mô tả">
                             <ItemStyle Width="45%" />
                         </asp:BoundField>
@@ -84,13 +84,9 @@
                             <HeaderTemplate>
                                 Loại văn bản cha</HeaderTemplate>
                             <ItemTemplate>
-                                <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px" Enabled="false">
-                                </asp:DropDownList>
+                                <%#GetName(Eval("DocumentKindID"))%>
                             </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:DropDownList ID="ddlGroupParent" runat="server" Width="200px">
-                                </asp:DropDownList>
-                            </EditItemTemplate>
+
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <HeaderTemplate>
@@ -98,7 +94,7 @@
                             <ItemTemplate>
                                 <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("DocumentKindID")%>' CssClass="link-function edit"
                                     ToolTip="Sửa" runat="server" />
-                                <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("DocumentKindID")%>' CssClass="link-function delete"
+                                <asp:LinkButton ID="LinkButton4" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa?');" CommandName="cmdDelete" CommandArgument='<%#Eval("DocumentKindID")%>' CssClass="link-function delete"
                                     ToolTip="Xóa" runat="server"></asp:LinkButton>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" Width="7%" />
@@ -106,7 +102,7 @@
                     </Columns>
                     <HeaderStyle ForeColor="#0072BC" />
                 </asp:GridView>
-                <div class="pagenav">
+                <div class="pagenav" style="display:none">
                     <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
                         PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
                 </div>

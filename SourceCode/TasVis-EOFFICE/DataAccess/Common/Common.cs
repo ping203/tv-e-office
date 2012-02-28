@@ -45,17 +45,7 @@ namespace DataAccess.Common
     };
     public class Common
     {
-        /// <summary>
-        /// Lấy về danh sách module
-        /// </summary>
-        /// <returns></returns>
-        public static List<OModule> GetListModule()
-        {
-            List<OModule> lst = new List<OModule>();
-            lst.Add(new OModule("MD01", "Quản trị người dùng"));
-            lst.Add(new OModule("MD02", "Quản trị nhóm người dùng"));
-            return lst;
-        }
+
         public static DataTable ConvertTo<T>(IList<T> list)
         {
             DataTable table = CreateTable<T>();

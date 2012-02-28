@@ -63,6 +63,23 @@ namespace EOFFICE
             grvDocumentKind.DataSource = ctl.Get(0);
             grvDocumentKind.DataBind();
         }
+
+        /// <summary>
+        /// Lấy về tên lại công văn
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetName(object  id)
+        {
+            BDocumentKind ctl = new BDocumentKind();
+            try{
+                return ctl.Get(int.Parse(id.ToString()))[0].Name;
+            }catch(Exception ex)
+            {
+                return "";
+            }
+           
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -100,8 +117,8 @@ namespace EOFFICE
         {
             if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
-                BDocumentKind ctl = new BDocumentKind();
-               ODocumentKind obj= ctl.Delete(int.Parse(e.CommandArgument.ToString()));
+                //BDocumentKind ctl = new BDocumentKind();
+                //ctl.Delete(int.Parse(e.CommandArgument.ToString()));
                
             }
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))

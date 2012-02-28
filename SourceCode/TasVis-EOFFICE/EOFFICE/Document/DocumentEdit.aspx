@@ -12,7 +12,7 @@
                     <table>
                         <tr>
                             <td align="right">
-                                Tài khoản:
+                                Số văn bản:
                             </td>
                             <td>
                                 <asp:TextBox runat="server" ID="txtUsername" CssClass="required"></asp:TextBox>
@@ -21,23 +21,23 @@
                         </tr>
                         <tr runat="server" id="tr_mk">
                             <td align="right">
-                                Mật khẩu:
+                                Tên văn bản:
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass=" required password"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtPassword" TextMode="MultiLine" CssClass=" required password"></asp:TextBox>
                             </td>
                         </tr>
                         <tr runat="server" id="tr_cmk">
                             <td align="right">
-                                Xác nhận mật khẩu:
+                               Nội dung: 
                             </td>
                             <td>
-                                <asp:TextBox runat="server" ID="txtConfirmPassword" TextMode="Password" CssClass="required confirm_password"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtConfirmPassword"  TextMode="MultiLine"  TextMode="Password" CssClass="required confirm_password"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td align="right">
-                                Họ và tên:
+                                Ngày xuất bản:
                             </td>
                             <td>
                                 <asp:TextBox runat="server" ID="txtFullName" CssClass="required"></asp:TextBox>
@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <asp:TextBox runat="server" ID="txtEmail" CssClass="email required"></asp:TextBox>
-                            </td>
+                            </td>ss
                         </tr>
                         <tr>
                             <td align="right">

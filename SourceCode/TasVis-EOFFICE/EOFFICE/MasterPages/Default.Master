@@ -22,8 +22,8 @@
             	<li><a href="http://nganson.vn" target="_blank"><span class="icon"><asp:Image ImageUrl="~/Images/Home.png" runat="server" /></span>Trang chủ</a></li>
                 <li><a href="http://nganson.com.vn" target="_blank"><span class="icon"><asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản lý nhân sự</a></li>
                 <li><a href="/Help.aspx"><span class="icon"><asp:Image ImageUrl="~/Images/Help.png" runat="server" /></span>Trợ giúp</a></li>
-                <li><a href="/Users/Person.aspx"><span class="icon"><asp:Image ImageUrl="~/Images/Person.png" runat="server" /></span>Xin chào <asp:Label ID="lblUser" class="user-name" runat="server"></asp:Label></a></li>
-                <li><asp:LinkButton runat="server" ID="btnLogout" onclick="btnLogout_Click"><asp:Image ID="Image1" ImageUrl="~/Images/Turn-off.png" runat="server" />Thoát</asp:LinkButton></li>
+                <li><a href="/Users/UserInfo.aspx"><span class="icon"><asp:Image ImageUrl="~/Images/Person.png" runat="server" /></span>Xin chào <asp:Label ID="lblUser" class="user-name" runat="server"></asp:Label></a></li>
+                <li><span class="icon"><asp:Image ID="Image1" ImageUrl="~/Images/Turn-off.png" runat="server" /></span><asp:LinkButton runat="server" ID="btnLogout" onclick="btnLogout_Click">Thoát</asp:LinkButton></li>
             </ul>
         </div><!-- end menu-top -->
     </div><!-- end header -->

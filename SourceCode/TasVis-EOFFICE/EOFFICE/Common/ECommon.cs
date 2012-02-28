@@ -15,16 +15,16 @@ namespace EOFFICE.Common
     public class ECommon
     {
 
-        /// <summary>
-        /// Lấy về danh sách module
-        /// </summary>
-        /// <returns></returns>
-        public static List<OModule> GetListModule()
-        {
-            List<OModule> lst = new List<OModule>();
-            lst.Add(new OModule("MD01", "Quản trị người dùng"));
-            lst.Add(new OModule("MD02", "Quản trị nhóm người dùng"));
-            return lst;
-        }
+        ///// <summary>
+        ///// Lấy về danh sách module
+        ///// </summary>
+        ///// <returns></returns>
+        //public static List<OModule> GetListModule()
+        //{
+        //    List<OModule> lst = new List<OModule>();
+        //    lst.Add(new OModule("MD01", "Quản trị người dùng"));
+        //    lst.Add(new OModule("MD02", "Quản trị nhóm người dùng"));
+        //    return lst;
+        //}
     }
 }

@@ -5,22 +5,29 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản trị danh sách quyền: </h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản trị danh
+            sách quyền
+        </h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
-                    
+                    Mã quyền:
+                    <asp:TextBox runat="server" ID="txtCode"></asp:TextBox>
+                    Tên quyền
+                    <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                    <asp:LinkButton runat="server" ID="cmdUpdateP" CssClass="link-btn" 
+                        onclick="cmdUpdateP_Click">Cập nhật</asp:LinkButton>
+                        <asp:HiddenField runat="server" ID="hdfId" Value="-1" />
                 </td>
             </tr>
             <tr>
                 <td align="left">
                     <asp:GridView ID="grvListPermission" runat="server" AutoGenerateColumns="False" CssClass="tbl-list"
-                        Width="100%" OnRowCommand="grvListGroups_RowCommand" DataKeyNames="GroupId">
-                        <Columns>                          
-                             <asp:TemplateField HeaderText="Chọn quyền">
+                        Width="100%" DataKeyNames="ID">
+                        <Columns>
+                            <asp:TemplateField HeaderText="Chọn quyền">
                                 <ItemTemplate>
-                                    <asp:CheckBox runat="server" CssClass="chkGroupCheck" ID="chkCheckGroup" Checked='<%#CheckHasRole(Eval("GroupId")) %>'/>
-                                    <asp:HiddenField runat="server" ID="hdfGroupId" Value='<%#Eval("GroupId") %>' />
+                                    <%#Eval("Code") %>
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>

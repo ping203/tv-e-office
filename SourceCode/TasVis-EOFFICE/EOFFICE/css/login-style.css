@@ -1,0 +1,15 @@
+﻿body
+{
+	background:url("../Images/Stage_BG_btm.png") repeat-x scroll center bottom transparent;
+	padding-top:200px;
+	padding-bottom:200px;
+	font-family:Tahoma;
+	font-size:13px;
+}
+.login{margin:0 auto;width:355px;background:url("../Images/bg-form.png") no-repeat;height:254px;padding:10px;}
+.login h2{margin:10px 0px 15px 10px;text-align:center;color:#004E35;}
+.login p{width:320px;margin:0 auto;margin-bottom:10px;}
+.login p span{padding-bottom:3px;display:block;}
+.txtlogin{background:url('../Images/bg-txt.png') no-repeat;border:none;width:310px;height:43px;padding-left:10px;}
+.btn{background:#004E35;border:none;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding:5px 8px;color:#FFF;-moz-box-shadow:1px 1px 5px #333;-webkit-border-radius:1px 1px 5px #333;float:right;text-decoration:none;}
+.btn:hover{background:#DA7026;cursor:pointer;}

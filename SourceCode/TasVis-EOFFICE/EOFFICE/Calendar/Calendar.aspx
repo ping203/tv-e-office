@@ -30,7 +30,7 @@
                             DataDescriptionField="Content"
                             Skin="Outlook" Culture="Vietnamese (Vietnam)" 
                             SelectedView="MonthView" DayEndTime="23:59:59" DayStartTime="00:00:00" 
-                            Height="1000px" style="margin-bottom: 25" EditFormDateFormat="dd/MM/yyyy" 
+                            Height="" style="margin-bottom: 25" EditFormDateFormat="dd/MM/yyyy" 
                             EnableTheming="True" MonthView-GroupingDirection="Vertical" onformcreated="RadScheduler1_FormCreated" 
                              
                             

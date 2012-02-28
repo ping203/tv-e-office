@@ -1948,7 +1948,7 @@ CREATE TABLE tblPermisionDefinition
 (
 ID   INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 Code  NVARCHAR(150)  NOT NULL,
-[Name]  NVARCHAR(50)
+[Name]  NVARCHAR(050)
 )
 GO
 /* get */

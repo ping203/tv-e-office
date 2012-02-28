@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {    
     //menu-left		
     $(".a-parent").click(function() {
         if ($(this).is('.parent-active')) {

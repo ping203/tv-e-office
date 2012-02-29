@@ -56,9 +56,9 @@ namespace EOFFICE.Works
             if (!Page.IsPostBack)
             {
                 ddlWorkGroup_Load();
-                grvWork_Load();
                 ddlWork_Load();
-                InitData();                
+                InitData();
+                grvWork_Load();
             }
         }
 
@@ -105,20 +105,20 @@ namespace EOFFICE.Works
         public string GenParamRedirect()
         {
             string strParam = "";
-            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
-            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&group=" + ddlWorkGroup.SelectedValue;
             strParam += "&status=" + ddlWork.SelectedValue;
-            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            strParam += "&type=" + ddlTieuChi.SelectedValue;
             if (txtKeyword.Text.Trim().Length > 0)
             {
-                strParam += "&fkey=" + Server.UrlEncode(txtKeyword.Text.Trim());
+                strParam += "&key=" + Server.UrlEncode(txtKeyword.Text.Trim());
             }
             //--Pagesize
             if (Request.QueryString["currentpage"] != null)
             {
                 try
                 {
-                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                    strParam += "&currentpage=" + Request.QueryString["currentpage"];
                 }
                 catch (Exception ex) { }
             }
@@ -134,9 +134,9 @@ namespace EOFFICE.Works
         {
             string strParam = "";
             strParam += "pagesize=" + ddlPageSize.SelectedValue;
-            strParam += "&fgroup=" + ddlWorkGroup.SelectedValue;
+            strParam += "&group=" + ddlWorkGroup.SelectedValue;
             strParam += "&status=" + ddlWork.SelectedValue;
-            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            strParam += "&type=" + ddlTieuChi.SelectedValue;
             if (txtKeyword.Text.Trim().Length > 0)
             {
                 strParam += "&type=" + Server.UrlEncode(txtKeyword.Text.Trim());
@@ -166,6 +166,7 @@ namespace EOFFICE.Works
         
         protected void grvWork_Load()
         {
+            
             int UserID = Global.UserInfo.UserID;
             BWork objWork = new BWork();
             string _name = "";

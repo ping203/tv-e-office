@@ -138,9 +138,9 @@ namespace EOFFICE.Contacts
             if (!Page.IsPostBack)
             {
                 ddlContactGroup_Load();
-                grvContact_Load();
                 BindGender();
                 InitData();
+                grvContact_Load();
             }
         }
 

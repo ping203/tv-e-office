@@ -20,7 +20,7 @@ namespace EOFFICE.Users
     public partial class UserInfo : System.Web.UI.Page
     {
         //Lấy tạm userName="vanhung"
-        private string UserName = Global.UserInfo.UserName;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,6 +31,7 @@ namespace EOFFICE.Users
 
         protected void KhoiTao()
         {
+            string UserName = Global.UserInfo.UserName;
             BUser BobjUser = new BUser();
             OUser objUser = new OUser();
             objUser = BobjUser.Get(UserName).First();
@@ -56,6 +57,7 @@ namespace EOFFICE.Users
 
         protected void btnCapNhat_Click(object sender, EventArgs e)
         {
+            string UserName = Global.UserInfo.UserName;
             BUser BobjUser = new BUser();
             CultureInfo culture = new CultureInfo("fr-FR", true);
             DateTime BirthDay;

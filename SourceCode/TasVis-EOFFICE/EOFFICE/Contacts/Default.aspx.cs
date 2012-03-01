@@ -186,12 +186,6 @@ namespace EOFFICE.Contacts
             {
                 switch (ddlTieuChi.SelectedValue)
                 {
-                    case "All":
-                        Name = txtKeyWord.Text.Trim();
-                        Phone = txtKeyWord.Text.Trim();
-                        Email = txtKeyWord.Text.Trim();
-                        Address = txtKeyWord.Text.Trim();
-                        break;
                     case "Name":
                         Name = txtKeyWord.Text.Trim();
                         break;

@@ -47,7 +47,7 @@ img{border:none;}
 search-doc{}
 .icon-go{width:24px;height:24px;display:none;background:url('../Images/sprite.png') no-repeat -30px 0px;margin-top:-25px;margin-left:70px;position:absolute;}
 #hot-function ul li:hover .icon-go{display:block;}
-.list{background:#FFF;margin-bottom:20px;overflow:hidden;}
+.list{background:#FFF;margin-bottom:20px;overflow:hidden;padding-bottom:10px;}
 .list h2{background:#0072BC;color:#FFF;padding:5px 0px 5px 5px;font-size:14px;font-weight:bold;}
 .list .RadScheduler h2{padding:0px;background:none;}
 .tbl-list{background:#0072BC;}
@@ -71,14 +71,14 @@ search-doc{}
 .pagenav ul li a.pagecurrent{font-weight:bold;}
 .wp-form{}
 .wp-form h2{margin-bottom:20px;}
-.form{border-top:2px solid #CD4900;border-bottom:2px solid #CD4900;padding:20px 10px 20px 10px;}
+.form{border-top:2px solid #CD4900;border-bottom:2px solid #CD4900;padding:20px 10px;overflow:hidden;}
 .nav-function{padding:2px;}
 .nav-function ul{overflow:hidden;padding-left:10px;}
 .nav-function ul li{float:left;margin-right:10px;border:1px solid #CCC;padding:1px;}
 .btn{display:block;padding:3px 5px;background:#0066CC;color:#FFF;border:none;}
 .btn:hover{background:#5E9AF0;cursor:pointer;}
-.link-btn{padding:3px 5px;background:#0066CC;color:#FFF;}
-.link-btn:hover{background:#5E9AF0;}
+.link-btn{padding:3px 3px;border:none;background:#0066CC;color:#FFF;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.link-btn:hover{background:#5E9AF0;cursor:pointer;}
 .link-btn .create{padding-left:20px;background:url('../Images/create.png') no-repeat;}
 .txt{padding:2px;width:150px;background:#FFF;border:1px solid #CCC;height:18px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .textarea{padding:5px;background:none;border:1px solid #CCC;-moz-border-radius:3px;-webkit-border-radius:3px;}
@@ -126,3 +126,15 @@ select{height:25px;padding:2px;background:none;border:1px solid #CCC;-moz-border
     padding: 5px;
 }
 /*End Comment*/
+.form-left{float:left;margin-right:10px;}
+.input{margin-bottom:10px;}
+.bunk-function{padding:5px 0px;margin-bottom:5px;overflow:hidden;}
+.bunk-function .link-btn{float:left;}
+.right{float:right;}
+#createWorkGroup .txt{width:300px;}
+#list-contact .bunk-function{padding:0px;margin-bottom:5px;}
+.filter{margin-bottom:20px;}
+#createWork .txt{width:300px;}
+#createWork select{width:305px;}
+#list-createuser .txt{width:300px;}
+#list-createuser select{width:305px;}

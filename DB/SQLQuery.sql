@@ -2039,11 +2039,131 @@ BEGIN
 END
 
 
+GO
+/* get */
+IF OBJECT_ID('sp_tblPermisionDefinition_add','P') IS NOT NULL
+	DROP PROC sp_tblPermisionDefinition_add
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblPermisionDefinition_add]
+	@Code NVARCHAR(150)=NULL,
+	@Name NVARCHAR(500)=NULL
+AS
+BEGIN
+	BEGIN
+			INSERT INTO   tblPermisionDefinition(Code,[Name]) VALUES(@Code,@Name)
+	END
+
+END
+
+GO
+/* table tblDepartment */
+/* create table */
+IF OBJECT_ID('tblGroupPermission','U') IS NOT NULL
+	DROP TABLE tblGroupPermission
+GO
+
+CREATE TABLE tblGroupPermission
+(
+ID   INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+GroupId  INT  NOT NULL,
+PermissionDefinitionId  INT  NOT NULL,
+)
+GO
+/* get */
+IF OBJECT_ID('sp_tblGroupPermission_get','P') IS NOT NULL
+	DROP PROC sp_tblGroupPermission_get
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblGroupPermission_get]
+	@ID INT=0,
+	@GroupId INT=0,
+	@PermissionDefinitionId INT=0,
+	@PageIndex INT=1,
+	@PageSize INT=500
+AS
+BEGIN
+	IF @ID IS NULL OR @ID=0
+	BEGIN
+		DECLARE @Start INT
+		DECLARE @End INT
+		DECLARE @DieuKien NVARCHAR(500)
+		SET @Start=(@PageIndex-1)*@PageSize+1
+		SET @End=@PageIndex*@PageSize
+		SET @DieuKien=' WHERE (1=1)'		
+		IF @GroupId IS NOT NULL AND @GroupId<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND GroupId = '+cast(@GroupId AS NVARCHAR)
+		END
+		IF @PermissionDefinitionId IS NOT NULL AND @PermissionDefinitionId<>0
+		BEGIN
+			SET @DieuKien=@DieuKien+' AND PermissionDefinitionId = '+cast(@PermissionDefinitionId AS NVARCHAR)
+		END
+		EXEC('WITH tblRecords AS(SELECT ROW_NUMBER() OVER (ORDER BY ID) AS RowIndex,*
+			FROM tblGroupPermission '+@DieuKien+'),tblTotalResult AS(SELECT MAX(RowIndex) AS TotalResult FROM tblRecords)
+			SELECT * FROM tblRecords,tblTotalResult WHERE RowIndex BETWEEN '+@Start+' AND '+@End)		
+	END
+	ELSE
+	BEGIN
+		SELECT * FROM tblGroupPermission WHERE ID=@ID
+	END
+END
+
+
+
+GO
+/* get */
+IF OBJECT_ID('sp_tblGroupPermission_add','P') IS NOT NULL
+	DROP PROC sp_tblGroupPermission_add
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblGroupPermission_add]
+	@GroupId INT,
+	@PermissionDefinitionId INT
+AS
+BEGIN
+	BEGIN
+			INSERT INTO   tblGroupPermission(GroupId,PermissionDefinitionId) VALUES(@GroupId,@PermissionDefinitionId)
+	END
+END
 
 
 
 
 
+GO
+/* get */
+IF OBJECT_ID('sp_tblGroupPermission_delete','P') IS NOT NULL
+	DROP PROC sp_tblGroupPermission_delete
+GO 
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROC [dbo].[sp_tblGroupPermission_delete]
+	@ID INT=0,
+	@GroupId INT=0,
+	@PermissionDefinitionId INT=0
+AS
+BEGIN
+	BEGIN
+			DELETE 	FROM tblGroupPermission WHERE (ID=@ID OR @ID=0) AND  (PermissionDefinitionId=@PermissionDefinitionId OR @PermissionDefinitionId=0) AND (GroupId=@GroupId OR @GroupId=0)
+	END
+
+END
 
 
 

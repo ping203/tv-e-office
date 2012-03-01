@@ -16,35 +16,21 @@
                         </ul>
                     </div>
                     <div class="form">
-                	<table width="100%" cellspacing="5">
-                    	<tr>
-                        	<td>Tên nhóm danh bạ:<span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtWorkGroupName" runat="server" CssClass="required"></asp:TextBox></td>                            
-                        </tr>                        
-                        <tr>
-                        	<td>Mô tả: </td>
-                            <td><asp:TextBox ID="txtContent" runat="server" CssClass="textarea" TextMode="multiline" Rows="5"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:Button ID="btnSubmit" runat="server" Text="Thêm" ToolTip="Thêm nhóm danh bạ" 
-                                    onclick="btnSubmit_Click" CssClass="btn"  /><br /> 
-                               
-                                <asp:Label runat="server" ID="lblThongBao"  ForeColor="Red"></asp:Label>
-                            </td>
-                        </tr>     
-                    </table>
-                    <div class="list" id="list-congvieccanlam">
-            	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM DANH BẠ</h2>
-            	        
-            	        <div style="margin-bottom:10px">
+                    <div class="form-left">
+                	    <p class="label">Tên nhóm danh bạ:<span class="rq">(*)</span></p>
+                        <p class="input"><asp:TextBox ID="txtWorkGroupName" Width="300" runat="server" CssClass="txt required"></asp:TextBox></p>
+                        <p class="label">Mô tả:</p>
+                        <p class="input"><asp:TextBox ID="txtContent" runat="server" CssClass="textarea" Width="295" TextMode="multiline" Rows="5"></asp:TextBox></p>
+                        <p><asp:Button ID="btnSubmit" runat="server" Text="Thêm nhóm danh bạ" ToolTip="Thêm nhóm danh bạ" 
+                                        onclick="btnSubmit_Click" CssClass="link-btn right"  /></p>                                   
+                        <p><asp:Label runat="server" ID="lblThongBao"  ForeColor="Red"></asp:Label></p>
+                    </div>
+                    <div class="list" id="list-congvieccanlam">            	                    	        
+            	        <div class="bunk-function">
             	            <asp:LinkButton runat="server" ID="btnXoa" Text="Xóa" CssClass="link-btn" 
                                 onclick="btnXoa_Click"></asp:LinkButton> &nbsp &nbsp
             	            <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
-            	        </div>
-            	        
-            	        
+            	        </div>            	                    	        
                         <asp:GridView ID="grvContactGroup" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" 
                             DataKeyNames="ContactGroupID" 
@@ -62,19 +48,16 @@
                                     <ItemTemplate>
                                         <asp:CheckBox ID="MyCheckBox" runat="server" />
                                     </ItemTemplate>
-                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
+                                    <ItemStyle Width="20" HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="STT">
                                    <ItemTemplate>
                                           <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
-                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
+                                    <ItemStyle Width="20" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="GroupName" HeaderText="Tên nhóm danh bạ">
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Description" HeaderText="Mô tả" >
-                                    
-                                </asp:BoundField>
+                                <asp:BoundField DataField="GroupName" HeaderText="Tên nhóm danh bạ"></asp:BoundField>
+                                <asp:BoundField DataField="Description" HeaderText="Mô tả" ></asp:BoundField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
@@ -85,7 +68,7 @@
                                         <asp:LinkButton ID="LinkButton2" CommandName="Update" CssClass="link-function update" ToolTip="Cập nhật"   runat="server" />
                                         <asp:LinkButton ID="LinkButton3" CommandName="Cancel"  CssClass="link-function cancel" ToolTip="Hủy"  runat="server" />
                                     </EditItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" Width="7%" />                   
+                                    <ItemStyle HorizontalAlign="Center" Width="60" />                   
                                 </asp:TemplateField>
                             </Columns>
                             <HeaderStyle ForeColor="#0072BC" />

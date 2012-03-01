@@ -16,71 +16,42 @@
                         </ul>
                     </div>
                     <div class="form">
-                	<table width="100%" cellspacing="5">
-                    	<tr>
-                    	    <td class="style3" >Nhóm danh bạ:</td>
-                    	    <td class="style4" >
-                    	        <asp:DropDownList runat="server" ID="ddlContactGroup"></asp:DropDownList>
-                    	    </td>
-                    	    <td class="style1" >Giới tính:</td>
-                    	    <td >
-                    	        <asp:DropDownList runat="server" ID="ddlGender">
-                    	            
-                    	        </asp:DropDownList>
-                    	    </td>
-                    	    <td class="style2" >Tiêu chí tìm kiếm:</td>
-                    	    <td>
-                    	        <asp:DropDownList runat="server" ID="ddlTieuChi">
-                    	            <asp:ListItem Text="-- Tất cả --" Value="All"></asp:ListItem>
-                    	            <asp:ListItem Text="Tên" Value="Name"></asp:ListItem>
-                    	            <asp:ListItem Text="Số điện thoại" Value="Phone"></asp:ListItem>
-                    	            <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
-                    	            <asp:ListItem Text="Địa chỉ" Value="Address"></asp:ListItem>
-                    	        </asp:DropDownList>
-                    	    </td>
-                    	</tr>
-                    	<tr>
-                    	    <td>Từ khóa:</td>
-                    	    <td>
-                    	        <asp:TextBox runat="server" ID="txtKeyWord"></asp:TextBox>
-                    	    </td>
-                    	</tr>
-                    	<tr>
-                    	    <td></td>
-                    	    <td>
-                    	        <asp:Button runat="server" ID="btnSearch" Text="Tìm kiếm" 
-                                    ToolTip="Tìm kiếm danh bạ" CssClass="btn" onclick="btnSearch_Click" />
-                    	    </td>
-                    	</tr>                    	
-                    </table>
-                    <div class="list" id="list-congvieccanlam">
-            	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>DANH SÁCH DANH BẠ</h2>
-            	        
-            	        <div style="margin-bottom:10px">
-            	            <asp:LinkButton runat="server" ID="btnXoa" Text="Xóa" CssClass="link-btn" onclick="btnXoa_Click" 
-                                ></asp:LinkButton> &nbsp &nbsp &nbsp &nbsp
-            	            <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
-            	        </div>
-            	        <table width="100%">
-                        <tr>
-                            <td align="left">  
-                                <span runat="server" id="spResultCount" style="float:left"></span>
-                            </td>
-                            <td align="right">
-                                Hiển thị:
-                                 <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
-                                    onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
-                                    <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
-                                    <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
-                                    <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
-                                    <asp:ListItem Text="30 kết quả" Value="30"></asp:ListItem>
-                                    <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
-                                    <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                    </table>
-            	        
+                    <div class="filter">
+                	    <table width="100%" cellspacing="5">
+                    	    <tr>
+                    	        <td>Từ khóa:<asp:TextBox runat="server" ID="txtKeyWord" Width="200" CssClass="txt"></asp:TextBox></td>
+                    	        <td>Nhóm danh bạ:<asp:DropDownList runat="server" ID="ddlContactGroup" CssClass="select"></asp:DropDownList></td>                    	    
+                    	        <td>Giới tính:<asp:DropDownList runat="server" ID="ddlGender"></asp:DropDownList></td>                    	    
+                    	        <td>Tiêu chí tìm kiếm:
+                    	            <asp:DropDownList runat="server" ID="ddlTieuChi">
+                    	                <asp:ListItem Text="-- Tất cả --" Value="All"></asp:ListItem>
+                    	                <asp:ListItem Text="Tên" Value="Name"></asp:ListItem>
+                    	                <asp:ListItem Text="Số điện thoại" Value="Phone"></asp:ListItem>
+                    	                <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
+                    	                <asp:ListItem Text="Địa chỉ" Value="Address"></asp:ListItem>
+                    	            </asp:DropDownList>
+                    	        </td>                    	                        	    
+                    	        <td><asp:Button runat="server" ID="btnSearch" Text="Tìm kiếm" ToolTip="Tìm kiếm danh bạ" CssClass="link-btn" onclick="btnSearch_Click" /></td>
+                    	    </tr>                    	
+                        </table>
+                    </div>
+                    <div id="list-contact">            	                    	        
+                        <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
+            	        <div class="bunk-function">
+            	            <asp:LinkButton runat="server" ID="btnXoa" Text="Xóa" CssClass="link-btn" onclick="btnXoa_Click"></asp:LinkButton> &nbsp &nbsp &nbsp &nbsp            	            
+            	            
+            	            <p style="float:right;"><span runat="server" id="spResultCount"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Hiển thị:
+                           <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                                onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                                <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
+                                <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                                <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
+                                <asp:ListItem Text="30 kết quả" Value="30"></asp:ListItem>
+                                <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                                <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                            </asp:DropDownList></p>
+            	        </div>            	                    	        
                         <asp:GridView ID="grvContact" runat="server" AutoGenerateColumns="False" 
                                     CssClass="tbl-list" Width="100%" 
                             DataKeyNames="ContactID" onrowcreated="grvContact_RowCreated" 
@@ -104,21 +75,11 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="FullName" HeaderText="Họ tên">
-                                    
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Phone" HeaderText="Di động" >    
-                                    
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Tel" HeaderText="Điện thoại nhà" >
-                                    
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Email" HeaderText="Email" >
-                                    
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Address" HeaderText="Địa chỉ" >
-                                    
-                                </asp:BoundField>
+                                <asp:BoundField DataField="FullName" HeaderText="Họ tên"></asp:BoundField>
+                                <asp:BoundField DataField="Phone" HeaderText="Di động" ></asp:BoundField>
+                                <asp:BoundField DataField="Tel" HeaderText="Điện thoại nhà" ></asp:BoundField>
+                                <asp:BoundField DataField="Email" HeaderText="Email" ></asp:BoundField>
+                                <asp:BoundField DataField="Address" HeaderText="Địa chỉ" ></asp:BoundField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Thao tác</HeaderTemplate>
                                     <ItemTemplate>
@@ -138,9 +99,7 @@
                             <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
                                 PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
                         </div>
-                        <br />
-                       
-                        
+                        <br />                                               
                     </div>
                     </div>
                     <div class="nav-function">
@@ -171,26 +130,3 @@
     } 
     </script>    
 </asp:Content>
-<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
-
-    <style type="text/css">
-        .style1
-        {
-            width: 61px;
-        }
-        .style2
-        {
-            width: 147px;
-        }
-        .style3
-        {
-            width: 97px;
-        }
-        .style4
-        {
-            width: 321px;
-        }
-    </style>
-
-</asp:Content>
-

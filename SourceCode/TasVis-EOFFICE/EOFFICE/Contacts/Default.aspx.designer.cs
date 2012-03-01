@@ -41,6 +41,15 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.LinkButton btnThem;
         
         /// <summary>
+        /// txtKeyWord control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKeyWord;
+        
+        /// <summary>
         /// ddlContactGroup control.
         /// </summary>
         /// <remarks>
@@ -68,15 +77,6 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.DropDownList ddlTieuChi;
         
         /// <summary>
-        /// txtKeyWord control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeyWord;
-        
-        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>
@@ -86,15 +86,6 @@ namespace EOFFICE.Contacts {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// btnXoa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnXoa;
-        
-        /// <summary>
         /// lblThongBao2 control.
         /// </summary>
         /// <remarks>
@@ -102,6 +93,15 @@ namespace EOFFICE.Contacts {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblThongBao2;
+        
+        /// <summary>
+        /// btnXoa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnXoa;
         
         /// <summary>
         /// spResultCount control.

@@ -76,7 +76,7 @@ namespace EOFFICE.Users
                         if (obj != null)
                         {
                             obj.Name = txtName.Text.Trim();
-                            obj.Code = txtCode.Text.Trim();
+                            //obj.Code = txtCode.Text.Trim();
                             ctl.Update(obj.ID, obj.Code, obj.Name);
                             BindData();
                             txtName.Text = "";
@@ -128,6 +128,7 @@ namespace EOFFICE.Users
                     {
                         txtCode.Text = obj.Code;
                         txtName.Text = obj.Name;
+                        txtCode.Enabled = false;
                     }
                 }
                 catch (Exception exxx)

@@ -1,30 +1,37 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Permission.aspx.cs" Inherits="EOFFICE.Users.Permission"
-    MasterPageFile="~/MasterPages/Default.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GroupPermission.aspx.cs"
+    Inherits="EOFFICE.Users.GroupPermission" MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" runat="server" ID="ContentUser">
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản trị danh
-            sách quyền
-        </h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Phân quyền
+            cho nhóm :
+            <asp:Label runat="server" ID="lblGroupName"></asp:Label></h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
-                    Mã quyền:
-                    <asp:TextBox runat="server" ID="txtCode"></asp:TextBox>
-                    Tên quyền
-                    <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
-                    <asp:LinkButton runat="server" ID="cmdUpdateP" CssClass="link-btn" 
-                        onclick="cmdUpdateP_Click">Cập nhật</asp:LinkButton>
-                        <asp:HiddenField runat="server" ID="hdfId" Value="-1" />
+                    <asp:DropDownList runat="server" ID="ddlAction">
+                        <asp:ListItem Text="Cập nhật quyền" Value="Update"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:LinkButton runat="server" ID="lnkAccept" CssClass="link-btn" OnClick="lnkAccept_Click"
+                        OnClientClick="javascript:return ValidCheckedGroup();">Thực hiện</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkReturn" CssClass="link-btn" OnClick="lnkReturn_Click">Quay lại</asp:LinkButton>
                 </td>
             </tr>
             <tr>
                 <td align="left">
-                    <asp:GridView ID="grvListPermission" runat="server" AutoGenerateColumns="False" CssClass="tbl-list"
-                        Width="100%" DataKeyNames="ID" onrowcommand="grvListPermission_RowCommand">
+                    <asp:GridView ID="grvPermisionDefinition" runat="server" AutoGenerateColumns="False"
+                        CssClass="tbl-list" Width="100%" OnRowCommand="grvPermisionDefinition_RowCommand"
+                        DataKeyNames="ID">
                         <Columns>
+                            <asp:TemplateField HeaderText="Chọn quyền">
+                                <ItemTemplate>
+                                    <asp:CheckBox runat="server" CssClass="chkGroupCheck" ID="chkCheckGroup" Checked='<%#CheckHasPermission(Eval("ID")) %>'/>
+                                    <asp:HiddenField runat="server" ID="hdfGroupId" Value='<%#Eval("ID") %>' />
+                                </ItemTemplate>
+                                <ItemStyle Width="3%" HorizontalAlign="Center" />
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Mã quyền">
                                 <ItemTemplate>
                                     <%#Eval("Code") %>
@@ -36,13 +43,6 @@
                                     <%#Eval("Name") %>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Sửa">
-                                <ItemTemplate>
-                                    <asp:LinkButton runat="server" ID="cmdEdit" CssClass="link-function edit" CommandName="cmdEdit" CommandArgument='<%#Eval("ID") %>'>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                                <ItemStyle Width="50px" HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />

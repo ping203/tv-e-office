@@ -19,33 +19,33 @@
                             <tr>
                                 <td colspan="3">
                                     <asp:Label ID="Label1" runat="server" Text="Tên công việc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblName"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblName"></asp:Label></strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <asp:Label ID="Label7" runat="server" Text="Người tạo việc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblUserCreate"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblUserCreate"></asp:Label></strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <asp:Label ID="Label2" runat="server" Text="Ngào tạo: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayTao"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblNgayTao"></asp:Label></strong>
                                 </td>
                                 <td>
                                     <asp:Label ID="Label3" runat="server" Text="Ngày bắt đầu: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayBatDau"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblNgayBatDau"></asp:Label></strong>
                                 </td>
                                 <td>
                                     <asp:Label ID="Label4" runat="server" Text="Ngày kết thúc: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblNgayKetThuc"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblNgayKetThuc"></asp:Label></strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <asp:Label ID="Label5" runat="server" Text="Yêu cầu xử lý: "></asp:Label>
-                                    <asp:Label runat="server" ID="lblYeuCau"></asp:Label>
+                                    <strong><asp:Label runat="server" ID="lblYeuCau"></asp:Label></strong>
                                 </td>
                             </tr>
                             <tr>
@@ -74,13 +74,14 @@
                             <td style="width:20%;vertical-align:top">
                                 Danh sách người thực hiện:<br />
                                 <asp:HiddenField runat="server" ID="hdfUserJoin" />
+                                <br />
                                 <asp:Repeater ID="rptListUser" runat="server" 
                                     onitemcommand="rptListUser_ItemCommand">
                                     <ItemTemplate>
                                         <img src="../Images/user.png" alt="" />
                                         <asp:LinkButton ID="btnLoad" runat="server" Text='<%#Eval("FullName") %>' CommandName="trigger"></asp:LinkButton>
                                         <asp:HiddenField ID="hdfID" runat="server" Value='<%#Eval("UserName") %>' />
-                                        <br />
+                                        <br />                                        
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </td>
@@ -93,14 +94,14 @@
                                     <ContentTemplate>
                                         Nội dung xử lý:
                                         <br />
-                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;width:600px;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
+                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
                                             <asp:Repeater runat="server" ID="rptComment">
                                                 <HeaderTemplate>
                                                     <ul class="item_comment">
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
                                                     <li>
-                                                        <p><img alt="img" style="vertical-align: middle;" src="../Images/arrow.png" /> Thời gian xử lý: <%#BindTime(DataBinder.Eval(Container.DataItem, "CommentID").ToString())%></p>
+                                                        <p><img alt="img" style="vertical-align: middle;" src="../Images/arrow.png" /> Thời gian xử lý: <strong><%#BindTime(DataBinder.Eval(Container.DataItem, "CommentID").ToString())%></strong></p>
                                                         <p class="comment_content">
                                                             <%#DataBinder.Eval(Container.DataItem, "Content")%>
                                                         </p>
@@ -110,7 +111,7 @@
                                                 <FooterTemplate></ul></FooterTemplate>
                                             </asp:Repeater>
                                         </div>      
-                                        File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" 
+                                        File đính kèm:<asp:Repeater ID="rptFileAttachs" runat="server" 
                                             onitemcommand="rptFileAttachs_ItemCommand"  >
                                                         <ItemTemplate>
                                                             <p><asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>' Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False" Font-Underline="True"></asp:LinkButton>&nbsp
@@ -132,7 +133,7 @@
                                 Nội dung:<span class="rq">*</span>
                             </td>
                             <td style="width:80%">
-                                <asp:TextBox ID="txtContent" runat="server" TextMode="multiline" Rows="10" CssClass="textarea required"></asp:TextBox>
+                                <asp:TextBox ID="txtContent" runat="server" TextMode="multiline" Rows="10" Width="600" CssClass="textarea required"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>

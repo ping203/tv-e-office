@@ -21,7 +21,7 @@
                     <a class="link-btn" href="Edit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtKey" Width="200px"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtKey" CssClass="txt" Width="200px"></asp:TextBox>
                     <asp:DropDownList runat="server" ID="ddlColumnName">
                         <asp:ListItem Text="Tài khoản" Value="Username"></asp:ListItem>
                         <asp:ListItem Text="Họ và tên" Value="Fullname"></asp:ListItem>

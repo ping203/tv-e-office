@@ -243,7 +243,7 @@
                                                                                 <tr>
                                                                                     <td>
                                                                                         <div class="link-department">
-                                                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartmentCreate" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
                                                                                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
                                                                                                 <%#Eval("Name") %>
                                                                                             </a>
@@ -260,9 +260,9 @@
                                                             <tr>
                                                                 <td></td>
                                                                 <td align="right">
-                                                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Insert" Text="Thêm lịch công tác">
+                                                                    <asp:Button ID="UpdateButton" runat="server" CssClass="link-btn" CommandName="Insert" Text="Thêm lịch công tác">
                                                                     </asp:Button>&nbsp &nbsp
-                                                                    <asp:Button ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ">
+                                                                    <asp:Button ID="UpdateCancelButton" runat="server" CssClass="link-btn" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ">
                                                                     </asp:Button>
                                                                 </td>
                                                             </tr>      
@@ -322,7 +322,7 @@
                  function OnClientTimeSlotClick(sender, eventArgs) {
                      
                      var Messages = $get('<%=hdf.ClientID%>');
-                     Messages.value = eventArgs.get_time().format('dd/MM/yyyy hh:mm:ss');
+                     Messages.value = eventArgs.get_time().format('yyyy/MM/dd hh:mm:ss');
                  }
             </script>
 </asp:Content>

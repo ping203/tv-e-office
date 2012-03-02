@@ -72,7 +72,7 @@
                     <table width="100%" cellpadding="5">
                         <tr>
                             <td style="width:20%;vertical-align:top">
-                                Danh sách người thực hiện:<br />
+                                Danh sách người thực hiện:<br /><br />
                                 <asp:HiddenField runat="server" ID="hdfUserJoin" />
                                 <br />
                                 <asp:Repeater ID="rptListUser" runat="server" 
@@ -94,7 +94,13 @@
                                     <ContentTemplate>
                                         Nội dung xử lý:
                                         <br />
-                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
+
+                                        <br />
+                                        <div id="ContentCommentDiv" style="height:300px; overflow-y:auto;width:600px;border:solid 1px #0072BC;margin-bottom:20px;overflow-x: hidden;">
+
+                                        
+
+                                           
                                             <asp:Repeater runat="server" ID="rptComment">
                                                 <HeaderTemplate>
                                                     <ul class="item_comment">
@@ -110,6 +116,8 @@
                                                 </ItemTemplate>                                                
                                                 <FooterTemplate></ul></FooterTemplate>
                                             </asp:Repeater>
+                                            <br />
+                                            <asp:Label runat="server" ID="lblMessage"></asp:Label>
                                         </div>      
                                         File đính kèm:<asp:Repeater ID="rptFileAttachs" runat="server" 
                                             onitemcommand="rptFileAttachs_ItemCommand"  >

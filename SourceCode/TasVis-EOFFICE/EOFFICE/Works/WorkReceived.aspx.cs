@@ -15,6 +15,7 @@ using DataAccess.Common;
 using DataAccess.DataObject;
 using System.Collections.Specialized;
 using System.Web.Configuration;
+using System.Collections.Generic;
 
 namespace EOFFICE.Works
 {
@@ -233,7 +234,9 @@ namespace EOFFICE.Works
             listUser = IDUserProcess.Split(',');
             for (int i = 1; i < listUser.Count() - 1; i++)
             {
-                list += obj.Get(listUser[i]).First().FullName + "; ";
+                IList<OUser> lstUser=obj.Get(listUser[i]);
+                if(lstUser.Count()>0)
+                    list += lstUser[0].FullName + "; ";
             }
             list = list.Remove(list.Length - 2);
             return list;

@@ -25,10 +25,8 @@
             <span class="icon">
                 <img src="../Images/New-document.png" /></span>Tạo loại văn bản</h2>
         <div class="nav-function">
-            <ul>
-                <li>
-                    <input type="button" class="btn" value="Quay về" onclick="history.go(-1);" /></li>
-            </ul>
+         
+                    <a href="/Document/DocumentEdit.aspx" class="link-btn">Quay lại</a>
         </div>
         <div class="form">
             <table width="100%" cellspacing="5">

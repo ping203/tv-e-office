@@ -19,7 +19,20 @@ namespace EOFFICE
 
     public partial class DocumentEdit : System.Web.UI.Page
     {
-       
+        #region "Common Function"
+        /// <summary>
+        /// Load ra danh sách loại tài liệu
+        /// </summary>
+        private void BindDocumentType()
+        {
+            BDocumentKind ctl = new BDocumentKind();
+            ddlType.ClearSelection();
+            ddlType.DataSource = ctl.Get(0);
+            ddlType.DataBind();
+            ddlParent.Items.Insert(0, new ListItem("Tất cả", ""));
+        }
+        #endregion
+
         #region "Events"
 
         /// <summary>
@@ -32,6 +45,7 @@ namespace EOFFICE
         {
             if (!IsPostBack)
             {
+                BindDocumentType();
             }
            
         }

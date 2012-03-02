@@ -20,7 +20,6 @@ namespace DataAccess.BusinessObject
             sqlPara[1].Value = obj.IDGroup;
             sqlPara[2] = new SqlParameter("@Roles", SqlDbType.VarChar);
             sqlPara[2].Value = obj.Roles;
-
             return RunProcudure("sp_tblPermission_add", sqlPara);
         }
 

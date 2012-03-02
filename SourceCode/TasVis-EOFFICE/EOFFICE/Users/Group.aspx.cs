@@ -30,6 +30,16 @@ namespace EOFFICE.Users
             grvListGroups.DataBind();
         }
 
+        /// <summary>
+        /// Lấy về url tới trang gán quyền cho nhóm
+        /// </summary>
+        /// <param name="GroupId"></param>
+        /// <returns></returns>
+        public string UrlPermission(object GroupId)
+        {
+            return "/Users/GroupPermission.aspx?GroupId="+GroupId.ToString();
+        }
+
         #endregion
 
         #region "Events"

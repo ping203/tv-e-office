@@ -171,16 +171,11 @@ namespace EOFFICE.Users
         {
             switch (ddlAction.SelectedValue)
             {
-                //-- Cập nhật quyền cho người dùng
+                //-- Cập nhật quyền cho nhóm người dùng
                 case "Update":
-                    //-- Thực hiện xóa người dùng
-                    BUserGroup ctl = new BUserGroup();
-                    OUserGroup obj = new OUserGroup();
-                    //obj.IDUser = UserId;
-                    //obj.IDGroup = 0;
-                    ////--- Kiểm tra quyền
-                    //IList<OUserGroup> lst;
-                    //lst = ctl.Get(obj);
+                    BGroupPermission ctl = new BGroupPermission();
+                    OGroupPermission obj = new OGroupPermission();
+
                     Dictionary<int, int> dnr = new Dictionary<int, int>();
                     ArrayList arrNewPermission = new ArrayList();
                     foreach (GridViewRow r in grvPermisionDefinition.Rows)
@@ -189,28 +184,27 @@ namespace EOFFICE.Users
                         HiddenField hdfGroupId = (HiddenField)r.FindControl("hdfGroupId");
                         if (chk.Checked)
                         {
-                            obj = new OUserGroup();
-                            obj.IDGroup = int.Parse(hdfGroupId.Value);
-                            obj.IDUser = UserId;
-                            IList<OUserGroup> lst;
+                            obj = new OGroupPermission();
+                            obj.PermissionDefinitionId = int.Parse(hdfGroupId.Value);
+                            obj.GroupId = GroupId;
+                            IList<OGroupPermission> lst;
                             lst = ctl.Get(obj);
-                            dnr.Add(obj.IDGroup, obj.IDGroup);
                             if (lst.Count < 1)
                             {
                                 ctl.Add(obj);
                             }
                         }
-                    }
-                    obj = new OUserGroup();
-                    obj.IDGroup = 0;
-                    obj.IDUser = UserId;
-                    IList<OUserGroup> lstOfUser;
-                    lstOfUser = ctl.Get(obj);
-                    foreach (OUserGroup IObj in lstOfUser)
-                    {
-                        if (!dnr.ContainsKey(IObj.IDGroup))
+                        else
                         {
-                            ctl.Delete(IObj);
+                            obj = new OGroupPermission();
+                            obj.PermissionDefinitionId = int.Parse(hdfGroupId.Value);
+                            obj.GroupId = GroupId;
+                            IList<OGroupPermission> lst;
+                            lst = ctl.Get(obj);
+                            if (lst.Count >0)
+                            {
+                                ctl.Delete(obj);
+                            }
                         }
                     }
                     //-- Load lại người dùng
@@ -258,7 +252,7 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void lnkReturn_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("/Users/Default.aspx" +GenParamRedirectF());
+            Response.Redirect("/Users/Group.aspx");
         }
         #endregion
 

@@ -65,6 +65,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CDBase.cs" />
     <Compile Include="Common\Common.cs" />
+    <Compile Include="DataObject\OGroupPermission.cs" />
     <Compile Include="DataObject\OPermisionDefinition.cs" />
     <Compile Include="DataObject\OAttach.cs" />
     <Compile Include="DataObject\OCalendar.cs" />
@@ -83,6 +84,11 @@
     <Compile Include="DataObject\OWork.cs" />
     <Compile Include="DataObject\OWorkGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessObject\BGroupPermission.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

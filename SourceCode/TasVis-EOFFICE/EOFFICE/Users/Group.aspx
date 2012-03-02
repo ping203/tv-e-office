@@ -5,8 +5,8 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản lý nhóm người
-            dùng</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Quản lý nhóm
+            người dùng</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -29,7 +29,6 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <input type="checkbox" value="abc" class="chkGroupCheck" id="chkCheckGroup" runat="server" />
-                                    
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
@@ -45,10 +44,14 @@
                                 <HeaderTemplate>
                                     Thao tác</HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("GroupId") %>' ToolTip="Sửa nhóm người dùng"
-                                        CssClass="link-function edit" runat="server" />
-                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("GroupId") %>' ToolTip="Xóa nhóm người dùng"
-                                        CssClass="link-function delete" runat="server" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa nhóm người dùng?');"></asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("GroupId") %>'
+                                        ToolTip="Sửa nhóm người dùng" CssClass="link-function edit" runat="server" />
+                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("GroupId") %>'
+                                        ToolTip="Xóa nhóm người dùng" CssClass="link-function delete" runat="server"
+                                        OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa nhóm người dùng?');"></asp:LinkButton>
+                                    <asp:HyperLink runat="server" NavigateUrl='<%#UrlPermission(Eval("GroupId")) %>' ID="lnkAssignPermision" ToolTip="Phân quyền cho nhóm">
+                                    <asp:Image CssClass="link-function" runat="server" ID="Image2" ImageUrl="~/images/User-group.png" />
+                                    </asp:HyperLink>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" Width="10%" />
                             </asp:TemplateField>

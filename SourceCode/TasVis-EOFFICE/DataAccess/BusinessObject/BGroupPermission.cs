@@ -30,7 +30,7 @@ namespace DataAccess.BusinessObject
             sqlPara[1].Value = obj.GroupId;
             sqlPara[2] = new SqlParameter("@PermissionDefinitionId", SqlDbType.Int);
             sqlPara[2].Value = obj.PermissionDefinitionId;
-            return RunProcudure("sp_tblGroupPermission_add", sqlPara);
+            return RunProcudure("sp_tblGroupPermission_delete", sqlPara);
         }
         public IList<OGroupPermission> Get(OGroupPermission obj)
         {

@@ -2,150 +2,80 @@
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <asp:Content ContentPlaceHolderID="cphContent" runat="server" ID="ContentUser">
-    <div class="list" id="list-congvieccanlam">
-        <h2>
-            <span class="icon">
-                <asp:Image ImageUrl="~/Images/Modify.png" runat="server" /></span>Cập nhật công văn</h2>
-        <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
-            <tr>
-                <td align="left">
-                    <table>
-                        <tr>
-                            <td align="right">
-                                Số văn bản:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtUsername" CssClass="required"></asp:TextBox>
-                                <asp:Label Font-Bold="true" runat="server" ID="lblUsername" Visible="false"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr runat="server" id="tr_mk">
-                            <td align="right">
-                                Tên văn bản:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtPassword" TextMode="MultiLine" CssClass=" required password"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr runat="server" id="tr_cmk">
-                            <td align="right">
-                               Nội dung: 
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtConfirmPassword"  TextMode="MultiLine"  TextMode="Password" CssClass="required confirm_password"></asp:TextBox>
+  <div class="list wp-form" id="create-document">
+            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Tạo công văn dự thảo</h2>
+                <form>
+                	<div class="nav-function">
+                    	<ul>
+                        	<li><a href="#" class="btn"><span class="icon"><img src="../Images/Save.png" /></span>Lưu bản thảo</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Forward.png" /></span>Gửi bản thảo</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Erase.png" /></span>Hủy bỏ</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Go-back.png" /></span>Quay về</a></li>
+                        </ul>
+                    </div>
+                    <div class="form">
+                	<table width="100%" cellspacing="5">
+                    	<tr>
+                        	<td>Loại công văn:<span class="required">*</span></td>
+                            <td colspan="3">
+                            	<select class="select">
+                                	<option>-- Chọn loại công văn --</option>
+                                    <option value="1">Giấy mời</option>
+                                    <option value="2">Thông báo</option>
+                                    <option value="3">Quyết định</option>
+                                    <option value="1">Nghị quyết</option>
+                                </select>     
+                                <a href="#" class="link-btn">Thêm loại công văn</a>                       
                             </td>
                         </tr>
                         <tr>
-                            <td align="right">
-                                Ngày xuất bản:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtFullName" CssClass="required"></asp:TextBox>
-                            </td>
+                        	<td>Tên bản thảo:<span class="required">*</span></td>
+                            <td colspan="3"><input type="text" name="tenbanthao" class="txt" /></td>                            
                         </tr>
                         <tr>
-                            <td align="right">
-                                Email:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtEmail" CssClass="email required"></asp:TextBox>
-                            </td>ss
+                        	<td>Ngày bắt đầu: <span class="required">*</span></td>
+                            <td><input type="text" class="txt" />(dd/mm/yy)</td>
+                            <td colspan="2">Ngày kết thúc: <span class="required">*</span><input type="text" class="txt" />(dd/mm/yy)</td>                            
                         </tr>
                         <tr>
-                            <td align="right">
-                                Số di động:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtPhoneNumber" CssClass="required"></asp:TextBox>
-                            </td>
+                        	<td>Nội dung tóm tắt: </td>
+                            <td colspan="3"><textarea cols="5" rows="5" name="tomtat" class="textarea"></textarea></td>
                         </tr>
                         <tr>
-                            <td align="right">
-                                Số máy bàn:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtTel" CssClass="required"></asp:TextBox>
-                            </td>
+                        	<td>Nội dung công văn: </td>
+                            <td colspan="3"><textarea cols="10" rows="10" class="textarea"></textarea></td>
                         </tr>
                         <tr>
-                            <td align="right">
-                                Giới tính:
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" id="ddlGender">
-                                </asp:DropDownList>
-                            </td>
+                        	<td>Bản thảo: </td>
+                            <td colspan="3"><input type="file" /></td>
                         </tr>
                         <tr>
-                            <td align="right">
-                                Ngày sinh:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtBirthDay" CssClass="required"></asp:TextBox>
-                            </td>
+                        	<td>Mức độ ưu tiên: </td>
+                            <td><input type="radio" name="rdoPrior" value="1" />Rất quan trọng </td>
+                            <td><input type="radio" name="rdoPrior" value="2" />Quan trọng </td>
+                            <td><input type="radio" name="rdoPrior" value="3" />Bình thường </td>
+                            <select class="select">
+                                	<option>-- Chọn loại công văn --</option>
+                                    <option value="1">Giấy mời</option>
+                                    <option value="2">Thông báo</option>
+                                    <option value="3">Quyết định</option>
+                                    <option value="1">Nghị quyết</option>
+                                </select>  
                         </tr>
                         <tr>
-                            <td align="right">
-                                Địa chỉ:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtAddress"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                Vị trí:
-                            </td>
-                            <td>
-                                <asp:TextBox runat="server" ID="txtPossition" CssClass="required"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                Trạng thái:
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" id="ddlStatus">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                Phòng ban:
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" id="ddlDepartment" DataValueField="DepartmentID" DataTextField="Name">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                Nhóm người dùng:
-                            </td>
-                            <td>
-                                <asp:DropDownList runat="server" id="ddlGroup" DataValueField="GroupID" DataTextField="Name">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" 
-                                    OnClientClick="javascript:return $('form').valid();" 
-                                    onclick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
-                                    <asp:LinkButton runat="server" ID="lnkBack" CssClass="link-btn" 
-                                    onclick="lnkBack_Click">Quay lại</asp:LinkButton>
-                            </td>
-                            <td>
-                            </td>
+                        	<td>Người xử lý/tham gia ý kiến: </td>
+                            <td colspan="3"><textarea cols="5" rows="5" class="textarea"></textarea></td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <script language="javascript" type="text/javascript">
-        	$(document).ready(function(){
-		$("#<%=txtBirthDay.ClientID%>").datepicker();
-	});
-    </script>
+                    </div>
+                    <div class="nav-function">
+                    	<ul>
+                        	<li><a href="#" class="btn"><span class="icon"><img src="../Images/Save.png" /></span>Lưu bản thảo</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Forward.png" /></span>Gửi bản thảo</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Erase.png" /></span>Hủy bỏ</a></li>
+                            <li><a href="#" class="btn"><span class="icon"><img src="../Images/Go-back.png" /></span>Quay về</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>  
 </asp:Content>

@@ -89,10 +89,10 @@ namespace EOFFICE.Contacts
         public string GenParamRedirect()
         {
             string strParam = "";
-            strParam += "fpagesize=" + ddlPageSize.SelectedValue;
-            strParam += "&fgroup=" + ddlContactGroup.SelectedValue;
-            strParam += "&fgender=" + ddlGender.SelectedValue;
-            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
+            strParam += "&group=" + ddlContactGroup.SelectedValue;
+            strParam += "&gender=" + ddlGender.SelectedValue;
+            strParam += "&type=" + ddlTieuChi.SelectedValue;
             if (txtKeyWord.Text.Trim().Length > 0)
             {
                 strParam += "&fkey=" + Server.UrlEncode(txtKeyWord.Text.Trim());
@@ -118,9 +118,9 @@ namespace EOFFICE.Contacts
         {
             string strParam = "";
             strParam += "pagesize=" + ddlPageSize.SelectedValue;
-            strParam += "&fgroup=" + ddlContactGroup.SelectedValue;
-            strParam += "&fgender=" + ddlGender.SelectedValue;
-            strParam += "&ftype=" + ddlTieuChi.SelectedValue;
+            strParam += "&group=" + ddlContactGroup.SelectedValue;
+            strParam += "&gender=" + ddlGender.SelectedValue;
+            strParam += "&type=" + ddlTieuChi.SelectedValue;
             if (txtKeyWord.Text.Trim().Length > 0)
             {
                 strParam += "&type=" + Server.UrlEncode(txtKeyWord.Text.Trim());

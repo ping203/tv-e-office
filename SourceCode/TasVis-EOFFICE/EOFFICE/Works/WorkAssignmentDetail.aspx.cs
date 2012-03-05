@@ -14,6 +14,7 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.Net;
 using System.IO;
+using System.Collections.Generic;
 
 namespace EOFFICE.Works
 {
@@ -43,15 +44,29 @@ namespace EOFFICE.Works
 
                     BComment BobjComment = new BComment();
                     OComment objComment = new OComment();
-                    objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
-                    BUser Buser = new BUser();
-                    
+                    if (BobjComment.GetCreate(hdfID.Value, WorkID).Count == 0)
+                    {
+                        lblMessage.Text = "Chưa có nội dung xử lý!";
+                        rptComment.Visible = false;
+                        rptFileAttachs.Visible = false;
+                    }
+                    else
+                    {
+                        rptComment.Visible = true;
+                        rptFileAttachs.Visible = true;
+                        lblMessage.Text = "";
+                        objComment = BobjComment.GetCreate(hdfID.Value, WorkID).First();
+                        rptComment.DataSource = BobjComment.GetCreate(hdfID.Value, WorkID);
+                        rptComment.DataBind();
 
-                    rptFileAttachs.DataSource = BobjComment.GetAttachs(objComment.CommentID);
-                    rptFileAttachs.DataBind();
-
-                    rptComment.DataSource = BobjComment.GetCreate(hdfID.Value, WorkID);
-                    rptComment.DataBind();
+                        List<OAttach> listAttach = new List<OAttach>();
+                        foreach (OComment obj in BobjComment.GetCreate(hdfID.Value, WorkID))
+                        {
+                            listAttach = listAttach.Union(BobjComment.GetAttachs(obj.CommentID)).ToList();
+                        }
+                        rptFileAttachs.DataSource = listAttach;
+                        rptFileAttachs.DataBind();
+                    }
                 }
             }
         }

@@ -24,7 +24,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label runat="server" Text="Ngào tạo: "></asp:Label>
+                                    <asp:Label runat="server" Text="Ngày tạo: "></asp:Label>
                                     <asp:Label runat="server" ID="lblNgayTao"></asp:Label>
                                 </td>
                                 <td>
@@ -103,6 +103,8 @@
                                                 </ItemTemplate>                                                
                                                 <FooterTemplate></ul></FooterTemplate>
                                             </asp:Repeater>
+                                            <br />
+                                            <asp:Label runat="server" ID="lblMessage"></asp:Label>
                                         </div>                                        
                                         File báo cáo:<asp:Repeater ID="rptFileAttachs" runat="server" onitemcommand="rptFileAttachs_ItemCommand" >
                                                         <ItemTemplate>

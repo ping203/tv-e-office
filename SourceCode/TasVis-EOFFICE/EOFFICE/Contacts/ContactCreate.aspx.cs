@@ -44,8 +44,9 @@ namespace EOFFICE.Contacts
 
         protected void ddlContactGroup_Load()
         {
+            int UserID = Global.UserInfo.UserID;
             BContactGroup Bobj = new BContactGroup();
-            ddlContactGroup.DataSource = Bobj.GetByUser(1);
+            ddlContactGroup.DataSource = Bobj.GetByUser(UserID);
             ddlContactGroup.DataTextField = "GroupName";
             ddlContactGroup.DataValueField = "ContactGroupID";
             ddlContactGroup.DataBind();

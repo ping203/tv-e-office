@@ -16,14 +16,20 @@
                         </ul>
                     </div>
                     <div class="form">
+
+                    
+
                     <div class="filter">
                 	    <table width="100%" cellspacing="5">
                     	    <tr>
                     	        <td>Từ khóa:<asp:TextBox runat="server" ID="txtKeyWord" Width="200" CssClass="txt"></asp:TextBox></td>
-                    	        <td>Nhóm danh bạ:<asp:DropDownList runat="server" ID="ddlContactGroup" CssClass="select"></asp:DropDownList></td>                    	    
-                    	        <td>Giới tính:<asp:DropDownList runat="server" ID="ddlGender"></asp:DropDownList></td>                    	    
+                    	        <td>Nhóm danh bạ:<asp:DropDownList runat="server" ID="ddlContactGroup" AutoPostBack="true"
+                                        CssClass="select" onselectedindexchanged="ddlContactGroup_SelectedIndexChanged"></asp:DropDownList></td>                    	    
+                    	        <td>Giới tính:<asp:DropDownList runat="server" ID="ddlGender" AutoPostBack="true"
+                                        onselectedindexchanged="ddlGender_SelectedIndexChanged"></asp:DropDownList></td>                    	    
                     	        <td>Tiêu chí tìm kiếm:
-                    	            <asp:DropDownList runat="server" ID="ddlTieuChi">                    	                
+                    	            <asp:DropDownList runat="server" ID="ddlTieuChi" AutoPostBack="true"
+                                        onselectedindexchanged="ddlTieuChi_SelectedIndexChanged">                    	                
                     	                <asp:ListItem Text="Tên" Value="Name"></asp:ListItem>
                     	                <asp:ListItem Text="Số điện thoại" Value="Phone"></asp:ListItem>
                     	                <asp:ListItem Text="Email" Value="Email"></asp:ListItem>
@@ -34,6 +40,7 @@
                     	    </tr>                    	
                         </table>
                     </div>
+
                     <div id="list-contact">            	                    	        
                         <asp:Label runat="server" ID="lblThongBao2" ForeColor="Red" Text=""></asp:Label>
             	        <div class="bunk-function">
@@ -74,7 +81,12 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="FullName" HeaderText="Họ tên"></asp:BoundField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>Họ tên</HeaderTemplate>
+                                    <ItemTemplate>
+                                        <a href="ContactDetail.aspx?ID=<%# DataBinder.Eval(Container.DataItem,"ContactID")%>"><%# DataBinder.Eval(Container.DataItem, "FullName")%></a>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:BoundField DataField="Phone" HeaderText="Di động" ></asp:BoundField>
                                 <asp:BoundField DataField="Tel" HeaderText="Điện thoại nhà" ></asp:BoundField>
                                 <asp:BoundField DataField="Email" HeaderText="Email" ></asp:BoundField>

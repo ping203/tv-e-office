@@ -95,14 +95,14 @@ namespace EOFFICE.Contacts
             strParam += "&type=" + ddlTieuChi.SelectedValue;
             if (txtKeyWord.Text.Trim().Length > 0)
             {
-                strParam += "&fkey=" + Server.UrlEncode(txtKeyWord.Text.Trim());
+                strParam += "&key=" + Server.UrlEncode(txtKeyWord.Text.Trim());
             }
             //--Pagesize
             if (Request.QueryString["currentpage"] != null)
             {
                 try
                 {
-                    strParam += "&fcurrentpage=" + Request.QueryString["currentpage"];
+                    strParam += "&currentpage=" + Request.QueryString["currentpage"];
                 }
                 catch (Exception ex) { }
             }
@@ -221,8 +221,9 @@ namespace EOFFICE.Contacts
 
         protected void ddlContactGroup_Load()
         {
+            int UserID = Global.UserInfo.UserID;
             BContactGroup Bobj = new BContactGroup();
-            ddlContactGroup.DataSource = Bobj.GetByUser(1);
+            ddlContactGroup.DataSource = Bobj.GetByUser(UserID);
             ddlContactGroup.DataTextField = "GroupName";
             ddlContactGroup.DataValueField = "ContactGroupID";            
             ddlContactGroup.DataBind();
@@ -311,6 +312,21 @@ namespace EOFFICE.Contacts
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            grvContact_Load();
+        }
+
+        protected void ddlContactGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvContact_Load();
+        }
+
+        protected void ddlGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvContact_Load();
+        }
+
+        protected void ddlTieuChi_SelectedIndexChanged(object sender, EventArgs e)
         {
             grvContact_Load();
         }

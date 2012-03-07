@@ -913,7 +913,7 @@ IF OBJECT_ID('sp_tblDocument_add','P') IS NOT NULL
 	DROP PROC sp_tblDocument_add
 GO
 CREATE PROC sp_tblDocument_add
-	@DocumentID VARCHAR(500),
+	@DocumentID VARCHAR(500)= NULL,
 	@DocumentNumber NVARCHAR(200)=NULL,
 	@Name NVARCHAR(300),
 	@Excerpt NVARCHAR(MAX)=NULL,
@@ -935,10 +935,10 @@ CREATE PROC sp_tblDocument_add
 	@Status VARCHAR(50)
 AS
 BEGIN
-	INSERT INTO tblDocument(DocumentID,DocumentNumber,[Name],Excerpt,[Content],PublishDate,PublishOffical,
+	INSERT INTO tblDocument(DocumentNumber,[Name],Excerpt,[Content],PublishDate,PublishOffical,
 				Attachs,IDDocumentKind,CreateDate,IDUserCreate,UserProcess,UserComments,StartProcess,EndProcess,
 				SendDate,ReceiveDate,SendOfficals,Priority,[Status]) 
-				VALUES(@DocumentID,@DocumentNumber,@Name,@Excerpt,@Content,@PublishDate,@PublishOffical,
+				VALUES(@DocumentNumber,@Name,@Excerpt,@Content,@PublishDate,@PublishOffical,
 				@Attachs,@IDDocumentKind,@CreateDate,@IDUserCreate,@UserProcess,@UserComments,@StartProcess,@EndProcess,
 				@SendDate,@ReceiveDate,@SendOfficals,@Priority,@Status)
 END

@@ -107,6 +107,41 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblContact_update", sqlPara);
         }
 
+        public bool Update(int ContactID, string ContactName, string FullName,string TitleName, string Phone, string Tel, DateTime BirthDay, string Gender, string Job, string Address, int IDContactGroup, int IDUser,string Other,string Email)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[14];
+            sqlPara[0] = new SqlParameter("@ContactID", SqlDbType.Int);
+            sqlPara[0].Value = ContactID;
+            sqlPara[1] = new SqlParameter("@ContactName", SqlDbType.NVarChar);
+            sqlPara[1].Value = ContactName;
+            sqlPara[2] = new SqlParameter("@FullName", SqlDbType.NVarChar);
+            sqlPara[2].Value = FullName;
+            sqlPara[3] = new SqlParameter("@Phone", SqlDbType.VarChar);
+            sqlPara[3].Value = Phone;
+            sqlPara[4] = new SqlParameter("@Tel", SqlDbType.VarChar);
+            sqlPara[4].Value = Tel;
+            sqlPara[5] = new SqlParameter("@BirthDay", SqlDbType.DateTime);
+            sqlPara[5].Value = BirthDay;
+            sqlPara[6] = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            sqlPara[6].Value = Gender;
+            sqlPara[7] = new SqlParameter("@Job", SqlDbType.NVarChar);
+            sqlPara[7].Value = Job;
+            sqlPara[8] = new SqlParameter("@Address", SqlDbType.NVarChar);
+            sqlPara[8].Value = Address;
+            sqlPara[9] = new SqlParameter("@IDContactGroup", SqlDbType.Int);
+            sqlPara[9].Value = IDContactGroup;
+            sqlPara[10] = new SqlParameter("@IDUser", SqlDbType.Int);
+            sqlPara[10].Value = IDUser;
+            sqlPara[11] = new SqlParameter("@TitleName", SqlDbType.NVarChar);
+            sqlPara[11].Value = TitleName;
+            sqlPara[12] = new SqlParameter("@Email", SqlDbType.VarChar);
+            sqlPara[12].Value = Email;
+            sqlPara[13] = new SqlParameter("@Other", SqlDbType.NVarChar);
+            sqlPara[13].Value = Other;
+
+            return RunProcudure("sp_tblContact_update", sqlPara);
+        }
+
         public bool Update(int ContactID,string FullName, string Phone, string Tel, string Address,string Email, int IDUser)
         {
             SqlParameter[] sqlPara = new SqlParameter[7];

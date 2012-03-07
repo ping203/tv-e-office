@@ -332,7 +332,7 @@ BEGIN
 	END
 	IF @FullName IS NOT NULL AND @FullName<>''
 	BEGIN
-		SET @Update=@Update+',FullName ='''+cast(@FullName AS NVARCHAR)+''''
+		SET @Update=@Update+',FullName =N'''+cast(@FullName AS NVARCHAR)+''''
 	END
 	IF @Email IS NOT NULL AND @Email<>''
 	BEGIN
@@ -356,11 +356,11 @@ BEGIN
 	END
 	IF @Address IS NOT NULL AND @Address<>''
 	BEGIN
-		SET @Update=@Update+',Address ='''+cast(@Address AS NVARCHAR)+''''
+		SET @Update=@Update+',Address =N'''+cast(@Address AS NVARCHAR)+''''
 	END
 	IF @Position IS NOT NULL AND @Position<>''
 	BEGIN
-		SET @Update=@Update+',Position ='''+cast(@Position AS NVARCHAR)+''''
+		SET @Update=@Update+',Position =N'''+cast(@Position AS NVARCHAR)+''''
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
@@ -1551,7 +1551,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		SELECT * FROM tblComment WHERE CommentID=@CommentID ORDER CreateDate DESC
+		SELECT * FROM tblComment WHERE CommentID=@CommentID
 	END
 END
 GO
@@ -1790,15 +1790,15 @@ BEGIN
 	SET @Update=' IDUser='+cast(@IDUser AS VARCHAR)
 	IF @ContactName IS NOT NULL AND @ContactName <>''
 	BEGIN
-		SET @Update=@Update+',ContactName='''+cast(@ContactName AS NVARCHAR)+''''
+		SET @Update=@Update+',ContactName=N'''+cast(@ContactName AS NVARCHAR)+''''
 	END
 	IF @TitleName IS NOT NULL AND @TitleName <>''
 	BEGIN
-		SET @Update=@Update+',TitleName='''+cast(@TitleName AS NVARCHAR)+''''
+		SET @Update=@Update+',TitleName=N'''+cast(@TitleName AS NVARCHAR)+''''
 	END
 	IF @FullName IS NOT NULL AND @FullName <>''
 	BEGIN
-		SET @Update=@Update+',FullName='''+cast(@FullName AS NVARCHAR)+''''
+		SET @Update=@Update+',FullName=N'''+cast(@FullName AS NVARCHAR)+''''
 	END
 	IF @Phone IS NOT NULL AND @Phone <>''
 	BEGIN
@@ -1822,19 +1822,19 @@ BEGIN
 	END
 	IF @Job IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Job='''+cast(@Job AS NVARCHAR)+''''
+		SET @Update=@Update+',Job=N'''+cast(@Job AS NVARCHAR)+''''
 	END
 	IF @Address IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Address='''+cast(@Address AS NVARCHAR)+''''
+		SET @Update=@Update+',Address=N'''+cast(@Address AS NVARCHAR)+''''
 	END
 	IF @Other IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Other='''+cast(@Other AS NVARCHAR)+''''
+		SET @Update=@Update+',Other=N'''+cast(@Other AS NVARCHAR)+''''
 	END
 	IF @IDContactGroup IS NOT NULL AND @IDContactGroup<>0
 	BEGIN
-		SET @Update=@Update+',IDGroupContact='+cast(@IDContactGroup AS VARCHAR)
+		SET @Update=@Update+',IDContactGroup='+cast(@IDContactGroup AS VARCHAR)
 	END
 	EXEC('UPDATE tblContact SET'+@Update+' WHERE ContactID='+@ContactID)	
 END

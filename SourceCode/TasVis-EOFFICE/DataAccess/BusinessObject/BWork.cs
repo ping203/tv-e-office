@@ -394,8 +394,12 @@ namespace DataAccess.BusinessObject
             {
                 for (int i = 1; i < arrUser.Count() - 1; i++)
                 {
-                    OUser objUser = objBUser.Get(arrUser[i]).First();
-                    lstUser.Add(objUser);
+                    IList<OUser> lstUserCurent=objBUser.Get(arrUser[i]);
+                    if(lstUser.Count>0)
+                    {
+                        OUser objUser = lstUserCurent[0];
+                        lstUser.Add(objUser);
+                    }
                 }
             }
             return lstUser;

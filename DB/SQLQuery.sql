@@ -1430,6 +1430,17 @@ BEGIN
 	END
 END
 GO
+/* get id last record*/
+IF OBJECT_ID('sp_tblWork_getidlastrecord','P') IS NOT NULL
+	DROP PROC sp_tblWork_getidlastrecord
+GO
+CREATE PROC sp_tblWork_getidlastrecord
+	@IDUserCreate INT
+AS
+BEGIN
+	SELECT WorkID FROM tblWork WHERE WorkID = IDENT_CURRENT('tblWork') AND IDUserCreate=@IDUserCreate
+END
+GO
 /* table comment */
 IF OBJECT_ID('tblComment','U') IS NOT NULL
 	DROP TABLE tblComment

@@ -79,7 +79,7 @@ namespace EOFFICE.Contacts
             objContact.Address = txtAddress.Text;
             objContact.Other = txtOther.Text;
             objContact.IDContactGroup = int.Parse(ddlContactGroup.SelectedValue.ToString());
-            objContact.IDUser = 1;//Lấy IDUser sau
+            objContact.IDUser = Global.UserInfo.UserID;//Lấy IDUser sau
 
             if (BobjContact.Add(objContact))
             {

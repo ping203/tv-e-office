@@ -12,6 +12,8 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.Common;
 using DataAccess.BusinessObject;
+using DataAccess.DataObject;
+using System.Globalization;
 
 namespace EOFFICE.Contacts
 {
@@ -22,13 +24,59 @@ namespace EOFFICE.Contacts
             if(!Page.IsPostBack)
             {
                 BindGender();
+                ddlContactGroup_Load();
+                Infomation_Load();
             }
 
         }
 
+        protected void Infomation_Load()
+        {
+            int ContactID = int.Parse(Request.QueryString["ID"].ToString());
+            int UserID = Global.UserInfo.UserID;
+
+            BContact Bobj = new BContact();
+            OContact obj = new OContact();
+            obj = Bobj.Get(ContactID, UserID).First();
+
+            txtFullName.Text = obj.FullName;
+            txtBirthDay.Text = obj.BirthDay.ToString("dd/MM/yyyy");
+            txtAddress.Text = obj.Address;
+            txtEmail.Text = obj.Email;
+            txtJob.Text = obj.Job;
+            txtOther.Text = obj.Other;
+            txtPhone.Text = obj.Phone;
+            txtTel.Text = obj.Tel;
+
+            ddlContactGroup.SelectedValue = obj.IDContactGroup.ToString();
+            ddlGender.SelectedValue = obj.Gender;
+            ddlXungDanh.SelectedValue = obj.TitleName;
+        }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            int ContactID = int.Parse(Request.QueryString["ID"].ToString());
+            int UserID = Global.UserInfo.UserID;
 
+            BContact Bobj = new BContact();
+            
+            string FullName=txtFullName.Text;
+            CultureInfo culture = new CultureInfo("fr-FR", true);
+            DateTime BirthDay = DateTime.Parse(txtBirthDay.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+            string ContactName = "";
+            string TitleName = ddlXungDanh.SelectedValue;
+            string Phone = txtPhone.Text;
+            string Tel = txtTel.Text;
+            string Gender = ddlGender.SelectedValue.ToString();
+            string Job = txtJob.Text;
+            string Address = txtAddress.Text;
+            string Other = txtOther.Text;
+            int ContactGroup = int.Parse(ddlContactGroup.SelectedValue);
+            string Email = txtEmail.Text;
+            if (Bobj.Update(ContactID, ContactName, FullName, TitleName, Phone, Tel, BirthDay, Gender, Job, Address, ContactGroup, UserID, Other, Email))
+            {
+                lblThongBao.Text = "Cập nhật thành công!";
+            }
         }
 
         protected void btnDanhSach_Click(object sender, EventArgs e)

@@ -21,28 +21,30 @@
                     <div class="form">
                 	<table width="80%" cellspacing="1">
                     	<tr>
-                    	    <td>Xem công việc:</td>
+                    	    <td align="right">Xem công việc:</td>
                     	    <td>
-                    	        <asp:DropDownList runat="server" ID="ddlWork" 
-                                    onselectedindexchanged="ddlWork_SelectedIndexChanged" AutoPostBack="true">
-                    	            
+                    	        <asp:DropDownList runat="server" ID="ddlWork" Width="255" 
+                                    onselectedindexchanged="ddlWork_SelectedIndexChanged" AutoPostBack="true">                    	            
                     	        </asp:DropDownList>
                     	    </td>
-                    	    <td>Nhóm công việc:</td>
+                    	    <td align="right">Nhóm công việc:</td>
                     	    <td>
-                    	        <asp:DropDownList runat="server" ID="ddlWorkGroup" 
+                    	        <asp:DropDownList runat="server" ID="ddlWorkGroup" Width="255"
                                     onselectedindexchanged="ddlWorkGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     	    </td>
                     	</tr>
                     	<tr>
-                    	    <td>Từ khóa:</td>
+                    	    <td align="right">Từ khóa:</td>
                     	    <td>
-                    	        <asp:TextBox runat="server" ID="txtKeyword"></asp:TextBox>
+                    	        <asp:TextBox runat="server" ID="txtKeyword" CssClass="txt" Width="250"></asp:TextBox>                    	        
+                    	    </td>
+                    	    <td align="right">Tiêu chí tìm kiếm:</td>
+                    	    <td>
                     	        <asp:DropDownList runat="server" ID="ddlTieuChi">
                     	            <asp:ListItem Text="Tên công việc" Value="WorkName"></asp:ListItem>
                     	            <asp:ListItem Text="Người xử lý" Value="User"></asp:ListItem>
                     	        </asp:DropDownList>
-                    	        <asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" onclick="btnTim_Click" />
+                    	        &nbsp;&nbsp;&nbsp;<asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" CssClass="link-btn" onclick="btnTim_Click" />
                     	    </td>
                     	</tr>
                     </table>

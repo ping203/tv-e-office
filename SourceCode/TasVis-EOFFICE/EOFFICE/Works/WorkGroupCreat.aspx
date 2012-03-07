@@ -25,25 +25,15 @@
                         </ul>
                     </div>
                     <div class="form">
-                	<table width="100%" cellspacing="5">
-                    	<tr>
-                        	<td>Tên nhóm công việc:<span class="rq">*</span></td>
-                            <td><asp:TextBox ID="txtWorkGroupName" runat="server" CssClass="required"></asp:TextBox></td>                            
-                        </tr>                        
-                        <tr>
-                        	<td>Mô tả: </td>
-                            <td><asp:TextBox ID="txtContent" runat="server" CssClass="textarea" TextMode="multiline" Rows="10"></asp:TextBox></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:Button ID="btnSubmit" runat="server" Text="Cập nhật" onclick="btnSubmit_Click" />
-                            </td>
-                        </tr>     
-                    </table>
-                    <div class="list" id="list-congvieccanlam">
-            	        <h2><span class="icon"><img src="../Images/Play.png" alt="Play.png" /></span>CẬP NHẬT NHÓM CÔNG VIỆC</h2>
-            	        <div>
+                    <div class="form-left">
+                        <p class="label">Tên nhóm công việc:<span class="rq">(*)</span></p>
+                        <p class="input"><asp:TextBox ID="txtWorkGroupName" runat="server" Width="300" CssClass="txt required"></asp:TextBox></p>
+                        <p class="label">Mô tả:</p>
+                        <p class="input"><asp:TextBox ID="txtContent" runat="server" CssClass="textarea" Width="295" TextMode="multiline" Rows="6"></asp:TextBox></p>
+                        <p><asp:Button ID="btnSubmit" runat="server" Text="Cập nhật" CssClass="right link-btn" onclick="btnSubmit_Click" /></p>
+                    </div>                	
+                    <div class="list" id="list-congvieccanlam">            	        
+            	        <div class="bunk-function">
             	            <asp:LinkButton ID="btnDelete" runat="server" Text="Xóa nhóm công việc" onclick="btnDelete_Click" CssClass="link-btn"></asp:LinkButton>	    
             	        </div>            	        
             	        <table width="100%">

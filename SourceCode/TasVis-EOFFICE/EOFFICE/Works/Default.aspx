@@ -7,9 +7,9 @@
                 	<div class="nav-function">
                     	<ul>
                         	<li><asp:Button ID="btnSave" runat="server" Text="Lưu" CssClass="btn" onclick="btnSave_Click" OnClientClick='return get_check_value();'></asp:Button></li>
-                            <li><asp:LinkButton ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
-                                    onclick="btnForward_Click" ></asp:LinkButton></li>
-                            <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
+                            <li><asp:Button ID="btnForward" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:Button></li>
+                            <li><input type="reset" class="btn" value="Hủy bỏ" /></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                         </ul>
                     </div>
@@ -39,6 +39,7 @@
                             <td>                                
                                 <asp:TextBox ID="txtEndDate" runat="server" CssClass="txt required datepicker"></asp:TextBox>(ngày/tháng/năm)                                
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEndDate" ErrorMessage="Sai định dạng ngày tháng" ValidationExpression="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$"></asp:RegularExpressionValidator>
+                                <br />
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txtStartDate" ControlToValidate="txtEndDate" ErrorMessage="Ngày kết thúc phải lớn hơn ngày bắt đầu" Operator="GreaterThanEqual"></asp:CompareValidator>
                             </td>
                         </tr>
@@ -88,15 +89,21 @@
                                 <asp:HiddenField ID="hdfUsers" runat="server" />
                             </form>
                             </td>
-                        </tr>                    
+                        </tr>
+                        <%--<tr>
+                            <td></td>
+                            <td>
+                                <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                            </td>
+                        </tr>    --%>                
                     </table>                                        
                     </div>
                     <div class="nav-function">
                     	<ul>
                         	<li><asp:Button ID="btnSave2" runat="server" Text="Lưu" OnClick="btnSave_Click" CssClass="btn" OnClientClick='return get_check_value();'   
                                     ></asp:Button></li>
-                            <li><asp:LinkButton ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
-                                    onclick="btnForward_Click" ></asp:LinkButton></li>
+                            <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
+                                    onclick="btnForward_Click" ></asp:Button></li>
                             <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
                             <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
                             

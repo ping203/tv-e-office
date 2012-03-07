@@ -29,7 +29,7 @@ namespace EOFFICE.Works {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnForward;
+        protected global::System.Web.UI.WebControls.Button btnForward;
         
         /// <summary>
         /// ddlWorkGroup control.
@@ -191,6 +191,6 @@ namespace EOFFICE.Works {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnForward2;
+        protected global::System.Web.UI.WebControls.Button btnForward2;
     }
 }

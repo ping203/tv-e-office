@@ -9,15 +9,17 @@
         <form>
         <div class="nav-function">
             <ul>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Save.png" /></span>Lưu bản thảo</a></li>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Forward.png" /></span>Gửi bản thảo</a></li>
                 <li>
-                    <asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn"><img src="../Images/Erase.png" /></span>Hủy bỏ</asp:LinkButton></li>
-                    </li>
-                <li>                    <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="btn"><img src="../Images/Go-back.png" /></span>Quay về</asp:LinkButton></li>
-                    
+                    <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkCancel" CssClass="btn"><img src="../Images/Erase.png" />Hủy bỏ</asp:LinkButton></li>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkReturn" CssClass="btn"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>
             </ul>
         </div>
         <div class="form">
@@ -88,27 +90,76 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Người xử lý/tham gia ý kiến:
+                    <td valign="top">
+                        Người xử lý:
                     </td>
-                    <td colspan="3">
-                        <textarea cols="5" rows="5" class="textarea"></textarea>
+                    <td colspan="3" valign="top" align="left">
+                        <asp:ScriptManager ID="ScriptManager1" runat="server">
+                        </asp:ScriptManager>
+                        <asp:UpdatePanel ID="udp" runat="server">
+                            <ContentTemplate>
+                                <table>
+                                    <tr>
+                                        <td valign="top">
+                                            <asp:ListBox Height="150px" runat="server" ID="lsbUserProcess" DataTextField="FullName"
+                                                DataValueField="UserId" Width="250px" AutoPostBack="false" SelectionMode="Multiple">
+                                            </asp:ListBox>
+                                        </td>
+                                        <td valign="top">
+                                            <asp:LinkButton Width="120px" runat="server" ID="lnkAddUserProcess" 
+                                                CssClass="btn" onclick="lnkAddUserProcess_Click"><img src="../Images/Go-back.png" />Thêm người xử lý</asp:LinkButton>
+                                                <br />
+                                                  <br />
+                                        <asp:LinkButton runat="server" ID="cmdDeleteUser" CssClass="btn" 
+                                                onclick="cmdDeleteUser_Click"><img src="../Images/Erase.png" />Xóa</asp:LinkButton>
+                                        </td>
+                                        <td valign="top">
+                                            <asp:TextBox runat="server" ID="txtKeySearch" Width="120px" Height="16px"></asp:TextBox>
+                                            <asp:DropDownList runat="server" ID="ddlDepartment" Width="150px" Height="22px" DataValueField="DepartmentID"
+                                                DataTextField="Name" AutoPostBack="true" 
+                                                onselectedindexchanged="ddlDepartment_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                            <asp:LinkButton runat="server" ID="btnSearchUserProcess" Text="Search" OnClick="btnSearchUserProcess_Click" OnClientClick="javascript:ShowLoading();"></asp:LinkButton>
+                                            <br />
+                                            <div align="center" id="SearchLoading" style="display:none">
+                                                <img src="../Images/icon_loading.gif" />
+                                            </div>
+                                            <div id="SearchContent">
+                                                <asp:ListBox runat="server" ID="lbsUserSearch" DataTextField="FullName" DataValueField="UserId" Visible="false" 
+                                                    Width="350px" AutoPostBack="false"  Height="150px" SelectionMode="Multiple"></asp:ListBox>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </td>
                 </tr>
             </table>
         </div>
         <div class="nav-function">
             <ul>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Save.png" /></span>Lưu bản thảo</a></li>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Forward.png" /></span>Gửi bản thảo</a></li>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Erase.png" /></span>Hủy bỏ</a></li>
-                <li><a href="#" class="btn"><span class="icon">
-                    <img src="../Images/Go-back.png" /></span>Quay về</a></li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" 
+                        onclick="lnkSave1_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkCancel1" CssClass="btn"><img src="../Images/Erase.png" />Hủy bỏ</asp:LinkButton></li>
+                </li>
+                <li>
+                    <asp:LinkButton runat="server" ID="lnkReturn1" CssClass="btn"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>
             </ul>
         </div>
         </form>
     </div>
+    <script language="javascript" type="text/javascript">
+    function ShowLoading()
+    {
+        document.getElementById("SearchLoading").style.display="block";
+        document.getElementById("SearchContent").style.display="none";
+    }
+    </script>
 </asp:Content>

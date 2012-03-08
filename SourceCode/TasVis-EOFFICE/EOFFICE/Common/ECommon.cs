@@ -27,4 +27,23 @@ namespace EOFFICE.Common
         //    return lst;
         //}
     }
+    public enum DocumentStatus
+    { 
+        /// <summary>
+        /// Lưu bản thảo
+        /// </summary>
+        SaveDrap =1,
+        /// <summary>
+        /// Gửi bản thảo
+        /// </summary>
+        SendDrap=2,
+        /// <summary>
+        /// Chờ xuất bản
+        /// </summary>
+        WaitPublish=3,
+        /// <summary>
+        /// Đã xuất bản
+        /// </summary>
+        Published=4
+    };
 }

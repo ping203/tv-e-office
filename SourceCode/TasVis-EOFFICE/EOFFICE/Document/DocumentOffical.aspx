@@ -1,6 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentKindCreate.aspx.cs"
-    Inherits="EOFFICE.DocumentKindCreate" MasterPageFile="~/MasterPages/Default.Master" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentOffical.aspx.cs"
+    Inherits="EOFFICE.DocumentOffical" MasterPageFile="~/MasterPages/Default.Master" %>
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">
 
@@ -30,24 +29,25 @@
                     <img src="../Images/Go-back.png" />Quay lại</a> </li>
             </ul>
         </div>
+        <asp:HiddenField runat="server" ID="hdfId" Value="0" />
         <div class="form">
             <table width="100%" cellspacing="5">
                 <tr>
-                    <td>
+                    <td style="width:150px">
                         Loại cha<span class="rq">*</span>
                     </td>
                     <td>
-                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="DocumentKindID"
+                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="OfficalID"
                             ID="ddlParent" Width="250px">
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Tên loại văn bản:<span class="rq">*</span>
+                        Tên văn phòng:<span class="rq">*</span>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtName" runat="server" CssClass="required"></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="required" Width="250px"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -56,7 +56,40 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtDescription" runat="server" CssClass="textarea" TextMode="multiline"
-                            Rows="10"></asp:TextBox>
+                            Rows="3" Width="250px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Địa chỉ:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtAddress" runat="server" CssClass="textarea" TextMode="multiline"
+                            Rows="3" Width="250px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tel:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtTel" runat="server" Width="250px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Fax:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtFax" runat="server" Width="250px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtEmail" runat="server" Width="250px"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -85,17 +118,17 @@
                             <HeaderTemplate>
                                 Loại văn bản cha</HeaderTemplate>
                             <ItemTemplate>
-                                <%#GetName(Eval("DocumentKindID"))%>
+                                <%#GetName(Eval("OfficalID"))%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <HeaderTemplate>
                                 Thao tác</HeaderTemplate>
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("DocumentKindID")%>'
+                                <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("OfficalID")%>'
                                     CssClass="link-function edit" ToolTip="Sửa" runat="server" />
                                 <asp:LinkButton ID="LinkButton4" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa?');"
-                                    CommandName="cmdDelete" CommandArgument='<%#Eval("DocumentKindID")%>' CssClass="link-function delete"
+                                    CommandName="cmdDelete" CommandArgument='<%#Eval("OfficalID")%>' CssClass="link-function delete"
                                     ToolTip="Xóa" runat="server"></asp:LinkButton>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" Width="7%" />

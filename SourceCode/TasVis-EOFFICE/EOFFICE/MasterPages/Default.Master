@@ -168,7 +168,6 @@
         $(document).ready(function() {        
             $("#aspnetForm").validate();
             $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
-            
         });
  </script> 
 

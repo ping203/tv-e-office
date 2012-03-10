@@ -143,7 +143,7 @@
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Boss.png" runat="server" /></span>Phân quyền</a>
                         </li> 
                         <li class="li-child">
-                        	<a href="/Users/Permission.aspx" class="a-child"><span class="icon"><asp:Image ID="Image2" ImageUrl="~/Images/Boss.png" runat="server" /></span>Quản trị quyền</a>
+                        	<a href="/Users/Permission.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Boss.png" runat="server" /></span>Quản trị quyền</a>
                         </li>                        
                     </ul>
                 </li>

@@ -92,8 +92,10 @@
                                 <asp:TemplateField>
                                     <HeaderTemplate>Tên công việc</HeaderTemplate>
                                     <ItemTemplate>
-                                        <a href="WorkAssignmentDetail.aspx?WorkID=<%# DataBinder.Eval(Container.DataItem,"WorkID")%>"><%# DataBinder.Eval(Container.DataItem,"Name") %></a>
+                                        <%--<a href="WorkAssignmentDetail.aspx?WorkID=<%# DataBinder.Eval(Container.DataItem,"WorkID")%>"><%# DataBinder.Eval(Container.DataItem,"Name") %></a>--%>
+                                        <asp:LinkButton runat="server" ID="lbtnForward" Text='<%# DataBinder.Eval(Container.DataItem,"Name") %>' CommandArgument='<%# DataBinder.Eval(Container.DataItem,"WorkID")%>' OnClick="lbtnForward_Click"></asp:LinkButton>
                                     </ItemTemplate>
+                                    
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>Người xử lý</HeaderTemplate>

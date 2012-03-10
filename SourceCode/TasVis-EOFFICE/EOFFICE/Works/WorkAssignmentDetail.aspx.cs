@@ -270,7 +270,7 @@ namespace EOFFICE.Works
                 Status = "CONG_VIEC_DA_XU_LY";
             }
             int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
-            int IDUserCreate = BobjWork.Get(WorkID).First().IDUserCreate;//Lấy sau
+            int IDUserCreate = BobjWork.Get(WorkID).First().IDUserCreate;
             
             BobjWork.Update(WorkID, Status, IDUserCreate);
         }

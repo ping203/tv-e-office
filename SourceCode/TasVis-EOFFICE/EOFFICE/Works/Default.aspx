@@ -104,8 +104,8 @@
                                     ></asp:Button></li>
                             <li><asp:Button ID="btnForward2" runat="server" Text="Giao việc" CssClass="btn" 
                                     onclick="btnForward_Click" OnClientClick='return get_check_value();'></asp:Button></li>
-                            <li><input type="reset" class="btn" value="Hủy bỏ" /></asp:Button></li>
-                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);"></li>
+                            <li><input type="reset" class="btn" value="Hủy bỏ" /></li>
+                            <li><INPUT TYPE="button" class="btn" VALUE="Quay về" onClick="history.go(-1);" /></li>
                             
                         </ul>
                     </div>

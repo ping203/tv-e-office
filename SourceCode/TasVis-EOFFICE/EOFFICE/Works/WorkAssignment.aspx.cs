@@ -216,8 +216,32 @@ namespace EOFFICE.Works
 
                 ((CheckBox)e.Row.FindControl("CheckAll")).Attributes.Add("onclick", "javascript:SelectAll('" + ((CheckBox)e.Row.FindControl("CheckAll")).ClientID + "')");
             }
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton lbtnForward = (LinkButton)grvWork.FindControl("lbtnForward"); 
+            }
 
         }
+
+        protected void lbtnForward_Click(object sender, EventArgs e)
+        {
+            // Retrieve control 
+            LinkButton lbtnForward = sender as LinkButton;
+
+            int WorkID = Int32.Parse(lbtnForward.CommandArgument);
+
+            BWork _BWork = new BWork();
+            OWork _OWork = new OWork();
+            _OWork = _BWork.GetWork(WorkID).First();
+            if (_OWork.Status == "CHUA_GIAO")
+            {
+                Response.Redirect("EditAssignment.aspx?WorkID=" + WorkID);
+            }
+            else
+            {
+                Response.Redirect("WorkAssignmentDetail.aspx?WorkID=" + WorkID);
+            }
+        } 
 
         /// <summary>
         /// Hàm lấy ra danh sách người xử lý công việc với chuỗi IDUserProcess truyền vào

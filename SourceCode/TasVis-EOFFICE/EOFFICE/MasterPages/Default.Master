@@ -40,10 +40,10 @@
                         	<a href="/Document/DocumentSendDrap.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn chờ/đang xử lý</a>
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/OK.png" runat="server" /></span>Công văn đã hoàn thành</a>
+                        	<a href="/Document/DocumentProcess.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/OK.png" runat="server" /></span>Công văn đã hoàn thành</a>
                         </li>
                         <li class="li-child">
-                        	<a href="file:///E:/TASVIS/PROJECT/NganSon/HTML/CongVanCanXuLy.html" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-play.png" runat="server" /></span>Công văn cần xử lý</a>
+                        	<a href="/Document/DocumentProcess.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-play.png" runat="server" /></span>Công văn cần xử lý</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Up.png" runat="server" /></span>Phát hành công văn</a>                            

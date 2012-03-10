@@ -1274,6 +1274,7 @@ BEGIN
 		@StartProcess,@EndProcess,@Status,@Priority)
 END
 /* update */
+GO
 IF OBJECT_ID('sp_tblWork_update','P') IS NOT NULL
 	DROP PROC sp_tblWork_update
 GO
@@ -1301,7 +1302,7 @@ BEGIN
 	END
 	IF @Description IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Decription='''+cast(@Description AS NVARCHAR)+''''
+		SET @Update=@Update+',Description='''+cast(@Description AS NVARCHAR)+''''
 	END
 	IF @Content IS NOT NULL
 	BEGIN
@@ -1321,15 +1322,15 @@ BEGIN
 	END	
 	IF @CreateDate IS NOT NULL AND @CreateDate<>''
 	BEGIN
-		SET @Update=@Update+',CreateDate='''+@CreateDate+''''
+		SET @Update=@Update+',CreateDate='''+cast(@CreateDate AS NVARCHAR(100))+''''
 	END
 	IF @StartProcess IS NOT NULL AND @StartProcess<>''
 	BEGIN
-		SET @Update=@Update+',StartProcess='''+@StartProcess+''''
+		SET @Update=@Update+',StartProcess='''+cast(@StartProcess AS NVARCHAR(100))+''''
 	END
 	IF @EndProcess IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',EndProcess='''+@EndProcess+''''
+		SET @Update=@Update+',EndProcess='''+cast(@EndProcess AS NVARCHAR(100))+''''
 	END
 	IF @Status IS NOT NULL AND @Status<>''
 	BEGIN
@@ -1341,6 +1342,8 @@ BEGIN
 	END	
 	EXEC('UPDATE tblWork SET'+@Update+' WHERE WorkID='+@WorkID)
 END
+
+
 GO
 /* delete */
 IF OBJECT_ID('sp_tblWork_delete','P') IS NOT NULL

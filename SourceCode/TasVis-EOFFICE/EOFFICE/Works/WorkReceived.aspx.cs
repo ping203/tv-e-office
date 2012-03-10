@@ -232,13 +232,21 @@ namespace EOFFICE.Works
             string list = string.Empty;
             BUser obj = new BUser();
             listUser = IDUserProcess.Split(',');
-            for (int i = 1; i < listUser.Count() - 1; i++)
+            if (listUser.Count() > 2)
             {
-                IList<OUser> lstUser=obj.Get(listUser[i]);
-                if(lstUser.Count()>0)
-                    list += lstUser[0].FullName + "; ";
+                for (int i = 1; i < listUser.Count() - 1; i++)
+                {
+                    IList<OUser> lstUser = obj.Get(listUser[i]);
+                    if (lstUser.Count() > 0)
+                        list += lstUser[0].FullName + "; ";
+                }
+                list = list.Remove(list.Length - 2);
             }
-            list = list.Remove(list.Length - 2);
+            else
+            {
+                list = "Chưa có người thực hiện!";
+            }
+            
             return list;
         }
 

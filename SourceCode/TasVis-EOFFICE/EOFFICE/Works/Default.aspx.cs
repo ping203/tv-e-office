@@ -28,7 +28,7 @@ namespace EOFFICE.Works
                 ddlWorkGroup_Load();
                 //CheckBoxBind_Load();
                 BindDepartment();
-                ResetField();
+                
             }
         }
 
@@ -144,9 +144,9 @@ namespace EOFFICE.Works
         protected void btnForward_Click(object sender, EventArgs e)
         {
             //Gửi thông báo tới người thực hiện công việc
+                      
 
-
-            //Chuyển sang trang giao việc
+            //Upload File
             CultureInfo culture = new CultureInfo("fr-FR", true);
 
             //Upload File
@@ -221,7 +221,7 @@ namespace EOFFICE.Works
             objWork.Description = txtDescription.Text;
             objWork.Content = txtContent.Text;
             objWork.Attachs = listFile;
-            objWork.IDUserCreate = Global.UserInfo.UserID;   
+            objWork.IDUserCreate = Global.UserInfo.UserID;   //--Lấy IDUserCreate sau
             objWork.IDUserProcess = UserJoin;
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             objWork.CreateDate = CurrentTime;

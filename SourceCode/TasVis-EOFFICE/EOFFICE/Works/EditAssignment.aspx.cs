@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.IO;
+using System.Globalization;
 
 namespace EOFFICE.Works
 {
@@ -133,12 +134,215 @@ namespace EOFFICE.Works
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
+            CultureInfo culture = new CultureInfo("fr-FR", true);
 
+            //Upload File
+            DateTime CurrentTime = DateTime.Now;
+            string day = CurrentTime.Day.ToString();
+            string month = CurrentTime.Month.ToString();
+            string year = CurrentTime.Year.ToString();
+            string hour = CurrentTime.Hour.ToString();
+            string minute = CurrentTime.Minute.ToString();
+            string millisecond = CurrentTime.Millisecond.ToString();
+            string str = "-" + day + "-" + month + "-" + year + "-" + "-" + hour + "-" + minute + "-" + millisecond;
+
+            //Lấy danh sách file Attach
+            BAttach Bobj = new BAttach();
+            HttpFileCollection hfc = Request.Files;
+            int n = hfc.Count;
+            string listFile = ",";
+            try
+            {
+                // Get the HttpFileCollection
+
+                for (int i = 0; i < hfc.Count; i++)
+                {
+                    HttpPostedFile hpf = hfc[i];
+                    if (hpf.ContentLength > 0)
+                    {
+                        hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName));
+                        OAttach obj = new OAttach();
+                        obj.Name = System.IO.Path.GetFileName(hpf.FileName);
+                        obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName);
+                        obj.Description = "";
+                        Bobj.Add(obj);
+                        listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            //Lấy danh sách người thực hiện công việc
+
+            string UserJoin = hdfUsers.Value;
+            if (UserJoin == ",")
+            {
+                UserJoin = "";
+            }
+            else
+            {
+                UserJoin = "," + UserJoin;
+            }
+            //Lấy mức độ ưu tiên
+            string Priority = string.Empty;
+            if (rdoPrior1.Checked == true)
+            {
+                Priority = "RAT_QUAN_TRONG";
+            }
+            else if (rdoPrior2.Checked == true)
+            {
+                Priority = "QUAN_TRONG";
+            }
+            else
+            {
+                Priority = "BINH_THUONG";
+            }
+
+            // Cập nhật công việc
+            OWork objWork = new OWork();
+            BWork _BWork = new BWork();
+            objWork = _BWork.GetWork(WorkID).First();
+
+            string Name = txtWorkName.Text;
+            string Description = txtDescription.Text;
+            string Content = txtContent.Text;
+            string Attachs=objWork.Attachs;
+            if (listFile != ",")
+            {
+                Attachs = Attachs.Remove(Attachs.Length - 1, 1) + listFile;
+            }
+            int IDUserCreate = objWork.IDUserCreate;
+            string IDUserProcess = UserJoin;
+            
+            int IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
+            DateTime CreateDate = objWork.CreateDate;
+            string Status = "CHUA_GIAO";
+            // Priority = Priority;
+            DateTime StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+            DateTime EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+
+            BWork BobjWork = new BWork();
+            if (BobjWork.Update(WorkID, Name, Description, Content, Attachs, IDUserCreate, IDUserProcess, CreateDate, StartProcess, EndProcess, Status, Priority, IDWorkGroup))
+            {
+                RegisterClientScriptBlock("NOTE", "<script>alert('Cập nhật thành công');</script>");
+            }
+            else
+            {
+                RegisterClientScriptBlock("NOTE", "<script>alert('Công việc chưa được cập nhật');</script>");
+            }
+            Response.Redirect(Request.Url.AbsoluteUri);
+            
         }
 
         protected void btnForward_Click(object sender, EventArgs e)
         {
+            int WorkID = int.Parse(Request.QueryString["WorkID"].ToString());
+            CultureInfo culture = new CultureInfo("fr-FR", true);
 
+            //Upload File
+            DateTime CurrentTime = DateTime.Now;
+            string day = CurrentTime.Day.ToString();
+            string month = CurrentTime.Month.ToString();
+            string year = CurrentTime.Year.ToString();
+            string hour = CurrentTime.Hour.ToString();
+            string minute = CurrentTime.Minute.ToString();
+            string millisecond = CurrentTime.Millisecond.ToString();
+            string str = "-" + day + "-" + month + "-" + year + "-" + "-" + hour + "-" + minute + "-" + millisecond;
+
+            //Lấy danh sách file Attach
+            BAttach Bobj = new BAttach();
+            HttpFileCollection hfc = Request.Files;
+            int n = hfc.Count;
+            string listFile = ",";
+            try
+            {
+                // Get the HttpFileCollection
+
+                for (int i = 0; i < hfc.Count; i++)
+                {
+                    HttpPostedFile hpf = hfc[i];
+                    if (hpf.ContentLength > 0)
+                    {
+                        hpf.SaveAs(Server.MapPath("/MyFiles") + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName));
+                        OAttach obj = new OAttach();
+                        obj.Name = System.IO.Path.GetFileName(hpf.FileName);
+                        obj.Path = "~/MyFiles" + "/" + System.IO.Path.GetFileNameWithoutExtension(hpf.FileName).Replace(" ", "_") + str + System.IO.Path.GetExtension(hpf.FileName);
+                        obj.Description = "";
+                        Bobj.Add(obj);
+                        listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            //Lấy danh sách người thực hiện công việc
+
+            string UserJoin = hdfUsers.Value;
+            if (UserJoin == ",")
+            {
+                UserJoin = "";
+            }
+            else
+            {
+                UserJoin = "," + UserJoin;
+            }
+            //Lấy mức độ ưu tiên
+            string Priority = string.Empty;
+            if (rdoPrior1.Checked == true)
+            {
+                Priority = "RAT_QUAN_TRONG";
+            }
+            else if (rdoPrior2.Checked == true)
+            {
+                Priority = "QUAN_TRONG";
+            }
+            else
+            {
+                Priority = "BINH_THUONG";
+            }
+
+            // Cập nhật công việc
+            OWork objWork = new OWork();
+            BWork _BWork = new BWork();
+            objWork = _BWork.GetWork(WorkID).First();
+
+            string Name = txtWorkName.Text;
+            string Description = txtDescription.Text;
+            string Content = txtContent.Text;
+            string Attachs = objWork.Attachs;
+            if (listFile != ",")
+            {
+                Attachs = Attachs.Remove(Attachs.Length - 1, 1) + listFile;
+            }
+            int IDUserCreate = objWork.IDUserCreate;
+            string IDUserProcess = UserJoin;
+
+            int IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
+            DateTime CreateDate = objWork.CreateDate;
+            string Status = "DANG_THUC_HIEN";
+            // Priority = Priority;
+            DateTime StartProcess = DateTime.Parse(txtStartDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+            DateTime EndProcess = DateTime.Parse(txtEndDate.Text, culture, DateTimeStyles.NoCurrentDateDefault);
+
+            BWork BobjWork = new BWork();
+            if (BobjWork.Update(WorkID, Name, Description, Content, Attachs, IDUserCreate, IDUserProcess, CreateDate, StartProcess, EndProcess, Status, Priority, IDWorkGroup))
+            {
+                Response.Redirect("WorkAssignment.aspx");
+            }
+            else
+            {
+                RegisterClientScriptBlock("NOTE", "<script>alert('Giao việc không thành công');</script>");
+            }
+            
         }
     }
 }

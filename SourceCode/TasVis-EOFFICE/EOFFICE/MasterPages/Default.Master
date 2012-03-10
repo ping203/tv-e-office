@@ -34,10 +34,10 @@
                 	<h3><a href="javascript:return false;" class="a-parent parent-active"><span class="icon"><asp:Image ImageUrl="~/Images/Text-out.png" runat="server" /></span>Dự thảo công văn</a></h3>
                     <ul class="ul-child">
                     	<li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/New-Document.png" runat="server" /></span>Dự thảo công văn</a>
+                        	<a href="/Document/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/New-Document.png" runat="server" /></span>Dự thảo công văn</a>
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn chờ/đang xử lý</a>
+                        	<a href="/Document/DocumentSendDrap.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn chờ/đang xử lý</a>
                         </li>
                         <li class="li-child">
                         	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/OK.png" runat="server" /></span>Công văn đã hoàn thành</a>

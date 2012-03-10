@@ -168,13 +168,6 @@
     <Compile Include="Users\Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Users\GroupPermission.aspx.cs">
-      <DependentUpon>GroupPermission.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Users\GroupPermission.aspx.designer.cs">
-      <DependentUpon>GroupPermission.aspx</DependentUpon>
-    </Compile>       
     <Compile Include="Users\Person.aspx.cs">
       <DependentUpon>Person.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,7 +357,6 @@
     <Content Include="js\ui.datetimepicker.js" />
     <Content Include="Login.aspx" />
     <Content Include="MasterPages\Default.Master" />
-    <Content Include="Users\GroupPermission.aspx" />
     <Content Include="Users\Permission.aspx" />
     <Content Include="Users\Person.aspx" />
     <Content Include="Users\GroupForUser.aspx" />

@@ -405,5 +405,15 @@ namespace DataAccess.BusinessObject
             return lstUser;
         }
 
+        public int GetIdLastrecord(int IDUserCreate)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[1];
+            sqlPara[0] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
+            sqlPara[0].Value = IDUserCreate;
+            DataTable tbl = RunProcedureGet("sp_tblWork_getidlastrecord", sqlPara);
+            IList<OWork> list = new List<OWork>();
+            list = Common.Common.ConvertTo<OWork>(tbl);
+            return list[0].WorkID;
+        }
     }
 }

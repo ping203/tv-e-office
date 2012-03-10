@@ -235,6 +235,7 @@ namespace EOFFICE.Works
 
             //Reset Field
             ResetField();
+            RegisterClientScriptBlock("NOTE", "<script>alert('Công việc đã được giao');</script>");
         }
 
         protected void ResetField()

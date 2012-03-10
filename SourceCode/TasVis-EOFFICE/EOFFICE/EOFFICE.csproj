@@ -59,6 +59,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ajax\ajLoadUser.aspx.cs">
+      <DependentUpon>ajLoadUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ajLoadUser.aspx.designer.cs">
+      <DependentUpon>ajLoadUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ajLoadUserByDepartment.aspx.cs">
+      <DependentUpon>ajLoadUserByDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ajLoadUserByDepartment.aspx.designer.cs">
+      <DependentUpon>ajLoadUserByDepartment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Calendar\Calendar.aspx.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -68,6 +82,34 @@
     </Compile>
     <Compile Include="Common\ECommon.cs" />
     <Compile Include="Common\Pagging.cs" />
+    <Compile Include="Contacts\ContactCreate.aspx.cs">
+      <DependentUpon>ContactCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacts\ContactCreate.aspx.designer.cs">
+      <DependentUpon>ContactCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacts\ContactDetail.aspx.cs">
+      <DependentUpon>ContactDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacts\ContactDetail.aspx.designer.cs">
+      <DependentUpon>ContactDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacts\ContactGroup.aspx.cs">
+      <DependentUpon>ContactGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacts\ContactGroup.aspx.designer.cs">
+      <DependentUpon>ContactGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacts\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacts\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -112,12 +154,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Users\GroupPermission.aspx.cs">
-      <DependentUpon>GroupPermission.aspx</DependentUpon>
+    <Compile Include="Users\ChangePass.aspx.cs">
+      <DependentUpon>ChangePass.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Users\GroupPermission.aspx.designer.cs">
-      <DependentUpon>GroupPermission.aspx</DependentUpon>
+    <Compile Include="Users\ChangePass.aspx.designer.cs">
+      <DependentUpon>ChangePass.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Permission.aspx.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
@@ -126,6 +168,13 @@
     <Compile Include="Users\Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\GroupPermission.aspx.cs">
+      <DependentUpon>GroupPermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\GroupPermission.aspx.designer.cs">
+      <DependentUpon>GroupPermission.aspx</DependentUpon>
+    </Compile>       
     <Compile Include="Users\Person.aspx.cs">
       <DependentUpon>Person.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -175,12 +224,59 @@
     <Compile Include="Users\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\wssendmessenger\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Works\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Works\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Works\WorkAssignment.aspx.cs">
+      <DependentUpon>WorkAssignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\WorkAssignment.aspx.designer.cs">
+      <DependentUpon>WorkAssignment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Works\WorkAssignmentDetail.aspx.cs">
+      <DependentUpon>WorkAssignmentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\WorkAssignmentDetail.aspx.designer.cs">
+      <DependentUpon>WorkAssignmentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Works\WorkGroupCreat.aspx.cs">
+      <DependentUpon>WorkGroupCreat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\WorkGroupCreat.aspx.designer.cs">
+      <DependentUpon>WorkGroupCreat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Works\WorkReceived.aspx.cs">
+      <DependentUpon>WorkReceived.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\WorkReceived.aspx.designer.cs">
+      <DependentUpon>WorkReceived.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Works\WorkReceivedDetail.aspx.cs">
+      <DependentUpon>WorkReceivedDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\WorkReceivedDetail.aspx.designer.cs">
+      <DependentUpon>WorkReceivedDetail.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -190,24 +286,36 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ajax\ajLoadUser.aspx" />
+    <Content Include="Ajax\ajLoadUserByDepartment.aspx" />
     <Content Include="bin\DataAccess.dll" />
     <Content Include="bin\DataAccess.pdb" />
     <Content Include="bin\Telerik.Web.UI.dll" />
     <Content Include="Calendar\Calendar.aspx" />
+    <Content Include="Contacts\ContactCreate.aspx" />
+    <Content Include="Contacts\ContactDetail.aspx" />
+    <Content Include="Contacts\ContactGroup.aspx" />
+    <Content Include="Contacts\Default.aspx" />
     <Content Include="css\datepicker-style.css" />
+    <Content Include="css\login-style.css" />
     <Content Include="css\style.css" />
     <Content Include="Document\DocumentEdit.aspx" />
     <Content Include="Document\DocumentKindCreate.aspx" />
     <Content Include="Images\Accordion_Module_button_collapse_left_grey.png" />
     <Content Include="Images\Accordion_Module_button_expand_left_grey.png" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\bg-form.png" />
+    <Content Include="Images\bg-txt.png" />
     <Content Include="Images\Boss.png" />
     <Content Include="Images\calendar_icon.gif" />
+    <Content Include="Images\checked.gif" />
     <Content Include="Images\Create.png" />
     <Content Include="Images\Erase.png" />
     <Content Include="Images\Forward.png" />
     <Content Include="Images\Go-back.png" />
     <Content Include="Images\Help.png" />
     <Content Include="Images\Home.png" />
+    <Content Include="Images\icon_loading.gif" />
     <Content Include="Images\icon_locked.png" />
     <Content Include="Images\icon_username.png" />
     <Content Include="Images\List-compass.png" />
@@ -240,8 +348,11 @@
     <Content Include="Images\Text-warning.png" />
     <Content Include="Images\Text-Yes.png" />
     <Content Include="Images\Turn-off.png" />
+    <Content Include="Images\ui-icons_222222_256x240.png" />
+    <Content Include="Images\unchecked.gif" />
     <Content Include="Images\Up.png" />
     <Content Include="Images\User-group.png" />
+    <Content Include="Images\user.png" />
     <Content Include="Images\View.png" />
     <Content Include="Images\Wrench.png" />
     <Content Include="Images\Yes.png" />
@@ -268,7 +379,14 @@
     <Content Include="obj\Release\EOFFICE.dll" />
     <Content Include="obj\Release\EOFFICE.pdb" />
     <Content Include="Users\Edit.aspx" />
+    <Content Include="Users\UserInfo.aspx" />
+    <None Include="Web References\wssendmessenger\Service.disco" />
     <Content Include="Works\Default.aspx" />
+    <Content Include="Works\WorkAssignment.aspx" />
+    <Content Include="Works\WorkAssignmentDetail.aspx" />
+    <Content Include="Works\WorkGroupCreat.aspx" />
+    <Content Include="Works\WorkReceived.aspx" />
+    <Content Include="Works\WorkReceivedDetail.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
@@ -278,6 +396,27 @@
     <None Include="obj\Debug\build.force" />
     <None Include="obj\Debug\ResolveAssemblyReference.cache" />
     <None Include="obj\Release\ResolveAssemblyReference.cache" />
+    <None Include="Web References\wssendmessenger\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\wssendmessenger\Service.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://www.vas.lachongmedia.vn/nhantinsms_ws/Service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\wssendmessenger\</RelPath>
+      <UpdateFromURL>http://www.vas.lachongmedia.vn/nhantinsms_ws/Service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>EOFFICE_wssendmessenger_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\App_LocalResources\" />

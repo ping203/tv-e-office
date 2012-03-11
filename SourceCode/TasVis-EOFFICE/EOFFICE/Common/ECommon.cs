@@ -52,6 +52,10 @@ namespace EOFFICE.Common
         /// <summary>
         /// Đang xử lý
         /// </summary>
-        Processing = 6
+        Processing = 6,
+        /// <summary>
+        /// Bị trả lại
+        /// </summary>
+        SendAgain = 7
     };
 }

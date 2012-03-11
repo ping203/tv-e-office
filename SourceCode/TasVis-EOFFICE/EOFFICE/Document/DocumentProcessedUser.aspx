@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentSendDrap.aspx.cs" Inherits="EOFFICE.Document.DocumentSendDrap"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentProcessedUser.aspx.cs" Inherits="EOFFICE.Document.DocumentProcessedUser"
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
@@ -6,7 +6,7 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản chờ duyệt</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản đã duyệt</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -68,11 +68,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    Thời gian xử lý</HeaderTemplate>
+                                    Phát hành</HeaderTemplate>
                                 <ItemTemplate>
-                                   Từ <b><%#DateTime.Parse(Eval("StartProcess").ToString()).ToString("dd/MM/yyyy")%></b> đến <b><%#DateTime.Parse(Eval("EndProcess").ToString()).ToString("dd/MM/yyyy")%></b>
+                                <asp:LinkButton runat="server" ID="cmdSendPublish" CommandName="Publish" CommandArgument='<%# Eval("DocumentID") %>'>Phát hành</asp:LinkButton>
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" Width="25%" />
+                               <ItemStyle HorizontalAlign="Center"/>
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />

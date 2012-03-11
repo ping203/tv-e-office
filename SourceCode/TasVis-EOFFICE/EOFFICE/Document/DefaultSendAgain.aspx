@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentSendDrap.aspx.cs" Inherits="EOFFICE.Document.DocumentSendDrap"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DefaultSendAgain.aspx.cs" Inherits="EOFFICE.Document.DefaultSendAgain"
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
@@ -6,7 +6,7 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản chờ duyệt</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản trả lại</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -18,7 +18,7 @@
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtAccept" CssClass="link-btn" OnClick="lbtAccept_Click"
                         OnClientClick="javascript:return ValidCheckedDocument();" Visible="false">Thực hiện</asp:LinkButton>
-                   <%-- <a class="link-btn" href="/Document/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>--%>
+                    <a style="display:none" class="link-btn" href="/Document/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
                 <td>
                     Từ ngày:<asp:TextBox runat="server" Width="80px" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>
@@ -26,7 +26,7 @@
                     Tên<asp:TextBox runat="server" ID="txtKey" CssClass="txt" Width="170px"></asp:TextBox>
                     <asp:DropDownList runat="server" ID="ddlColumnName" Visible="false">
                         <asp:ListItem Text="Tên văn bản" Value="Name"></asp:ListItem>
-                        <asp:ListItem Text="Người xử lý" Value="Fullname"></asp:ListItem>
+                        <asp:ListItem Text="Người duyêt" Value="Fullname"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtSearch" CssClass="link-btn" 
                         onclick="lbtSearch_Click1">Tìm kiếm</asp:LinkButton>
@@ -60,19 +60,22 @@
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Name" HeaderText="Tên  văn bản"></asp:BoundField>
-                            <asp:TemplateField HeaderText="Người tham gia duyệt">
+                            <asp:BoundField DataField="Name" HeaderText="Tên văn bản"></asp:BoundField>
+                            <asp:TemplateField HeaderText="Người duyệt">
                                 <ItemTemplate>
                                     <%#BindUserProcess(Eval("UserProcess"))%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    Thời gian xử lý</HeaderTemplate>
+                                    Thao tác</HeaderTemplate>
                                 <ItemTemplate>
-                                   Từ <b><%#DateTime.Parse(Eval("StartProcess").ToString()).ToString("dd/MM/yyyy")%></b> đến <b><%#DateTime.Parse(Eval("EndProcess").ToString()).ToString("dd/MM/yyyy")%></b>
+                                    <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("DocumentID") %>'
+                                        ToolTip="Sửa bản thảo" CssClass="link-function edit" runat="server" />
+                                    <asp:LinkButton ID="LinkButton4" CommandName="cmdDelete" CommandArgument='<%#Eval("DocumentID") %>'
+                                        ToolTip="Xóa bản thảo" CssClass="link-function delete" runat="server" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa bản thảo?');"></asp:LinkButton>
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" Width="25%" />
+                                <ItemStyle HorizontalAlign="Center" Width="15%" />
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />

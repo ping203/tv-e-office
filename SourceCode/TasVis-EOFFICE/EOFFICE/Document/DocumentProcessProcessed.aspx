@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentSendDrap.aspx.cs" Inherits="EOFFICE.Document.DocumentSendDrap"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DocumentProcessProcessed.aspx.cs" Inherits="EOFFICE.Document.DocumentProcessProcessed"
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
@@ -6,7 +6,8 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản chờ duyệt</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản 
+            đã phát hành</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -68,11 +69,21 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    Thời gian xử lý</HeaderTemplate>
+                                    Ngày phát hành</HeaderTemplate>
                                 <ItemTemplate>
-                                   Từ <b><%#DateTime.Parse(Eval("StartProcess").ToString()).ToString("dd/MM/yyyy")%></b> đến <b><%#DateTime.Parse(Eval("EndProcess").ToString()).ToString("dd/MM/yyyy")%></b>
+                                   <b><%#DateTime.Parse(Eval("PublishDate").ToString()).ToString("dd/MM/yyyy")%></b>
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" Width="25%" />
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                    Chi tiết</HeaderTemplate>
+                                <ItemTemplate>
+                                <a href='/Document/DocumentDetailsPublished.aspx?DocumentId=<%#Eval("DocumentId")%>'>
+                                  <img src="/images/View.png" />
+                                  </a>
+                                </ItemTemplate>
+                               <ItemStyle HorizontalAlign="Center"/>
                             </asp:TemplateField>
                         </Columns>
                         <HeaderStyle ForeColor="#0072BC" />

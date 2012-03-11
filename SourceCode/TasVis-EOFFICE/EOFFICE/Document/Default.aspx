@@ -25,8 +25,8 @@
                     Đến ngày:<asp:TextBox runat="server"  Width="80px" ID="txtEndDate" CssClass="txt required datepicker"></asp:TextBox>
                     Tên<asp:TextBox runat="server" ID="txtKey" CssClass="txt" Width="170px"></asp:TextBox>
                     <asp:DropDownList runat="server" ID="ddlColumnName" Visible="false">
-                        <asp:ListItem Text="Tên công văn" Value="Name"></asp:ListItem>
-                        <asp:ListItem Text="Người xử lý" Value="Fullname"></asp:ListItem>
+                        <asp:ListItem Text="Tên văn bản" Value="Name"></asp:ListItem>
+                        <asp:ListItem Text="Người duyêt" Value="Fullname"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtSearch" CssClass="link-btn" 
                         onclick="lbtSearch_Click1">Tìm kiếm</asp:LinkButton>
@@ -61,7 +61,7 @@
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
                             <asp:BoundField DataField="Name" HeaderText="Tên văn bản"></asp:BoundField>
-                            <asp:TemplateField HeaderText="Người xử lý">
+                            <asp:TemplateField HeaderText="Người duyệt">
                                 <ItemTemplate>
                                     <%#BindUserProcess(Eval("UserProcess"))%>
                                 </ItemTemplate>

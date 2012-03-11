@@ -224,6 +224,7 @@ namespace EOFFICE
                         obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         //obj.IDUserCreate = Global.UserInfo.UserID;
                         obj.Name = txtName.Text;
+                        obj.Attachs = lblLink.Text;
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
@@ -249,6 +250,7 @@ namespace EOFFICE
                 obj.IDUserCreate = Global.UserInfo.UserID;
                 obj.Name = txtName.Text;
                 obj.Priority = ddlLevel.SelectedValue;
+                obj.Attachs = lblLink.Text;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
                 obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
@@ -328,7 +330,7 @@ namespace EOFFICE
         /// <param name="e"></param>
         protected void cmđUpload_Click(object sender, EventArgs e)
         {
-            if (fuDrap.PostedFile != null)
+            if (fuDrap.PostedFile == null)
                 return;
             if (!Directory.Exists(Server.MapPath("DocumentFiles")))
             {
@@ -369,6 +371,7 @@ namespace EOFFICE
                         obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         //obj.IDUserCreate = Global.UserInfo.UserID;
+                        obj.Attachs = lblLink.Text;
                         obj.Name = txtName.Text;
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
@@ -376,7 +379,7 @@ namespace EOFFICE
                         obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
-                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("dd/MM/yyyy"), obj.EndProcess.ToString("dd/MM/yyyy"),DateTime.Now,"", obj.SendOfficals, obj.Priority, obj.Status);
+                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
                         Response.Redirect("/Document/Default.aspx");
                     }
                 }
@@ -399,6 +402,7 @@ namespace EOFFICE
                 obj.UserProcess = GetUserProcess();
                 obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                 obj.Excerpt = txtSubContent.Text;
+                obj.Attachs = lblLink.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
                 ctl.Add(obj);
                 Response.Redirect("/Document/Default.aspx");
@@ -413,10 +417,11 @@ namespace EOFFICE
         /// <param name="e"></param>
         protected void cmdDeleteFile_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName+"/"+lblLink.Text.Trim())))
+            if (File.Exists(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName+"/"+lblLink.Text.Trim())))
             {
                 File.Delete(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName + "/" + lblLink.Text.Trim()));
             }
+            lblLink.Text = "";
         }
 
 

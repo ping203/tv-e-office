@@ -6,7 +6,8 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản cần xử lý</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Văn bản 
+            cần duyệt</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -60,8 +61,8 @@
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Name" HeaderText="Tên công văn"></asp:BoundField>
-                            <asp:TemplateField HeaderText="Người xử lý">
+                            <asp:BoundField DataField="Name" HeaderText="Tên  văn bản"></asp:BoundField>
+                            <asp:TemplateField HeaderText="Người tham gia duyệt">
                                 <ItemTemplate>
                                     <%#BindUserProcess(Eval("UserProcess"))%>
                                 </ItemTemplate>
@@ -86,9 +87,9 @@
                                 <HeaderTemplate>
                                     Xử lý</HeaderTemplate>
                                 <ItemTemplate>
-                                <asp:LinkButton runat="server" ID="cmdProcess">
+                                <a href='/Document/DocumentDetails.aspx?DocumentId=<%#Eval("DocumentId")%>'>
                                   <img src="/images/Notes.png" />
-                                  </asp:LinkButton>
+                                  </a>
                                 </ItemTemplate>
                                <ItemStyle HorizontalAlign="Center"/>
                             </asp:TemplateField>

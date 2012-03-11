@@ -80,6 +80,19 @@ namespace EOFFICE
             }
            
         }
+
+        /// <summary>
+        /// Reset các form
+        /// </summary>
+        private void ResetForm()
+        {
+            txtAddress.Text = "";
+            txtDescription.Text = "";
+            txtEmail.Text = "";
+            txtFax.Text = "";
+            txtName.Text = "";
+            txtTel.Text = "";
+        }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -96,11 +109,17 @@ namespace EOFFICE
             if (!string.IsNullOrEmpty(txtName.Text))
             {
                 OOffical obj = new OOffical();
-                obj=ctl.Get(int.Parse(hdfId.v
-)
+                
                  if (hdfId.Value != "0")
                 {
-                    ctl.Update(obj)
+                    try
+                    {
+                        obj = ctl.Get(int.Parse(hdfId.Value))[0];
+                    }
+                    catch (Exception ex)
+                    {
+                        obj = new OOffical();
+                    }
                 }
                 obj.Name = txtName.Text;
                 obj.Description = txtDescription.Text;
@@ -115,15 +134,18 @@ namespace EOFFICE
                 { obj.OfficalParent = 0; }
                 if (hdfId.Value != "0")
                 {
-                    ctl.Update(obj);
+                   ctl.Update(obj.OfficalID, obj.Name, obj.Description, obj.Address, obj.Tel, obj.Fax, obj.Email, obj.OfficalParent);
+                   hdfId.Value = "0";
                 }
                 else
                 {
                     ctl.Add(obj);
                     BindData();
                 }
+                ResetForm();
             }
         }
+
         /// <summary>
         /// Các thao tác trên danh sách
         /// </summary>
@@ -135,6 +157,27 @@ namespace EOFFICE
             {
                 //BOffical ctl = new BOffical();
                 //ctl.Delete(int.Parse(e.CommandArgument.ToString()));
+                hdfId.Value = e.CommandArgument.ToString();
+                BOffical ctl = new BOffical();
+                try
+                {
+                   OOffical obj = ctl.Get(int.Parse(hdfId.Value))[0];
+                   txtAddress.Text = obj.Address;
+                   txtDescription.Text = obj.Description;
+                   txtEmail.Text = obj.Email;
+                   txtFax.Text = obj.Fax;
+                   txtName.Text = obj.Name;
+                   txtTel.Text = obj.Tel;
+                   try {
+                       ddlParent.Items.FindByValue(obj.OfficalParent.ToString()).Selected = true;
+                   }
+                   catch (Exception ex)
+                   { }
+                }
+                catch (Exception ex)
+                {
+                    
+                }
                
             }
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))

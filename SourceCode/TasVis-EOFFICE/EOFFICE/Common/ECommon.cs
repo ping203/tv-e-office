@@ -44,6 +44,14 @@ namespace EOFFICE.Common
         /// <summary>
         /// Đã xuất bản
         /// </summary>
-        Published=4
+        Published=4,
+        /// <summary>
+        /// Đã xử lý
+        /// </summary>
+        Processed = 5,
+        /// <summary>
+        /// Đang xử lý
+        /// </summary>
+        Processing = 6
     };
 }

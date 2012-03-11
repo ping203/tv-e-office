@@ -5,7 +5,7 @@
     <div class="list wp-form" id="create-document">
         <h2>
             <span class="icon">
-                <img src="../Images/New-document.png" /></span>Tạo công văn dự thảo</h2>
+                <img src="../Images/New-document.png" /></span>Tạo văn bản dự thảo</h2>
         <form>
         <div class="nav-function">
             <ul>
@@ -13,25 +13,37 @@
                     <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn" 
+                        onclick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
                 </li>
-                <li>
+                <li style="display:none">
                     <asp:LinkButton runat="server" ID="lnkCancel" CssClass="btn"><img src="../Images/Erase.png" />Hủy bỏ</asp:LinkButton></li>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkReturn" CssClass="btn"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>
+                    <asp:LinkButton runat="server" ID="lnkReturn" CssClass="btn" 
+                        onclick="lnkReturn_Click"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>
             </ul>
         </div>
         <div class="form">
             <table width="100%" cellspacing="5">
                 <tr>
                     <td>
-                        Loại công văn:<span class="required">*</span>
+                        Loại văn bản:<span class="required">*</span>
                     </td>
                     <td colspan="3">
-                        <asp:DropDownList runat="server" DataTextField="Name" ID="ddlType">
+                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="DocumentKindID" ID="ddlType">
                         </asp:DropDownList>
-                        <a href="/Document/DocumentKindCreate.aspx" class="link-btn">Thêm loại công văn</a>
+                        <a href="/Document/DocumentKindCreate.aspx" class="link-btn">Thêm loại văn bản</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Văn phòng:<span class="required">*</span>
+                    </td>
+                    <td colspan="3">
+                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="OfficalId" ID="ddlOffical">
+                        </asp:DropDownList>
+                        <a href="/Document/DocumentOffical.aspx" class="link-btn">Thêm văn phòng</a>
                     </td>
                 </tr>
                 <tr>
@@ -74,7 +86,11 @@
                         Bản thảo:
                     </td>
                     <td>
-                        <asp:FileUpload runat="server" ID="fuDrap" />
+                        <asp:FileUpload runat="server" ID="fuDrap" /><asp:LinkButton runat="server" 
+                            ID="cmđUpload" onclick="cmđUpload_Click">Tải lên server</asp:LinkButton>
+                            <br />
+                            <asp:Label runat="server" ID="lblLink"></asp:Label>
+                        <asp:LinkButton runat="server" Visible="false" ID="cmdDeleteFile" onclick="cmdDeleteFile_Click">Xóa</asp:LinkButton>
                     </td>
                 </tr>
                 <tr>
@@ -141,12 +157,13 @@
             <ul>
                 <li>
                     <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" 
-                        onclick="lnkSave1_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
+                        onclick="lnkSave_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn" 
+                        onclick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
                 </li>
-                <li>
+                <li style="display:none">
                     <asp:LinkButton runat="server" ID="lnkCancel1" CssClass="btn"><img src="../Images/Erase.png" />Hủy bỏ</asp:LinkButton></li>
                 </li>
                 <li>

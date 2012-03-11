@@ -47,7 +47,7 @@
                         Tên văn phòng:<span class="rq">*</span>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtName" runat="server" CssClass="required" Width="250px"></asp:TextBox>
+                        <asp:TextBox ID="txtName" autocomplete="off" runat="server" CssClass="required" Width="250px"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

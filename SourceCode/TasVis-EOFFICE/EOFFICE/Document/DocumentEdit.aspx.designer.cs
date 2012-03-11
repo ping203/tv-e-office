@@ -59,6 +59,15 @@ namespace EOFFICE {
         protected global::System.Web.UI.WebControls.DropDownList ddlType;
         
         /// <summary>
+        /// ddlOffical control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOffical;
+        
+        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -111,6 +120,33 @@ namespace EOFFICE {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuDrap;
+        
+        /// <summary>
+        /// cmđUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton cmđUpload;
+        
+        /// <summary>
+        /// lblLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLink;
+        
+        /// <summary>
+        /// cmdDeleteFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton cmdDeleteFile;
         
         /// <summary>
         /// ddlLevel control.

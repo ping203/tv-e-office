@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using DataAccess.Common;
 using DataAccess.BusinessObject;
 using DataAccess.DataObject;
+using System.IO;
 
 namespace EOFFICE
 {
@@ -21,24 +22,73 @@ namespace EOFFICE
     {
         #region "Property"
         /// <summary>
-        /// Lưu mã người dùng
+        /// Lưu mã  văn bản
         /// </summary>
-        public int DocumentId
+        public string DocumentId
         {
             get
             {
                 if (Request.QueryString["DocumentId"] != null)
                 {
-                    return int.Parse( Request.QueryString["DocumentId"]);
+                    return Request.QueryString["DocumentId"];
                 }
                 else
                 {
-                    return 0;
+                    return "";
                 }
             }
         }
         #endregion
         #region "Common Function"
+        private void InitData()
+        {
+            if (DocumentId != "")
+            {
+                BDocument ctl = new BDocument();
+                if (ctl.Get(DocumentId) != null)
+                {
+                    ODocument obj = ctl.Get(DocumentId)[0];
+                    if (obj != null)
+                    {
+                        txtName.Text = obj.Name;
+                        txtContent.Text = obj.Content;
+                        txtEndDate.Text = obj.EndProcess.ToString("dd/MM/yyyy");
+                        txtStartDate.Text = obj.StartProcess.ToString("dd/MM/yyyy");
+                        txtSubContent.Text = obj.Excerpt;
+                        lblLink.Text = obj.Attachs;
+                        try { ddlLevel.Items.FindByValue(obj.Priority).Selected = true; }
+                        catch (Exception ex) { }
+                        try { ddlOffical.Items.FindByValue(obj.PublishOffical.ToString()).Selected = true; }
+                        catch (Exception ex) { }
+                        try { ddlType.Items.FindByValue(obj.IDDocumentKind.ToString()).Selected = true; }
+                        catch (Exception ex) { }
+                        BindUserProcess(obj.UserProcess);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load danh sahcs nguoi xu ly
+        /// </summary>
+        /// <param name="str"></param>
+        private void BindUserProcess(string str)
+        {
+            BUser ctl = new BUser();
+            foreach (string i in str.Split(','))
+            {
+                try
+                {
+                    OUser obj = ctl.Get(int.Parse(i))[0];
+                    if (obj != null)
+                    {
+                        lsbUserProcess.Items.Add(new ListItem(obj.FullName, obj.UserID.ToString()));
+                    }
+                }
+                catch (Exception ex) { }
+            }
+        }
+
         /// <summary>
         /// Load ra danh sách loại tài liệu
         /// </summary>
@@ -48,8 +98,21 @@ namespace EOFFICE
             ddlType.ClearSelection();
             ddlType.DataSource = ctl.Get(0);
             ddlType.DataBind();
-            ddlType.Items.Insert(0, new ListItem("Tất cả", ""));
+            //ddlType.Items.Insert(0, new ListItem("Tất cả", ""));
         }
+
+        /// <summary>
+        /// Load ra danh sách văn phòng
+        /// </summary>
+        private void BindOffical()
+        {
+            BOffical ctl = new BOffical();
+            ddlOffical.ClearSelection();
+            ddlOffical.DataSource = ctl.Get(0);
+            ddlOffical.DataBind();
+            //ddlOffical.Items.Insert(0, new ListItem("Tất cả", ""));
+        }
+
 
         /// <summary>
         /// Load danh sách phòng ban
@@ -75,13 +138,13 @@ namespace EOFFICE
                 if (str == "")
                     str = str + lsbUserProcess.Items[i].Value;
                 else
-                    str = str+"," + lsbUserProcess.Items[i].Value;
+                    str = str + "," + lsbUserProcess.Items[i].Value;
             }
             return str;
         }
 
         /// <summary>
-        /// Bind dannh sách người dùng
+        /// Bind dannh sách  văn bản
         /// </summary>
         private void BindDataUser()
         {
@@ -89,7 +152,7 @@ namespace EOFFICE
             string _fullname = "";
             string _username = "";
             string _email = "";
-            string _status =UserStatus.Approve.ToString("D");
+            string _status = UserStatus.Approve.ToString("D");
             int _departmentid = int.Parse(ddlDepartment.SelectedValue);
             //--Set key tìm kiếm
             if (txtKeySearch.Text.Trim().Length > 0)
@@ -103,7 +166,7 @@ namespace EOFFICE
             if (count > 0)
             {
                 lbsUserSearch.Visible = true;
-                lbsUserSearch.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", 1,100);
+                lbsUserSearch.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", 1, 100);
                 lbsUserSearch.DataBind();
             }
             else
@@ -126,9 +189,11 @@ namespace EOFFICE
             if (!IsPostBack)
             {
                 BindDocumentType();
+                BindOffical();
                 BindDepartment();
+                InitData();
             }
-           
+
         }
         #endregion
 
@@ -139,26 +204,41 @@ namespace EOFFICE
         /// <param name="e"></param>
         protected void lnkSave_Click(object sender, EventArgs e)
         {
-            ODocument obj = new ODocument() ;
+            ODocument obj;
             BDocument ctl = new BDocument();
-            if (DocumentId > 0)
+            if (DocumentId != "")
             {
-                //obj = ctl.Get(DocumentId.ToString());
-                if (obj != null)
+                try
                 {
-                    //obj.Content = txtContent.Text;
-                    //obj.CreateDate = DateTime.Now;
-                    //obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    //obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                    //obj.IDUserCreate = Global.UserInfo.UserID;
-                    //obj.Name = txtName.Text;
-                    //obj.Priority = ddlLevel.SelectedValue;
-                    //obj.UserProcess = GetUserProcess();
-                    //ctl.Add(obj);
+                    obj = ctl.Get(DocumentId)[0];
+
+
+                    if (obj != null)
+                    {
+                        obj.Content = txtContent.Text;
+                        //obj.CreateDate = DateTime.Now;
+                        obj.SendDate = DateTime.Now;
+                        obj.ReceiveDate = DateTime.Now;
+                        obj.PublishDate = DateTime.Now;
+                        obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        //obj.IDUserCreate = Global.UserInfo.UserID;
+                        obj.Name = txtName.Text;
+                        obj.Priority = ddlLevel.SelectedValue;
+                        obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
+                        obj.UserProcess = GetUserProcess();
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
+                        obj.Excerpt = txtSubContent.Text;
+                        obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
+                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("dd/MM/yyyy"), obj.EndProcess.ToString("dd/MM/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
+                        Response.Redirect("/Document/Default.aspx");
+                    }
                 }
+                catch (Exception ex) { }
             }
             else
             {
+                obj = new ODocument();
                 obj.Content = txtContent.Text;
                 obj.CreateDate = DateTime.Now;
                 obj.SendDate = DateTime.Now;
@@ -169,10 +249,15 @@ namespace EOFFICE
                 obj.IDUserCreate = Global.UserInfo.UserID;
                 obj.Name = txtName.Text;
                 obj.Priority = ddlLevel.SelectedValue;
+                obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
+                obj.Excerpt = txtSubContent.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
                 ctl.Add(obj);
+                Response.Redirect("/Document/Default.aspx");
             }
+
         }
 
         /// <summary>
@@ -184,7 +269,7 @@ namespace EOFFICE
         {
             BindDataUser();
         }
-        
+
         /// <summary>
         /// Chọn phòng ban
         /// </summary>
@@ -210,7 +295,7 @@ namespace EOFFICE
                     {
                         lsbUserProcess.Items.Add(lbsUserSearch.Items[i]);
                     }
-                   
+
                 }
             }
         }
@@ -226,9 +311,112 @@ namespace EOFFICE
             }
         }
 
-        protected void lnkSave1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Quay về trang quản trị văn bản
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkReturn_Click(object sender, EventArgs e)
         {
+            Response.Redirect("/Document/Default.aspx");
+        }
 
+        /// <summary>
+        /// Updaload file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmđUpload_Click(object sender, EventArgs e)
+        {
+            if (fuDrap.PostedFile != null)
+                return;
+            if (!Directory.Exists(Server.MapPath("DocumentFiles")))
+            {
+                Directory.CreateDirectory(Server.MapPath("DocumentFiles"));
+            }
+            if (!Directory.Exists(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName)))
+            {
+                Directory.CreateDirectory(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName));
+            }
+            fuDrap.SaveAs(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName + "/" + fuDrap.FileName));
+            lblLink.Text =fuDrap.FileName;
+            cmdDeleteFile.Visible = true;
+        }
+
+        /// <summary>
+        /// Gửi bản thảo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkSendDrap_Click(object sender, EventArgs e)
+        {
+            ODocument obj;
+            BDocument ctl = new BDocument();
+            if (DocumentId != "")
+            {
+                try
+                {
+                    obj = ctl.Get(DocumentId)[0];
+
+
+                    if (obj != null)
+                    {
+                        obj.Content = txtContent.Text;
+                        //obj.CreateDate = DateTime.Now;
+                        obj.SendDate = DateTime.Now;
+                        obj.ReceiveDate = DateTime.Now;
+                        obj.PublishDate = DateTime.Now;
+                        obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        //obj.IDUserCreate = Global.UserInfo.UserID;
+                        obj.Name = txtName.Text;
+                        obj.Priority = ddlLevel.SelectedValue;
+                        obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
+                        obj.UserProcess = GetUserProcess();
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
+                        obj.Excerpt = txtSubContent.Text;
+                        obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
+                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("dd/MM/yyyy"), obj.EndProcess.ToString("dd/MM/yyyy"),DateTime.Now,"", obj.SendOfficals, obj.Priority, obj.Status);
+                        Response.Redirect("/Document/Default.aspx");
+                    }
+                }
+                catch (Exception ex) { }
+            }
+            else
+            {
+                obj = new ODocument();
+                obj.Content = txtContent.Text;
+                obj.CreateDate = DateTime.Now;
+                obj.SendDate = DateTime.Now;
+                obj.ReceiveDate = DateTime.Now;
+                obj.PublishDate = DateTime.Now;
+                obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                obj.IDUserCreate = Global.UserInfo.UserID;
+                obj.Name = txtName.Text;
+                obj.Priority = ddlLevel.SelectedValue;
+                obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
+                obj.UserProcess = GetUserProcess();
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
+                obj.Excerpt = txtSubContent.Text;
+                obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
+                ctl.Add(obj);
+                Response.Redirect("/Document/Default.aspx");
+            }
+
+        }
+
+        /// <summary>
+        /// Xoa file tren server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void cmdDeleteFile_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName+"/"+lblLink.Text.Trim())))
+            {
+                File.Delete(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName + "/" + lblLink.Text.Trim()));
+            }
         }
 
 

@@ -953,17 +953,17 @@ CREATE PROC sp_tblDocument_update
 	@Name NVARCHAR(300)=NULL,
 	@Excerpt NVARCHAR(MAX)=NULL,
 	@Content NVARCHAR(MAX)=NULL,	
-	@PublishDate DATETIME=NULL,
+	@PublishDate VARCHAR(100)=NULL,
 	@PublishOffical INT =NULL,
 	@Attachs VARCHAR(50)=NULL,
 	@IDDocumentKind INT =NULL,
-	@CreateDate DATETIME=NULL,	
+	@CreateDate VARCHAR(100)=NULL,	
 	@UserProcess VARCHAR(100)=NULL,
 	@UserComments VARCHAR(100)=NULL,
-	@StartProcess DATETIME=NULL,
-	@EndProcess DATETIME=NULL,
-	@SendDate DATETIME=NULL,
-	@ReceiveDate DATETIME=NULL,	
+	@StartProcess VARCHAR(100)=NULL,
+	@EndProcess VARCHAR(100)=NULL,
+	@SendDate VARCHAR(100)=NULL,
+	@ReceiveDate VARCHAR(100)=NULL,	
 	@SendOfficals VARCHAR(100)=NULL,
 	@Priority VARCHAR(20)=NULL,
 	@Status VARCHAR(50)=NULL
@@ -973,15 +973,15 @@ BEGIN
 	SET @Update=' DocumentNumber='''+cast(@DocumentNumber AS NVARCHAR)+''''
 	IF @Name IS NOT NULL AND @Name<>''
 	BEGIN
-		SET @Update=@Update+',Name='''+cast(@Name AS NVARCHAR)+''''
+		SET @Update=@Update+',Name=N'''+cast(@Name AS NVARCHAR)+''''
 	END
 	IF @Excerpt IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Excerpt='''+cast(@Excerpt AS NVARCHAR)+''''
+		SET @Update=@Update+',Excerpt=N'''+cast(@Excerpt AS NVARCHAR)+''''
 	END
 	IF @Content IS NOT NULL
 	BEGIN
-		SET @Update=@Update+',Content='''+cast(@Content AS NVARCHAR)+''''
+		SET @Update=@Update+',Content=N'''+cast(@Content AS NVARCHAR)+''''
 	END
 	IF @PublishDate IS NOT NULL AND @PublishDate<>''
 	BEGIN
@@ -1039,7 +1039,7 @@ BEGIN
 	BEGIN
 		SET @Update=@Update+',Status='''+cast(@Status AS NVARCHAR)+''''
 	END
-	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='+@DocumentID)
+	EXEC('UPDATE tblDocument SET'+@Update+' WHERE DocumentID='''+@DocumentID+'''')
 END
 GO
 /* delete */
@@ -1106,7 +1106,7 @@ BEGIN
 		END
 		IF @FromPublishDate IS NOT NULL AND @FromPublishDate<>'' AND @ToPublishDate IS NOT NULL AND @ToPublishDate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND PublishDate BETWEEN '''+@FromPublishDate+''' AND '''+@ToPublishDate+''''
+			SET @DieuKien=@DieuKien+' AND PublishDate BETWEEN '''+cast(@FromPublishDate AS NVARCHAR)+''' AND '''+cast(@ToPublishDate AS NVARCHAR)+''''
 		END
 		IF @PublishOffical IS NOT NULL AND @PublishOffical<>0
 		BEGIN

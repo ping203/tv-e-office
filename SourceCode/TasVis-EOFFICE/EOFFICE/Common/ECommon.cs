@@ -81,7 +81,14 @@ namespace EOFFICE.Common
         /// <summary>
         /// Quyền gửi tin nhắn nhắc
         /// </summary>
-        SendSMS
+        SendSMS,
+
+        /// <summary>
+        /// Quản trị người dùng
+        /// </summary>
+        UserManagement,
+
+
     };
 
 }

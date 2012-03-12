@@ -22,16 +22,16 @@ namespace EOFFICE.MasterPages
         /// </summary>
         private void CheckPermission()
         {
-            //BUser ctl = new BUser();
-            ////-- Kiểm tra quyền dự thảo
-            //if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()))
-            //    pnDocumentDrap.Visible = true;
-            ////-- Kiểm tra quyền duyệt
-            //if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentProcess.ToString()))
-            //    pnDocumentProcess.Visible = true;
-            ////-- Kiểm tra quyền phát hành
-            //if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()))
-            //    pnDocumentPublish.Visible = true;
+            BUser ctl = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()))
+                pnDocumentDrap.Visible = true;
+            //-- Kiểm tra quyền duyệt
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentProcess.ToString()))
+                pnDocumentProcess.Visible = true;
+            //-- Kiểm tra quyền phát hành
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()))
+                pnDocumentPublish.Visible = true;
         }
 
         protected void Page_Load(object sender, EventArgs e)

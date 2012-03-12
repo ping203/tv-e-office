@@ -33,7 +33,7 @@
             	<li class="li-parent" id="du-thao-cong-van">
                 	<h3><a href="javascript:return false;" class="a-parent parent-active"><span class="icon"><asp:Image ImageUrl="~/Images/Text-out.png" runat="server" /></span>Dự thảo văn bản</a></h3>
                     <ul class="ul-child">
-                        <asp:Panel runat="server" ID="pnDocumentDrap" Visible="true">
+                        <asp:Panel runat="server" ID="pnDocumentDrap" Visible="false">
                     	<li class="li-child">
                         	<a href="/Document/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/New-Document.png" runat="server" /></span>Dự thảo văn bản</a>
                         </li>
@@ -44,7 +44,7 @@
                         	<a href="/Document/DocumentSendDrap.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-compass.png" runat="server" /></span>Văn bản đang chờ duyệt</a>
                         </li>
                         </asp:Panel>
-                        <asp:Panel runat="server" ID="pnDocumentProcess" Visible="true">
+                        <asp:Panel runat="server" ID="pnDocumentProcess" Visible="false">
                         <li class="li-child">
                         	<a href="/Document/DocumentProcess.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-play.png" runat="server" /></span>Văn bản cần duyệt</a>
                         </li>
@@ -52,7 +52,7 @@
                         	<a href="/Document/DocumentProcessedUser.aspx" class="a-child"><span class="icon"><asp:Image ID="Image4" ImageUrl="~/Images/OK.png" runat="server" /></span>Văn bản đã duyệt</a>
                         </li>
                         </asp:Panel>
-                        <asp:Panel runat="server" ID="pnDocumentPublish" Visible="true">
+                        <asp:Panel runat="server" ID="pnDocumentPublish" Visible="false">
                         <li class="li-child">
                         	<a href="/Document/DocumentProcessProcessed.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Text-Yes.png" runat="server" /></span>Đã phát hành</a>
                         </li>

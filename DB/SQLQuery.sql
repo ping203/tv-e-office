@@ -474,8 +474,43 @@ BEGIN
 END
 GO
 /* get */
+IF OBJECT_ID('sp_tblUser_HasPermission','P') IS NOT NULL
+	DROP PROC sp_tblUser_HasPermission
+GO
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[sp_tblUser_HasPermission]
+	@UserID INT,
+	@PermissionID INT
+AS
+select Count(*) from tblGroupPermission g where 
+g.PermissionDefinitionId=@PermissionID AND g.GroupId in
+(Select tblUser_Group.IDGroup From tblUser_Group WHERE tblUser_Group.IDUser=@UserID)
+GO
+/* get */
+IF OBJECT_ID('sp_tblUser_HasPermissionCode','P') IS NOT NULL
+	DROP PROC sp_tblUser_HasPermissionCode
+GO
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[sp_tblUser_HasPermissionCode]
+	@UserID INT,
+	@PermissionCode NVARCHAR(200)
+AS
+select Count(*) from tblGroupPermission g where 
+g.PermissionDefinitionId IN(Select tblPermisionDefinition.ID FROM tblPermisionDefinition WHERE tblPermisionDefinition.Code=@PermissionCode)
+ AND g.GroupId in
+(Select tblUser_Group.IDGroup From tblUser_Group WHERE tblUser_Group.IDUser=@UserID)
+
+
+
+
+GO
+/* get */
 IF OBJECT_ID('sp_tblUser_getcount','P') IS NOT NULL
-	DROP PROC sp_tblUser_get
+	DROP PROC sp_tblUser_getcount
 GO
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON

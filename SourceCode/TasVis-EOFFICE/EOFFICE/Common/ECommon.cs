@@ -28,23 +28,23 @@ namespace EOFFICE.Common
         //}
     }
     public enum DocumentStatus
-    { 
+    {
         /// <summary>
         /// Lưu bản thảo
         /// </summary>
-        SaveDrap =1,
+        SaveDrap = 1,
         /// <summary>
         /// Gửi bản thảo
         /// </summary>
-        SendDrap=2,
+        SendDrap = 2,
         /// <summary>
         /// Chờ xuất bản
         /// </summary>
-        WaitPublish=3,
+        WaitPublish = 3,
         /// <summary>
         /// Đã xuất bản
         /// </summary>
-        Published=4,
+        Published = 4,
         /// <summary>
         /// Đã xử lý
         /// </summary>
@@ -58,4 +58,30 @@ namespace EOFFICE.Common
         /// </summary>
         SendAgain = 7
     };
+
+    /// <summary>
+    /// Danh sách các quyền hệ thống
+    /// </summary>
+    public enum PermissionCode
+    {
+        /// <summary>
+        /// Xử lý dự thảo
+        /// </summary>
+        DocumentDrap,
+        /// <summary>
+        /// Duyệt văn bản
+        /// </summary>
+        DocumentProcess,
+        /// <summary>
+        /// Phát hành văn bản
+        /// </summary>
+        DocumentPublish,
+
+        //------------------Gửi tin nhắn--------------
+        /// <summary>
+        /// Quyền gửi tin nhắn nhắc
+        /// </summary>
+        SendSMS
+    };
+
 }

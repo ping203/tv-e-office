@@ -89,7 +89,7 @@
                                         <asp:Image CssClass="link-function" runat="server" ID="imgApprove" ImageUrl="~/images/checked.gif" />
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton5" CommandName="cmdUserGroup" CommandArgument='<%#Eval("Username") %>'
-                                        ToolTip="Quyền" CssClass="link-function" runat="server">
+                                        ToolTip="Thuộc nhóm" CssClass="link-function" runat="server">
                                         <asp:Image CssClass="link-function" runat="server" ID="Image2" ImageUrl="~/images/User-group.png" />
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton1" CommandName="cmdEdit" CommandArgument='<%#Eval("Username") %>'

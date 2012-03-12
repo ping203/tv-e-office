@@ -55,7 +55,11 @@ namespace EOFFICE.Document
         /// Khởi tạo các thông tin của form
         /// </summary>
         private void InitData()
-        { 
+        {
+            BUser ctl = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()))
+                pnDocumentDrap.Visible = true;
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {
@@ -64,6 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
+            lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
             ////--Trạng thái
             //if (Request.QueryString["status"] != null)

@@ -32,8 +32,6 @@ namespace DataAccess.BusinessObject
             sqlPara[1].Value = IDGroup;
             sqlPara[2] = new SqlParameter("@Roles", SqlDbType.VarChar);
             sqlPara[2].Value = Roles;
-            
-
             return RunProcudure("sp_tblPermission_update", sqlPara);
         }
 
@@ -42,7 +40,6 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[1];
             sqlPara[0] = new SqlParameter("@IDModule", SqlDbType.VarChar);
             sqlPara[0].Value = IDModule;
-
             return RunProcudure("sp_tblPermission_delete", sqlPara);
         }
 
@@ -51,7 +48,6 @@ namespace DataAccess.BusinessObject
             SqlParameter[] sqlPara = new SqlParameter[1];
             sqlPara[0] = new SqlParameter("@IDGroup", SqlDbType.Int);
             sqlPara[0].Value = IDGroup;
-
             return RunProcudure("sp_tblPermission_delete", sqlPara);
         }
 
@@ -62,7 +58,6 @@ namespace DataAccess.BusinessObject
             sqlPara[0].Value = IDModule;
             sqlPara[1] = new SqlParameter("@IDGroup", SqlDbType.Int);
             sqlPara[1].Value = IDGroup;
-
             return RunProcudure("sp_tblPermission_delete", sqlPara);
         }
 

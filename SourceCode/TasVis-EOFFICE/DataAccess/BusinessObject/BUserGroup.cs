@@ -24,6 +24,7 @@ namespace DataAccess.BusinessObject
             sqlParam[1].Value = objUserGroup.IDGroup;
             return RunProcudure("sp_tblUser_Group_add", sqlParam);                        
         }
+
         /// <summary>
         /// Xóa người dùng khỏi group
         /// </summary>
@@ -38,6 +39,7 @@ namespace DataAccess.BusinessObject
             sqlParam[1].Value = objUserGroup.IDGroup;
             return RunProcudure("sp_tblUser_Group_delete", sqlParam);
         }
+
         /// <summary>
         /// Cập nhật user vào group
         /// </summary>
@@ -51,6 +53,7 @@ namespace DataAccess.BusinessObject
             }            
             return false;
         }
+
         /// <summary>
         /// Lấy về danh sách user thuộc group
         /// </summary>

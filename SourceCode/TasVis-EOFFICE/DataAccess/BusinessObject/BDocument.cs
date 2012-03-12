@@ -170,5 +170,47 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<ODocument>(tbl);
             return list;
         }
+
+
+        public bool Update(string DocumentID,string DocumentNumber, string ReceiveDate, string Status)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
+            sqlPara[0].Value = DocumentID;
+            sqlPara[1] = new SqlParameter("@ReceiveDate", SqlDbType.VarChar);
+            sqlPara[1].Value = ReceiveDate;
+            sqlPara[2] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[2].Value = Status;
+            sqlPara[3] = new SqlParameter("@DocumentNumber", SqlDbType.VarChar);
+            sqlPara[3].Value = DocumentNumber;
+            return RunProcudure("sp_tblDocument_update", sqlPara);
+        }
+
+        public bool Update(string DocumentID, string DocumentNumber, string Status)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[3];
+            sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
+            sqlPara[0].Value = DocumentID;
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
+            sqlPara[2] = new SqlParameter("@DocumentNumber", SqlDbType.VarChar);
+            sqlPara[2].Value = DocumentNumber;
+            return RunProcudure("sp_tblDocument_update", sqlPara);
+        }
+
+        public bool UpdatePublish(string DocumentID, string DocumentNumber, string Status, string PublishDate)
+        {
+            SqlParameter[] sqlPara = new SqlParameter[4];
+            sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
+            sqlPara[0].Value = DocumentID;
+            sqlPara[1] = new SqlParameter("@Status", SqlDbType.VarChar);
+            sqlPara[1].Value = Status;
+            sqlPara[2] = new SqlParameter("@DocumentNumber", SqlDbType.VarChar);
+            sqlPara[2].Value = DocumentNumber;
+            sqlPara[3] = new SqlParameter("@PublishDate", SqlDbType.VarChar);
+            sqlPara[3].Value = PublishDate;
+            return RunProcudure("sp_tblDocument_update", sqlPara);
+        }
+
     }
 }

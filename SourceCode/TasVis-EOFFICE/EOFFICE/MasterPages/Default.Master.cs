@@ -10,11 +10,30 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-
+using DataAccess.BusinessObject;
+using DataAccess.DataObject;
+using EOFFICE.Common;
 namespace EOFFICE.MasterPages
 {
     public partial class Default : System.Web.UI.MasterPage
     {
+        /// <summary>
+        /// Kiểm tra quyền
+        /// </summary>
+        private void CheckPermission()
+        {
+            BUser ctl = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()))
+                pnDocumentDrap.Visible = true;
+            //-- Kiểm tra quyền duyệt
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentProcess.ToString()))
+                pnDocumentProcess.Visible = true;
+            //-- Kiểm tra quyền phát hành
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()))
+                pnDocumentPublish.Visible = true;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {			
             if (Session["MyUserInfo"] == null)
@@ -31,7 +50,8 @@ namespace EOFFICE.MasterPages
                 Response.Redirect("~/Login.aspx" + strReturn);
             }
             lblUser.Text = Global.UserInfo.FullName;
-            lblUser.DataBind();            
+            lblUser.DataBind();
+            CheckPermission();
         }
 
         /// <summary>

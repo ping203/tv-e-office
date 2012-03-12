@@ -115,7 +115,7 @@ namespace DataAccess.BusinessObject
         }
 
 
-        public IList<OComment> Get(string Title,string IDDocument, string IDWork)
+        public IList<OComment> Get(string Title,string IDDocument, int IDWork)
         {
             SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@Title", SqlDbType.NVarChar);

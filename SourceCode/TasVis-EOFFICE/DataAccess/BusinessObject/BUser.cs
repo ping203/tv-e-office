@@ -287,5 +287,39 @@ namespace DataAccess.BusinessObject
              list = Common.Common.ConvertTo<OUser>(tbl);
              return list;
          }
+         public bool HasPermission(int UserId,int PermissionId)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[2];
+             sqlPara[0] = new SqlParameter("@UserID", SqlDbType.Int);
+             sqlPara[0].Value = UserId;
+             sqlPara[1] = new SqlParameter("@PermissionID", SqlDbType.Int);
+             sqlPara[1].Value = PermissionId;
+             int result = RunProcudureScalar("sp_tblUser_HasPermission", sqlPara);
+             if (result==0)
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }
+         }
+         public bool HasPermission(int UserId, string PermissionCode)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[2];
+             sqlPara[0] = new SqlParameter("@UserID", SqlDbType.Int);
+             sqlPara[0].Value = UserId;
+             sqlPara[1] = new SqlParameter("@PermissionCode", SqlDbType.NVarChar);
+             sqlPara[1].Value = PermissionCode;
+             int result = RunProcudureScalar("sp_tblUser_HasPermissionCode", sqlPara);
+             if (result == 0)
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }
+         }
     }
 }

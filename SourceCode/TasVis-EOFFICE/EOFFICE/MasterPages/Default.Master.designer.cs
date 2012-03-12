@@ -59,6 +59,15 @@ namespace EOFFICE.MasterPages {
         protected global::System.Web.UI.WebControls.LinkButton btnLogout;
         
         /// <summary>
+        /// pnDocumentDrap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnDocumentDrap;
+        
+        /// <summary>
         /// Image3 control.
         /// </summary>
         /// <remarks>
@@ -68,6 +77,15 @@ namespace EOFFICE.MasterPages {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
+        /// pnDocumentProcess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnDocumentProcess;
+        
+        /// <summary>
         /// Image4 control.
         /// </summary>
         /// <remarks>
@@ -75,6 +93,15 @@ namespace EOFFICE.MasterPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image4;
+        
+        /// <summary>
+        /// pnDocumentPublish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnDocumentPublish;
         
         /// <summary>
         /// Image2 control.

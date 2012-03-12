@@ -495,6 +495,7 @@ GO
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
+[sp_tblUser_HasPermissionCode] 17,'DocumentDrap'
 CREATE PROC [dbo].[sp_tblUser_HasPermissionCode]
 	@UserID INT,
 	@PermissionCode NVARCHAR(200)
@@ -1586,11 +1587,11 @@ BEGIN
 		END
 		IF @IDUserCreate IS NOT NULL AND @IDUserCreate<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND IDUserCreate='''+cast(@IDUserCreate AS VARCHAR)+''''
+			SET @DieuKien=@DieuKien+' AND IDUserCreate='''+@IDUserCreate+''''
 		END
 		IF @IDDocument IS NOT NULL AND @IDDocument<>''
 		BEGIN
-			SET @DieuKien=@DieuKien+' AND IDDocument='''+cast(@IDDocument AS NVARCHAR)+''''
+			SET @DieuKien=@DieuKien+' AND IDDocument='''+@IDDocument+''''
 		END
 		IF @IDWork IS NOT NULL AND @IDWork<>0
 		BEGIN

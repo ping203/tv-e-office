@@ -55,7 +55,11 @@ namespace EOFFICE.Document
         /// Khởi tạo các thông tin của form
         /// </summary>
         private void InitData()
-        { 
+        {
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()))
+                Response.Redirect("/");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {

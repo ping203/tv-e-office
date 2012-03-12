@@ -167,6 +167,10 @@ namespace EOFFICE.Document
         /// </summary>
         private void BindData()
         {
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền duyệt
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString()))
+                Response.Redirect("/");
             DateTime StartDate = DateTime.ParseExact("01/01/1970", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime EndDate = DateTime.MaxValue;
             if (txtStartDate.Text.Trim().Length > 0)

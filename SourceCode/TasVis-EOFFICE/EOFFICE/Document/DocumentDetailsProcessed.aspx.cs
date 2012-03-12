@@ -43,6 +43,10 @@ namespace EOFFICE
         #region "Common Function"
         private void InitData()
         {
+            //BUser ctlUP = new BUser();
+            ////-- Kiểm tra quyền dự thảo
+            //if (ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()))
+            //    Response.Redirect("/");
             if (DocumentId != "")
             {
                 BDocument ctl = new BDocument();

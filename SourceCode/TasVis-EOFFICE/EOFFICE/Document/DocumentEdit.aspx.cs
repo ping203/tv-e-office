@@ -231,7 +231,7 @@ namespace EOFFICE
                         obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
-                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("dd/MM/yyyy"), obj.EndProcess.ToString("dd/MM/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
+                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
                         Response.Redirect("/Document/Default.aspx");
                     }
                 }

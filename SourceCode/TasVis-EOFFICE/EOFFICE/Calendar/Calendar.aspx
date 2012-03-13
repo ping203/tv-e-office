@@ -333,8 +333,7 @@
             
             <asp:HiddenField runat="server" ID="hdf" />
              <script type="text/javascript">
-                 function OnClientTimeSlotClick(sender, eventArgs) {
-                     
+                 function OnClientTimeSlotClick(sender, eventArgs) {                     
                      var Messages = $get('<%=hdf.ClientID%>');
                      Messages.value = eventArgs.get_time().format('yyyy/MM/dd hh:mm:ss');
                  }

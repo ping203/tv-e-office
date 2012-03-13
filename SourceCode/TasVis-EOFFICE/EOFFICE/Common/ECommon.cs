@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.DataObject;
+using System.Collections.Generic;
 namespace EOFFICE.Common
 {
     public class ECommon

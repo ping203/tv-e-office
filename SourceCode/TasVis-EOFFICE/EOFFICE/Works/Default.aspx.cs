@@ -15,6 +15,7 @@ using DataAccess.DataObject;
 using DataAccess.Common;
 using System.Globalization;
 using System.Collections.Generic;
+using EOFFICE.Common;
 
 namespace EOFFICE.Works
 {
@@ -26,9 +27,18 @@ namespace EOFFICE.Works
             if (!Page.IsPostBack)
             {
                 ddlWorkGroup_Load();
-                //CheckBoxBind_Load();
-                BindDepartment();
                 
+                BindDepartment();
+                BUser ctl = new BUser();
+                //-- Kiểm tra quyền giao việc
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkAssignment.ToString()) || Global.IsAdmin())
+                {
+                    trUser.Visible = true;
+                }
+                else
+                {
+                    trUser.Visible = false;
+                }
             }
         }
 
@@ -125,8 +135,18 @@ namespace EOFFICE.Works
             objWork.Description = txtDescription.Text;
             objWork.Content = txtContent.Text;
             objWork.Attachs = listFile;
-            objWork.IDUserCreate = Global.UserInfo.UserID;   //--Lấy IDUserCreate sau
-            objWork.IDUserProcess = UserJoin;
+            objWork.IDUserCreate = Global.UserInfo.UserID;
+            BUser ctl = new BUser();
+            //-- Kiểm tra quyền giao việc
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkAssignment.ToString()) || Global.IsAdmin())
+            {
+                objWork.IDUserProcess = UserJoin;
+            }
+            else
+            {
+                objWork.IDUserProcess = "," + Global.UserInfo.UserName + ",";
+            }
+            
             objWork.IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             objWork.CreateDate = CurrentTime;
             objWork.Status = "CHUA_GIAO";

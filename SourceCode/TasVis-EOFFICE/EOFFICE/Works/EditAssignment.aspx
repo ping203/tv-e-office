@@ -78,7 +78,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:RadioButton ID="rdoPrior3" runat="server" GroupName="rdoPrior" Text="Bình thường" />
                             </td>
                         </tr>    
-                        <tr>
+                        <tr runat="server" id="trUser">
                             <td align="right">Người nhận việc: </td>
                             <td>
                                 <asp:HiddenField runat="server" ID="hdfUserJoin" />

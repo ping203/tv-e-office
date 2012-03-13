@@ -158,6 +158,15 @@ namespace EOFFICE.Works {
         protected global::System.Web.UI.WebControls.RadioButton rdoPrior3;
         
         /// <summary>
+        /// trUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trUser;
+        
+        /// <summary>
         /// rptDepartment control.
         /// </summary>
         /// <remarks>

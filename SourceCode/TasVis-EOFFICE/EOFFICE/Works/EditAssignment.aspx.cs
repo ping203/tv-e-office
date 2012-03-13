@@ -14,6 +14,7 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.IO;
 using System.Globalization;
+using EOFFICE.Common;
 
 namespace EOFFICE.Works
 {
@@ -24,6 +25,16 @@ namespace EOFFICE.Works
             if (!Page.IsPostBack)
             {
                 InitData();
+                //-- Kiểm tra quyền giao việc
+                BUser ctl = new BUser();
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkAssignment.ToString()) || Global.IsAdmin())
+                {
+                    trUser.Visible = true;
+                }
+                else
+                {
+                    trUser.Visible = false;
+                }
             }
         }
 
@@ -217,7 +228,18 @@ namespace EOFFICE.Works
                 Attachs = Attachs.Remove(Attachs.Length - 1, 1) + listFile;
             }
             int IDUserCreate = objWork.IDUserCreate;
-            string IDUserProcess = UserJoin;
+            string IDUserProcess = "";
+            //-- Kiểm tra quyền giao việc
+            BUser ctl = new BUser();
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkAssignment.ToString()) || Global.IsAdmin())
+            {
+                IDUserProcess = UserJoin;
+            }
+            else
+            {
+                IDUserProcess = ","+Global.UserInfo.UserName+",";
+            }
+           
             
             int IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             DateTime CreateDate = objWork.CreateDate;
@@ -324,8 +346,17 @@ namespace EOFFICE.Works
                 Attachs = Attachs.Remove(Attachs.Length - 1, 1) + listFile;
             }
             int IDUserCreate = objWork.IDUserCreate;
-            string IDUserProcess = UserJoin;
-
+            string IDUserProcess = "";
+            //-- Kiểm tra quyền giao việc
+            BUser ctl = new BUser();
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkAssignment.ToString()) || Global.IsAdmin())
+            {
+                IDUserProcess = UserJoin;
+            }
+            else
+            {
+                IDUserProcess = "," + Global.UserInfo.UserName + ",";
+            }
             int IDWorkGroup = int.Parse(ddlWorkGroup.SelectedValue);
             DateTime CreateDate = objWork.CreateDate;
             string Status = "DANG_THUC_HIEN";

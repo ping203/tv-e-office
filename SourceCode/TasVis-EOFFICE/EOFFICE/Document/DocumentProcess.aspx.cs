@@ -58,7 +58,7 @@ namespace EOFFICE.Document
         {
             BUser ctlUP = new BUser();
             //-- Kiểm tra quyền duyệt
-            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentProcess.ToString()))
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentProcess.ToString())&& !Global.IsAdmin())
                 Response.Redirect("/");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)

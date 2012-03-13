@@ -47,6 +47,11 @@ namespace EOFFICE
             ////-- Kiểm tra quyền dự thảo
             //if (ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()))
             //    Response.Redirect("/");
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()) && !Global.IsAdmin())
+                Response.Redirect("/");
+
             if (DocumentId != "")
             {
                 BDocument ctl = new BDocument();

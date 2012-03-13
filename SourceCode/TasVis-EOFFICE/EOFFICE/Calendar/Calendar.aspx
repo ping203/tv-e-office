@@ -51,7 +51,7 @@
                                 ContextMenuEdit="Sửa" HeaderDay="Ngày" HeaderMonth="Tháng" 
                                 HeaderNextDay="Ngày kế tiếp" HeaderPrevDay="Ngày trước" 
                                 HeaderTimeline="Dòng thời gian" HeaderToday="Hôm nay" HeaderWeek="Tuần" 
-                                Save="Lưu" ShowAdvancedForm="Lựa chọn" AdvancedDone="Xong" 
+                                Save="Lưu" ShowAdvancedForm="Tùy chọn" AdvancedDone="Xong" 
                                 AdvancedNewAppointment="Thêm lịch làm việc" 
                                 ContextMenuGoToToday="Tới ngày hôm nay" Show24Hours="Xem theo 24 giờ..." 
                                 ShowBusinessHours="Xem theo giờ làm việc..." ShowMore="Xem thêm..." />
@@ -298,7 +298,7 @@
                                                     <asp:LinkButton ID="btnSave" runat="server" CommandName="Insert" Text="Thêm" class="rsAptEditConfirm" />
                                                     <asp:LinkButton ID="btnCancel" runat="server" CommandName="Cancel" Text="Hủy bỏ"
                                                         class="rsAptEditCancel" />
-                                                    <asp:LinkButton ID="btnOptions" runat="server" CommandName="More" Text="Lựa chọn" class="rsAptEditMore" />
+                                                    <asp:LinkButton ID="btnOptions" runat="server" CommandName="More" Text="Tùy chọn" class="rsAptEditMore" />
                                                 </div>
                                             </td>
                                         </tr>

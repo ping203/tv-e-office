@@ -152,12 +152,12 @@
                                 <asp:FileUpload ID="FileUpload1" runat="server" class="multi" /> 
                             </td>
                         </tr>
-                        <tr>
+                        <tr runat="server" id="trUser">
                             <td><b>Chuyển tiếp:</b></td>
                             <td>
                             </td>
                         </tr>
-                        <tr>
+                        <tr runat="server" id="trListUser">
                             <td colspan="2">
                                 <div>                                                                    
                                     <asp:Repeater ID="rptDepartment" runat="server">

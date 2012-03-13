@@ -16,6 +16,7 @@ using System.IO;
 using System.Web.UI.MobileControls;
 using Telerik.Web.UI;
 using System.Collections.Generic;
+using EOFFICE.Common;
 
 namespace EOFFICE.Works
 {
@@ -27,6 +28,18 @@ namespace EOFFICE.Works
             {
                 Infomation_Load();
                 BindDepartment();
+                //-- Kiểm tra quyền giao việc
+                BUser ctl = new BUser();
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.WorkForward.ToString()) || Global.IsAdmin())
+                {
+                    trUser.Visible = true;
+                    trListUser.Visible = true;
+                }
+                else
+                {
+                    trUser.Visible = false;
+                    trListUser.Visible = false;
+                }
                 
             }
         }

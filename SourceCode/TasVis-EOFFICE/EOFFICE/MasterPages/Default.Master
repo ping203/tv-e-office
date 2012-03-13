@@ -63,12 +63,13 @@
             	<li class="li-parent">
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Text-out.png" runat="server" /></span>Công văn đi</a></h3>
                     <ul class="ul-child">
+                                            <li class="li-child">
+                        	<a href="/DocumentSend/DocumentEdit.aspx" class="a-child"><span class="icon"><asp:Image ID="Image5" ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Thêm mới công văn đi</a>
+                        </li>
                     	<li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-out.png" runat="server" /></span>Danh sách công văn đi</a>
+                        	<a href="/Documentsend/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-out.png" runat="server" /></span>Danh sách công văn đi</a>
                         </li>                                                
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Tra cứu văn bản đi</a>
-                        </li>                        
+                        
                     </ul>
                 </li>
                 <li class="li-parent">

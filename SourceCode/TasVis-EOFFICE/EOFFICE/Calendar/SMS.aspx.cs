@@ -38,7 +38,7 @@ namespace EOFFICE.Calendar
             BUser _BUser = new BUser();
             string strPhoneNumber="";
             string content = "NganSon.,JSC: ";
-            content += txtContent.Text;
+            content += Common.ECommon.ReplaceUnicode(txtContent.Text);            
             String[] arrUserName = hdfUsers.Value.Split(',');
             string fail = "";
             foreach (string strUserName in arrUserName)
@@ -51,9 +51,9 @@ namespace EOFFICE.Calendar
                         strPhoneNumber = lstUser[0].PhoneNumber;
                         if (strPhoneNumber != "")
                         {
-                            if (ws.send(ConfigurationManager.AppSettings["usersms"].ToString(), ConfigurationManager.AppSettings["passwordsms"].ToString(), content, strPhoneNumber) != "200|Send success") 
+                            if (ws.send(ConfigurationManager.AppSettings["usersms"].ToString(), ConfigurationManager.AppSettings["passwordsms"].ToString(), content, strPhoneNumber) != "200|Send success")
                             {
-                                fail += lstUser[0].FullName+"("+strPhoneNumber+");";    
+                                fail += lstUser[0].FullName + "(" + strPhoneNumber + ");";
                             }
                         }
                         else {                            

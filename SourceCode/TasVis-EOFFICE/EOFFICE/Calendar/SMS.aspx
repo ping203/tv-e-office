@@ -13,7 +13,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Người thực hiện:</td>
+                    <td>Người nhận tin:</td>
                     <td>
                         <form name="orderform">
                             <asp:Repeater ID="rptDepartment" runat="server">

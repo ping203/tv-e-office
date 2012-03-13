@@ -10,7 +10,6 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using DataAccess.DataObject;
-using System.Collections.Generic;
 namespace EOFFICE.Common
 {
     public class ECommon
@@ -252,4 +251,23 @@ namespace EOFFICE.Common
         ///</summary>
         CalendarCreate,
     };    
+    /// <summary>
+    /// Loại văn bản
+    /// </summary>
+    public enum DocumentType
+    { 
+        /// <summary>
+        /// Công văn dự thảo
+        /// </summary>
+        DocumentDrap=1,
+        /// <summary>
+        /// Công văn đi
+        /// </summary>
+        DocumentSend=2,
+        /// <summary>
+        /// Công văn đến
+        /// </summary>
+        DocumentReceived=3
+    }
+
 }

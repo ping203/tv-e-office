@@ -76,13 +76,10 @@
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Text-in.png" runat="server" /></span>Công văn đến</a></h3>
                     <ul class="ul-child">
                     	<li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Text-warning.png" runat="server" /></span>Công văn chưa xử lý</a>
+                        	<a href="/DocumentReceived/DocumentEdit.aspx" class="a-child"><span class="icon"><asp:Image ID="Image6" ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Thêm mới công văn đến</a>
                         </li>
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn đang xử lý</a>
-                        </li>                       
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Tra cứu công văn đến</a>
+                    	<li class="li-child">
+                        	<a href="/DocumentReceived/Default.aspx" class="a-child"><span class="icon"><asp:Image ID="Image7" ImageUrl="~/Images/List-out.png" runat="server" /></span>Danh sách công văn đến</a>
                         </li>                         
                     </ul>
                 </li>

@@ -17,6 +17,7 @@ using Telerik.Web.UI;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Globalization;
+using EOFFICE.Common;
 
 namespace EOFFICE.Calender
 {
@@ -67,10 +68,20 @@ namespace EOFFICE.Calender
                 //startInput.SelectedDate = DateTime.Parse(hdf.Value);                
                 RadDateTimePicker endInput = (RadDateTimePicker)e.Container.FindControl("EndInput");
                 //endInput.SelectedDate = DateTime.Parse(hdf.Value);
+                //-- Kiểm tra quyền tạo việc
+                BUser ctl = new BUser();
+                Panel panelUser = (Panel)e.Container.FindControl("panelUser");
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.CalendarCreate.ToString()) || Global.IsAdmin())
+                {
+                    panelUser.Visible = true;
+                }
+                else
+                {
+                    panelUser.Visible = false;
+                }
             }
             if (e.Container.Mode == SchedulerFormMode.AdvancedEdit)
             {
-                
                 HiddenField hdfID = ((HiddenField)e.Container.FindControl("hdfID"));
                 hdfID.Value = e.Appointment.ID.ToString();
                 TextBox subjectBox = (TextBox)e.Container.FindControl("SubjectTextBox");
@@ -108,7 +119,18 @@ namespace EOFFICE.Calender
 
                 //Lấy địa chỉ họp
                 txtAddress.Text = objCalendar.Address;
-                
+
+                Panel panelUser = (Panel)e.Container.FindControl("panelUser");
+                //-- Kiểm tra quyền tạo việc
+                BUser ctl = new BUser();
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.CalendarCreate.ToString()) || Global.IsAdmin())
+                {
+                    panelUser.Visible = true;
+                }
+                else
+                {
+                    panelUser.Visible = false;
+                }
             }
         }
 
@@ -135,8 +157,22 @@ namespace EOFFICE.Calender
                 RadDateTimePicker RadEndDate = (RadDateTimePicker)e.Container.FindControl("EndInput");
                 DateTime EndDate = DateTime.Parse(RadStartDate.DateInput.SelectedDate.ToString());
                 string Address = ((TextBox)e.Container.FindControl("txtAddress")).Text;
+                //Kiểm tra quyền tạo lịch
+                BUser ctl = new BUser();
+                string UserJoin = "";
 
-                string UserJoin = "," + Request.Form["ckxUser"] + ",";
+                if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.CalendarCreate.ToString()) || Global.IsAdmin())
+                {
+                    if (Request.Form["ckxUser"] != "")
+                    { 
+                        UserJoin = "," + Request.Form["ckxUser"] + ",";
+                    }
+                        
+                }
+                else
+                {
+                    UserJoin = "";
+                }                
                 BCalendar BobjCalendar = new BCalendar();
                 BobjCalendar.Update(int.Parse(CalendarID), Name, Description, StartDate, EndDate, UserJoin, Address);
                 RadScheduler_Load();
@@ -176,8 +212,22 @@ namespace EOFFICE.Calender
 
                     string Address = ((TextBox)e.Container.FindControl("txtAddress")).Text;
 
-                    string UserJoin = "," + Request.Form["ckxUser"] + ",";
+                    //Kiểm tra quyền tạo lịch
+                    BUser ctl = new BUser();
+                    string UserJoin="";
 
+                    if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.CalendarCreate.ToString()) || Global.IsAdmin())
+                    {
+                        if (Request.Form["ckxUser"] != "")
+                        {
+                            UserJoin = "," + Request.Form["ckxUser"] + ",";
+                        }
+                    }
+                    else
+                    {
+                        UserJoin = "";
+                    }
+                    
                     BCalendar BobjCalendar = new BCalendar();
                     OCalendar objCalendar = new OCalendar();
 

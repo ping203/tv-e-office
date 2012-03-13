@@ -131,27 +131,30 @@
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
+                                                                <asp:Panel runat="server" ID="panelUser">
                                                                     <br />
                                                                     <p style="font-size:12pt">Thay đổi thành phần tham gia:<p>                                                               
-                                                                    <div>                                                                    
-                                                                        <asp:Repeater ID="rptDepartment" runat="server"  DataSource="<%#BindDepartment() %>">
-                                                                            <HeaderTemplate><table></HeaderTemplate>
-                                                                            <ItemTemplate>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="link-department">
-                                                                                            <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
-                                                                                                <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
-                                                                                                <%#Eval("Name") %>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                        <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </ItemTemplate>
-                                                                            <FooterTemplate></table></FooterTemplate>
-                                                                        </asp:Repeater>                                                                    
+                                                                    <div>
+                                                                        
+                                                                            <asp:Repeater ID="rptDepartment" runat="server"  DataSource="<%#BindDepartment() %>">
+                                                                                <HeaderTemplate><table></HeaderTemplate>
+                                                                                <ItemTemplate>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div class="link-department">
+                                                                                                <a href='<%#Request.Url.Host %>' class="lbtDepartment" id='<%#Eval("DepartmentID") %>' style="font-weight:bold">
+                                                                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/expand.png" ImageAlign="AbsMiddle" />
+                                                                                                    <%#Eval("Name") %>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class='result-<%#Eval("DepartmentID") %>' style="margin-left:30px;margin-top:5px"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </ItemTemplate>
+                                                                                <FooterTemplate></table></FooterTemplate>
+                                                                            </asp:Repeater>    
                                                                     </div>
+                                                                     </asp:Panel>      
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -235,6 +238,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
+                                                                <asp:Panel runat="server" ID="panelUser">
                                                                     <p>Chọn thành phần tham gia:</p>                                                                    
                                                                     <div>                                                                    
                                                                         <asp:Repeater ID="rptDepartment" runat="server" DataSource="<%#BindDepartment() %>">
@@ -255,6 +259,7 @@
                                                                             <FooterTemplate></table></FooterTemplate>
                                                                         </asp:Repeater>                                                                    
                                                                     </div>
+                                                                    </asp:Panel>
                                                                 </td>
                                                             </tr>
                                                             <tr>

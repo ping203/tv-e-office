@@ -31,5 +31,15 @@ namespace EOFFICE.Properties {
                 return ((string)(this["MSG_LOGIN_SUCCES"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.vas.lachongmedia.vn/nhantinsms_ws/Service.asmx")]
+        public string EOFFICE_wssendmessenger_Service {
+            get {
+                return ((string)(this["EOFFICE_wssendmessenger_Service"]));
+            }
+        }
     }
 }

@@ -5,5 +5,8 @@
     <Setting Name="MSG_LOGIN_SUCCES" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Đăng nhập thành công</Value>
     </Setting>
+    <Setting Name="EOFFICE_wssendmessenger_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.vas.lachongmedia.vn/nhantinsms_ws/Service.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -38,7 +38,7 @@
                             OnAppointmentCommand="RadScheduler1_AppointmentCommand" 
                              OnClientTimeSlotClick="OnClientTimeSlotClick" 
                             onappointmentcreated="RadScheduler1_AppointmentCreated" onappointmentdelete="RadScheduler1_AppointmentDelete"
-                            >                                             
+                            OnClientTimeSlotContextMenu="onTimeSlotContextMenu">                                             
                             <WeekView GroupingDirection="Horizontal" />
                             <Localization AdvancedAllDayEvent="Cả ngày" AdvancedCalendarCancel="Hủy" 
                                 AdvancedCalendarOK="Đồng ý" AdvancedCalendarToday="Hôm nay" 
@@ -328,6 +328,11 @@
                      
                      var Messages = $get('<%=hdf.ClientID%>');
                      Messages.value = eventArgs.get_time().format('yyyy/MM/dd hh:mm:ss');
+                 }
+                 function onTimeSlotContextMenu(sender, eventArgs) {
+                     var Messages = $get('<%=hdf.ClientID%>');
+                     Messages.value = eventArgs.get_time().format('yyyy/MM/dd hh:mm:ss');
+                     eventArgs.get_domEvent().preventDefault();
                  }
             </script>
 </asp:Content>

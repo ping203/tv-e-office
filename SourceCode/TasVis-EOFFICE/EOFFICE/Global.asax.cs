@@ -31,6 +31,17 @@ namespace EOFFICE
             }
         }
 
+        /// <summary>
+        /// Kiểm tra quyền quản trị
+        /// </summary>
+        public static bool IsAdmin()
+        {
+            if (UserInfo.UserName.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                return true;
+            else
+                return false;
+        }
+
         protected void Application_Start(object sender, EventArgs e)
         {
             CDBase.strConnectionString = ConfigurationManager.ConnectionStrings["sqlconnection"].ConnectionString;

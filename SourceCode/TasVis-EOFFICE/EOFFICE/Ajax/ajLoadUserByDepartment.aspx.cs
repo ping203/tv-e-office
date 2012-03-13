@@ -21,13 +21,14 @@ namespace EOFFICE.Ajax
         {
             string html = "";
             int DepartmentID=int.Parse(Request.Params["DepartmentID"].ToString());
-            string UserJoin = Request.Params["UserJoin"].ToString();            
+            string UserJoin = Request.Params["UserJoin"].ToString();
             
+
             html += "<table width='800px'>";
             
             BUser BobjUser = new BUser();
             List<OUser> listUser = new List<OUser>();
-            listUser = BobjUser.GetByDepartment(DepartmentID).ToList();
+            listUser = BobjUser.GetByDepartment(DepartmentID, UserJoin).ToList();
             int count = 0;
             foreach (OUser obj in listUser)
             {
@@ -36,14 +37,10 @@ namespace EOFFICE.Ajax
                     html += "<tr>";
                 }
                 html += "<td width='90'>";
-                if (UserJoin.IndexOf("," + obj.UserName + ",") == -1)
-                {
+                
                     html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName + "' />";
-                }
-                else
-                {
-                    html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName+"'" +" checked='checked' " +"' />";
-                }
+               
+                
                 html += "&nbsp";
                 html += ""+obj.FullName+"";
                 html += "</td>";

@@ -401,7 +401,8 @@ namespace EOFFICE.Works
         protected void btnGiaoViec_Click(object sender, EventArgs e)
         {
             int UserID = Global.UserInfo.UserID;
-            BWork obj = new BWork();
+            BWork obj = new BWork();            
+            OWork _OWork=new OWork();
             foreach (GridViewRow row in grvWork.Rows)
             {
                 CheckBox checkbox = (CheckBox)row.FindControl("MyCheckBox");
@@ -409,13 +410,17 @@ namespace EOFFICE.Works
                 if (checkbox.Checked == true)
                 {
                     int Id = Convert.ToInt32(grvWork.DataKeys[row.RowIndex].Value);
-                    if (obj.GetWork(Id).First().Status == "CHUA_GIAO")
+                    _OWork=obj.GetWork(Id).First();
+                    if (_OWork.Status == "CHUA_GIAO")
                     {
-                        obj.Update(Id, "DANG_THUC_HIEN", UserID);
+                        if (!obj.Update(Id, "DANG_THUC_HIEN", UserID))
+                        {
+                            RegisterClientScriptBlock("NOTE", "<script>alert('Công việc chưa được giao !');</script>");
+                        }
                     }
                 }
             }
-            grvWork_Load();
+            grvWork_Load();            
         }
 
         protected void ddlWork_SelectedIndexChanged(object sender, EventArgs e)

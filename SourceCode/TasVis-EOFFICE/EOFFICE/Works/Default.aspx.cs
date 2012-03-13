@@ -234,8 +234,8 @@ namespace EOFFICE.Works
             BobjWork.Add(objWork);
 
             //Reset Field
-            ResetField();
-            RegisterClientScriptBlock("NOTE", "<script>alert('Công việc đã được giao');</script>");
+            ResetField();            
+            RegisterClientScriptBlock("NOTE", "<script>alert('Công việc đã được giao !');</script>");
         }
 
         protected void ResetField()

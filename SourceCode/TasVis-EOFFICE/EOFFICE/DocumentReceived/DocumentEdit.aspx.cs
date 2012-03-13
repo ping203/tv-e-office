@@ -15,7 +15,7 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.IO;
 
-namespace EOFFICE
+namespace EOFFICE.DocumentReceived
 {
 
     public partial class DocumentEdit : System.Web.UI.Page
@@ -56,6 +56,8 @@ namespace EOFFICE
                         txtStartDate.Text = obj.StartProcess.ToString("dd/MM/yyyy");
                         txtSubContent.Text = obj.Excerpt;
                         lblLink.Text = obj.Attachs;
+                        txtCode.Text = obj.DocumentNumber;
+                        txtAddress.Text = obj.UserComments;
                         try { ddlLevel.Items.FindByValue(obj.Priority).Selected = true; }
                         catch (Exception ex) { }
                         try { ddlOffical.Items.FindByValue(obj.PublishOffical.ToString()).Selected = true; }
@@ -211,8 +213,6 @@ namespace EOFFICE
                 try
                 {
                     obj = ctl.Get(DocumentId)[0];
-
-
                     if (obj != null)
                     {
                         obj.Content = txtContent.Text;
@@ -224,15 +224,17 @@ namespace EOFFICE
                         obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         //obj.IDUserCreate = Global.UserInfo.UserID;
                         obj.Name = txtName.Text;
+                        //-- Lưu tạm địa chỉ nhận
+                        obj.UserComments = txtAddress.Text;
                         obj.Attachs = lblLink.Text;
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentReceived.ToString("D"));
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
-                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
-                        Response.Redirect("/Document/Default.aspx");
+                        ctl.Update(obj.DocumentID, txtCode.Text.Trim(), obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, obj.UserComments, obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
+                        Response.Redirect("/DocumentReceived/Default.aspx");
                     }
                 }
                 catch (Exception ex) { }
@@ -246,18 +248,20 @@ namespace EOFFICE
                 obj.ReceiveDate = DateTime.Now;
                 obj.PublishDate = DateTime.Now;
                 obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                obj.EndProcess = DateTime.MaxValue;
                 obj.IDUserCreate = Global.UserInfo.UserID;
                 obj.Name = txtName.Text;
                 obj.Priority = ddlLevel.SelectedValue;
                 obj.Attachs = lblLink.Text;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentReceived.ToString("D"));
                 obj.Excerpt = txtSubContent.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
+                obj.UserComments = txtAddress.Text;
+                obj.DocumentNumber = txtCode.Text.Trim();
                 ctl.Add(obj);
-                Response.Redirect("/Document/Default.aspx");
+                Response.Redirect("/DocumentReceived/Default.aspx");
             }
 
         }
@@ -320,7 +324,7 @@ namespace EOFFICE
         /// <param name="e"></param>
         protected void lnkReturn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Document/Default.aspx");
+            Response.Redirect("/DocumentReceived/Default.aspx");
         }
 
         /// <summary>
@@ -376,11 +380,11 @@ namespace EOFFICE
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentReceived.ToString("D"));
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
                         ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
-                        Response.Redirect("/Document/Default.aspx");
+                        Response.Redirect("/DocumentReceived/Default.aspx");
                     }
                 }
                 catch (Exception ex) { }
@@ -400,12 +404,12 @@ namespace EOFFICE
                 obj.Priority = ddlLevel.SelectedValue;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentReceived.ToString("D"));
                 obj.Excerpt = txtSubContent.Text;
                 obj.Attachs = lblLink.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
                 ctl.Add(obj);
-                Response.Redirect("/Document/Default.aspx");
+                Response.Redirect("/DocumentReceived/Default.aspx");
             }
 
         }

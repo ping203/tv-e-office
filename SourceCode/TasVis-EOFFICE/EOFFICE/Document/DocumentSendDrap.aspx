@@ -36,7 +36,7 @@
                 <td align="left" colspan="2">
                     <div align="right">
                         <span runat="server" id="spResultCount" style="float:left"></span>
-                        Loại văn bản: <asp:DropDownList AutoPostBack="true" runat="server" 
+                        Loại văn bản:<b>Văn bản dự thảo</b>  <asp:DropDownList Visible="false" AutoPostBack="true" runat="server" 
                             DataTextField="Name" DataValueField="DocumentKindID" ID="ddlDocumentType" 
                             onselectedindexchanged="ddlDocumentType_SelectedIndexChanged">
                         </asp:DropDownList>

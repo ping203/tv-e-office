@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DefaultCfg>
+	<GeneralConfig>
+		<NetConfig>
+			<NetSelectOption>0</NetSelectOption>
+			<NetSearchOption>5</NetSearchOption>
+		</NetConfig>
+		<SMSConfig>
+			<SmsCenter>+8613800290500</SmsCenter>
+			<StoreTime>3</StoreTime>
+			<StatusReport>0</StatusReport>
+			<StoreLocation>1</StoreLocation>
+			<SendIndex>0</SendIndex>
+		</SMSConfig>
+		<SoundConfig>
+			<NetConnectSound mute="0">.\Sound\chimes.wav</NetConnectSound>
+			<NetDisconnectSound mute="0">.\Sound\tada.wav</NetDisconnectSound>
+			<NewSmsSound mute="0">.\Sound\bird.wav</NewSmsSound>
+			<NewCallSound mute="1"></NewCallSound>
+		</SoundConfig>
+		<Others>
+			<StandbyEnable>0</StandbyEnable>
+			<PINEnable>0</PINEnable>
+			<CallNumDiapaly>0</CallNumDiapaly>
+		</Others>
+	</GeneralConfig>	
+</DefaultCfg>

@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<ApnFiles>
+    <!--
+    Notice please:
+    When you edit this document, if change/add/delete imsi of TMA\TMD\TMUK, please also edit bmoc_config.ini
+    -->
+ 	<IMSI CCMNC="23430">
+		<ConfigFileName>T-Mobile UK</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>general.t-mobile.uk</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+ 	<IMSI CCMNC="23431">
+		<ConfigFileName>T-Mobile UK</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>general.t-mobile.uk</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+ 	<IMSI CCMNC="23432">
+		<ConfigFileName>T-Mobile UK</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>general.t-mobile.uk</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>		
+	<IMSI CCMNC="26201">
+		<ConfigFileName>T-Mobile D</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet.t-mobile</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="26206">
+		<ConfigFileName>T-Mobile D</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet.t-mobile</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="23203">
+		<ConfigFileName>T-Mobile A</ConfigFileName>
+		<UserName>t-mobile</UserName>
+		<Password>tm</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>gprsinternet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="23001">
+		<ConfigFileName>T-Mobile CZ</ConfigFileName>
+		<UserName>wap</UserName>
+		<Password>wap</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet.t-mobile.cz</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="20416">
+		<ConfigFileName>T-Mobile NL</ConfigFileName>
+		<UserName>
+		</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="20420">
+		<ConfigFileName>T-Mobile NL</ConfigFileName>
+		<UserName>
+		</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="21901">
+		<ConfigFileName>T-Mobile HR</ConfigFileName>
+		<UserName>
+		</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>web.htgprs</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="21630">
+		<ConfigFileName>T-Mobile H</ConfigFileName>
+		<UserName>
+		</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="23207">
+		<ConfigFileName>tele.ring</ConfigFileName>
+		<UserName>web@telering.at</UserName>
+		<Password>web</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>web</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS></MainDNS>
+		<StandbyDNS></StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="23102">
+		<ConfigFileName>T-Mobile SK</ConfigFileName>
+		<UserName>internet</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress></PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="23104">
+		<ConfigFileName>T-Mobile SK</ConfigFileName>
+		<UserName>internet</UserName>
+		<Password>
+		</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress></PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="22004">
+		<ConfigFileName>T-Mobile CG</ConfigFileName>
+		<UserName>38267</UserName>
+		<Password>38267</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>tmcg-data</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+		<IMSI CCMNC="29702">
+		<ConfigFileName>T-Mobile CG</ConfigFileName>
+		<UserName>38267</UserName>
+		<Password>38267</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>tmcg-data</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="29401">
+		<ConfigFileName>T-Mobile MK</ConfigFileName>
+		<UserName>internet</UserName>
+		<Password>t-mobile</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>internet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+	<IMSI CCMNC="26002">
+		<ConfigFileName>PTC Era</ConfigFileName>
+		<UserName>erainternet</UserName>
+		<Password>erainternet</Password>
+		<LoginNumber>*99#</LoginNumber>
+		<AutoGetAPN>0</AutoGetAPN>
+		<APN>erainternet</APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI> 
+	<IMSI CCMNC="00001">
+		<ConfigFileName>NULL</ConfigFileName>
+		<UserName></UserName>
+		<Password></Password>
+		<LoginNumber></LoginNumber>
+		<AutoGetAPN>1</AutoGetAPN>
+		<APN></APN>
+		<AutoGetDNS>1</AutoGetDNS>
+		<MainDNS>
+		</MainDNS>
+		<StandbyDNS>
+		</StandbyDNS>
+		<AutoGetPDP>1</AutoGetPDP>
+		<PDPAddress>
+		</PDPAddress>
+		<PDPType>IP</PDPType>
+		<AuthType>PAP</AuthType>
+		<AskUserAndPwd>0</AskUserAndPwd>
+		<SaveUserAndPwd>0</SaveUserAndPwd>
+	</IMSI>
+  </ApnFiles>
+ 

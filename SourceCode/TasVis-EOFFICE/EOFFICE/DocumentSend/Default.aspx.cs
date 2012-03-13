@@ -16,9 +16,9 @@ using DataAccess.DataObject;
 using EOFFICE;
 using System.Collections.Generic;
 
-namespace EOFFICE.Document
+namespace EOFFICE.DocumentSend
 {
-    public partial class DocumentProcessedUser : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
         #region "Propertys"
         /// <summary>
@@ -56,9 +56,9 @@ namespace EOFFICE.Document
         /// </summary>
         private void InitData()
         {
-            BUser ctlUP = new BUser();
-            //-- Kiểm tra quyền duyệt
-            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString())&&!Global.IsAdmin())
+            BUser ctl = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentDrap.ToString())&& !Global.IsAdmin())
                 Response.Redirect("/");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
@@ -68,6 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
+            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
             ////--Trạng thái
             //if (Request.QueryString["status"] != null)
@@ -179,7 +180,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(Common.DocumentType.DocumentDrap.ToString("D")), 0, Global.UserInfo.UserID.ToString(), int.Parse(EOFFICE.Common.DocumentStatus.Processed.ToString("D")), "Name", "DESC", 0, int.Parse(hdfCurrentPage.Value), pagesize);
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse( Common.DocumentType.DocumentSend.ToString("D")), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC",Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value ), pagesize);
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)
@@ -370,11 +371,29 @@ namespace EOFFICE.Document
         {
 
             //-- Sửa văn bản
-            if (e.CommandName.Equals("Publish", StringComparison.OrdinalIgnoreCase))
+            if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
                 //-- Chuyển tới trang sửa  văn bản
-                Response.Redirect("/Document/DocumentDetailsProcessed.aspx?DocumentId=" + e.CommandArgument.ToString());
+                Response.Redirect("/DocumentSend/DocumentEdit.aspx?DocumentId=" + e.CommandArgument.ToString());
             }
+            //--Xóa  văn bản
+            else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
+            {
+                BDocument ctl = new BDocument();
+                try
+                {
+                    //-- THực hiện xóa  văn bản
+                    ctl.Delete(e.CommandArgument.ToString());
+                    //--Load lại danh sách  văn bản
+                    BindData();
+                }
+                catch (Exception ex)
+                {
+                    //--Load lại danh sách  văn bản
+                    BindData();
+                }
+            }
+           
         }
 
         /// <summary>

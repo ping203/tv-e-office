@@ -124,8 +124,11 @@ namespace EOFFICE
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
             {
                 BDocumentKind ctl = new BDocumentKind();
-                ctl.Delete(int.Parse(e.CommandArgument.ToString()));
-                BindData();
+                if(ctl.Delete(int.Parse(e.CommandArgument.ToString())))
+                    BindData();
+                else
+                    RegisterClientScriptBlock("Notification", "<script language='javascript'>alert('Đã tồn tại văn bản trong loại này!');</script>");
+                
             }
 
         }

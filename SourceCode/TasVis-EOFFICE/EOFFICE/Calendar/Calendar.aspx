@@ -14,7 +14,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <div class="list wp-form" id="WorkAssignment">
-            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Lịch công tác cá nhân</h2>
+            	<h2><span class="icon"><img src="../Images/New-document.png" /></span>Quản lý lịch làm việc</h2>
                 
                 	<div class="nav-function">
                     	<ul>
@@ -47,7 +47,7 @@
                                 AllDay="Cả ngày" Cancel="Hủy" ConfirmCancel="Hủy" 
                                 ConfirmDeleteText="Bạn chắc chắn muốn xóa lịch làm việc này?" 
                                 ConfirmDeleteTitle="Xác nhận xóa" ConfirmOK="Đồng ý" 
-                                ContextMenuAddAppointment="Thêm lịch công tác" ContextMenuDelete="Xóa" 
+                                ContextMenuAddAppointment="Thêm lịch làm việc" ContextMenuDelete="Xóa" 
                                 ContextMenuEdit="Sửa" HeaderDay="Ngày" HeaderMonth="Tháng" 
                                 HeaderNextDay="Ngày kế tiếp" HeaderPrevDay="Ngày trước" 
                                 HeaderTimeline="Dòng thời gian" HeaderToday="Hôm nay" HeaderWeek="Tuần" 
@@ -63,7 +63,7 @@
                             <AdvancedEditTemplate>
                                 <div class="rsAdvancedEdit">
                                     <div class="rsAdvTitle">
-                                        <div class="rsAdvInnerTitle"> Sửa lịch công tác </div>
+                                        <div class="rsAdvInnerTitle"> Sửa lịch làm việc </div>
                                     </div>
                                     <div class="rsAdvContentWrapper">
                                         <div class="rsAdvOptionsScroll">
@@ -72,7 +72,7 @@
                                                     <div class="rsAdvOptionsPanel">
                                                         <table width="100%">
                                                             <tr>
-                                                                <td align="right" width="135px">Tên lịch công tác:</td>
+                                                                <td align="right" width="135px">Tên lịch làm việc:</td>
                                                                 <td>
                                                                     <asp:HiddenField runat="server" ID="hdfID" />
                                                                     <asp:TextBox runat="server" ID="SubjectTextBox" Width="100%" CssClass="txt"></asp:TextBox>
@@ -178,7 +178,7 @@
                             <AdvancedInsertTemplate>
                                 <div class="rsAdvancedEdit">
                                     <div class="rsAdvTitle">
-                                        <div class="rsAdvInnerTitle"> Thêm lịch công tác </div>
+                                        <div class="rsAdvInnerTitle"> Thêm lịch làm việc </div>
                                     </div>
                                     <div class="rsAdvContentWrapper">
                                         <div class="rsAdvOptionsScroll">
@@ -187,7 +187,7 @@
                                                     <div class="rsAdvOptionsPanel">
                                                         <table width="100%">
                                                             <tr>
-                                                                <td align="right" width="135px">Tên lịch công tác:</td>
+                                                                <td align="right" width="135px">Tên lịch làm việc:</td>
                                                                 <td>
                                                                     <asp:TextBox runat="server" ID="SubjectTextBox" Width="100%" CssClass="txt"></asp:TextBox>
                                                                     <br />

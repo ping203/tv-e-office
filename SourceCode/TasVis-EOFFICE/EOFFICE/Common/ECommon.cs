@@ -89,7 +89,20 @@ namespace EOFFICE.Common
         /// </summary>
         UserManagement,
 
-
+        //-----------------Công việc------------------
+        ///<summary>
+        ///Quyền giao việc
+        ///</summary>
+        WorkAssignment,
+        ///<summary>
+        ///Quyền chuyển việc
+        ///</summary>
+        WorkForward,
+        //-------------Lịch họp -------------------
+        ///<summary>
+        ///Quyền tạo lịch họp
+        ///</summary>
+        CalendarCreate,
     };
 
 }

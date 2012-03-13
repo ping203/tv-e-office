@@ -26,7 +26,17 @@ $(document).ready(function() {
     $("#btnHide").click(function() {
         $("#listUserProcess").slideToggle("slow");
     });
-
+    $(".txtcontentsms").keydown(function(){
+        var value=$(this).val();
+        var length=value.length;
+        
+        if(length > 146){
+            $(this).val(value.substring(0,146));
+        }else{
+            var character=146-length;
+            $("#lblChar").html(character);
+        }
+    });     
 });
 /* ajax load user by department work */
 $(".lbtDepartmentAjax").click(function() {
@@ -64,3 +74,11 @@ function get_check_value() {
         );
             $("#ctl00_cphContent_hdfUsers").val(c_value);             
 } 
+/* check char sms */
+function textCounter(field,cntfield,maxlimit) {
+    if (field.value.length > maxlimit) // if too long...trim it!
+        field.value = field.value.substring(0, maxlimit);
+    // otherwise, update 'characters left' counter
+    else
+    cntfield.value = maxlimit - field.value.length;
+}

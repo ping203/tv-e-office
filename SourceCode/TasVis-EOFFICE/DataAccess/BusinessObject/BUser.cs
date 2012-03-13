@@ -53,6 +53,25 @@ namespace DataAccess.BusinessObject
              list = Common.Common.ConvertTo<OUser>(tbl);
              return list;
          }
+        /// <summary>
+        /// Lấy danh sách User trong phòng ban trừ những người đã tham gia
+        /// </summary>
+        /// <param name="DepartmentID"></param>
+        /// <param name="ExcludeUserName"></param>
+        /// <returns></returns>
+         public IList<OUser> GetByDepartment(int DepartmentID,string ExcludeUserName)
+         {
+             SqlParameter[] sqlPara = new SqlParameter[2];
+             sqlPara[0] = new SqlParameter("@IDDepartment", SqlDbType.Int);
+             sqlPara[0].Value = DepartmentID;
+             sqlPara[1] = new SqlParameter("@ExcludeUserName", SqlDbType.VarChar);
+             sqlPara[1].Value = ExcludeUserName;
+             DataTable tbl = RunProcedureGet("sp_tblUser_get", sqlPara);
+             IList<OUser> list = new List<OUser>();
+             list = Common.Common.ConvertTo<OUser>(tbl);
+             return list;
+         }
+
          public IList<OUser> Get(string Username, string Password)
          {
              SqlParameter[] sqlPara = new SqlParameter[2];

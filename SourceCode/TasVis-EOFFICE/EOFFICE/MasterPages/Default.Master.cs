@@ -24,13 +24,13 @@ namespace EOFFICE.MasterPages
         {
             BUser ctl = new BUser();
             //-- Kiểm tra quyền dự thảo
-            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()))
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentDrap.ToString()) || Global.IsAdmin())
                 pnDocumentDrap.Visible = true;
             //-- Kiểm tra quyền duyệt
-            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentProcess.ToString()))
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentProcess.ToString()) || Global.IsAdmin())
                 pnDocumentProcess.Visible = true;
             //-- Kiểm tra quyền phát hành
-            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()))
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()) || Global.IsAdmin())
                 pnDocumentPublish.Visible = true;
         }
 

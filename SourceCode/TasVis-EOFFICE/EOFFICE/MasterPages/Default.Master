@@ -86,20 +86,13 @@
                     </ul>
                 </li>
             	<li class="li-parent" id="lich-cong-tac">
-                	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/calendar_icon.gif" runat="server" /></span>Lịch công tác</a></h3>
-                    <ul class="ul-child">                    	
+                	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/calendar_icon.gif" runat="server" /></span>Lịch làm việc</a></h3>
+                    <ul class="ul-child">                    	                        
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Create.png" runat="server" /></span>Tạo mới lịch họp</a>
-
+                        	<a href="../Calendar/Calendar.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/View.png" runat="server" /></span>Quản lý lịch làm việc</a>
                         </li>
                         <li class="li-child">
-                        	<a href="../Calendar/Calendar.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/View.png" runat="server" /></span>Xem lịch họp</a>
-                        </li>
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Ngày được đăng ký</a>
-                        </li>
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Người được đăng ký</a>
+                        	<a href="../Calendar/SMS.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/icon-sms.png" runat="server" /></span>Gửi tin nhắn nhắc việc</a>
                         </li>
                     </ul>
                 </li>

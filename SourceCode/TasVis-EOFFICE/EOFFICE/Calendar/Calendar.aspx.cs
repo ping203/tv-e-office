@@ -103,26 +103,54 @@ namespace EOFFICE.Calender
                 BUser BobjUser = new BUser();
                 OUser objUser = new OUser();
                 string[] listUser;
+                Panel panelUser = (Panel)e.Container.FindControl("panelUser");
+                string html = "";
+                html +="<table width='100%'>";
+                int count = 0;
                 
-                string mesage = string.Empty;
                 string UserJoin = objCalendar.UserJoin;
                 listUser = UserJoin.Split(',');
                 for (int i = 1; i < listUser.Count() - 1; i++)
                 {
+                    OUser _OUser = new OUser();
+                    _OUser = BobjUser.Get(listUser[i]).First();
                     
-                    mesage += "- "+BobjUser.Get(listUser[i]).First().FullName + "<br/>";
-                }
-                HiddenField hdfUserJoin = (HiddenField)e.Container.FindControl("hdfUserJoin");
-                hdfUserJoin.Value = UserJoin;
-                lblUserJoin = (Label)e.Container.FindControl("lblUserJoin");
-                lblUserJoin.Text = mesage;
+                    if (count % 4 == 0)
+                    {
+                        html += "<tr>";
+                    }
+                    html += "<td width='25%'>";
 
+                    html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + _OUser.UserName + "' title='" + _OUser.FullName +"'"+ "checked='checked'" + " />";
+
+
+                    html += "&nbsp";
+                    html += "" + _OUser.FullName + "";
+                    html += "</td>";
+                    count++;
+                    if (count % 4 == 0)
+                    {
+                        html += "</tr>";
+                    }
+                }
+                if (count % 4 != 0)
+                {
+                    html += "</tr>";
+                }
+                html += "</table>";
+
+                Literal LiteralUser = (Literal)e.Container.FindControl("LiteralUser");
+                LiteralUser.Text = html;
+                HiddenField hdfUserJoin = (HiddenField)e.Container.FindControl("hdfUserJoin");
+                hdfUserJoin.Value = UserJoin;                
                 //Lấy địa chỉ họp
                 txtAddress.Text = objCalendar.Address;
 
-                Panel panelUser = (Panel)e.Container.FindControl("panelUser");
+                
+
                 //-- Kiểm tra quyền tạo việc
                 BUser ctl = new BUser();
+                
                 if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.CalendarCreate.ToString()) || Global.IsAdmin())
                 {
                     panelUser.Visible = true;

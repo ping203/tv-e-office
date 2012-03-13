@@ -117,11 +117,20 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                <td>&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td align="right">Thành phần tham gia:</td>
                                                                 <td>
-                                                                    <asp:Label runat="server" ID="lblUserJoin"></asp:Label>
+                                                                
+                                                                    <asp:Literal runat="server" ID="LiteralUser">
+                                                                        
+                                                                    </asp:Literal>
                                                                     <asp:HiddenField runat="server" ID="hdfUserJoin" />
                                                                 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>&nbsp;</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="right">Địa điểm:</td>
@@ -133,7 +142,7 @@
                                                                 <td colspan="2">
                                                                 <asp:Panel runat="server" ID="panelUser">
                                                                     <br />
-                                                                    <p style="font-size:12pt">Thay đổi thành phần tham gia:<p>                                                               
+                                                                    <p style="font-size:12pt">Thêm thành phần tham gia:<p>                                                               
                                                                     <div>
                                                                         
                                                                             <asp:Repeater ID="rptDepartment" runat="server"  DataSource="<%#BindDepartment() %>">

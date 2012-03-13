@@ -36,10 +36,14 @@ namespace EOFFICE
         /// </summary>
         public static bool IsAdmin()
         {
-            if (UserInfo.UserName.Equals("admin", StringComparison.OrdinalIgnoreCase))
-                return true;
-            else
-                return false;
+            try {
+                if (UserInfo.UserName.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex) { return false; }
+           
         }
 
         protected void Application_Start(object sender, EventArgs e)

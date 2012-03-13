@@ -35,7 +35,7 @@ namespace EOFFICE.Ajax
                 {
                     html += "<tr>";
                 }
-                html += "<td width='25%'>";
+                html += "<td width='90'>";
                 if (UserJoin.IndexOf("," + obj.UserName + ",") == -1)
                 {
                     html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName + "' />";

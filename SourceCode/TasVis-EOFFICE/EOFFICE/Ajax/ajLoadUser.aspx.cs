@@ -28,27 +28,25 @@ namespace EOFFICE.Ajax
             List<OUser> listUser = new List<OUser>();
             listUser = BobjUser.GetByDepartment(DepartmentID).ToList();
             int count = 0;
+            html += "<tr>";
             foreach (OUser obj in listUser)
-            {
-                if (count % 4 == 0)
-                {
-                    html += "<tr>";
-                }
-                html += "<td width='25%'>";                
+            {                
+                html += "<td width='90'>";                
                 html += "<input id='ckxUser' class='cbxUser' name='ckxUser' type='checkbox' value='" + obj.UserName + "' title='" + obj.FullName + "' />";                
                 html += "&nbsp";
                 html += "" + obj.FullName + "";
                 html += "</td>";
                 count++;
+                if(count==3 && listUser.Count<4)
+                {
+                    html+="<td width='90'></td>";
+                }                
                 if (count % 4 == 0)
                 {
-                    html += "</tr>";
+                    html += "</tr><tr>";
                 }
             }
-            if (count % 4 != 0)
-            {
-                html += "</tr>";
-            }
+            html += "</tr>";
             html += "</table>";
             Response.Write(html);
             Response.End();

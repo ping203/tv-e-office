@@ -18,11 +18,19 @@ namespace EOFFICE.Calendar
 {
     public partial class SMS : System.Web.UI.Page
     {
+        OUser _OUser = new OUser();
+        BUser _BUser = new BUser();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (_BUser.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.SendSMS.ToString()))
             {
-                BindDepartment();
+                if (!IsPostBack)
+                {
+                    BindDepartment();
+                }
+            }
+            else {
+                Response.Redirect("/permission-fail.aspx");
             }
         }
         public void BindDepartment()
@@ -33,9 +41,7 @@ namespace EOFFICE.Calendar
         }
         protected void btnSend_Click(object sender, EventArgs e)
         {
-            wssendmessenger.Service ws = new EOFFICE.wssendmessenger.Service();
-            OUser _OUser = new OUser();
-            BUser _BUser = new BUser();
+            wssendmessenger.Service ws = new EOFFICE.wssendmessenger.Service();            
             string strPhoneNumber="";
             string content = "NganSon.,JSC: ";
             content += Common.ECommon.ReplaceUnicode(txtContent.Text);            

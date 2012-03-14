@@ -26,7 +26,7 @@
         </div>
         <div class="form">
             <table width="100%" cellspacing="5">
-                <tr>
+                <tr style="display:none">
                     <td>
                         Loại văn bản:<span class="required">*</span>
                     </td>

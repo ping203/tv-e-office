@@ -120,7 +120,7 @@ namespace EOFFICE.Users
                 obj = new OUser();
             }
             //-- gán thông tin cho đổi tượng người dùng
-            obj.BirthDay = Convert.ToDateTime(txtBirthDay.Text.Trim());
+            obj.BirthDay = DateTime.ParseExact(txtBirthDay.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture); 
             obj.Email = txtEmail.Text.ToString();
             obj.FullName = txtFullName.Text.Trim();
             obj.Gender = ddlGender.SelectedValue;
@@ -142,7 +142,7 @@ namespace EOFFICE.Users
             else
             {
                 obj.UserName = txtUsername.Text.Trim();
-                obj.Password = txtPassword.Text.Trim();
+                obj.Password = Common.ECommon.GetMd5String(txtPassword.Text.Trim());
                 ctl.Add(obj);
                 Response.Redirect("Default.aspx");
             }

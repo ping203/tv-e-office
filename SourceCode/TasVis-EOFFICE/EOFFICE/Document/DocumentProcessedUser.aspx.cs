@@ -69,16 +69,6 @@ namespace EOFFICE.Document
                 catch (Exception ex) { }
             }
             hdfCurrentPage.Value = CurrentPage.ToString();
-            ////--Trạng thái
-            //if (Request.QueryString["status"] != null)
-            //{
-            //    try
-            //    {
-            //        ddlStatus.Items.FindByValue(Request.QueryString["status"]).Selected = true;
-            //    }
-            //    catch (Exception ex) { }
-            //}
-            //--Phòng ban
             if (Request.QueryString["dt"] != null)
             {
                 try
@@ -197,22 +187,6 @@ namespace EOFFICE.Document
                     ctlPagging.Visible = false;
                 }
             }
-            //int count = ctl.GetCount(_fullname, _username, _email, _departmentid, _status, "", "");
-            //ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
-            //spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
-            //if (count > ctlPagging.PageSize)
-            //{
-            //    ctlPagging.Visible = true;
-            //}
-            //else
-            //{
-            //    ctlPagging.Visible = false;
-            //}
-            //grvListDocument.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", CurrentPage, ctlPagging.PageSize);
-            //grvListDocument.DataBind();
-            //ctlPagging.CurrentIndex =CurrentPage;
-            //ctlPagging.ItemCount = count;
-            //ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         /// <summary>

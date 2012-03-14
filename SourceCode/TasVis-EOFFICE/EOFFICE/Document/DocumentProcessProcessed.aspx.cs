@@ -169,7 +169,7 @@ namespace EOFFICE.Document
         {
             BUser ctlUP = new BUser();
             //-- Kiểm tra quyền duyệt
-            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString()))
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString()) && !Global.IsAdmin())
                 Response.Redirect("/");
             DateTime StartDate = DateTime.ParseExact("01/01/1970", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime EndDate = DateTime.MaxValue;
@@ -179,7 +179,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(Common.DocumentType.DocumentDrap.ToString("D")), 0, Global.UserInfo.UserID.ToString(), int.Parse(EOFFICE.Common.DocumentStatus.Published.ToString("D")), "Name", "DESC", 0, int.Parse(hdfCurrentPage.Value), pagesize);
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(Common.DocumentType.DocumentDrap.ToString("D")), 0,0, int.Parse(EOFFICE.Common.DocumentStatus.Published.ToString("D")), "Name", "DESC", 0, int.Parse(hdfCurrentPage.Value), pagesize);
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)

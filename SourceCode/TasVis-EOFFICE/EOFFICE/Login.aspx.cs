@@ -37,6 +37,11 @@ namespace EOFFICE
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //BUser ctlUser = new BUser();
+            //foreach (OUser obj in ctlUser.Get(0))
+            //{
+            //    ctlUser.Update(obj.UserName, Common.ECommon.GetMd5String(obj.Password));
+            //}
             txtPassword.Attributes.Add("onkeydown", "if ((event.which && event.which ==13) || (event.keyCode && event.keyCode == 13)){__doPostBack('" + btnLogin.UniqueID + "','')} else return true; ");
             txtUsername.Attributes.Add("onkeydown", "if ((event.which && event.which ==13) || (event.keyCode && event.keyCode == 13)){__doPostBack('" + btnLogin.UniqueID + "','')} else return true; ");
         }
@@ -51,7 +56,7 @@ namespace EOFFICE
             BUser ctlUser = new BUser();
             if (txtUsername.Text.Trim() != "" && txtPassword.Text.Trim() != "")
             {
-                IList<OUser> lst = ctlUser.Get(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+                IList<OUser> lst = ctlUser.Get(txtUsername.Text.Trim(), Common.ECommon.GetMd5String(txtPassword.Text.Trim()));
                 if (lst != null && lst.Count > 0)
                 {
                     UInfo = lst[0];

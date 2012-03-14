@@ -31,7 +31,7 @@
                         Loại văn bản:<span class="required">*</span>
                     </td>
                     <td colspan="3">
-                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="DocumentKindID" ID="ddlType">
+                        <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="DocumentKindID" ID="ddlType">
                         </asp:DropDownList>
                         <a href="/Document/DocumentKindCreate.aspx" class="link-btn">Thêm loại văn bản</a>
                     </td>
@@ -41,7 +41,7 @@
                         Văn phòng:<span class="required">*</span>
                     </td>
                     <td colspan="3">
-                        <asp:DropDownList runat="server" DataTextField="Name" DataValueField="OfficalId" ID="ddlOffical">
+                        <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="OfficalId" ID="ddlOffical">
                         </asp:DropDownList>
                         <a href="/Document/DocumentOffical.aspx" class="link-btn">Thêm văn phòng</a>
                     </td>
@@ -51,7 +51,7 @@
                         Tên bản thảo:<span class="required">*</span>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtName" CssClass="txt required"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -59,9 +59,9 @@
                         Ngày bắt đầu: <span class="required">*</span>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>(dd/mm/yy)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ngày
+                        <asp:TextBox runat="server" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>(ngày/tháng/năm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ngày
                         kết thúc: <span class="required">*</span><asp:TextBox runat="server" ID="txtEndDate"
-                            CssClass="txt required datepicker"></asp:TextBox>(dd/mm/yy)
+                            CssClass="txt required datepicker"></asp:TextBox>(ngày/tháng/năm)
                     </td>
                 </tr>
                 <tr>
@@ -69,8 +69,8 @@
                         Nội dung tóm tắt:
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtSubContent" TextMode="MultiLine" Height="50px"
-                            Width="300px"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtSubContent" CssClass="textarea" TextMode="MultiLine" Height="60"
+                            Width="500"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -78,7 +78,7 @@
                         Nội dung công văn:
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine" Height="50px" Width="300px"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtContent" CssClass="textarea" TextMode="MultiLine" Height="100" Width="500"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -98,7 +98,7 @@
                         Mức độ ưu tiên:
                     </td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlLevel">
+                        <asp:DropDownList runat="server" ID="ddlLevel" Width="250">
                             <asp:ListItem Text="Rất quan trọng" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Quan trọng" Value="2"></asp:ListItem>
                             <asp:ListItem Text="Bình thường" Value="3"></asp:ListItem>
@@ -122,7 +122,7 @@
                                             </asp:ListBox>
                                         </td>
                                         <td valign="top">
-                                            <asp:LinkButton Width="120px" runat="server" ID="lnkAddUserProcess" 
+                                            <asp:LinkButton Width="125px" runat="server" ID="lnkAddUserProcess" 
                                                 CssClass="btn" onclick="lnkAddUserProcess_Click"><img src="../Images/Go-back.png" />Thêm người xử lý</asp:LinkButton>
                                                 <br />
                                                   <br />
@@ -130,12 +130,12 @@
                                                 onclick="cmdDeleteUser_Click"><img src="../Images/Erase.png" />Xóa</asp:LinkButton>
                                         </td>
                                         <td valign="top">
-                                            <asp:TextBox runat="server" ID="txtKeySearch" Width="120px" Height="16px"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="txtKeySearch" CssClass="txt" Width="120px" Height="16px"></asp:TextBox>
                                             <asp:DropDownList runat="server" ID="ddlDepartment" Width="150px" Height="22px" DataValueField="DepartmentID"
                                                 DataTextField="Name" AutoPostBack="true" 
                                                 onselectedindexchanged="ddlDepartment_SelectedIndexChanged">
                                             </asp:DropDownList>
-                                            <asp:LinkButton runat="server" ID="btnSearchUserProcess" Text="Search" OnClick="btnSearchUserProcess_Click" OnClientClick="javascript:ShowLoading();"></asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="btnSearchUserProcess" Text="Search" CssClass="link-btn" OnClick="btnSearchUserProcess_Click" OnClientClick="javascript:ShowLoading();"></asp:LinkButton>
                                             <br />
                                             <div align="center" id="SearchLoading" style="display:none">
                                                 <img src="../Images/icon_loading.gif" />

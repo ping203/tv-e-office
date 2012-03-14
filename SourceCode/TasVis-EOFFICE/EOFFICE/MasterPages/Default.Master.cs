@@ -32,6 +32,9 @@ namespace EOFFICE.MasterPages
             //-- Kiểm tra quyền phát hành
             if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()) || Global.IsAdmin())
                 pnDocumentPublish.Visible = true;
+            BUser ctlUP = new BUser();
+            if (Global.IsAdmin())
+                li_User.Visible=true ;
         }
 
         protected void Page_Load(object sender, EventArgs e)

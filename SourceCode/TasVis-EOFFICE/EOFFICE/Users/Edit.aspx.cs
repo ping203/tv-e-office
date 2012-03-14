@@ -214,8 +214,12 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            BUser ctlUP = new BUser();
+            if (!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             if (!IsPostBack)
             {
+
                 //--Load danh sách giới tính
                 BindGender();
                 //--Load danh sách trạng thái

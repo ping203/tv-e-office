@@ -54,7 +54,10 @@ namespace EOFFICE.Users
         /// Khởi tạo các thông tin của form
         /// </summary>
         private void InitData()
-        { 
+        {
+            BUser ctlUP = new BUser();
+            if (!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {

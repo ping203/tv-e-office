@@ -124,7 +124,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="li-parent">
+                <li class="li-parent" runat="server" id="li_User" visible="false">
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Pinion.png" runat="server" /></span>Quản trị hệ thống</a></h3>
                 	<ul class="ul-child">
                 	    <li class="li-child">

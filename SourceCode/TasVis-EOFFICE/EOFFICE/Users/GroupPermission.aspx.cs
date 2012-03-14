@@ -82,6 +82,9 @@ namespace EOFFICE.Users
         /// </summary>
         private void BindData()
         {
+            BUser ctlUP = new BUser();
+            if (!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             BPermisionDefinition ctl = new BPermisionDefinition();
             grvPermisionDefinition.DataSource = ctl.Get(0,"","");
             grvPermisionDefinition.DataBind();

@@ -140,6 +140,15 @@ namespace EOFFICE.MasterPages {
         protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
+        /// li_User control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_User;
+        
+        /// <summary>
         /// cphContent control.
         /// </summary>
         /// <remarks>

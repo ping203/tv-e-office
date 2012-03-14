@@ -25,6 +25,9 @@ namespace EOFFICE.Users
         /// </summary>
         private void BindData()
         {
+            BUser ctlUP = new BUser();
+            if (!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             BGroup ctl = new BGroup();
             grvListGroups.DataSource = ctl.Get(0);
             grvListGroups.DataBind();

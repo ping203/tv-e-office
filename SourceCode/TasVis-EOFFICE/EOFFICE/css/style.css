@@ -76,10 +76,13 @@ search-doc{}
 .nav-function ul{overflow:hidden;padding-left:10px;}
 .nav-function ul li{float:left;margin-right:10px;border:1px solid #CCC;padding:1px;}
 .btn{display:block;padding:3px 5px;background:#0066CC;color:#FFF;border:none;}
+.btn img{float:left;margin-right:5px;}
 .btn:hover{background:#5E9AF0;cursor:pointer;}
+.RadScheduler_Outlook input.link-btn{padding:3px 3px;color:#FFF;}
 .link-btn{padding:3px 3px;border:none;background:#0066CC;color:#FFF;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .link-btn:hover{background:#5E9AF0;cursor:pointer;}
 .link-btn .create{padding-left:20px;background:url('../Images/create.png') no-repeat;}
+.link-btn img{float:left;margin-right:5px;}
 .txt{padding:2px;width:150px;background:#FFF;border:1px solid #CCC;height:18px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .textarea{padding:5px;background:none;border:1px solid #CCC;-moz-border-radius:3px;-webkit-border-radius:3px;}
 select{height:25px;padding:2px;background:none;border:1px solid #CCC;-moz-border-radius:3px;-webkit-border-radius:3px;}
@@ -138,3 +141,4 @@ select{height:25px;padding:2px;background:none;border:1px solid #CCC;-moz-border
 #createWork select{width:305px;}
 #list-createuser .txt{width:300px;}
 #list-createuser select{width:305px;}
+#create-document .txt{width:245px;}

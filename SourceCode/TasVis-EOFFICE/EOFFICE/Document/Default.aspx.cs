@@ -68,7 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
-            lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
+            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
             ////--Trạng thái
             //if (Request.QueryString["status"] != null)

@@ -9,10 +9,10 @@
         <div class="nav-function">
             <ul>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Duyệt</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClientClick="javascript:return $('form').valid();" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Duyệt</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn" OnClick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Trả lại</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn" OnClientClick="javascript:return $('form').valid();" OnClick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Trả lại</asp:LinkButton>
                 </li>
                 <li>
                     <asp:LinkButton runat="server" ID="lnkReturn" CssClass="btn" OnClick="lnkReturn_Click"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>
@@ -87,10 +87,10 @@
         <div class="nav-function">
             <ul>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Duyệt</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" OnClientClick="javascript:return $('form').valid();" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Duyệt</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn" OnClick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Trả lại</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn" OnClientClick="javascript:return $('form').valid();" OnClick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Trả lại</asp:LinkButton>
                 </li>
                 <li>
                     <asp:LinkButton runat="server" ID="lnkReturn1" CssClass="btn"><img src="../Images/Go-back.png" />Quay về</asp:LinkButton></li>

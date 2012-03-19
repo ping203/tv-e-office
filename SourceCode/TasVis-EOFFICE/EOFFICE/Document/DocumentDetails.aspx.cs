@@ -177,7 +177,7 @@ namespace EOFFICE
             {
    
             }
-
+            Response.Redirect("/Document/DocumentProcess.aspx");
         }
 
         /// <summary>
@@ -248,6 +248,8 @@ namespace EOFFICE
         protected void lnkReturn_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Document/Default.aspx");
+            
+            
         }
 
         /// <summary>
@@ -357,7 +359,7 @@ namespace EOFFICE
             else
             {
             }
-
+            Response.Redirect("/Document/DocumentProcess.aspx");
         }
 
         /// <summary>

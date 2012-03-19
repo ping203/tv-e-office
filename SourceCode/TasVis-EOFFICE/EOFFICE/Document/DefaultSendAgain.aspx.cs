@@ -170,7 +170,7 @@ namespace EOFFICE.Document
             BUser ctlUP = new BUser();
             //-- Kiểm tra quyền dự thảo
             if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()) && !Global.IsAdmin())
-                Response.Redirect("/");
+                Response.Redirect("/permission-fail.aspx");
 
             DateTime StartDate = DateTime.ParseExact("01/01/1970", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime EndDate = DateTime.MaxValue;

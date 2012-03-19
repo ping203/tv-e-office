@@ -10,10 +10,10 @@
         <div class="nav-function">
             <ul>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClick="lnkSave_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkSave" CssClass="btn" OnClick="lnkSave_Click" OnClientClick="javascript:return $('form').valid();"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn" 
+                    <asp:LinkButton runat="server" ID="lnkSendDrap" CssClass="btn" OnClientClick="javascript:return $('form').valid();"  
                         onclick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
                 </li>
                 <li style="display:none">
@@ -156,11 +156,11 @@
         <div class="nav-function">
             <ul>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" 
+                    <asp:LinkButton runat="server" ID="lnkSave1" CssClass="btn" OnClientClick="javascript:return $('form').valid();" 
                         onclick="lnkSave_Click"><img src="../Images/Save.png" />Lưu bản thảo</asp:LinkButton>
                 </li>
                 <li>
-                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn" 
+                    <asp:LinkButton runat="server" ID="lnkSendDrap1" CssClass="btn" OnClientClick="javascript:return $('form').valid();" 
                         onclick="lnkSendDrap_Click"><img src="../Images/Forward.png" />Gửi bản thảo</asp:LinkButton>
                 </li>
                 <li style="display:none">

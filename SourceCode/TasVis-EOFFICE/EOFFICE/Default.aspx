@@ -1,178 +1,121 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE._Default" MasterPageFile="~/MasterPages/Default.Master" %>
+<%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
 <asp:Content ContentPlaceHolderID="cphContent" ID="ContentDefault" runat="server">
     <div class="list" id="hot-function">
     	<h2><span class="icon"><img src="Images/Wrench.png" /></span>Truy cập nhanh các chức năng</h2>
         <ul>
         	<li><a href="/Document/Default.aspx" class="a-hot-function create-doc-out"><span class="icon"><img src="Images/New-document.png" /></span>Tạo văn bản dự thảo</a><span class="icon-go"></span></li>
-            <li><a href="" class="a-hot-function create-doc-in"><span class="icon"><img src="Images/New-document.png" /></span>Nhập văn bản đến</a><span class="icon-go"></span></li>
+            <li><a href="/DocumentReceived/DocumentEdit.aspx" class="a-hot-function create-doc-in"><span class="icon"><img src="Images/New-document.png" /></span>Nhập văn bản đến</a><span class="icon-go"></span></li>
             <li><a href="/Works/Default.aspx" class="a-hot-function create-work"><span class="icon"><img src="Images/Create.png" /></span>Tạo mới công việc</a><span class="icon-go"></span></li>
             <li><a href="/Works/WorkReceived.aspx" class="a-hot-function work-play"><span class="icon"><img src="Images/Play.png" /></span>Công việc cần hoàn thành</a><span class="icon-go"></span></li>
             <li><a href="#" class="a-hot-function search-doc"><span class="icon"><img src="Images/Text-preview.png" /></span>Tra cứu văn bản</a><span class="icon-go"></span></li>
         </ul>
     </div><!-- end hot-function -->
     <div class="list" id="list-congvieccanlam">
-    	<h2><span class="icon"><img src="Images/Play.png" /></span>Danh sách công việc cần hoàn thành</h2>
-    	<table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
-    	    <tr>
-    	        <td colspan="7">    	            
-    	            <select class="select">
-    	                <option>Xóa</option>
-    	                <option>Duyệt</option>
-    	            </select>
-    	            <a href="#" class="link-btn">Thực hiện</a>
-    	        </td>
-    	    </tr>
+    	<h2><span class="icon"><img src="Images/Play.png" /></span>Danh sách công việc cần hoàn thành</h2>    	
+    	<table width="80%" cellspacing="1">
         	<tr>
-        	    <th><input type="checkbox" /></th>
-            	<th>Stt</th>
-                <th><a href="#" class="order-desc">Tên công việc</a></th>
-                <th><a href="#">Ngày bắt đầu</a></th>
-                <th><a href="#">Ngày hoàn thành</a></th>
-                <th>Ghi chú</th>
-                <th>Thao tác</th>
-            </tr>            
+        	    <td align="right">Xem công việc:</td>
+        	    <td>
+        	        <asp:DropDownList runat="server" ID="ddlWork" onselectedindexchanged="ddlWork_SelectedIndexChanged" Width="255" AutoPostBack="true"></asp:DropDownList>
+        	    </td>
+        	    <td align="right">Nhóm công việc:</td>
+        	    <td>
+        	        <asp:DropDownList runat="server" ID="ddlWorkGroup" 
+                        onselectedindexchanged="ddlWorkGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+        	    </td>
+        	</tr>
+        	<tr>
+        	    <td align="right">Từ khóa:</td>
+        	    <td>
+        	        <asp:TextBox runat="server" ID="txtKeyword" CssClass="txt" Width="250"></asp:TextBox>
+        	    </td>
+        	    <td align="right">
+        	        Tìm kiếm theo:                    	        
+        	    </td>
+        	    <td>
+        	        <asp:DropDownList runat="server" ID="ddlTieuChi">
+        	            <asp:ListItem Text="Tên công việc" Value="WorkName"></asp:ListItem>
+        	            <asp:ListItem Text="Người xử lý" Value="User"></asp:ListItem>
+        	        </asp:DropDownList>                    	    
+        	        &nbsp;&nbsp;&nbsp;<asp:Button ID="btnTim" Text="Tìm kiếm" runat="server" CssClass="link-btn" onclick="btnTim_Click" />
+        	    </td>
+        	</tr>
+        </table>
+       <table width="100%">
             <tr>
-                <td><input type="checkbox" /></td>
-            	<td align="center">1</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function update" title="Cập nhật">Cập nhật</a><a href="#" class="link-function cancel" title="Hủy">Hủy</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
-            </tr>
-            <tr class="altenate">
-                <td><input type="checkbox" /></td>
-            	<td align="center">2</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete" title="Xóa">Xóa</a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-            	<td align="center">3</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr class="altenate">
-                <td><input type="checkbox" /></td>
-            	<td align="center">4</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit" title="Sửa">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-            	<td align="center">5</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr class="altenate">
-                <td><input type="checkbox" /></td>
-            	<td align="center">6</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-            	<td align="center">7</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr class="altenate">
-                <td><input type="checkbox" /></td>
-            	<td align="center">8</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" /></td>
-            	<td align="center">9</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
-            </tr>
-            <tr class="altenate">
-                <td><input type="checkbox" /></td>
-            	<td align="center">10</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-                <td><a href="#" class="link-function edit">Sửa</a><a href="#" class="link-function delete">Xóa</a></td>
+                <td align="left">  
+                    <span runat="server" id="spResultCount" style="float:left"></span>
+                </td>
+                <td align="right">
+                    Hiển thị:
+                     <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" 
+                        onselectedindexchanged="ddlPageSize_SelectedIndexChanged">
+                        <asp:ListItem Text="5 kết quả" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="10 kết quả" Value="10"></asp:ListItem>
+                        <asp:ListItem Text="20 kết quả" Value="20"></asp:ListItem>
+                        <asp:ListItem Text="30 kết quả" Value="30"></asp:ListItem>
+                        <asp:ListItem Text="50 kết quả" Value="50"></asp:ListItem>
+                        <asp:ListItem Text="100 kết quả" Value="100"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
             </tr>
         </table>
-        <div class="pagenav">
-        	<ul>
-            	<li><a href="#">Trang đầu</a></li>
-                <li><a href="#" class="pagecurrent">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">Trang cuối</a></li>
-            </ul>
-        </div>	
-    </div>
-    <div class="list" id="list-vanbanden">
-    	<h2><span class="icon"><img src="Images/List-in.png" /></span>Danh sách văn bản đến</h2>
-    	<table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
-        	<tr>
-            	<th>Stt</th>
-                <th><a href="#" class="order-desc">Ngày nhận</a></th>
-                <th><a href="#">Văn bản số</a></th>
-                <th><a href="#">Nơi phát hành</a></th>
-                <th>Trích yếu</th>
-            </tr>
-            <tr>
-            	<td align="center">1</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-            </tr>
-            <tr class="altenate">
-            	<td align="center">2</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-            </tr>
-            <tr>
-            	<td align="center">3</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-            </tr>
-            <tr class="altenate">
-            	<td align="center">4</td>
-                <td>Báo cáo công việc tuần từ 19/12 -> 24/12/2011</td>
-                <td align="center">23/12/2011</td>
-                <td align="center">24/12/2011</td>
-                <td>Báo cáo tuần</td>
-            </tr>
-        </table>	
-    </div>
+            <asp:GridView ID="grvWork" runat="server" AutoGenerateColumns="False"  DataKeyNames="WorkID"
+                CssClass="tbl-list" Width="100%" onrowcreated="grvWork_RowCreated"  >
+                <Columns>
+                    <asp:TemplateField HeaderText="STT">
+                       <ItemTemplate>
+                              <%# Container.DataItemIndex + 1 %>
+                        </ItemTemplate>
+                        <ItemStyle Width="3%" HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Tên công việc</HeaderTemplate>
+                        <ItemTemplate>
+                            <a href="/Works/WorkReceivedDetail.aspx?WorkID=<%# DataBinder.Eval(Container.DataItem,"WorkID")%>"><%# DataBinder.Eval(Container.DataItem,"Name") %></a>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Người tạo việc</HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%#BindTaoViec(DataBinder.Eval(Container.DataItem,"IDUserCreate").ToString()) %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Người chuyển việc</HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%#BindChuyenViec(DataBinder.Eval(Container.DataItem,"IDUserProcess").ToString()) %>'></asp:Label>
+                        </ItemTemplate>
+                        
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Hạn kết thúc</HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%#BindHanKetThuc(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Trạng thái</HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%#BindTrangThai(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <HeaderTemplate>Ngày giao</HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%#BindNgayGiao(DataBinder.Eval(Container.DataItem,"WorkID").ToString()) %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                </Columns>
+                <HeaderStyle ForeColor="#0072BC" />
+            </asp:GridView>
+            <div class="pagenav">
+                <MyControl:PaggingControl runat="server" ID="ctlPagging" Mode="Url" PageSize="20"
+                    PreviousClause="<img src='/images/Back.png'/>" NextClause="<img src='/images/Forward.png'/>" />
+            </div>        
+    </div>    
 </asp:Content>

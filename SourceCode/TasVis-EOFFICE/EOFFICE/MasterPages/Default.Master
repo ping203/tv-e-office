@@ -120,7 +120,7 @@
                         	<a href="../Users/UserInfo.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Person.png" runat="server" /></span>Thông tin cá nhân</a>
                         </li>
                         <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Đổi mật khẩu</a>
+                        	<a href="../Users/ChangePass.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Repair.png" runat="server" /></span>Đổi mật khẩu</a>
                         </li>
                     </ul>
                 </li>

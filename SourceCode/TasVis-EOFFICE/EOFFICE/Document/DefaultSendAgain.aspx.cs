@@ -379,7 +379,7 @@ namespace EOFFICE.Document
             //--Xóa  văn bản
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
             {
-                BUser ctl = new BUser();
+                BDocument ctl = new BDocument();
                 try
                 {
                     //-- THực hiện xóa  văn bản

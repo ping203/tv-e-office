@@ -47,50 +47,50 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Tên công văn:<span class="required">*</span>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtName" CssClass="required"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtName" CssClass="txt required" Width="250"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Ký hiệu:<span class="required">*</span>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtCode" CssClass="required"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtCode" CssClass="txt required" Width="250"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Ngày gửi: <span class="required">*</span>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>(dd/mm/yy)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display:none">Ngày
+                        <asp:TextBox runat="server" ID="txtStartDate" CssClass="txt required datepicker" Width="250"></asp:TextBox>(ngày/tháng/năm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display:none">Ngày
                         kết thúc: <span class="required">*</span><asp:TextBox runat="server" ID="txtEndDate"
-                            CssClass="txt required datepicker"></asp:TextBox>(dd/mm/yy)</div>
+                            CssClass="txt required datepicker"></asp:TextBox>(ngày/tháng/năm)</div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Nội dung tóm tắt:
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtSubContent" TextMode="MultiLine" Height="50px"
-                            Width="300px"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtSubContent" TextMode="MultiLine" CssClass="textarea" Height="50"
+                            Width="500"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Nội dung công văn:
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine" Height="50px" Width="300px"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine" Height="100" CssClass="textarea" Width="500"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         File kèm theo:
                     </td>
                     <td>
@@ -102,11 +102,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Mức độ ưu tiên:
                     </td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlLevel">
+                        <asp:DropDownList runat="server" ID="ddlLevel" Width="250">
                             <asp:ListItem Text="Rất quan trọng" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Quan trọng" Value="2"></asp:ListItem>
                             <asp:ListItem Text="Bình thường" Value="3"></asp:ListItem>
@@ -114,11 +114,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td align="right">
                         Địa chỉ nhận:
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" Height="50px" Width="300px" CssClass="required"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" Height="50" Width="240" CssClass="textarea required"></asp:TextBox>
                     </td>
                 </tr>
                 <tr style="display:none">

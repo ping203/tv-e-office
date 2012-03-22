@@ -36,9 +36,9 @@
                 <td align="left" colspan="2">
                     <div align="right">
                         <span runat="server" id="spResultCount" style="float:left"></span>
-                        Loại văn bản:<b>Văn bản dự thảo</b> <asp:DropDownList AutoPostBack="true" runat="server" 
+                        Loại văn bản: <asp:DropDownList AutoPostBack="true" runat="server" 
                             DataTextField="Name" DataValueField="DocumentKindID" ID="ddlDocumentType" 
-                            onselectedindexchanged="ddlDocumentType_SelectedIndexChanged" Visible="false">
+                            onselectedindexchanged="ddlDocumentType_SelectedIndexChanged">
                         </asp:DropDownList>
                         Hiển thị:
                          <asp:DropDownList runat="server" ID="ddlPageSize" AutoPostBack="true" OnSelectedIndexChanged="ddlPageSize_SelectedIndexChanged">

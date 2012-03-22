@@ -228,7 +228,7 @@ namespace EOFFICE
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
                         ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
@@ -253,7 +253,7 @@ namespace EOFFICE
                 obj.Attachs = lblLink.Text;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                 obj.Excerpt = txtSubContent.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
                 ctl.Add(obj);
@@ -376,7 +376,7 @@ namespace EOFFICE
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue );
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
                         ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
@@ -400,7 +400,7 @@ namespace EOFFICE
                 obj.Priority = ddlLevel.SelectedValue;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentDrap.ToString("D"));
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                 obj.Excerpt = txtSubContent.Text;
                 obj.Attachs = lblLink.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");

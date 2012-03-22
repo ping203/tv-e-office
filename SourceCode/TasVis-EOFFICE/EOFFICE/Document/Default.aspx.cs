@@ -180,7 +180,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse( Common.DocumentType.DocumentDrap.ToString("D")), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC",Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value ), pagesize);
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue ), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC",Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value ), pagesize);
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)

@@ -319,11 +319,11 @@ namespace EOFFICE.Common
         /// <summary>
         /// Công văn đi
         /// </summary>
-        DocumentSend=2,
+        DocumentSend=-2,
         /// <summary>
         /// Công văn đến
         /// </summary>
-        DocumentReceived=3
+        DocumentReceived=-3
     }
 
 }

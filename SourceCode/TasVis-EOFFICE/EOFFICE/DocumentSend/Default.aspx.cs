@@ -16,9 +16,9 @@ using DataAccess.DataObject;
 using EOFFICE;
 using System.Collections.Generic;
 
-namespace EOFFICE.DocumentSend
+namespace EOFFICE.Document
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class SendDefault : System.Web.UI.Page
     {
         #region "Propertys"
         /// <summary>
@@ -168,7 +168,7 @@ namespace EOFFICE.DocumentSend
         }
 
         /// <summary>
-        /// Bind dannh sách  văn bản
+        /// Bind dannh sách  Công văn đi
         /// </summary>
         private void BindData()
         {
@@ -180,7 +180,7 @@ namespace EOFFICE.DocumentSend
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse( Common.DocumentType.DocumentSend.ToString("D")), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC",Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value ), pagesize);
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC", Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common .DocumentType.DocumentSend.ToString("D")));
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)
@@ -298,7 +298,7 @@ namespace EOFFICE.DocumentSend
         {
             if (!IsPostBack)
             {
-                //--Load danh sách loại văn bản
+                //--Load danh sách loại Công văn đi
                 BindDocumentType();
                 //-- Thiết lập các thông tin trong form
                 InitData();
@@ -324,11 +324,11 @@ namespace EOFFICE.DocumentSend
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện xóa  văn bản
+                            //-- THực hiện xóa  Công văn đi
                             ctl.Delete(grvListDocument.DataKeys[r.RowIndex].Value.ToString());
                         }
                     }
-                    //-- Load lại  văn bản
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
                 //-- Duyệt
@@ -338,11 +338,11 @@ namespace EOFFICE.DocumentSend
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện duyệt  văn bản
+                            //-- THực hiện duyệt  Công văn đi
                             ctl.UpdateStatus(grvListDocument.DataKeys[r.RowIndex].Value.ToString(),UserStatus.Approve.ToString("D"));
                         }
                     }
-                    //-- Load lại  văn bản
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
                 //-- Khóa
@@ -352,48 +352,82 @@ namespace EOFFICE.DocumentSend
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện xóa  văn bản
+                            //-- THực hiện xóa  Công văn đi
                             ctl.UpdateStatus(grvListDocument.DataKeys[r.RowIndex].Value.ToString(), UserStatus.UnApprove.ToString("D"));
                         }
                     }
-                    //-- Load lại  văn bản
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
             }
         }
 
         /// <summary>
-        /// Sự kiện xảy ra khi thực hiện các thao tác trên danh sách  văn bản
+        /// Sự kiện xảy ra khi thực hiện các thao tác trên danh sách  Công văn đi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void grvListDocument_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
-            //-- Sửa văn bản
+            //-- Sửa Công văn đi
             if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
-                //-- Chuyển tới trang sửa  văn bản
+                //-- Chuyển tới trang sửa  Công văn đi
                 Response.Redirect("/DocumentSend/DocumentEdit.aspx?DocumentId=" + e.CommandArgument.ToString());
             }
-            //--Xóa  văn bản
+            //--Xóa  Công văn đi
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
             {
                 BDocument ctl = new BDocument();
                 try
                 {
-                    //-- THực hiện xóa  văn bản
+                    //-- THực hiện xóa  Công văn đi
                     ctl.Delete(e.CommandArgument.ToString());
-                    //--Load lại danh sách  văn bản
+                    //--Load lại danh sách  Công văn đi
                     BindData();
                 }
                 catch (Exception ex)
                 {
-                    //--Load lại danh sách  văn bản
+                    //--Load lại danh sách  Công văn đi
                     BindData();
                 }
             }
-           
+            //--Khóa  Công văn đi
+            else if (e.CommandName.Equals("cmdUnApprove", StringComparison.OrdinalIgnoreCase))
+            {
+                BUser ctl = new BUser();
+                try
+                {
+                    //-- THực hiện cập nhật trạng thái
+                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.UnApprove.ToString("D"));
+                    //--Load lại danh sách  Công văn đi
+                    BindData();
+                }
+                catch (Exception ex)
+                {
+                    //--Load lại danh sách  Công văn đi
+                    BindData();
+                }
+            }
+            //--Duyệt  Công văn đi
+            else if (e.CommandName.Equals("cmdApprove", StringComparison.OrdinalIgnoreCase))
+            {
+                BUser ctl = new BUser();
+                try
+                {
+                    //-- THực hiện cập nhật trạng thái
+                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.Approve.ToString("D"));
+                    //--Load lại danh sách  Công văn đi
+                    BindData();
+                }
+                catch (Exception ex)
+                {
+                    //--Load lại danh sách  Công văn đi
+                    BindData();
+                }
+            }
+
         }
 
         /// <summary>
@@ -403,7 +437,7 @@ namespace EOFFICE.DocumentSend
         /// <param name="e"></param>
         protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  văn bản
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -416,7 +450,7 @@ namespace EOFFICE.DocumentSend
         /// <param name="e"></param>
         protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  văn bản
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -428,7 +462,7 @@ namespace EOFFICE.DocumentSend
         /// <param name="e"></param>
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  văn bản
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -457,7 +491,7 @@ namespace EOFFICE.DocumentSend
 
 
         /// <summary>
-        /// Chọn loại văn bản
+        /// Chọn loại Công văn đi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

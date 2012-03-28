@@ -18,7 +18,7 @@ using System.Collections.Generic;
 
 namespace EOFFICE.Document
 {
-    public partial class ReceivedDefault : System.Web.UI.Page
+    public partial class SendDocumentProcessedUser : System.Web.UI.Page
     {
         #region "Propertys"
         /// <summary>
@@ -56,10 +56,10 @@ namespace EOFFICE.Document
         /// </summary>
         private void InitData()
         {
-            BUser ctl = new BUser();
-            //-- Kiểm tra quyền dự thảo
-            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentDrap.ToString())&& !Global.IsAdmin())
-                Response.Redirect("/");
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền duyệt
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString())&&!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {
@@ -68,18 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
-            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
-            ////--Trạng thái
-            //if (Request.QueryString["status"] != null)
-            //{
-            //    try
-            //    {
-            //        ddlStatus.Items.FindByValue(Request.QueryString["status"]).Selected = true;
-            //    }
-            //    catch (Exception ex) { }
-            //}
-            //--Phòng ban
             if (Request.QueryString["dt"] != null)
             {
                 try
@@ -168,7 +157,7 @@ namespace EOFFICE.Document
         }
 
         /// <summary>
-        /// Bind dannh sách  Công văn đến
+        /// Bind dannh sách  Công văn đi
         /// </summary>
         private void BindData()
         {
@@ -180,7 +169,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC", Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common .DocumentType.DocumentSend.ToString("D")));
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.Processed.ToString("D")), "Name", "DESC", 0, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D")));
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)
@@ -198,22 +187,6 @@ namespace EOFFICE.Document
                     ctlPagging.Visible = false;
                 }
             }
-            //int count = ctl.GetCount(_fullname, _username, _email, _departmentid, _status, "", "");
-            //ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
-            //spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
-            //if (count > ctlPagging.PageSize)
-            //{
-            //    ctlPagging.Visible = true;
-            //}
-            //else
-            //{
-            //    ctlPagging.Visible = false;
-            //}
-            //grvListDocument.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", CurrentPage, ctlPagging.PageSize);
-            //grvListDocument.DataBind();
-            //ctlPagging.CurrentIndex =CurrentPage;
-            //ctlPagging.ItemCount = count;
-            //ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         /// <summary>
@@ -298,7 +271,7 @@ namespace EOFFICE.Document
         {
             if (!IsPostBack)
             {
-                //--Load danh sách loại Công văn đến
+                //--Load danh sách loại Công văn đi
                 BindDocumentType();
                 //-- Thiết lập các thông tin trong form
                 InitData();
@@ -324,11 +297,11 @@ namespace EOFFICE.Document
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện xóa  Công văn đến
+                            //-- THực hiện xóa  Công văn đi
                             ctl.Delete(grvListDocument.DataKeys[r.RowIndex].Value.ToString());
                         }
                     }
-                    //-- Load lại  Công văn đến
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
                 //-- Duyệt
@@ -338,11 +311,11 @@ namespace EOFFICE.Document
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện duyệt  Công văn đến
+                            //-- THực hiện duyệt  Công văn đi
                             ctl.UpdateStatus(grvListDocument.DataKeys[r.RowIndex].Value.ToString(),UserStatus.Approve.ToString("D"));
                         }
                     }
-                    //-- Load lại  Công văn đến
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
                 //-- Khóa
@@ -352,82 +325,30 @@ namespace EOFFICE.Document
                         HtmlInputCheckBox chk = (HtmlInputCheckBox)r.FindControl("chkCheckUser");
                         if (chk.Checked)
                         {
-                            //-- THực hiện xóa  Công văn đến
+                            //-- THực hiện xóa  Công văn đi
                             ctl.UpdateStatus(grvListDocument.DataKeys[r.RowIndex].Value.ToString(), UserStatus.UnApprove.ToString("D"));
                         }
                     }
-                    //-- Load lại  Công văn đến
+                    //-- Load lại  Công văn đi
                     BindData();
                     break;
             }
         }
 
         /// <summary>
-        /// Sự kiện xảy ra khi thực hiện các thao tác trên danh sách  Công văn đến
+        /// Sự kiện xảy ra khi thực hiện các thao tác trên danh sách  Công văn đi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void grvListDocument_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
-            //-- Sửa Công văn đến
-            if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
+            //-- Sửa Công văn đi
+            if (e.CommandName.Equals("Publish", StringComparison.OrdinalIgnoreCase))
             {
-                //-- Chuyển tới trang sửa  Công văn đến
-                Response.Redirect("/DocumentSend/DocumentEdit.aspx?DocumentId=" + e.CommandArgument.ToString());
+                //-- Chuyển tới trang sửa  Công văn đi
+                Response.Redirect("/DocumentSend/DocumentDetailsProcessed.aspx?DocumentId=" + e.CommandArgument.ToString());
             }
-            //--Xóa  Công văn đến
-            else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
-            {
-                BDocument ctl = new BDocument();
-                try
-                {
-                    //-- THực hiện xóa  Công văn đến
-                    ctl.Delete(e.CommandArgument.ToString());
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-            //--Khóa  Công văn đến
-            else if (e.CommandName.Equals("cmdUnApprove", StringComparison.OrdinalIgnoreCase))
-            {
-                BUser ctl = new BUser();
-                try
-                {
-                    //-- THực hiện cập nhật trạng thái
-                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.UnApprove.ToString("D"));
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-            //--Duyệt  Công văn đến
-            else if (e.CommandName.Equals("cmdApprove", StringComparison.OrdinalIgnoreCase))
-            {
-                BUser ctl = new BUser();
-                try
-                {
-                    //-- THực hiện cập nhật trạng thái
-                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.Approve.ToString("D"));
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-
         }
 
         /// <summary>
@@ -437,7 +358,7 @@ namespace EOFFICE.Document
         /// <param name="e"></param>
         protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  Công văn đến
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -450,7 +371,7 @@ namespace EOFFICE.Document
         /// <param name="e"></param>
         protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  Công văn đến
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -462,7 +383,7 @@ namespace EOFFICE.Document
         /// <param name="e"></param>
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //--Load lại danh sách  Công văn đến
+            //--Load lại danh sách  Công văn đi
             hdfCurrentPage.Value = "1";
             BindData();
         }
@@ -491,7 +412,7 @@ namespace EOFFICE.Document
 
 
         /// <summary>
-        /// Chọn loại Công văn đến
+        /// Chọn loại Công văn đi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -15,14 +15,14 @@ using DataAccess.BusinessObject;
 using DataAccess.DataObject;
 using System.IO;
 
-namespace EOFFICE.DocumentSend
+namespace EOFFICE
 {
 
-    public partial class DocumentEdit : System.Web.UI.Page
+    public partial class SendDocumentEdit : System.Web.UI.Page
     {
         #region "Property"
         /// <summary>
-        /// Lưu mã  văn bản
+        /// Lưu mã  Công văn đi
         /// </summary>
         public string DocumentId
         {
@@ -45,9 +45,9 @@ namespace EOFFICE.DocumentSend
             if (DocumentId != "")
             {
                 BDocument ctl = new BDocument();
-                if (ctl.Get(DocumentId) != null)
+                if (ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D"))) != null)
                 {
-                    ODocument obj = ctl.Get(DocumentId)[0];
+                    ODocument obj = ctl.Get(DocumentId,int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D")))[0];
                     if (obj != null)
                     {
                         txtName.Text = obj.Name;
@@ -55,9 +55,7 @@ namespace EOFFICE.DocumentSend
                         txtEndDate.Text = obj.EndProcess.ToString("dd/MM/yyyy");
                         txtStartDate.Text = obj.StartProcess.ToString("dd/MM/yyyy");
                         txtSubContent.Text = obj.Excerpt;
-                        lblLink.Text = obj.Attachs;
-                        txtCode.Text = obj.DocumentNumber;
-                        txtAddress.Text = obj.UserComments;
+                        //lblLink.Text = obj.Attachs;
                         try { ddlLevel.Items.FindByValue(obj.Priority).Selected = true; }
                         catch (Exception ex) { }
                         try { ddlOffical.Items.FindByValue(obj.PublishOffical.ToString()).Selected = true; }
@@ -65,6 +63,14 @@ namespace EOFFICE.DocumentSend
                         try { ddlType.Items.FindByValue(obj.IDDocumentKind.ToString()).Selected = true; }
                         catch (Exception ex) { }
                         BindUserProcess(obj.UserProcess);
+
+                        rptFiles.DataSource = (new BAttach()).GetAttachs(obj.Attachs);
+                        rptFiles.DataBind();
+
+                        if (obj.Attachs == "" || obj.Attachs == ",")
+                        {
+                            lblThongBao.Text = "Không có file đính kèm!";
+                        }
                     }
                 }
             }
@@ -146,7 +152,7 @@ namespace EOFFICE.DocumentSend
         }
 
         /// <summary>
-        /// Bind dannh sách  văn bản
+        /// Bind dannh sách  Công văn đi
         /// </summary>
         private void BindDataUser()
         {
@@ -175,6 +181,63 @@ namespace EOFFICE.DocumentSend
             {
                 lbsUserSearch.Visible = false;
             }
+        }
+
+        /// <summary>
+        /// Upload file
+        /// </summary>
+        /// <returns></returns>
+        private string Upload()
+        {
+            string listFile = ",";
+            try
+            {
+                if (fuDrap.PostedFile == null)
+                    return "";
+                if (!Directory.Exists(Server.MapPath("DocumentFiles")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("DocumentFiles"));
+                }
+                if (!Directory.Exists(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName)))
+                {
+                    Directory.CreateDirectory(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName));
+                }
+
+                BAttach Bobj = new BAttach();
+                HttpFileCollection hfc = Request.Files;
+                int n = hfc.Count;
+                if (n > 0)
+                {
+
+                    try
+                    {
+                        // Get the HttpFileCollection
+
+                        for (int i = 0; i < hfc.Count; i++)
+                        {
+                            HttpPostedFile hpf = hfc[i];
+                            if (hpf.ContentLength > 0)
+                            {
+                                hpf.SaveAs(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName) + "/" + hpf.FileName);
+                                OAttach objA = new OAttach();
+                                objA.Name = System.IO.Path.GetFileName(hpf.FileName);
+                                objA.Path = Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName) + "/" + hpf.FileName;
+                                objA.Description = "";
+                                Bobj.Add(objA);
+                                listFile += Bobj.GetLast().FirstOrDefault().AttachID.ToString() + ",";
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                //FileUpload1.SaveAs(Server.MapPath("DocumentFiles/" + Global.UserInfo.UserName + "/" + FileUpload1.FileName));
+            }
+            catch (Exception ex)
+            { }
+            return listFile;
         }
         #endregion
 
@@ -212,7 +275,9 @@ namespace EOFFICE.DocumentSend
             {
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D")))[0];
+
+
                     if (obj != null)
                     {
                         obj.Content = txtContent.Text;
@@ -224,16 +289,20 @@ namespace EOFFICE.DocumentSend
                         obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         //obj.IDUserCreate = Global.UserInfo.UserID;
                         obj.Name = txtName.Text;
-                        //-- Lưu tạm địa chỉ nhận
-                        obj.UserComments = txtAddress.Text;
-                        obj.Attachs = lblLink.Text;
+                        string strFile = Upload();
+                        string Attachs = obj.Attachs;
+                        if (strFile != ",")
+                        {
+                            Attachs = Attachs.Remove(Attachs.Length - 1, 1) + strFile;
+                        }
+                        obj.Attachs = Attachs;
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentSend.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
-                        ctl.Update(obj.DocumentID, txtCode.Text.Trim(), obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, obj.UserComments, obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
+                        ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), "", "", obj.SendOfficals, obj.Priority, obj.Status);
                         Response.Redirect("/DocumentSend/Default.aspx");
                     }
                 }
@@ -248,18 +317,17 @@ namespace EOFFICE.DocumentSend
                 obj.ReceiveDate = DateTime.Now;
                 obj.PublishDate = DateTime.Now;
                 obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                obj.EndProcess = DateTime.MaxValue;
+                obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 obj.IDUserCreate = Global.UserInfo.UserID;
                 obj.Name = txtName.Text;
                 obj.Priority = ddlLevel.SelectedValue;
-                obj.Attachs = lblLink.Text;
+                obj.Attachs = Upload();
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentSend.ToString("D"));
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                 obj.Excerpt = txtSubContent.Text;
                 obj.Status = EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D");
-                obj.UserComments = txtAddress.Text;
-                obj.DocumentNumber = txtCode.Text.Trim();
+                obj.Type = int.Parse( EOFFICE.Common.DocumentType.DocumentSend.ToString("D"));
                 ctl.Add(obj);
                 Response.Redirect("/DocumentSend/Default.aspx");
             }
@@ -318,7 +386,7 @@ namespace EOFFICE.DocumentSend
         }
 
         /// <summary>
-        /// Quay về trang quản trị văn bản
+        /// Quay về trang quản trị Công văn đi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -349,6 +417,63 @@ namespace EOFFICE.DocumentSend
             cmdDeleteFile.Visible = true;
         }
 
+        public void rptItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            //Response.Write(e.CommandName);
+            //Response.Write(e.CommandArgument);
+            if (e.CommandName == "Download")
+            {
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            if (e.CommandName == "Delete")
+            {
+                OAttach objAttach = new OAttach();
+                BAttach BobjAttach = new BAttach();
+                BDocument Bdocument = new BDocument();
+                ODocument obj = Bdocument.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D"))).First();
+                //int IDUserCreate = int.Parse(objWork.IDUserCreate.ToString());
+                string listAttach = obj.Attachs.ToString();
+                objAttach = BobjAttach.Get(int.Parse(e.CommandArgument.ToString())).First();
+                string AttachId = objAttach.AttachID.ToString();
+                try
+                {
+                    FileInfo TheFile = new FileInfo(Server.MapPath(objAttach.Path));
+                    if (TheFile.Exists)
+                    {
+                        File.Delete(Server.MapPath(objAttach.Path));//Xóa file Attach
+                        BobjAttach.Delete(objAttach.AttachID);//Xóa file Attach trong CSDL
+                        string newListAttach = listAttach.Replace("," + AttachId + ",", ",");
+                        obj.Attachs = newListAttach;
+                        Bdocument.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
+                        InitData();
+                    }
+                    else
+                    {
+                        throw new FileNotFoundException();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //throw new FileNotFoundException();
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// Gửi bản thảo
         /// </summary>
@@ -362,7 +487,7 @@ namespace EOFFICE.DocumentSend
             {
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentSend.ToString("D")))[0];
 
 
                     if (obj != null)
@@ -375,12 +500,18 @@ namespace EOFFICE.DocumentSend
                         obj.StartProcess = DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         obj.EndProcess = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                         //obj.IDUserCreate = Global.UserInfo.UserID;
-                        obj.Attachs = lblLink.Text;
+                        string strFile = Upload();
+                        string Attachs = obj.Attachs;
+                        if (strFile != ",")
+                        {
+                            Attachs = Attachs.Remove(Attachs.Length - 1, 1) + strFile;
+                        }
+                        obj.Attachs = Attachs;
                         obj.Name = txtName.Text;
                         obj.Priority = ddlLevel.SelectedValue;
                         obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                         obj.UserProcess = GetUserProcess();
-                        obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentSend.ToString("D"));
+                        obj.IDDocumentKind = int.Parse(ddlType.SelectedValue );
                         obj.Excerpt = txtSubContent.Text;
                         obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
                         ctl.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
@@ -404,10 +535,11 @@ namespace EOFFICE.DocumentSend
                 obj.Priority = ddlLevel.SelectedValue;
                 obj.PublishOffical = int.Parse(ddlOffical.SelectedValue);
                 obj.UserProcess = GetUserProcess();
-                obj.IDDocumentKind = int.Parse(Common.DocumentType.DocumentSend.ToString("D"));
+                obj.IDDocumentKind = int.Parse(ddlType.SelectedValue);
                 obj.Excerpt = txtSubContent.Text;
-                obj.Attachs = lblLink.Text;
+                obj.Attachs = Upload();
                 obj.Status = EOFFICE.Common.DocumentStatus.SendDrap.ToString("D");
+                obj.Type = int.Parse( EOFFICE.Common.DocumentType.DocumentSend.ToString("D"));
                 ctl.Add(obj);
                 Response.Redirect("/DocumentSend/Default.aspx");
             }

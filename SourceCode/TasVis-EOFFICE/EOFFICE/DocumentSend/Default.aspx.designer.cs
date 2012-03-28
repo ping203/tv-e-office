@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EOFFICE.DocumentSend {
+namespace EOFFICE.Document {
     
     
-    public partial class Default {
+    public partial class SendDefault {
         
         /// <summary>
         /// hdfCurrentPage control.

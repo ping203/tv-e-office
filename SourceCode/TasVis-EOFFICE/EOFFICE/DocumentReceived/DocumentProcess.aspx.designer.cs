@@ -11,7 +11,7 @@
 namespace EOFFICE.Document {
     
     
-    public partial class ReceivedDefault {
+    public partial class ReceivedDocumentProcess {
         
         /// <summary>
         /// hdfCurrentPage control.

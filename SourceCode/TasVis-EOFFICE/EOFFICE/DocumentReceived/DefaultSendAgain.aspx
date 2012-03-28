@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="EOFFICE.Document.SendDefault"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DefaultSendAgain.aspx.cs" Inherits="EOFFICE.Document.ReceivedDefaultSendAgain"
     MasterPageFile="~/MasterPages/Default.Master" %>
 
 <%@ Register Assembly="EOFFICE" Namespace="EOFFICE.Common" TagPrefix="MyControl" %>
@@ -6,7 +6,7 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Công văn đi</h2>
+                <asp:Image ImageUrl="~/Images/People.png" runat="server" /></span>Công văn đến trả lại</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td>
@@ -18,14 +18,14 @@
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtAccept" CssClass="link-btn" OnClick="lbtAccept_Click"
                         OnClientClick="javascript:return ValidCheckedDocument();" Visible="false">Thực hiện</asp:LinkButton>
-                    <a class="link-btn" href="/DocumentSend/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>
+                    <a style="display:none" class="link-btn" href="/DocumentSend/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
                 <td>
                     Từ ngày:<asp:TextBox runat="server" Width="80px" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>
                     Đến ngày:<asp:TextBox runat="server"  Width="80px" ID="txtEndDate" CssClass="txt required datepicker"></asp:TextBox>
                     Tên<asp:TextBox runat="server" ID="txtKey" CssClass="txt" Width="170px"></asp:TextBox>
                     <asp:DropDownList runat="server" ID="ddlColumnName" Visible="false">
-                        <asp:ListItem Text="Tên Công văn đi" Value="Name"></asp:ListItem>
+                        <asp:ListItem Text="Tên Công văn đến" Value="Name"></asp:ListItem>
                         <asp:ListItem Text="Người duyêt" Value="Fullname"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtSearch" CssClass="link-btn" 
@@ -36,7 +36,7 @@
                 <td align="left" colspan="2">
                     <div align="right">
                         <span runat="server" id="spResultCount" style="float:left"></span>
-                        Loại công văn đi: <asp:DropDownList AutoPostBack="true" runat="server" 
+                        Loại Công văn đến:<asp:DropDownList AutoPostBack="true" runat="server" 
                             DataTextField="Name" DataValueField="DocumentKindID" ID="ddlDocumentType" 
                             onselectedindexchanged="ddlDocumentType_SelectedIndexChanged">
                         </asp:DropDownList>
@@ -60,7 +60,7 @@
                                 </ItemTemplate>
                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Name" HeaderText="Tên Công văn đi"></asp:BoundField>
+                            <asp:BoundField DataField="Name" HeaderText="Tên Công văn đến"></asp:BoundField>
                             <asp:TemplateField HeaderText="Người duyệt">
                                 <ItemTemplate>
                                     <%#BindUserProcess(Eval("UserProcess"))%>

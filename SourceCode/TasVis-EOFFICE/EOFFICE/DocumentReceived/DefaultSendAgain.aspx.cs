@@ -18,7 +18,7 @@ using System.Collections.Generic;
 
 namespace EOFFICE.Document
 {
-    public partial class ReceivedDefault : System.Web.UI.Page
+    public partial class ReceivedDefaultSendAgain : System.Web.UI.Page
     {
         #region "Propertys"
         /// <summary>
@@ -55,11 +55,7 @@ namespace EOFFICE.Document
         /// Khởi tạo các thông tin của form
         /// </summary>
         private void InitData()
-        {
-            BUser ctl = new BUser();
-            //-- Kiểm tra quyền dự thảo
-            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentDrap.ToString())&& !Global.IsAdmin())
-                Response.Redirect("/");
+        { 
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {
@@ -68,7 +64,6 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
-            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
             ////--Trạng thái
             //if (Request.QueryString["status"] != null)
@@ -172,6 +167,11 @@ namespace EOFFICE.Document
         /// </summary>
         private void BindData()
         {
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền dự thảo
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()) && !Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
+
             DateTime StartDate = DateTime.ParseExact("01/01/1970", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime EndDate = DateTime.MaxValue;
             if (txtStartDate.Text.Trim().Length > 0)
@@ -180,7 +180,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC", Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common .DocumentType.DocumentSend.ToString("D")));
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SendAgain.ToString("D")), "Name", "DESC", Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common.DocumentType.DocumentReceived.ToString("D")));
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)

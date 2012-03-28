@@ -8,126 +8,162 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EOFFICE.Document {
+namespace EOFFICE {
     
     
-    public partial class ReceivedDefault {
+    public partial class SendDocumentDetails {
         
         /// <summary>
-        /// hdfCurrentPage control.
+        /// lnkSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfCurrentPage;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSave;
         
         /// <summary>
-        /// ddlAction control.
+        /// lnkSendDrap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAction;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSendDrap;
         
         /// <summary>
-        /// lbtAccept control.
+        /// lnkReturn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtAccept;
+        protected global::System.Web.UI.WebControls.LinkButton lnkReturn;
         
         /// <summary>
-        /// txtStartDate control.
+        /// lblName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartDate;
+        protected global::System.Web.UI.WebControls.Label lblName;
         
         /// <summary>
-        /// txtEndDate control.
+        /// lblUserDrap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndDate;
+        protected global::System.Web.UI.WebControls.Label lblUserDrap;
         
         /// <summary>
-        /// txtKey control.
+        /// lblSubContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKey;
+        protected global::System.Web.UI.WebControls.Label lblSubContent;
         
         /// <summary>
-        /// ddlColumnName control.
+        /// cmdDownAttachs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlColumnName;
+        protected global::System.Web.UI.WebControls.LinkButton cmdDownAttachs;
         
         /// <summary>
-        /// lbtSearch control.
+        /// lblAttach control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtSearch;
+        protected global::System.Web.UI.WebControls.Label lblAttach;
         
         /// <summary>
-        /// spResultCount control.
+        /// rptFiles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spResultCount;
+        protected global::System.Web.UI.WebControls.Repeater rptFiles;
         
         /// <summary>
-        /// ddlDocumentType control.
+        /// txtContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDocumentType;
+        protected global::System.Web.UI.WebControls.TextBox txtContent;
         
         /// <summary>
-        /// ddlPageSize control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// grvListDocument control.
+        /// lnkSave1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvListDocument;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSave1;
         
         /// <summary>
-        /// ctlPagging control.
+        /// lnkSendDrap1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EOFFICE.Common.PaggingControl ctlPagging;
+        protected global::System.Web.UI.WebControls.LinkButton lnkSendDrap1;
+        
+        /// <summary>
+        /// lnkReturn1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkReturn1;
+        
+        /// <summary>
+        /// rptComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptComment;
+        
+        /// <summary>
+        /// rptFileAttachs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFileAttachs;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }

@@ -18,7 +18,7 @@ using System.Collections.Generic;
 
 namespace EOFFICE.Document
 {
-    public partial class ReceivedDefault : System.Web.UI.Page
+    public partial class ReceivedDocumentProcessedUser : System.Web.UI.Page
     {
         #region "Propertys"
         /// <summary>
@@ -56,10 +56,10 @@ namespace EOFFICE.Document
         /// </summary>
         private void InitData()
         {
-            BUser ctl = new BUser();
-            //-- Kiểm tra quyền dự thảo
-            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentDrap.ToString())&& !Global.IsAdmin())
-                Response.Redirect("/");
+            BUser ctlUP = new BUser();
+            //-- Kiểm tra quyền duyệt
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentPublish.ToString())&&!Global.IsAdmin())
+                Response.Redirect("/permission-fail.aspx");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {
@@ -68,18 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
-            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
-            ////--Trạng thái
-            //if (Request.QueryString["status"] != null)
-            //{
-            //    try
-            //    {
-            //        ddlStatus.Items.FindByValue(Request.QueryString["status"]).Selected = true;
-            //    }
-            //    catch (Exception ex) { }
-            //}
-            //--Phòng ban
             if (Request.QueryString["dt"] != null)
             {
                 try
@@ -180,7 +169,7 @@ namespace EOFFICE.Document
                 EndDate  = DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             int pagesize = int.Parse(ddlPageSize.SelectedValue);
             BDocument ctl = new BDocument();
-            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.SaveDrap.ToString("D")), "Name", "DESC", Global.UserInfo.UserID, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common .DocumentType.DocumentSend.ToString("D")));
+            IList<ODocument> lst = ctl.Get("", txtKey.Text, StartDate, EndDate, int.Parse(ddlDocumentType.SelectedValue), 0, "", int.Parse(EOFFICE.Common.DocumentStatus.Processed.ToString("D")), "Name", "DESC", 0, int.Parse(hdfCurrentPage.Value), pagesize, int.Parse(EOFFICE.Common.DocumentType.DocumentReceived.ToString("D")));
             grvListDocument.DataSource = lst;
             grvListDocument.DataBind();
             if (grvListDocument.Rows.Count > 0)
@@ -198,22 +187,6 @@ namespace EOFFICE.Document
                     ctlPagging.Visible = false;
                 }
             }
-            //int count = ctl.GetCount(_fullname, _username, _email, _departmentid, _status, "", "");
-            //ctlPagging.PageSize = int.Parse(ddlPageSize.SelectedValue);
-            //spResultCount.InnerHtml = "Tìm thấy <b>" + count.ToString() + "</b> kết quả";
-            //if (count > ctlPagging.PageSize)
-            //{
-            //    ctlPagging.Visible = true;
-            //}
-            //else
-            //{
-            //    ctlPagging.Visible = false;
-            //}
-            //grvListDocument.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", CurrentPage, ctlPagging.PageSize);
-            //grvListDocument.DataBind();
-            //ctlPagging.CurrentIndex =CurrentPage;
-            //ctlPagging.ItemCount = count;
-            //ctlPagging.QueryStringParameterName = GenarateParam();
         }
 
         /// <summary>
@@ -371,63 +344,11 @@ namespace EOFFICE.Document
         {
 
             //-- Sửa Công văn đến
-            if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
+            if (e.CommandName.Equals("Publish", StringComparison.OrdinalIgnoreCase))
             {
                 //-- Chuyển tới trang sửa  Công văn đến
-                Response.Redirect("/DocumentSend/DocumentEdit.aspx?DocumentId=" + e.CommandArgument.ToString());
+                Response.Redirect("/DocumentSend/DocumentDetailsProcessed.aspx?DocumentId=" + e.CommandArgument.ToString());
             }
-            //--Xóa  Công văn đến
-            else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))
-            {
-                BDocument ctl = new BDocument();
-                try
-                {
-                    //-- THực hiện xóa  Công văn đến
-                    ctl.Delete(e.CommandArgument.ToString());
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-            //--Khóa  Công văn đến
-            else if (e.CommandName.Equals("cmdUnApprove", StringComparison.OrdinalIgnoreCase))
-            {
-                BUser ctl = new BUser();
-                try
-                {
-                    //-- THực hiện cập nhật trạng thái
-                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.UnApprove.ToString("D"));
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-            //--Duyệt  Công văn đến
-            else if (e.CommandName.Equals("cmdApprove", StringComparison.OrdinalIgnoreCase))
-            {
-                BUser ctl = new BUser();
-                try
-                {
-                    //-- THực hiện cập nhật trạng thái
-                    ctl.UpdateStatus(e.CommandArgument.ToString(), UserStatus.Approve.ToString("D"));
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-                catch (Exception ex)
-                {
-                    //--Load lại danh sách  Công văn đến
-                    BindData();
-                }
-            }
-
         }
 
         /// <summary>

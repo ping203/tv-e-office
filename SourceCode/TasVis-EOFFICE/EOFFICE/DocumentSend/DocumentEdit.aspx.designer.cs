@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EOFFICE.DocumentSend {
+namespace EOFFICE {
     
     
-    public partial class DocumentEdit {
+    public partial class SendDocumentEdit {
         
         /// <summary>
         /// lnkSave control.
@@ -77,15 +77,6 @@ namespace EOFFICE.DocumentSend {
         protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
-        /// txtCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCode;
-        
-        /// <summary>
         /// txtStartDate control.
         /// </summary>
         /// <remarks>
@@ -120,6 +111,24 @@ namespace EOFFICE.DocumentSend {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContent;
+        
+        /// <summary>
+        /// rptFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFiles;
+        
+        /// <summary>
+        /// lblThongBao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblThongBao;
         
         /// <summary>
         /// fuDrap control.
@@ -165,15 +174,6 @@ namespace EOFFICE.DocumentSend {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLevel;
-        
-        /// <summary>
-        /// txtAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
         /// ScriptManager1 control.

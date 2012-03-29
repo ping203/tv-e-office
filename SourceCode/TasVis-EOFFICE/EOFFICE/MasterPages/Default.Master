@@ -62,24 +62,61 @@
             	<li class="li-parent">
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Text-out.png" runat="server" /></span>Công văn đi</a></h3>
                     <ul class="ul-child">
-                                            <li class="li-child">
-                        	<a href="/DocumentSend/DocumentEdit.aspx" class="a-child"><span class="icon"><asp:Image ID="Image5" ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Thêm mới công văn đi</a>
+                    <asp:Panel runat="server" ID="pnDocumentSendDrap" Visible="false">
+                          <li class="li-child">
+                        	<a href="/DocumentSend/Default.aspx" class="a-child"><span class="icon"><asp:Image ID="Image5" ImageUrl="~/Images/New-Document.png" runat="server" /></span>Công văn đi</a>
                         </li>
-                    	<li class="li-child">
-                        	<a href="/Documentsend/Default.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/List-out.png" runat="server" /></span>Danh sách công văn đi</a>
-                        </li>                                                
-                        
+                        <li class="li-child">
+                        	<a href="/DocumentSend/DefaultSendAgain.aspx" class="a-child"><span class="icon"><asp:Image ID="Image8" ImageUrl="~/Images/New-Document.png" runat="server" /></span>Công văn đi trả lại</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="/DocumentSend/DocumentSendDrap.aspx" class="a-child"><span class="icon"><asp:Image ID="Image9" ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn đi đang chờ duyệt</a>
+                        </li>
+                        </asp:Panel>
+                        <asp:Panel runat="server" ID="pnDocumentSendProcess" Visible="false">
+                        <li class="li-child">
+                        	<a href="/DocumentSend/DocumentProcess.aspx" class="a-child"><span class="icon"><asp:Image ID="Image10" ImageUrl="~/Images/List-play.png" runat="server" /></span>Công văn đi cần duyệt</a>
+                        </li>
+                                              
+                        <li class="li-child">
+                        	<a href="/DocumentSend/DocumentProcessedUser.aspx" class="a-child"><span class="icon"><asp:Image ID="Image11" ImageUrl="~/Images/OK.png" runat="server" /></span>Công văn đi đã duyệt</a>
+                        </li>
+                          </asp:Panel>
+                         <asp:Panel runat="server" ID="pnDocumentSendPublish" Visible="false">
+                        <li class="li-child">
+                        	<a href="/DocumentSend/DocumentProcessProcessed.aspx" class="a-child"><span class="icon"><asp:Image ID="Image12" ImageUrl="~/Images/Text-Yes.png" runat="server" /></span>Công văn đi đã phát hành</a>
+                        </li>                                               
+                        </asp:Panel>
                     </ul>
                 </li>
                 <li class="li-parent">
                 	<h3><a href="javascript:return false;" class="a-parent"><span class="icon"><asp:Image ImageUrl="~/Images/Text-in.png" runat="server" /></span>Công văn đến</a></h3>
                     <ul class="ul-child">
-                    	<li class="li-child">
-                        	<a href="/DocumentReceived/DocumentEdit.aspx" class="a-child"><span class="icon"><asp:Image ID="Image6" ImageUrl="~/Images/Text-preview.png" runat="server" /></span>Thêm mới công văn đến</a>
+                    <asp:Panel runat="server" ID="pnDocumentReceivedDrap" Visible="false">
+                    	 <li class="li-child">
+                        	<a href="/DocumentReceived/Default.aspx" class="a-child"><span class="icon"><asp:Image ID="Image7" ImageUrl="~/Images/New-Document.png" runat="server" /></span>Công văn đến</a>
                         </li>
-                    	<li class="li-child">
-                        	<a href="/DocumentReceived/Default.aspx" class="a-child"><span class="icon"><asp:Image ID="Image7" ImageUrl="~/Images/List-out.png" runat="server" /></span>Danh sách công văn đến</a>
-                        </li>                         
+                        <li class="li-child">
+                        	<a href="/DocumentReceived/DefaultSendAgain.aspx" class="a-child"><span class="icon"><asp:Image ID="Image13" ImageUrl="~/Images/New-Document.png" runat="server" /></span>Công văn đến trả lại</a>
+                        </li>
+                        <li class="li-child">
+                        	<a href="/DocumentReceived/DocumentSendDrap.aspx" class="a-child"><span class="icon"><asp:Image ID="Image14" ImageUrl="~/Images/List-compass.png" runat="server" /></span>Công văn đến đang chờ duyệt</a>
+                        </li>
+                       </asp:Panel>
+                        <asp:Panel runat="server" ID="pnDocumentReceivedProcess" Visible="false">
+                        <li class="li-child">
+                        	<a href="/DocumentReceived/DocumentProcess.aspx" class="a-child"><span class="icon"><asp:Image ID="Image15" ImageUrl="~/Images/List-play.png" runat="server" /></span>Công văn đến cần duyệt</a>
+                        </li>
+                                              
+                        <li class="li-child">
+                        	<a href="/DocumentReceived/DocumentProcessedUser.aspx" class="a-child"><span class="icon"><asp:Image ID="Image16" ImageUrl="~/Images/OK.png" runat="server" /></span>Công văn đến đã duyệt</a>
+                        </li>
+                        </asp:Panel>
+                         <asp:Panel runat="server" ID="pnDocumentReceivedPublish" Visible="false">
+                        <li class="li-child">
+                        	<a href="/DocumentReceived/DocumentProcessProcessed.aspx" class="a-child"><span class="icon"><asp:Image ID="Image17" ImageUrl="~/Images/Text-Yes.png" runat="server" /></span>Công văn đến đã phát hành</a>
+                        </li>                                               
+                             </asp:Panel>                  
                     </ul>
                 </li>
             	<li class="li-parent" id="lich-cong-tac">

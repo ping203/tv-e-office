@@ -32,6 +32,28 @@ namespace EOFFICE.MasterPages
             //-- Kiểm tra quyền phát hành
             if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentPublish.ToString()) || Global.IsAdmin())
                 pnDocumentPublish.Visible = true;
+
+            //-- Kiểm tra quyền dự thảo
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentSendDrap.ToString()) || Global.IsAdmin())
+                pnDocumentSendDrap.Visible = true;
+            //-- Kiểm tra quyền duyệt
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentSendProcess.ToString()) || Global.IsAdmin())
+                pnDocumentSendProcess.Visible = true;
+            //-- Kiểm tra quyền phát hành
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentSendPublish.ToString()) || Global.IsAdmin())
+                pnDocumentSendPublish.Visible = true;
+
+
+            //-- Kiểm tra quyền dự thảo
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentReceivedDrap.ToString()) || Global.IsAdmin())
+                pnDocumentReceivedDrap.Visible = true;
+            //-- Kiểm tra quyền duyệt
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentReceivedProcess.ToString()) || Global.IsAdmin())
+                pnDocumentReceivedProcess.Visible = true;
+            //-- Kiểm tra quyền phát hành
+            if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentReceivedPublish.ToString()) || Global.IsAdmin())
+                pnDocumentReceivedPublish.Visible = true;
+
             BUser ctlUP = new BUser();
             if (Global.IsAdmin())
                 li_User.Visible=true ;

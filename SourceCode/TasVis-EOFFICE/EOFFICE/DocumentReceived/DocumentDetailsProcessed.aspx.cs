@@ -45,11 +45,11 @@ namespace EOFFICE
         {
             //BUser ctlUP = new BUser();
             ////-- Kiểm tra quyền dự thảo
-            //if (ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()))
+            //if (ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentReceivedDrap.ToString()))
             //    Response.Redirect("/");
             BUser ctlUP = new BUser();
             //-- Kiểm tra quyền dự thảo
-            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentDrap.ToString()) && !Global.IsAdmin())
+            if (!ctlUP.HasPermission(Global.UserInfo.UserID, Common.PermissionCode.DocumentReceivedDrap.ToString()) && !Global.IsAdmin())
                 Response.Redirect("/permission-fail.aspx");
 
             if (DocumentId != "")

@@ -49,9 +49,20 @@
                         Bản thảo:
                     </td>
                     <td colspan="3">
-                        <asp:LinkButton runat="server" ID="cmdDownAttachs" OnClick="cmdDownAttachs_Click">
+                        <asp:LinkButton runat="server" Visible="false" ID="cmdDownAttachs" OnClick="cmdDownAttachs_Click">
                             <asp:Label runat="server" ID="lblAttach" Font-Bold="true"></asp:Label>
                         </asp:LinkButton>
+                        <asp:Repeater ID="rptFiles" runat="server" OnItemCommand="rptItemCommand">
+                            <ItemTemplate>
+                                <p>
+                                    <asp:LinkButton ID="lblFileName" CommandName="Download" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"Path") %>'
+                                        Text='<%#DataBinder.Eval(Container.DataItem,"Name") %>' runat="server" Font-Overline="False"
+                                        Font-Underline="True"></asp:LinkButton>&nbsp
+                                    <asp:LinkButton Visible="false" ID="lblDeleteFile" runat="server" CommandName="Delete" CommandArgument='<%#DataBinder.Eval(Container.DataItem,"AttachID") %>'
+                                        Text="(Xóa)" OnClientClick="javascript:return confirm('Bạn chắc chắn muốn xóa file đính kèm?');"
+                                        ForeColor="Red"></asp:LinkButton></p>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </td>
                 </tr>
             </table>

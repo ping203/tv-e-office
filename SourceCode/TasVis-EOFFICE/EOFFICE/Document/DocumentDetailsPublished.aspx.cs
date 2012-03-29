@@ -46,9 +46,9 @@ namespace EOFFICE
             if (DocumentId != "")
             {
                 BDocument ctl = new BDocument();
-                if (ctl.Get(DocumentId) != null)
+                if (ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D"))) != null)
                 {
-                    ODocument obj = ctl.Get(DocumentId)[0];
+                    ODocument obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
                     if (obj != null)
                     {
                         lblName.Text = obj.Name;
@@ -106,7 +106,7 @@ namespace EOFFICE
 
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
                     if (obj != null)
                     {
                         ctl.UpdatePublish(DocumentId, "", EOFFICE.Common.DocumentStatus.Published.ToString("D"),DateTime.Now.ToString("MM/dd/yyyy"));
@@ -215,14 +215,14 @@ namespace EOFFICE
             {
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
                     if (obj != null)
                     {
                         string listFile = ",";
 
                         try
                         {
-                            obj = ctl.Get(DocumentId)[0];
+                            obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
                             
                             if (obj != null)
@@ -262,7 +262,7 @@ namespace EOFFICE
                 {
                     try
                     {
-                        obj = ctl.Get(DocumentId)[0];
+                        obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
 
                         if (obj != null)

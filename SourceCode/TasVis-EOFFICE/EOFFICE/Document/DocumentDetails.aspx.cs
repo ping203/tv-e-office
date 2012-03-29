@@ -46,15 +46,16 @@ namespace EOFFICE
             if (DocumentId != "")
             {
                 BDocument ctl = new BDocument();
-                if (ctl.Get(DocumentId) != null)
+                if (ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D"))) != null)
                 {
-                    ODocument obj = ctl.Get(DocumentId)[0];
+                    ODocument obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
                     if (obj != null)
                     {
                         lblName.Text = obj.Name;
                         lblSubContent.Text = obj.Excerpt;
                         lblUserDrap.Text = obj.IDUserCreate.ToString();
-                        lblAttach.Text = obj.Attachs;
+                        //lblAttach.Text = obj.Attachs;
+                        
                         BComment BobjComment = new BComment();
                         rptComment.DataSource= BobjComment.Get("", DocumentId,0);
                         rptComment.DataBind();
@@ -65,6 +66,9 @@ namespace EOFFICE
                         }
                         rptFileAttachs.DataSource = listAttach;
                         rptFileAttachs.DataBind();
+
+                        rptFiles.DataSource = (new BAttach()).GetAttachs(obj.Attachs);
+                        rptFiles.DataBind();
                     }
                 }
             }
@@ -106,7 +110,7 @@ namespace EOFFICE
 
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
                     try {
                         if (FileUpload1.PostedFile == null)
@@ -252,6 +256,62 @@ namespace EOFFICE
             
         }
 
+        public void rptItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            //Response.Write(e.CommandName);
+            //Response.Write(e.CommandArgument);
+            if (e.CommandName == "Download")
+            {
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            if (e.CommandName == "Delete")
+            {
+                OAttach objAttach = new OAttach();
+                BAttach BobjAttach = new BAttach();
+                BDocument Bdocument = new BDocument();
+                ODocument obj = Bdocument.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D"))).First();
+                //int IDUserCreate = int.Parse(objWork.IDUserCreate.ToString());
+                string listAttach = obj.Attachs.ToString();
+                objAttach = BobjAttach.Get(int.Parse(e.CommandArgument.ToString())).First();
+                string AttachId = objAttach.AttachID.ToString();
+                try
+                {
+                    FileInfo TheFile = new FileInfo(Server.MapPath(objAttach.Path));
+                    if (TheFile.Exists)
+                    {
+                        File.Delete(Server.MapPath(objAttach.Path));//Xóa file Attach
+                        BobjAttach.Delete(objAttach.AttachID);//Xóa file Attach trong CSDL
+                        string newListAttach = listAttach.Replace("," + AttachId + ",", ",");
+                        obj.Attachs = newListAttach;
+                        Bdocument.Update(obj.DocumentID, "", obj.Name, obj.Excerpt, obj.Content, "", obj.PublishOffical, obj.Attachs, obj.IDDocumentKind, "", obj.UserProcess, "", obj.StartProcess.ToString("MM/dd/yyyy"), obj.EndProcess.ToString("MM/dd/yyyy"), DateTime.Now.ToString("MM/dd/yyyy"), "", obj.SendOfficals, obj.Priority, obj.Status);
+                        InitData();
+                    }
+                    else
+                    {
+                        throw new FileNotFoundException();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //throw new FileNotFoundException();
+                }
+            }
+        }
+
+
         /// <summary>
         /// Updaload file
         /// </summary>
@@ -275,7 +335,7 @@ namespace EOFFICE
             {
                 try
                 {
-                    obj = ctl.Get(DocumentId)[0];
+                    obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
 
                     if (obj != null)
@@ -285,7 +345,7 @@ namespace EOFFICE
 
                         try
                         {
-                            obj = ctl.Get(DocumentId)[0];
+                            obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
                             try
                             {
@@ -382,7 +442,7 @@ namespace EOFFICE
                 {
                     try
                     {
-                        obj = ctl.Get(DocumentId)[0];
+                        obj = ctl.Get(DocumentId, int.Parse(EOFFICE.Common.DocumentType.DocumentDrap.ToString("D")))[0];
 
 
                         if (obj != null)

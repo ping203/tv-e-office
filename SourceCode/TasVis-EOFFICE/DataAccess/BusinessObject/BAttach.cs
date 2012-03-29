@@ -68,5 +68,34 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<OAttach>(tbl);
             return list;
         }
+
+        /// <summary>
+        /// Lấy danh sách file Attach
+        /// </summary>
+        /// <param name="strAttachID"></param>
+        /// <returns></returns>
+        public List<OAttach> GetAttachs(string strAttachID)
+        {
+            if ((strAttachID == "") || (strAttachID == ","))
+            {
+                return null;
+            }
+            else
+            {
+                String[] arrattachs = strAttachID.Split(',');
+                List<OAttach> lstAttachs = new List<OAttach>();
+                BAttach objBAttach = new BAttach();
+                if (arrattachs.Count() > 1)
+                {
+                    for (int i = 1; i < arrattachs.Count() - 1; i++)
+                    {
+                        OAttach objAttach = objBAttach.Get(int.Parse(arrattachs[i])).First();
+                        lstAttachs.Add(objAttach);
+                    }
+                }
+                return lstAttachs;
+            }
+        }
+
     }
 }

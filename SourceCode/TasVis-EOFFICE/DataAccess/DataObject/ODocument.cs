@@ -154,5 +154,13 @@ namespace DataAccess.DataObject
             get { return _TotalResult; }
             set { _TotalResult = value; }
         }
+
+        private int _Type;
+
+        public int Type
+        {
+            get { return _Type; }
+            set { _Type = value; }
+        }
     }
 }

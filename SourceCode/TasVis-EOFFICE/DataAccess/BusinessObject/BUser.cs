@@ -212,7 +212,6 @@ namespace DataAccess.BusinessObject
              SqlParameter[] sqlPara = new SqlParameter[1];
              sqlPara[0] = new SqlParameter("@UserName", SqlDbType.VarChar);
              sqlPara[0].Value = UserName;
-
              return RunProcudure("sp_tblUser_delete", sqlPara);
          }
 
@@ -223,7 +222,6 @@ namespace DataAccess.BusinessObject
              sqlPara[0].Value = UserName;
              sqlPara[1] = new SqlParameter("@Password", SqlDbType.VarChar);
              sqlPara[1].Value = Password;
-
              return RunProcudure("sp_tblUser_update", sqlPara);
          }
          public bool Update(string UserName, string FullName, string Email, string PhoneNumber, string Tel, string Gender, DateTime Birthday, string Address, string Position, string Status, int IDDepartment)

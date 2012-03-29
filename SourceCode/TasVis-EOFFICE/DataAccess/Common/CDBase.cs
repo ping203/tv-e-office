@@ -111,7 +111,6 @@ namespace DataAccess.Common
                     cmd.Parameters.Add(sqlPara);
                 }
                 numRecordsEffect=cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex) { }           
                       

@@ -14,7 +14,7 @@ namespace DataAccess.BusinessObject
         
         public bool Add(ODocument obj)
         {
-            SqlParameter[] sqlPara = new SqlParameter[20];
+            SqlParameter[] sqlPara = new SqlParameter[21];
             sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
             sqlPara[0].Value = obj.DocumentID;
             sqlPara[1] = new SqlParameter("@DocumentNumber", SqlDbType.NVarChar);
@@ -55,6 +55,8 @@ namespace DataAccess.BusinessObject
             sqlPara[18].Value = obj.Priority;
             sqlPara[19] = new SqlParameter("@Status", SqlDbType.VarChar);
             sqlPara[19].Value = obj.Status;
+            sqlPara[20] = new SqlParameter("@Type", SqlDbType.Int );
+            sqlPara[20].Value = obj.Type ;
 
             return RunProcudure("sp_tblDocument_add", sqlPara);
         }
@@ -113,32 +115,36 @@ namespace DataAccess.BusinessObject
             return RunProcudure("sp_tblDocument_delete", sqlPara);
         }
 
-        public IList<ODocument> Get(string DocumentID)
+        public IList<ODocument> Get(string DocumentID,int Type)
         {
-            SqlParameter[] sqlPara = new SqlParameter[1];
+            SqlParameter[] sqlPara = new SqlParameter[2];
             sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
             sqlPara[0].Value = DocumentID;
+            sqlPara[1] = new SqlParameter("@Type", SqlDbType.Int);
+            sqlPara[1].Value = Type;
             DataTable tbl = RunProcedureGet("sp_tblDocument_get", sqlPara);
             IList<ODocument> list = new List<ODocument>();
             list = Common.Common.ConvertTo<ODocument>(tbl);
             return list;
         }
         
-        public IList<ODocument> Get(string DocumentID,string Name)
+        public IList<ODocument> Get(string DocumentID,string Name,int Type)
         {
-            SqlParameter[] sqlPara = new SqlParameter[2];
+            SqlParameter[] sqlPara = new SqlParameter[3];
             sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
             sqlPara[0].Value = DocumentID;
             sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
             sqlPara[1].Value = Name;
+            sqlPara[2] = new SqlParameter("@Type", SqlDbType.Int);
+            sqlPara[2].Value = Type;
             DataTable tbl = RunProcedureGet("sp_tblDocument_get", sqlPara);
             IList<ODocument> list = new List<ODocument>();
             list = Common.Common.ConvertTo<ODocument>(tbl);
             return list;
         }
-        public IList<ODocument> Get(string DocumentID, string Name, DateTime FromPublishDate, DateTime ToPublishDate, int DocumentType, int OfficalId, string UserProcess, int Status, string OrderBy, string Order, int IDUserCreate, int PageIndex, int Pagesize)
+        public IList<ODocument> Get(string DocumentID, string Name, DateTime FromPublishDate, DateTime ToPublishDate, int DocumentType, int OfficalId, string UserProcess, int Status, string OrderBy, string Order, int IDUserCreate, int PageIndex, int Pagesize, int Type)
         {
-            SqlParameter[] sqlPara = new SqlParameter[13];
+            SqlParameter[] sqlPara = new SqlParameter[14];
             sqlPara[0] = new SqlParameter("@DocumentID", SqlDbType.VarChar);
             sqlPara[0].Value = DocumentID;
             sqlPara[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
@@ -165,6 +171,8 @@ namespace DataAccess.BusinessObject
             sqlPara[11].Value = Pagesize;
             sqlPara[12] = new SqlParameter("@IDUserCreate", SqlDbType.Int);
             sqlPara[12].Value = IDUserCreate;
+            sqlPara[13] = new SqlParameter("@Type", SqlDbType.Int);
+            sqlPara[13].Value = Type ;
             DataTable tbl = RunProcedureGet("sp_tblDocument_get", sqlPara);
             IList<ODocument> list = new List<ODocument>();
             list = Common.Common.ConvertTo<ODocument>(tbl);

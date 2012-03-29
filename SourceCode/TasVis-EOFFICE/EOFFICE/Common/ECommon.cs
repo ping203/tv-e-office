@@ -268,6 +268,32 @@ namespace EOFFICE.Common
     /// </summary>
     public enum PermissionCode
     {
+
+        /// <summary>
+        /// Xử lý công văn đến
+        /// </summary>
+        DocumentReceivedDrap,
+        /// <summary>
+        /// Duyệt công văn đến
+        /// </summary>
+        DocumentReceivedProcess,
+        /// <summary>
+        /// Phát hành công văn đến
+        /// </summary>
+        DocumentReceivedPublish,
+        /// <summary>
+        /// Xử lý công văn đi
+        /// </summary>
+        DocumentSendDrap,
+        /// <summary>
+        /// Duyệt công văn đi
+        /// </summary>
+        DocumentSendProcess,
+        /// <summary>
+        /// Phát hành công văn đi
+        /// </summary>
+        DocumentSendPublish,
+
         /// <summary>
         /// Xử lý dự thảo
         /// </summary>
@@ -319,11 +345,11 @@ namespace EOFFICE.Common
         /// <summary>
         /// Công văn đi
         /// </summary>
-        DocumentSend=-2,
+        DocumentSend=2,
         /// <summary>
         /// Công văn đến
         /// </summary>
-        DocumentReceived=-3
+        DocumentReceived=3
     }
 
 }

@@ -58,7 +58,7 @@ namespace EOFFICE.Document
         {
             BUser ctl = new BUser();
             //-- Kiểm tra quyền dự thảo
-            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentDrap.ToString())&& !Global.IsAdmin())
+            if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentSendDrap.ToString())&& !Global.IsAdmin())
                 Response.Redirect("/");
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
@@ -68,7 +68,7 @@ namespace EOFFICE.Document
                 }
                 catch (Exception ex) { }
             }
-            //lbtSearch.Text = Common.PermissionCode.DocumentDrap.ToString();
+            //lbtSearch.Text = Common.PermissionCode.DocumentSendDrap.ToString();
             hdfCurrentPage.Value = CurrentPage.ToString();
             ////--Trạng thái
             //if (Request.QueryString["status"] != null)

@@ -428,9 +428,9 @@ namespace EOFFICE
                     HttpContext.Current.Response.ContentType =
                                 "application/octet-stream";
                     HttpContext.Current.Response.AddHeader("Content-Disposition",
-                      "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath(e.CommandArgument.ToString())));
+                      "attachment; filename=" + System.IO.Path.GetFileName(e.CommandArgument.ToString()));
                     HttpContext.Current.Response.Clear();
-                    HttpContext.Current.Response.WriteFile(Server.MapPath(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.WriteFile(e.CommandArgument.ToString());
                     HttpContext.Current.Response.End();
                 }
                 catch (Exception ex)

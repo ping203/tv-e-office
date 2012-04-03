@@ -65,6 +65,8 @@ namespace EOFFICE
                         }
                         rptFileAttachs.DataSource = listAttach;
                         rptFileAttachs.DataBind();
+                        rptFiles.DataSource = (new BAttach()).GetAttachs(obj.Attachs);
+                        rptFiles.DataBind();
                     }
                 }
             }
@@ -282,7 +284,7 @@ namespace EOFFICE
                 HttpContext.Current.Response.ContentType =
                             "application/octet-stream";
                 HttpContext.Current.Response.AddHeader("Content-Disposition",
-                  "attachment; filename=" + System.IO.Path.GetFileName(Server.MapPath("DocumentFiles/" + usn + "/" + lblAttach.Text)));
+                  "attachment; filename=" + lblAttach.Text);
                 HttpContext.Current.Response.Clear();
                 HttpContext.Current.Response.WriteFile(Server.MapPath("DocumentFiles/" + usn + "/" + lblAttach.Text));
                 HttpContext.Current.Response.End();
@@ -290,6 +292,27 @@ namespace EOFFICE
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        protected void rptItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Download")
+            {
+                try
+                {
+                    HttpContext.Current.Response.ContentType =
+                                "application/octet-stream";
+                    HttpContext.Current.Response.AddHeader("Content-Disposition",
+                      "attachment; filename=" + System.IO.Path.GetFileName(e.CommandArgument.ToString()));
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.WriteFile(e.CommandArgument.ToString());
+                    HttpContext.Current.Response.End();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 

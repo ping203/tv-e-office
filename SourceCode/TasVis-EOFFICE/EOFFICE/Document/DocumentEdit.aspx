@@ -37,7 +37,7 @@
                         <a href="/Document/DocumentKindCreate.aspx" class="link-btn">Thêm loại văn bản</a>
                     </td>
                 </tr>
-                <tr>
+                <tr style="display:none">
                     <td>
                         Văn phòng:<span class="required">*</span>
                     </td>

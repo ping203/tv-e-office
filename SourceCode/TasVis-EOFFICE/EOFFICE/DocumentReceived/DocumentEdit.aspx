@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Văn phòng:<span class="required">*</span>
+                        Đơn vị gửi:<span class="required">*</span>
                     </td>
                     <td colspan="3">
                         <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="OfficalId"

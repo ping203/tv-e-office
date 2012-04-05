@@ -54,6 +54,14 @@ namespace EOFFICE
                         lblName.Text = obj.Name;
                         lblSubContent.Text = obj.Excerpt;
                         lblUserDrap.Text = obj.IDUserCreate.ToString();
+                        try
+                        {
+                            lblUserDrap.Text = (new BUser()).Get(obj.IDUserCreate).First().UserName;
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                         //lblAttach.Text = obj.Attachs;
                         
                         BComment BobjComment = new BComment();

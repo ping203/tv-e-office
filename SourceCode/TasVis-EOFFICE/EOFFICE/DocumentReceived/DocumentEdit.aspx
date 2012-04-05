@@ -34,7 +34,7 @@
                         <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="DocumentKindID"
                             ID="ddlType">
                         </asp:DropDownList>
-                        <a href="/DocumentSend/DocumentKindCreate.aspx" class="link-btn">Thêm loại Công văn đến</a>
+                        <a href="/DocumentReceived/DocumentKindCreate.aspx" class="link-btn">Thêm loại Công văn đến</a>
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +45,7 @@
                         <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="OfficalId"
                             ID="ddlOffical">
                         </asp:DropDownList>
-                        <a href="/DocumentSend/DocumentOffical.aspx" class="link-btn">Thêm văn phòng</a>
+                        <a href="/DocumentReceived/DocumentOffical.aspx" class="link-btn">Thêm văn phòng</a>
                     </td>
                 </tr>
                 <tr>

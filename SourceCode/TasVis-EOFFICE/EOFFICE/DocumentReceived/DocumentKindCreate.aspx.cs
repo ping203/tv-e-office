@@ -103,8 +103,15 @@ namespace EOFFICE
                 }
                 catch (Exception ea)
                 { obj.DocumentKindParent = 0; }
-                
-                ctl.Add(obj);
+                if (hdfId.Value != "")
+                {
+                    obj.DocumentKindID = int.Parse(hdfId.Value);
+                    ctl.Update(obj.DocumentKindID, obj.Name, obj.Description, obj.DocumentKindParent);
+                }
+                else
+                {
+                    ctl.Add(obj);
+                }
                 BindData();
             }
         }
@@ -117,7 +124,18 @@ namespace EOFFICE
         {
             if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
-                //BDocumentKind ctl = new BDocumentKind();
+                BDocumentKind ctl = new BDocumentKind();
+                ODocumentKind obj = ctl.Get(int.Parse(e.CommandArgument.ToString())).First();
+                if (obj != null)
+                {
+                    txtDescription.Text = obj.Description;
+                    txtName.Text = obj.Name;
+                    hdfId.Value = obj.DocumentKindID.ToString();
+                    try {
+                        ddlParent.Items.FindByValue(obj.DocumentKindParent.ToString()).Selected = true;
+                    }
+                    catch (Exception ex) { }
+                }
                 //ctl.Delete(int.Parse(e.CommandArgument.ToString()));
                
             }

@@ -18,7 +18,7 @@
                     </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="lbtAccept" CssClass="link-btn" OnClick="lbtAccept_Click"
                         OnClientClick="javascript:return ValidCheckedDocument();" Visible="false">Thực hiện</asp:LinkButton>
-                    <a class="link-btn" href="/DocumentSend/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>
+                    <a class="link-btn" href="/DocumentReceived/DocumentEdit.aspx"><span class="create">Thêm mới</span></a>
                 </td>
                 <td>
                     Từ ngày:<asp:TextBox runat="server" Width="80px" ID="txtStartDate" CssClass="txt required datepicker"></asp:TextBox>

@@ -59,6 +59,9 @@ namespace EOFFICE
         /// </summary>
         private void BindData()
         {
+            //-- Kiểm tra quyền dự thảo
+            if (!Global.IsAdmin())
+                Response.Redirect("/");
             BDocumentKind ctl = new BDocumentKind();
             grvDocumentKind.DataSource = ctl.Get(0);
             grvDocumentKind.DataBind();
@@ -107,11 +110,14 @@ namespace EOFFICE
                 {
                     obj.DocumentKindID = int.Parse(hdfId.Value);
                     ctl.Update(obj.DocumentKindID, obj.Name, obj.Description, obj.DocumentKindParent);
+                    hdfId.Value = ""; 
                 }
                 else
                 {
                     ctl.Add(obj);
                 }
+                txtName.Text = "";
+                txtDescription.Text = "";
                 BindData();
             }
         }

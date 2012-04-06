@@ -59,6 +59,9 @@ namespace EOFFICE
         /// </summary>
         private void BindData()
         {
+            //-- Kiểm tra quyền dự thảo
+            if (!Global.IsAdmin())
+                Response.Redirect("/");
             BDocumentKind ctl = new BDocumentKind();
             grvDocumentKind.DataSource = ctl.Get(0);
             grvDocumentKind.DataBind();
@@ -98,13 +101,24 @@ namespace EOFFICE
                 ODocumentKind obj = new ODocumentKind();
                 obj.Name = txtName.Text;
                 obj.Description = txtDescription.Text;
-                try {
+                try
+                {
                     obj.DocumentKindParent = int.Parse(ddlParent.SelectedValue);
                 }
                 catch (Exception ea)
                 { obj.DocumentKindParent = 0; }
-                
-                ctl.Add(obj);
+                if (hdfId.Value != "")
+                {
+                    obj.DocumentKindID = int.Parse(hdfId.Value);
+                    ctl.Update(obj.DocumentKindID, obj.Name, obj.Description, obj.DocumentKindParent);
+                    hdfId.Value = "";
+                }
+                else
+                {
+                    ctl.Add(obj);
+                }
+                txtName.Text = "";
+                txtDescription.Text = "";
                 BindData();
             }
         }
@@ -117,8 +131,19 @@ namespace EOFFICE
         {
             if (e.CommandName.Equals("cmdEdit", StringComparison.OrdinalIgnoreCase))
             {
-                //BDocumentKind ctl = new BDocumentKind();
-                //ctl.Delete(int.Parse(e.CommandArgument.ToString()));
+                BDocumentKind ctl = new BDocumentKind();
+                ODocumentKind obj = ctl.Get(int.Parse(e.CommandArgument.ToString())).First();
+                if (obj != null)
+                {
+                    txtDescription.Text = obj.Description;
+                    txtName.Text = obj.Name;
+                    hdfId.Value = obj.DocumentKindID.ToString();
+                    try
+                    {
+                        ddlParent.Items.FindByValue(obj.DocumentKindParent.ToString()).Selected = true;
+                    }
+                    catch (Exception ex) { }
+                }
                
             }
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))

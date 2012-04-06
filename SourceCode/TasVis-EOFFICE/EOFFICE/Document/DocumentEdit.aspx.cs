@@ -253,6 +253,10 @@ namespace EOFFICE
         {
             if (!IsPostBack)
             {
+                if (!Global.IsAdmin())
+                    lnkAddCategory.Visible = false ;
+                else
+                    lnkAddCategory.Visible = true;
                 BindDocumentType();
                 BindOffical();
                 BindDepartment();

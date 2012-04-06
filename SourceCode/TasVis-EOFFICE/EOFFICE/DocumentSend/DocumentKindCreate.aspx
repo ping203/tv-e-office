@@ -19,7 +19,7 @@
         }
     } 
     </script>
-
+<asp:HiddenField runat="server" ID="hdfId" Value="" />
     <div class="list wp-form" id="createWorkGroup">
         <h2>
             <span class="icon">

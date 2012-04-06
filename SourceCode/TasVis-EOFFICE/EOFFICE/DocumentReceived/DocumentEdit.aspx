@@ -34,7 +34,7 @@
                         <asp:DropDownList runat="server" DataTextField="Name" Width="250" DataValueField="DocumentKindID"
                             ID="ddlType">
                         </asp:DropDownList>
-                        <a href="/DocumentReceived/DocumentKindCreate.aspx" class="link-btn">Thêm loại Công văn đến</a>
+                        <a href="/DocumentReceived/DocumentKindCreate.aspx" runat="server" id="lnkAddCategory" class="link-btn">Thêm loại Công văn đến</a>
                     </td>
                 </tr>
                 <tr>

@@ -56,6 +56,8 @@ namespace EOFFICE.Document
         /// </summary>
         private void InitData()
         {
+
+
             BUser ctl = new BUser();
             //-- Kiểm tra quyền dự thảo
             if (!ctl.HasPermission(Global.UserInfo.UserID,Common.PermissionCode.DocumentReceivedDrap.ToString())&& !Global.IsAdmin())

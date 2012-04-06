@@ -119,7 +119,7 @@
                                 </asp:DropDownList>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="display:none">
                             <td align="right">
                                 Nhóm người dùng:
                             </td>

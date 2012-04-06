@@ -25,14 +25,14 @@ namespace EOFFICE.Users
         /// </summary>
         public int CurrentPage
         {
-         
+
             get
             {
                 if (Request.QueryString["currentpage"] != null)
                 {
                     try
                     {
-                  
+
                         return int.Parse(Request.QueryString["currentpage"]);
                     }
                     catch (Exception ex)
@@ -61,7 +61,8 @@ namespace EOFFICE.Users
             //--Pagesize
             if (Request.QueryString["pagesize"] != null)
             {
-                try {
+                try
+                {
                     ddlPageSize.Items.FindByValue(Request.QueryString["pagesize"]).Selected = true;
                 }
                 catch (Exception ex) { }
@@ -129,13 +130,13 @@ namespace EOFFICE.Users
         private string GenarateParam()
         {
             string strParam = "";
-            strParam += "pagesize="+ddlPageSize.SelectedValue;
+            strParam += "pagesize=" + ddlPageSize.SelectedValue;
             strParam += "&status=" + ddlStatus.SelectedValue;
             strParam += "&dpm=" + ddlDepartment.SelectedValue;
             strParam += "&type=" + ddlColumnName.SelectedValue;
             if (txtKey.Text.Trim().Length > 0)
             {
-                strParam += "&type=" +Server.UrlEncode( txtKey.Text.Trim());
+                strParam += "&type=" + Server.UrlEncode(txtKey.Text.Trim());
             }
             return strParam;
         }
@@ -147,7 +148,7 @@ namespace EOFFICE.Users
         {
             BUser ctl = new BUser();
             string _fullname = "";
-            string _username= "";
+            string _username = "";
             string _email = "";
             string _status = "";
             int _departmentid = int.Parse(ddlDepartment.SelectedValue);
@@ -181,7 +182,7 @@ namespace EOFFICE.Users
             }
             grvListUsers.DataSource = ctl.Get(_fullname, _username, _email, _departmentid, _status, "DESC", "UserId", CurrentPage, ctlPagging.PageSize);
             grvListUsers.DataBind();
-            ctlPagging.CurrentIndex =CurrentPage;
+            ctlPagging.CurrentIndex = CurrentPage;
             ctlPagging.ItemCount = count;
             ctlPagging.QueryStringParameterName = GenarateParam();
         }
@@ -313,6 +314,7 @@ namespace EOFFICE.Users
                     //-- Load lại người dùng
                     BindData();
                     break;
+              
             }
         }
 
@@ -323,8 +325,8 @@ namespace EOFFICE.Users
         /// <param name="e"></param>
         protected void grvListUsers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            
-                //-- Phân quyền người dùng
+
+            //-- Phân quyền người dùng
             if (e.CommandName.Equals("cmdUserGroup", StringComparison.OrdinalIgnoreCase))
             {
                 //-- Chuyển tới trang phân quyền người dùng
@@ -335,6 +337,11 @@ namespace EOFFICE.Users
             {
                 //-- Chuyển tới trang sửa người dùng 
                 Response.Redirect("Edit.aspx?username=" + e.CommandArgument.ToString());
+            }
+            else if (e.CommandName.Equals("cmdResetPass", StringComparison.OrdinalIgnoreCase))
+            {
+                BUser Bobj = new BUser();
+                Bobj.Update(e.CommandArgument.ToString(), Common.ECommon.GetMd5String("nganson"));
             }
             //--Xóa người dùng
             else if (e.CommandName.Equals("cmdDelete", StringComparison.OrdinalIgnoreCase))

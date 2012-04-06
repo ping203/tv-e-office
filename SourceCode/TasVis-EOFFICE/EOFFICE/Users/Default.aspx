@@ -83,6 +83,11 @@
                                         runat="server">
                                         <asp:Image CssClass="link-function" runat="server" ID="Image1" ImageUrl="~/images/unchecked.gif" />
                                     </asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton6" CommandName="cmdResetPass" CommandArgument='<%#Eval("Username") %>'
+                                        ToolTip="Reset mật khẩu mặc định" CssClass="link-function"
+                                        runat="server">
+                                        Reset mật khẩu
+                                    </asp:LinkButton>
                                     <asp:LinkButton ID="LinkButton2" CommandName="cmdUnApprove" CommandArgument='<%#Eval("Username") %>'
                                         ToolTip="Khóa" Visible='<%#VisibleApp(Eval("Status")) %>' CssClass="link-function"
                                         runat="server">

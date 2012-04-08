@@ -85,7 +85,7 @@
                             <HeaderTemplate>
                                 Loại Công văn đi cha</HeaderTemplate>
                             <ItemTemplate>
-                                <%#GetName(Eval("DocumentKindID"))%>
+                                <%#GetName(Eval("DocumentKindParent"))%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>

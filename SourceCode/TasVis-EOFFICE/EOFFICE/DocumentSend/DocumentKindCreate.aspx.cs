@@ -76,7 +76,12 @@ namespace EOFFICE
         {
             BDocumentKind ctl = new BDocumentKind();
             try{
-                return ctl.Get(int.Parse(id.ToString()))[0].Name;
+                if (int.Parse(id.ToString()) > 0)
+                {
+                    return ctl.Get(int.Parse(id.ToString()))[0].Name;
+                }
+                else
+                    return "";
             }catch(Exception ex)
             {
                 return "";
@@ -140,6 +145,7 @@ namespace EOFFICE
                     hdfId.Value = obj.DocumentKindID.ToString();
                     try
                     {
+                        ddlParent.ClearSelection();
                         ddlParent.Items.FindByValue(obj.DocumentKindParent.ToString()).Selected = true;
                     }
                     catch (Exception ex) { }

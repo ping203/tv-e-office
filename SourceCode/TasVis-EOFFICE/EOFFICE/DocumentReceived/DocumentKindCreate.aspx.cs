@@ -72,16 +72,23 @@ namespace EOFFICE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string GetName(object  id)
+        public string GetName(object id)
         {
             BDocumentKind ctl = new BDocumentKind();
-            try{
-                return ctl.Get(int.Parse(id.ToString()))[0].Name;
-            }catch(Exception ex)
+            try
+            {
+                if (int.Parse(id.ToString()) > 0)
+                {
+                    return ctl.Get(int.Parse(id.ToString()))[0].Name;
+                }
+                else
+                    return "";
+            }
+            catch (Exception ex)
             {
                 return "";
             }
-           
+
         }
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -138,6 +145,7 @@ namespace EOFFICE
                     txtName.Text = obj.Name;
                     hdfId.Value = obj.DocumentKindID.ToString();
                     try {
+                        ddlParent.ClearSelection();
                         ddlParent.Items.FindByValue(obj.DocumentKindParent.ToString()).Selected = true;
                     }
                     catch (Exception ex) { }

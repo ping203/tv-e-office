@@ -35,7 +35,6 @@ namespace DataAccess.BusinessObject
             sqlPara[2].Value = Description;
             sqlPara[3] = new SqlParameter("@DocumentKindParent", SqlDbType.Int);
             sqlPara[3].Value = DocumentKindParent;
-
             return RunProcudure("sp_tblDocumentKind_update", sqlPara);
         }
 

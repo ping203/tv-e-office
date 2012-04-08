@@ -5,8 +5,8 @@
     <div class="list" id="list-congvieccanlam">
         <h2>
             <span class="icon">
-                <asp:Image ImageUrl="~/Images/Modify.png" runat="server" /></span>Cập nhật nhóm người
-            dùng</h2>
+                <asp:Image ImageUrl="~/Images/Modify.png" runat="server" /></span>Cập nhật nhóm
+            người dùng</h2>
         <table class="tbl-list" width="100%" cellspacing="1" cellpadding="3">
             <tr>
                 <td align="left">
@@ -30,9 +30,9 @@
                         </tr>
                         <tr>
                             <td align="right">
-                                <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" 
-                                    OnClientClick="javascript:return $('form').valid();" 
-                                    onclick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="lnkUpdate" CssClass="link-btn" OnClientClick="javascript:return $('form').valid();"
+                                    OnClick="lnkUpdate_Click">Cập nhật</asp:LinkButton>
+                                <a href="Group.aspx" class="link-btn">Quay lại</a>
                             </td>
                             <td>
                             </td>

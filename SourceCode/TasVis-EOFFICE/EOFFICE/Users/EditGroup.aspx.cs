@@ -81,6 +81,7 @@ namespace EOFFICE.Users
             }
             //-- gán thông tin cho đối tượng nhóm người dùng
             obj.Description = txtDescription.Text;
+            obj.Name = txtName.Text;
             //-- Cập nhật User
             if (obj.GroupID > 0)
             {
@@ -116,11 +117,9 @@ namespace EOFFICE.Users
                     return;
                 txtDescription.Text = obj.Description;
                 txtName.Text = obj.Name;
-                txtName.Visible = false;
+                txtName.Visible = true;
                 lblName.Text = obj.Name;
-                lblName.Visible = true;
-                
-                
+                lblName.Visible = false ;
             }
             catch (Exception ex)
             {

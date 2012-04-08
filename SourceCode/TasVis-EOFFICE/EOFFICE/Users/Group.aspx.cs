@@ -100,6 +100,14 @@ namespace EOFFICE.Users
                 BGroup ctl = new BGroup();
                 try
                 {
+                    BUserGroup ctlBu = new BUserGroup();
+                    OUserGroup objUG = new OUserGroup();
+                    objUG.IDGroup = int.Parse((e.CommandArgument.ToString()));
+                    objUG.IDUser = 0;
+                    if (ctlBu.Get(objUG).Count > 0)
+                    {
+                        RegisterClientScriptBlock("notif", "<script language='javascript'>alert('Không thể xóa nhóm do có người dùng tồn tại trong nhóm');</script>");
+                    }
                     //-- THực hiện xóa nhóm người dùng
                     ctl.Delete(int.Parse((e.CommandArgument.ToString())));
                     //--Load lại danh sách nhóm người dùng

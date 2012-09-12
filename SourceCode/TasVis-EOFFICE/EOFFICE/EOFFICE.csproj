@@ -80,6 +80,13 @@
     <Compile Include="Calendar\Calendar.aspx.designer.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendar\SMS.aspx.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar\SMS.aspx.designer.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\ECommon.cs" />
     <Compile Include="Common\Pagging.cs" />
     <Compile Include="Contacts\ContactCreate.aspx.cs">
@@ -117,6 +124,209 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DocumentReceived\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DefaultSendAgain.aspx.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DefaultSendAgain.aspx.designer.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetails.aspx.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetails.aspx.designer.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetailsProcessed.aspx.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetailsProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetailsPublished.aspx.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentDetailsPublished.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentEdit.aspx.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentEdit.aspx.designer.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentKindCreate.aspx.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentKindCreate.aspx.designer.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentOffical.aspx.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentOffical.aspx.designer.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcess.aspx.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcess.aspx.designer.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcessedUser.aspx.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcessedUser.aspx.designer.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcessProcessed.aspx.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentProcessProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentSendDrap.aspx.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentReceived\DocumentSendDrap.aspx.designer.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DefaultSendAgain.aspx.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DefaultSendAgain.aspx.designer.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetails.aspx.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetails.aspx.designer.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetailsProcessed.aspx.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetailsProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetailsPublished.aspx.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentDetailsPublished.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentEdit.aspx.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentEdit.aspx.designer.cs">
+      <DependentUpon>DocumentEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentKindCreate.aspx.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentKindCreate.aspx.designer.cs">
+      <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentOffical.aspx.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentOffical.aspx.designer.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcess.aspx.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcess.aspx.designer.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcessedUser.aspx.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcessedUser.aspx.designer.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcessProcessed.aspx.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentProcessProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentSendDrap.aspx.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentSend\DocumentSendDrap.aspx.designer.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DefaultSendAgain.aspx.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DefaultSendAgain.aspx.designer.cs">
+      <DependentUpon>DefaultSendAgain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentDetails.aspx.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentDetails.aspx.designer.cs">
+      <DependentUpon>DocumentDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentDetailsProcessed.aspx.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentDetailsProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentDetailsPublished.aspx.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentDetailsPublished.aspx.designer.cs">
+      <DependentUpon>DocumentDetailsPublished.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Document\DocumentEdit.aspx.cs">
       <DependentUpon>DocumentEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -130,6 +340,41 @@
     </Compile>
     <Compile Include="Document\DocumentKindCreate.aspx.designer.cs">
       <DependentUpon>DocumentKindCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentOffical.aspx.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentOffical.aspx.designer.cs">
+      <DependentUpon>DocumentOffical.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentProcess.aspx.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentProcess.aspx.designer.cs">
+      <DependentUpon>DocumentProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentProcessedUser.aspx.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentProcessedUser.aspx.designer.cs">
+      <DependentUpon>DocumentProcessedUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentProcessProcessed.aspx.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentProcessProcessed.aspx.designer.cs">
+      <DependentUpon>DocumentProcessProcessed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentSendDrap.aspx.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentSendDrap.aspx.designer.cs">
+      <DependentUpon>DocumentSendDrap.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,6 +393,13 @@
     <Compile Include="MasterPages\Default.Master.designer.cs">
       <DependentUpon>Default.Master</DependentUpon>
     </Compile>
+    <Compile Include="permission-fail.aspx.cs">
+      <DependentUpon>permission-fail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="permission-fail.aspx.designer.cs">
+      <DependentUpon>permission-fail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -160,6 +412,20 @@
     </Compile>
     <Compile Include="Users\ChangePass.aspx.designer.cs">
       <DependentUpon>ChangePass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Department.aspx.cs">
+      <DependentUpon>Department.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Department.aspx.designer.cs">
+      <DependentUpon>Department.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\GroupPermission.aspx.cs">
+      <DependentUpon>GroupPermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\GroupPermission.aspx.designer.cs">
+      <DependentUpon>GroupPermission.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Permission.aspx.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
@@ -236,6 +502,13 @@
     <Compile Include="Works\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Works\EditAssignment.aspx.cs">
+      <DependentUpon>EditAssignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Works\EditAssignment.aspx.designer.cs">
+      <DependentUpon>EditAssignment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Works\WorkAssignment.aspx.cs">
       <DependentUpon>WorkAssignment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -285,6 +558,7 @@
     <Content Include="bin\DataAccess.pdb" />
     <Content Include="bin\Telerik.Web.UI.dll" />
     <Content Include="Calendar\Calendar.aspx" />
+    <Content Include="Calendar\SMS.aspx" />
     <Content Include="Contacts\ContactCreate.aspx" />
     <Content Include="Contacts\ContactDetail.aspx" />
     <Content Include="Contacts\ContactGroup.aspx" />
@@ -292,8 +566,60 @@
     <Content Include="css\datepicker-style.css" />
     <Content Include="css\login-style.css" />
     <Content Include="css\style.css" />
+    <Content Include="DocumentReceived\Default.aspx" />
+    <Content Include="DocumentReceived\DefaultSendAgain.aspx" />
+    <Content Include="DocumentReceived\DocumentDetails.aspx" />
+    <Content Include="DocumentReceived\DocumentDetailsProcessed.aspx" />
+    <Content Include="DocumentReceived\DocumentDetailsPublished.aspx" />
+    <Content Include="DocumentReceived\DocumentEdit.aspx" />
+    <Content Include="DocumentReceived\DocumentFiles\admin\403-3.gif" />
+    <Content Include="DocumentReceived\DocumentFiles\admin\Default.aspx" />
+    <Content Include="DocumentReceived\DocumentFiles\admin\jquery-ui-1.8.4.custom.js" />
+    <Content Include="DocumentReceived\DocumentFiles\admin\Products.dll" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\8200download.dll" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\ApnCfg.xml" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\BaseSettingCfg.xml" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\CMUpdater.exe" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\DefaultCfg.xml" />
+    <Content Include="DocumentReceived\DocumentFiles\minhhv\dll_stack.dll" />
+    <Content Include="DocumentReceived\DocumentKindCreate.aspx" />
+    <Content Include="DocumentReceived\DocumentOffical.aspx" />
+    <Content Include="DocumentReceived\DocumentProcess.aspx" />
+    <Content Include="DocumentReceived\DocumentProcessedUser.aspx" />
+    <Content Include="DocumentReceived\DocumentProcessProcessed.aspx" />
+    <Content Include="DocumentReceived\DocumentSendDrap.aspx" />
+    <Content Include="DocumentSend\Default.aspx" />
+    <Content Include="DocumentSend\DefaultSendAgain.aspx" />
+    <Content Include="DocumentSend\DocumentDetails.aspx" />
+    <Content Include="DocumentSend\DocumentDetailsProcessed.aspx" />
+    <Content Include="DocumentSend\DocumentDetailsPublished.aspx" />
+    <Content Include="DocumentSend\DocumentEdit.aspx" />
+    <Content Include="DocumentSend\DocumentFiles\admin\Products.pdb" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\8200download.dll" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\ApnCfg.xml" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\BaseSettingCfg.xml" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\CMUpdater.exe" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\DefaultCfg.xml" />
+    <Content Include="DocumentSend\DocumentFiles\minhhv\dll_stack.dll" />
+    <Content Include="DocumentSend\DocumentKindCreate.aspx" />
+    <Content Include="DocumentSend\DocumentOffical.aspx" />
+    <Content Include="DocumentSend\DocumentProcess.aspx" />
+    <Content Include="DocumentSend\DocumentProcessedUser.aspx" />
+    <Content Include="DocumentSend\DocumentProcessProcessed.aspx" />
+    <Content Include="DocumentSend\DocumentSendDrap.aspx" />
+    <Content Include="Document\Default.aspx" />
+    <Content Include="Document\DefaultSendAgain.aspx" />
+    <Content Include="Document\DocumentDetails.aspx" />
+    <Content Include="Document\DocumentDetailsProcessed.aspx" />
+    <Content Include="Document\DocumentDetailsPublished.aspx" />
     <Content Include="Document\DocumentEdit.aspx" />
+    <Content Include="Document\DocumentFiles\minhhv\CMUpdater.exe" />
     <Content Include="Document\DocumentKindCreate.aspx" />
+    <Content Include="Document\DocumentOffical.aspx" />
+    <Content Include="Document\DocumentProcess.aspx" />
+    <Content Include="Document\DocumentProcessedUser.aspx" />
+    <Content Include="Document\DocumentProcessProcessed.aspx" />
+    <Content Include="Document\DocumentSendDrap.aspx" />
     <Content Include="Images\Accordion_Module_button_collapse_left_grey.png" />
     <Content Include="Images\Accordion_Module_button_expand_left_grey.png" />
     <Content Include="Images\arrow.png" />
@@ -304,10 +630,12 @@
     <Content Include="Images\checked.gif" />
     <Content Include="Images\Create.png" />
     <Content Include="Images\Erase.png" />
+    <Content Include="Images\expand.png" />
     <Content Include="Images\Forward.png" />
     <Content Include="Images\Go-back.png" />
     <Content Include="Images\Help.png" />
     <Content Include="Images\Home.png" />
+    <Content Include="Images\icon-sms.png" />
     <Content Include="Images\icon_loading.gif" />
     <Content Include="Images\icon_locked.png" />
     <Content Include="Images\icon_username.png" />
@@ -351,12 +679,27 @@
     <Content Include="Images\Yes.png" />
     <Content Include="js\jquery-latest.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\jquery.MultiFile.js" />
     <Content Include="js\jquery.ui.core.js" />
     <Content Include="js\jquery.validate.js" />
     <Content Include="js\script.js" />
     <Content Include="js\ui.datetimepicker.js" />
     <Content Include="Login.aspx" />
     <Content Include="MasterPages\Default.Master" />
+    <Content Include="MyFiles\Capture-18-2-2012--17-22-28.PNG" />
+    <Content Include="MyFiles\logo-intro-10-3-2012--10-57-729.png" />
+    <Content Include="MyFiles\logo-kgt-10-3-2012--10-54-491.jpg" />
+    <Content Include="MyFiles\test-15-2-2012--22-1-26.txt" />
+    <Content Include="MyFiles\test-16-1-2012--11-13-438.txt" />
+    <Content Include="MyFiles\test13-1-2012--23-58-627.txt" />
+    <Content Include="MyFiles\test2-15-2-2012--22-1-26.txt" />
+    <Content Include="MyFiles\test2-16-1-2012--11-13-438.txt" />
+    <Content Include="MyFiles\test2-16-1-2012--11-34-801.txt" />
+    <Content Include="MyFiles\test213-1-2012--23-58-627.txt" />
+    <Content Include="permission-fail.aspx" />
+    <Content Include="Users\ChangePass.aspx" />
+    <Content Include="Users\Department.aspx" />
+    <Content Include="Users\GroupPermission.aspx" />
     <Content Include="Users\Permission.aspx" />
     <Content Include="Users\Person.aspx" />
     <Content Include="Users\GroupForUser.aspx" />
@@ -374,6 +717,7 @@
     <Content Include="Users\UserInfo.aspx" />
     <None Include="Web References\wssendmessenger\Service.disco" />
     <Content Include="Works\Default.aspx" />
+    <Content Include="Works\EditAssignment.aspx" />
     <Content Include="Works\WorkAssignment.aspx" />
     <Content Include="Works\WorkAssignmentDetail.aspx" />
     <Content Include="Works\WorkGroupCreat.aspx" />
@@ -381,6 +725,20 @@
     <Content Include="Works\WorkReceivedDetail.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DocumentReceived\DocumentFiles\admin\AI.TestCertificate.rar" />
+    <None Include="DocumentReceived\DocumentFiles\admin\clear-svn.bat" />
+    <Content Include="DocumentReceived\DocumentFiles\admin\Compression.config" />
+    <Content Include="DocumentSend\DocumentFiles\admin\403-3.gif" />
+    <Content Include="DocumentSend\DocumentFiles\admin\Default.aspx" />
+    <Content Include="DocumentSend\DocumentFiles\admin\jquery-ui-1.8.4.custom.js" />
+    <Content Include="DocumentSend\DocumentFiles\admin\Products.dll" />
+    <None Include="DocumentReceived\DocumentFiles\minhhv\App.Config.ini" />
+    <None Include="DocumentSend\DocumentFiles\admin\AI.TestCertificate.rar" />
+    <None Include="DocumentSend\DocumentFiles\admin\clear-svn.bat" />
+    <Content Include="DocumentSend\DocumentFiles\admin\Compression.config" />
+    <None Include="DocumentSend\DocumentFiles\minhhv\App.Config.ini" />
+    <None Include="MyFiles\Bao_gia_dich_vu_sms_marketing_nam_2012-1-3-2012--20-36-576.pdf" />
+    <None Include="MyFiles\Buổi_chia_sẻ_sáng_nay_có_tiêu_đề_Bài_toán_kinh_doanh_trên_các_trang_mạng_điện_tử-1-3-2012--20-37-594.doc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

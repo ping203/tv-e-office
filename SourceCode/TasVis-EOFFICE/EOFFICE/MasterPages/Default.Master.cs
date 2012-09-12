@@ -54,6 +54,10 @@ namespace EOFFICE.MasterPages
             if (ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.DocumentReceivedPublish.ToString()) || Global.IsAdmin())
                 pnDocumentReceivedPublish.Visible = true;
 
+            //-- Kiểm tra quyền gửi tin nhắn
+            if(ctl.HasPermission(Global.UserInfo.UserID, PermissionCode.SendSMS.ToString())||Global.IsAdmin())
+                pnlSMS.Visible=true;
+
             BUser ctlUP = new BUser();
             if (Global.IsAdmin())
                 li_User.Visible=true ;

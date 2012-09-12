@@ -31,8 +31,14 @@ namespace DataAccess.BusinessObject
             list = Common.Common.ConvertTo<ODepartment>(tbl);
             return list;
         }
-
-        
+        public IList<ODepartment> Get(int PageIndex, int PageSize)
+        {
+            SqlParameter[] sqlParam = { new SqlParameter("@PageIndex",SqlDbType.Int),
+                                        new SqlParameter("@PageSize",SqlDbType.Int)};
+            sqlParam[0].Value = PageIndex;
+            sqlParam[1].Value = PageSize;
+            return Common.Common.ConvertTo<ODepartment>(RunProcedureGet("sp_tblDepartment_get", sqlParam));
+        }        
 
         public bool Add(ODepartment obj)
         {

@@ -8,7 +8,7 @@
             <li><a href="/DocumentReceived/DocumentEdit.aspx" class="a-hot-function create-doc-in"><span class="icon"><img src="Images/New-document.png" /></span>Nhập văn bản đến</a><span class="icon-go"></span></li>
             <li><a href="/Works/Default.aspx" class="a-hot-function create-work"><span class="icon"><img src="Images/Create.png" /></span>Tạo mới công việc</a><span class="icon-go"></span></li>
             <li><a href="/Works/WorkReceived.aspx" class="a-hot-function work-play"><span class="icon"><img src="Images/Play.png" /></span>Công việc cần hoàn thành</a><span class="icon-go"></span></li>
-            <li><a href="#" class="a-hot-function search-doc"><span class="icon"><img src="Images/Text-preview.png" /></span>Tra cứu văn bản</a><span class="icon-go"></span></li>
+            <!-- <li><a href="#" class="a-hot-function search-doc"><span class="icon"><img src="Images/Text-preview.png" /></span>Tra cứu văn bản</a><span class="icon-go"></span></li> -->
         </ul>
     </div><!-- end hot-function -->
     <div class="list" id="list-congvieccanlam">

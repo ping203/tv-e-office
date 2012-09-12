@@ -37,6 +37,15 @@ $(document).ready(function() {
             $("#lblChar").html(character);
         }
     });     
+    //check/uncheck all checkbox
+	$(".cbxAll input").change(function(){
+        if($(this).is(':checked'))
+        {
+            $(".cbxItem input").attr("checked",true);   
+        }else{
+            $(".cbxItem input").attr("checked",false);   
+        }
+    });
 });
 /* ajax load user by department work */
 $(".lbtDepartmentAjax").click(function() {

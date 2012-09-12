@@ -162,7 +162,5 @@ namespace DataAccess.Common
             }
             return numRecordsEffect;
         }
-
-
     }
 }

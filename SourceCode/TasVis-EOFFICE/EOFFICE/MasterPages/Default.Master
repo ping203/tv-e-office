@@ -125,9 +125,11 @@
                         <li class="li-child">
                         	<a href="../Calendar/Calendar.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/calendar_icon.gif" runat="server" /></span>Quản lý lịch làm việc</a>
                         </li>
+                        <asp:Panel ID="pnlSMS" runat="server" Visible="false">
                         <li class="li-child">
-                        	<a href="../Calendar/SMS.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/icon-sms.png" runat="server" /></span>Gửi tin nhắn nhắc việc</a>
+                        	<a href="../Calendar/SMS.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/icon-sms.png" runat="server" /></span>Gửi tin nhắn nhắc việc</a>                        	
                         </li>
+                        </asp:Panel>
                     </ul>
                 </li>
                 <li class="li-parent">
@@ -140,10 +142,7 @@
                         	<a href="../Works/WorkAssignment.aspx" class="a-child"><span class="icon"><asp:Image ID="Image2" ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc giao</a>
                         </li>
                         <li class="li-child">
-                        	<a href="../Works/WorkReceived.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc cần hoàn thành</a>
-                        </li>
-                        <li class="li-child">
-                        	<a href="#" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/OK.png" runat="server" /></span>Công việc đã kết thúc</a>
+                        	<a href="../Works/WorkReceived.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Play.png" runat="server" /></span>Công việc nhận</a>
                         </li>
                     </ul>
                 </li>                                
@@ -169,9 +168,9 @@
                         </li>
                     	<li class="li-child">
                         	<a href="/Users/Group.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/User-group.png" runat="server" /></span>Nhóm người dùng</a>
-                        </li>                        
+                        </li>
                         <li class="li-child">
-                        	<a href="/Users/Permission.aspx" class="a-child"><span class="icon"><asp:Image ImageUrl="~/Images/Boss.png" runat="server" /></span>Quản trị quyền</a>
+                        	<a href="/Users/Department.aspx" class="a-child"><span class="icon"><asp:Image ID="Image6" ImageUrl="~/Images/User-group.png" runat="server" /></span>Danh sách phòng ban</a>
                         </li>                        
                     </ul>
                 </li>

@@ -35,6 +35,12 @@ namespace DataAccess.DataObject
             get { return _Description; }
             set { _Description = value; }
         }
-        
+        private Int64 _TotalResult;
+
+        public Int64 TotalResult
+        {
+            get { return _TotalResult; }
+            set { _TotalResult = value; }
+        }
     }
 }

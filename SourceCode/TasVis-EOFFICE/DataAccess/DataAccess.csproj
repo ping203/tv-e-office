@@ -55,6 +55,7 @@
     <Compile Include="BusinessObject\BDocument.cs" />
     <Compile Include="BusinessObject\BDocumentKind.cs" />
     <Compile Include="BusinessObject\BGroup.cs" />
+    <Compile Include="BusinessObject\BGroupPermission.cs" />
     <Compile Include="BusinessObject\BOffical.cs" />
     <Compile Include="BusinessObject\BPermission.cs" />
     <Compile Include="BusinessObject\BUser.cs" />
@@ -84,11 +85,6 @@
     <Compile Include="DataObject\OWork.cs" />
     <Compile Include="DataObject\OWorkGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BusinessObject\BGroupPermission.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,8 +18,8 @@ namespace EOFFICE.Users
 {
     public partial class ChangePass : System.Web.UI.Page
     {
-        //Khai báo tạm biến UserName
-        private string UserName = "vanhung";
+        
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -30,16 +30,18 @@ namespace EOFFICE.Users
 
         private void KhoiTao()
         {
+            string UserName = Global.UserInfo.UserName;
             lblUserName.Text = UserName;
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
+            string UserName = Global.UserInfo.UserName;
             BUser Bobj = new BUser();
             OUser obj = new OUser();
             obj = Bobj.Get(UserName).First();
 
-            if (txtPass.Text != obj.Password)
+            if (Common.ECommon.GetMd5String(txtPass.Text) != obj.Password)
             {
                 lblThongBao.Text = "MẬT KHẨU CŨ KHÔNG ĐÚNG!";
             }
@@ -51,7 +53,7 @@ namespace EOFFICE.Users
                 }
                 else
                 {
-                    if (Bobj.Update(UserName, txtPassNew.Text))
+                    if (Bobj.Update(UserName, Common.ECommon.GetMd5String(txtPassNew.Text)))
                     {
                         lblThongBao.Text = "ĐỔI MẬT KHẨU THÀNH CÔNG!";
                     }
